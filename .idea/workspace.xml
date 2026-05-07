@@ -5,7 +5,63 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="changed Dependency">
+      <change afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/config/AuditorConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/controller/common/AuthController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/controller/common/HelloController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/repository/AppUserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/repository/base/AbstractBaseRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/service/auth/UserDetailsAuthService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/service/base/AbstractBaseService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/service/manager/AppUserManagerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/general/api-gateway/src/main/java/project/general_api_gateway/properties/ServletProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/general/api-gateway/src/main/java/project/general_api_gateway/service/auth/UserDetailsAuthService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/general/service-registry/src/main/java/project/general_service_registry/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/general-auth-starter/src/main/java/project/shared_general_auth_starter/annotation/AdminPermitByPass.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/general-common-lib/src/main/java/project/shared_general_common_lib/constant/AppUserRole.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/annotation/PermitByPass.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/component/SpaCsrfTokenRequestHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/config/WebConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/converter/JwtAuthenticationConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/interceptor/AuthInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/resolver/AuthBearerTokenResolver.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/service/base/UserDetailsBaseService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.local" beforeDir="false" afterPath="$PROJECT_DIR$/.env.local" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/account-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/GeneralAccountServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/GeneralAccountServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/model/entity/AppUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/model/entity/AppUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/model/entity/base/AbstractAuditableEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/model/entity/base/AbstractAuditableEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/resources/db/changelog/changes/01-create-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/resources/db/changelog/changes/01-create-table.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/api-gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/api-gateway/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/api-gateway/src/main/java/project/general_api_gateway/GeneralAPIGatewayApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/api-gateway/src/main/java/project/general_api_gateway/GeneralAPIGatewayApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/api-gateway/src/main/java/project/general_api_gateway/config/GatewayConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/api-gateway/src/main/java/project/general_api_gateway/config/GatewayConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/api-gateway/src/main/java/project/general_api_gateway/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/api-gateway/src/main/java/project/general_api_gateway/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/api-gateway/src/main/java/project/general_api_gateway/config/WebConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/api-gateway/src/main/java/project/general_api_gateway/properties/CorsProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/general-common-lib/src/main/java/project/shared_general_common_lib/properties/CorsProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/api-gateway/src/main/java/project/general_api_gateway/properties/JwtProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/general-common-lib/src/main/java/project/shared_general_common_lib/properties/JwtProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/api-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/api-gateway/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/config-mapping/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/config-mapping/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/config-mapping/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/config-mapping/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/service-registry/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/service-registry/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/service-registry/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/service-registry/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/general-auth-starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/general-auth-starter/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/general-auth-starter/src/main/java/project/shared_general_auth_starter/constant/CookieKeyConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/general-common-lib/src/main/java/project/shared_general_common_lib/constant/CookieKeyConstant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/general-auth-starter/src/main/java/project/shared_general_auth_starter/constant/FirebaseClaimKeysConstant.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/general-auth-starter/src/main/java/project/shared_general_auth_starter/interceptor/AuthInterceptor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/general-auth-starter/src/main/java/project/shared_general_auth_starter/service/auth/FirebaseAuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/general-auth-starter/src/main/java/project/shared_general_auth_starter/service/auth/FirebaseAuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/general-starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/general-starter/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/config/GrpcStubConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/config/GrpcStubConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/constant/FirebaseClaimKeysConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/general-common-lib/src/main/java/project/shared_general_common_lib/constant/FirebaseClaimKeysConstant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/model/entity/enums/AppUserRole.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/service/auth/PrincipalService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/service/auth/PrincipalAuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/general-starter/src/main/proto/user_account.proto" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/proto/general_account.proto" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +73,9 @@
       <list>
         <option value="Python Script" />
         <option value="Enum" />
+        <option value="AnnotationType" />
+        <option value="Interface" />
+        <option value="package-info" />
         <option value="Class" />
       </list>
     </option>
@@ -49,38 +108,45 @@
     <option name="showMembers" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.GeneralAPIGatewayApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.GeneralAccountServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.GeneralConfigMappingApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.GeneralServiceRegistryApplication .executor&quot;: &quot;Run&quot;,
-    &quot;Application.project.general_service_registry.GeneralServiceRegistryApplication .executor&quot;: &quot;Run&quot;,
-    &quot;Maven.config-mapping [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.config-mapping [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.general-api-gateway [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.general-api-gateway [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.general-service-registry [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.general-service-registry [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.project [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.project [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.shared-general-starter [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.shared-general-starter [install].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/1pcreeper/projects/001 Project/codes/v001/1pcreeper-project/backend/general/account-service/src/main/resources&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15625&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.3034483&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.GeneralAPIGatewayApplication.executor": "Run",
+    "Application.GeneralAccountServiceApplication.executor": "Run",
+    "Application.GeneralConfigMappingApplication.executor": "Run",
+    "Application.GeneralServiceRegistryApplication .executor": "Run",
+    "Application.project.general_service_registry.GeneralServiceRegistryApplication .executor": "Run",
+    "Maven.config-mapping [clean].executor": "Run",
+    "Maven.config-mapping [install].executor": "Run",
+    "Maven.general-api-gateway [clean].executor": "Run",
+    "Maven.general-api-gateway [install].executor": "Run",
+    "Maven.general-service-registry [clean].executor": "Run",
+    "Maven.general-service-registry [install].executor": "Run",
+    "Maven.project [clean,-X].executor": "Run",
+    "Maven.project [clean].executor": "Run",
+    "Maven.project [install].executor": "Run",
+    "Maven.project [mvn,clean,install,-DskipTests].executor": "Run",
+    "Maven.project [site].executor": "Run",
+    "Maven.project [validate].executor": "Run",
+    "Maven.shared-general-auth-starter [clean].executor": "Run",
+    "Maven.shared-general-auth-starter [install].executor": "Run",
+    "Maven.shared-general-starter [clean].executor": "Run",
+    "Maven.shared-general-starter [install].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/1pcreeper/projects/001 Project/codes/v001/1pcreeper-project",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15625",
+    "project.structure.side.proportion": "0.3034483",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\shared\general-starter\src\main\java\project\shared_general_starter" />
       <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\general\account-service\src\main\resources" />
       <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\general\account-service" />
       <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\shared\general-auth-library" />
@@ -92,8 +158,17 @@
       <recent name="D:\Favorites\Code\1pcreeper\projects\001 Project\codes\current\1pcreeper-project\backend\general\service-registry\src\main\java" />
       <recent name="D:\Favorites\Code\1pcreeper\projects\001 Project\codes\current\1pcreeper-project\backend\shared\common-library\src\main\java\project" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="project.shared_general_starter.properties" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.GeneralAPIGatewayApplication">
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn clean -X" />
+      <command value="mvn mvn clean install -DskipTests" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.GeneralAccountServiceApplication">
     <list>
       <item itemvalue="Application.GeneralAccountServiceApplication" />
       <item itemvalue="Application.GeneralAPIGatewayApplication" />
@@ -137,8 +212,58 @@
     <option name="localTasksCounter" value="4" />
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="changed Dependency" />
     <option name="LAST_COMMIT_MESSAGE" value="changed Dependency" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/converter/JwtAuthenticationConverter.java</url>
+          <line>36</line>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/converter/JwtAuthenticationConverter.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/converter/JwtAuthenticationConverter.java</url>
+          <line>39</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/service/auth/UserDetailsAuthService.java</url>
+          <line>23</line>
+          <properties>
+            <option name="lambda-ordinal" value="0" />
+          </properties>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/service/auth/UserDetailsAuthService.java</url>
+          <line>22</line>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/service/auth/UserDetailsAuthService.java</url>
+          <line>16</line>
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

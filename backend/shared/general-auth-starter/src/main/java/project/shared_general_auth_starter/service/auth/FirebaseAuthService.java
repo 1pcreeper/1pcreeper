@@ -6,11 +6,16 @@ import com.google.firebase.auth.FirebaseToken;
 import com.google.firebase.auth.UserRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import project.shared_general_auth_starter.constant.FirebaseClaimKeysConstant;
+import project.shared_general_common_lib.constant.AppUserRole;
+import project.shared_general_common_lib.constant.CookieKeyConstant;
+import project.shared_general_common_lib.constant.FirebaseClaimKeysConstant;
 import project.shared_general_auth_starter.model.bo.request.FirebaseCreateUserRequestBO;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class FirebaseAuthService {
@@ -31,18 +36,27 @@ public class FirebaseAuthService {
             .setPassword(reqBo.getPassword())
             .setDisabled(reqBo.isDisable())
             .setEmailVerified(reqBo.isEmailVerified());
-//                .setPhoneNumber(reqBo.getPhoneNumber());
-//                .setPhotoUrl(reqBo.getPhotoUrl());
         UserRecord userRecord = firebaseAuth.createUser(createRequest);
         return userRecord.getUid();
     }
     
-    public void setClaims(String uid, List<String> roles) throws FirebaseAuthException{
+    public void setRoles(String uid, List<String> roles) throws FirebaseAuthException{
         Map<String, Object> claims = Map.of(
             FirebaseClaimKeysConstant.ROLE_KEY, roles
         );
         firebaseAuth.revokeRefreshTokens(uid);
         firebaseAuth.setCustomUserClaims(uid, claims);
+    }
+    
+    public Set<String> getRoles(String uid) throws FirebaseAuthException {
+        UserRecord userRecord = getUser(uid);
+        Object roleData = userRecord.getCustomClaims().get(CookieKeyConstant.SECURE);
+        try{
+            List<String> roleList = (List<String>) roleData;
+            return new HashSet<>(roleList);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Roles Format Error");
+        }
     }
     
     public UserRecord getUser(String uid) throws FirebaseAuthException{
@@ -51,16 +65,6 @@ public class FirebaseAuthService {
     
     public UserRecord getUserByEmail(String email) throws FirebaseAuthException{
         return firebaseAuth.getUserByEmail(email);
-    }
-    
-    public boolean isUserEmailVerified(String uid) throws FirebaseAuthException{
-        UserRecord userRecord = getUser(uid);
-        return userRecord.isEmailVerified();
-    }
-    
-    public String getUid(String idToken) throws FirebaseAuthException{
-        FirebaseToken decodedToken = firebaseAuth.verifyIdToken(idToken);
-        return decodedToken.getUid();
     }
     
     public FirebaseToken verifyIdToken(String idToken) throws FirebaseAuthException {

@@ -1,17 +1,18 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 DROP TABLE IF EXISTS abstract_auditable_entity CASCADE;
 DROP TABLE IF EXISTS abstract_persistable_entity CASCADE;
 DROP TABLE IF EXISTS user_roles CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
 
-
 CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(20) NOT NULL UNIQUE CHECK (name <> '' AND name NOT LIKE '% %' AND name ~ '^[a-zA-Z0-9@._]+$'),
-    email VARCHAR(100) NOT NULL UNIQUE CHECK (email ~ '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9._%+-]+\.[a-zA-Z]{2,}$'),
-    phone VARCHAR(20) UNIQUE CHECK (phone ~ '^[0-9]{8}$' OR phone IS NULL),
-    display_name VARCHAR(50) NOT NULL CHECK (display_name <> ''),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NULL
+  id SERIAL PRIMARY KEY,
+  uid VARCHAR(255) NOT NULL UNIQUE,
+  name VARCHAR(20) UNIQUE CHECK (name <> '' AND name NOT LIKE '% %' AND name ~ '^[a-zA-Z0-9@._]+$'),
+  email VARCHAR(255) UNIQUE CHECK (email <> '' AND email NOT LIKE '% %' AND email ~ '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9._%+-]+\.[a-zA-Z]{2,}$'),
+  display_name VARCHAR(20) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NULL
 );
 
 CREATE TABLE IF NOT EXISTS user_roles (
@@ -33,4 +34,3 @@ CREATE TABLE abstract_auditable_entity (
   FOREIGN KEY (created_by) REFERENCES "users"(id) ON DELETE CASCADE,
   FOREIGN KEY (updated_by) REFERENCES "users"(id) ON DELETE CASCADE
 ) INHERITS (abstract_persistable_entity);
-

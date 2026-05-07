@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import project.shared_general_starter.grpc.GeneralAccountRPCServiceGrpc;
 
 import java.time.Duration;
 import java.util.List;
@@ -24,7 +25,7 @@ public class GrpcStubConfig {
     private EurekaClient eurekaClient;
 
     @Bean
-    public ManagedChannel userAccountServiceManagedChannel() {
+    public ManagedChannel generalAccountServiceManagedChannel() {
         String host;
         try {
             InstanceInfo instanceInfo = eurekaClient.getNextServerFromEureka(generalAccountServiceAddress, false);
@@ -41,10 +42,10 @@ public class GrpcStubConfig {
 
     //injection
 
-//    @Bean
-//    public UserRPCServiceGrpc.UserRPCServiceBlockingStub userRPCServiceBlockingStub() {
-//        return UserRPCServiceGrpc.newBlockingStub(userAccountServiceManagedChannel());
-//    }
+    @Bean
+    public GeneralAccountRPCServiceGrpc.GeneralAccountRPCServiceBlockingStub generalAccountRPCServiceBlockingStub() {
+        return GeneralAccountRPCServiceGrpc.newBlockingStub(generalAccountServiceManagedChannel());
+    }
 //
 //    @Bean
 //    public RoleRPCServiceGrpc.RoleRPCServiceBlockingStub roleRPCServiceBlockingStub() {

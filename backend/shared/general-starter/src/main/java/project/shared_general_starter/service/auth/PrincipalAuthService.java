@@ -2,14 +2,14 @@ package project.shared_general_starter.service.auth;
 
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
-import project.shared_general_starter.constant.FirebaseClaimKeysConstant;
+import project.shared_general_common_lib.constant.FirebaseClaimKeysConstant;
 import project.shared_general_starter.model.exception.PrincipalException;
 
 import java.security.Principal;
 import java.util.*;
 
 @Service
-public class PrincipalService {
+public class PrincipalAuthService {
     public Map<String,Object> getPrincipalData(Principal principal) throws PrincipalException {
         Map<String, Object> data = new HashMap<>();
         String roleKey = FirebaseClaimKeysConstant.ROLE_KEY;

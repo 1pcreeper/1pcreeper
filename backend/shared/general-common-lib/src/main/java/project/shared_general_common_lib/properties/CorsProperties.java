@@ -1,4 +1,4 @@
-package project.general_api_gateway.properties;
+package project.shared_general_common_lib.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

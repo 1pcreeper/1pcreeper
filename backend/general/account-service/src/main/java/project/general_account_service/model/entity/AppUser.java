@@ -8,8 +8,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import project.shared_general_starter.model.entity.enums.AppUserRole;
+import project.shared_general_common_lib.constant.AppUserRole;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
@@ -21,22 +22,22 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
-public class AppUser implements UserDetails {
+public class AppUser implements UserDetails , Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false, unique = true, length = 20)
+    @Column(name = "uid", nullable = false, unique = true, length = 255)
+    private String uid;
+
+    @Column(name = "name", unique = true, length = 20)
     private String name;
 
-    @Column(name = "email", nullable = false, unique = true, length = 100)
+    @Column(name = "email", unique = true)
     private String email;
 
-    @Column(name = "phone", unique = true, length = 20)
-    private String phone;
-
-    @Column(name = "display_name", nullable = false, length = 50)
+    @Column(name = "display_name", nullable = false, length = 20)
     private String displayName;
 
     @Column(name = "created_at", insertable = false, updatable = false)

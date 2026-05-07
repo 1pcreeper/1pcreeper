@@ -1,7 +1,5 @@
 server:
     port: ${GENERAL_ACCOUNT_SERVICE_SERVER_PORT}
-    servlet:
-        context-path: ${GENERAL_ACCOUNT_SERVICE_CONTEXT_PATH}
 spring:
     application:
         name: general-account-service
@@ -23,6 +21,8 @@ spring:
             password: ${GENERAL_CONFIG_MAPPING_SECURITY_PASSWORD}
 properties:
     security: dummy
+    cors:
+        allowed-origins: ${GENERAL_ACCOUNT_SERVICE_CORS_ALLOWED_ORIGINS}
 grpc:
     server:
         port: ${GENERAL_ACCOUNT_SERVICE_GRPC_PORT}

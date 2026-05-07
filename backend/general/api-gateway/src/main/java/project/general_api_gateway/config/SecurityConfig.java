@@ -12,60 +12,54 @@ import org.springframework.security.web.server.csrf.CookieServerCsrfTokenReposit
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.reactive.CorsConfigurationSource;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
-import project.general_api_gateway.properties.CorsProperties;
-import project.general_api_gateway.properties.JwtProperties;
+import project.general_api_gateway.service.auth.UserDetailsAuthService;
+import project.shared_general_common_lib.properties.CorsProperties;
+import project.shared_general_common_lib.properties.JwtProperties;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Configuration
-@EnableWebFluxSecurity
+@EnableWebFluxSecurity // 注意：改用 WebFluxSecurity
 public class SecurityConfig {
     private final CorsProperties corsProperties;
     private final JwtProperties jwtProperties;
+
     @Autowired
     public SecurityConfig(
         CorsProperties corsProperties,
         JwtProperties jwtProperties
-    ){
+    ) {
         this.corsProperties = corsProperties;
         this.jwtProperties = jwtProperties;
     }
+
+    // 在 WebFlux 中要使用 ReactiveJwtDecoder
     @Bean
-    public ReactiveJwtDecoder reactiveJwtDecoder() {
-        return ReactiveJwtDecoders.fromIssuerLocation(
-            jwtProperties.getIssuerUri()
-        );
+    public ReactiveJwtDecoder jwtDecoder() {
+        return ReactiveJwtDecoders.fromIssuerLocation(jwtProperties.getIssuerUri());
     }
+
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
         http
-            // Define access policies
-            .authorizeExchange(exchanges -> exchanges
-                // Allow public access to certain paths, e.g., login or health checks
-                .pathMatchers("/api/public/**").permitAll()
-                .pathMatchers("/api/account/**").permitAll()
-                // Secure all other routes
-                .anyExchange().authenticated()
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+            .csrf(csrf -> csrf
+                .csrfTokenRepository(CookieServerCsrfTokenRepository.withHttpOnlyFalse())
             )
-            // Enable OAuth2 resource server (for Bearer token validation)
-            .oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer
-                .jwt(jwt -> jwt.jwtDecoder(reactiveJwtDecoder())) // Use JWT validation based on properties
-            )
-            .csrf(csrf->
-                csrf.csrfTokenRepository(CookieServerCsrfTokenRepository.withHttpOnlyFalse()
-                )
-        );
+            .authorizeExchange(exchange -> exchange
+                .anyExchange().permitAll() 
+            );
 
         return http.build();
     }
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList(
-            corsProperties.getAllowedOriginsArray()
-        ));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowedOrigins(Arrays.asList(corsProperties.getAllowedOrigins()));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
