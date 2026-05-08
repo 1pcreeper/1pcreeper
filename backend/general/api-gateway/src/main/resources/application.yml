@@ -8,13 +8,24 @@ spring:
     main:
         web-application-type: reactive 
     config:
-        import: configserver:http://${GENERAL_CONFIG_MAPPING_SERVER_IP_ADDRESS}:${GENERAL_CONFIG_MAPPING_SERVER_PORT}
+        import: "optional:configserver:"
     cloud:
         gateway:
             enabled: true
         config:
+            discovery:
+                enabled: true
+                service-id: ${GENERAL_CONFIG_MAPPING_SERVER_HOSTNAME}
             username: ${GENERAL_CONFIG_MAPPING_SECURITY_USERNAME}
             password: ${GENERAL_CONFIG_MAPPING_SECURITY_PASSWORD}
+eureka:
+    instance:
+        prefer-ip-address: false
+    client:
+        register-with-eureka: true
+        fetch-registry: true
+        service-url:
+            defaultZone: http://admin:${GENERAL_SERVICE_REGISTRY_SECURITY_PASSWORD}@${GENERAL_SERVICE_REGISTRY_SERVER_IP_ADDRESS}:${GENERAL_SERVICE_REGISTRY_SERVER_PORT}/eureka
 logging:
     level:
         org.springframework.cloud.gateway: DEBUG

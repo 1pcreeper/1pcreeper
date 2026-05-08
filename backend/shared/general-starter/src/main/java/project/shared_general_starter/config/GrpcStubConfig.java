@@ -5,10 +5,13 @@ import com.netflix.discovery.EurekaClient;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import project.shared_general_common_lib.constant.ServiceRegistryIDNames;
 import project.shared_general_starter.grpc.GeneralAccountRPCServiceGrpc;
 
 import java.time.Duration;
@@ -17,23 +20,23 @@ import java.util.Map;
 
 @Configuration
 public class GrpcStubConfig {
-    @Value("${grpc.client.general-account-service.address}")
-    private String generalAccountServiceAddress;
-    @Value("${grpc.client.general-account-service.port}")
-    private int generalAccountServicePort;
     @Autowired
     private EurekaClient eurekaClient;
+    @Value("${grpc.client.general-account-service.port}")
+    private int generalAccountServicePort;
 
     @Bean
     public ManagedChannel generalAccountServiceManagedChannel() {
-        String host;
+        String generalAccountServiceAddress;
         try {
-            InstanceInfo instanceInfo = eurekaClient.getNextServerFromEureka(generalAccountServiceAddress, false);
-            host = instanceInfo.getIPAddr();
+            InstanceInfo instanceInfo = eurekaClient.getNextServerFromEureka(
+                ServiceRegistryIDNames.GENERAL_ACCOUNT_SERVICE, false
+            );
+            generalAccountServiceAddress = instanceInfo.getIPAddr();
         } catch (Exception e) {
-            host = generalAccountServiceAddress;
+            generalAccountServiceAddress = ServiceRegistryIDNames.GENERAL_ACCOUNT_SERVICE;
         }
-        return ManagedChannelBuilder.forAddress(host, generalAccountServicePort)
+        return ManagedChannelBuilder.forAddress(generalAccountServiceAddress, generalAccountServicePort)
             .usePlaintext()
             .enableRetry()
             .defaultServiceConfig(buildServiceConfig())
