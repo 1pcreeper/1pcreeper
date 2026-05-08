@@ -28,13 +28,13 @@ public class AppUserManagerService extends AbstractBaseService<AppUser,Long> {
     public Optional<AppUser> findByName(String name){
         return appUserRepository.findByName(name);
     }
-    public boolean existsByName(String name){
-        return appUserRepository.existsByName(name);
-    }
-    public Page<AppUser> findByNameContaining(@Param("partialName") String partialName, Pageable pageable){
+    public Page<AppUser> findByNameContaining(String partialName, Pageable pageable){
         return appUserRepository.findByNameContaining(partialName,pageable);
     }
-    public List<AppUser> findByNameContaining(@Param("partialName") String partialName){
+    public List<AppUser> findByNameContaining(String partialName){
         return appUserRepository.findByNameContaining(partialName);
+    }
+    public Optional<AppUser> findByEmail(String email){
+        return appUserRepository.findByEmail(email);
     }
 }

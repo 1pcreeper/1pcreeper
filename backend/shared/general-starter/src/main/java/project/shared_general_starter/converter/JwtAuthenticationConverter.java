@@ -14,6 +14,7 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import project.shared_general_common_lib.constant.FirebaseClaimKeysConstant;
+import project.shared_general_starter.handler.base.JwtAuthRequestBaseHandler;
 import project.shared_general_starter.service.base.UserDetailsBaseService;
 
 import java.util.Collection;
@@ -24,16 +25,20 @@ import java.util.stream.Collectors;
 @Cacheable
 public class JwtAuthenticationConverter implements Converter<Jwt, AbstractAuthenticationToken> {
     private final UserDetailsBaseService userDetailsBaseService;
+    private final JwtAuthRequestBaseHandler jwtAuthRequestBaseHandler;
     @Autowired
     public JwtAuthenticationConverter(
-        UserDetailsBaseService userDetailsBaseService
+        UserDetailsBaseService userDetailsBaseService,
+        JwtAuthRequestBaseHandler jwtAuthRequestBaseHandler
     ) {
         this.userDetailsBaseService = userDetailsBaseService;
+        this.jwtAuthRequestBaseHandler = jwtAuthRequestBaseHandler;
     }
 
     @Override
     public AbstractAuthenticationToken convert(Jwt source) {
-
+        
+        jwtAuthRequestBaseHandler.handle(source);
         Collection<GrantedAuthority> authorities = extractAuthorities(source);
 
         String uid = source.getSubject();

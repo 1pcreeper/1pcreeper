@@ -18,9 +18,10 @@ public interface AppUserRepository extends AbstractBaseRepository<AppUser,Long> 
     Optional<AppUser> findByUid(@Param("uid")String uid);
     @Query("SELECT u FROM AppUser u WHERE u.name = :name")
     Optional<AppUser> findByName(@Param("name")String name);
+    @Query("SELECT u FROM AppUser u WHERE u.email = :email")
+    Optional<AppUser> findByEmail(@Param("email")String email);
     @Query("SELECT u FROM AppUser u WHERE u.name LIKE %:partialName%")
     Page<AppUser> findByNameContaining(@Param("partialName") String partialName, Pageable pageable);
     @Query("SELECT u FROM AppUser u WHERE u.name LIKE %:partialName%")
     List<AppUser> findByNameContaining(@Param("partialName") String partialName);
-    boolean existsByName(String name);
 }

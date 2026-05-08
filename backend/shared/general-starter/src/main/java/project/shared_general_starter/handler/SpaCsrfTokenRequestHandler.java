@@ -1,4 +1,4 @@
-package project.shared_general_starter.component;
+package project.shared_general_starter.handler;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

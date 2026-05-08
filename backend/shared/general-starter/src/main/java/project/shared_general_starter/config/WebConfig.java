@@ -7,13 +7,13 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import project.shared_general_common_lib.properties.CorsProperties;
-import project.shared_general_starter.interceptor.AuthInterceptor;
+import project.shared_general_starter.interceptor.AbstractAuthBaseInterceptor;
 import project.shared_general_starter.resolver.AuthBearerTokenResolver;
 
 @Configuration
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
-    private final AuthInterceptor authInterceptor;
+    private final AbstractAuthBaseInterceptor abstractAuthBaseInterceptor;
     private final AuthBearerTokenResolver authBearerTokenResolver;
     private final CorsProperties corsProperties;
 
@@ -21,17 +21,17 @@ public class WebConfig implements WebMvcConfigurer {
     public WebConfig(
         AuthBearerTokenResolver authBearerTokenResolver,
         CorsProperties corsProperties,
-        AuthInterceptor authInterceptor
+        AbstractAuthBaseInterceptor abstractAuthBaseInterceptor
     ){
         this.authBearerTokenResolver = authBearerTokenResolver;
         this.corsProperties = corsProperties;
-        this.authInterceptor = authInterceptor;
+        this.abstractAuthBaseInterceptor = abstractAuthBaseInterceptor;
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(
-            authInterceptor
+            abstractAuthBaseInterceptor
         );
     }
     @Override

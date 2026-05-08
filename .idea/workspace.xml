@@ -5,15 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="changed Dependency">
-      <change afterPath="$PROJECT_DIR$/backend/shared/general-common-lib/src/main/java/project/shared_general_common_lib/constant/ServiceRegistryIDNames.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.local" beforeDir="false" afterPath="$PROJECT_DIR$/.env.local" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/handler/JwtAuthRequestHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/service/account/AccountSyncService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/general-common-lib/src/main/java/project/shared_general_common_lib/constant/AppUserRoles.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/handler/base/JwtAuthRequestBaseHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/interceptor/AbstractAuthBaseInterceptor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/general/api-gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/api-gateway/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/general/api-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/api-gateway/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/shared/general-auth-starter/src/main/java/project/shared_general_auth_starter/annotation/AdminPermitByPass.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/config/GrpcStubConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/config/GrpcStubConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/controller/common/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/controller/common/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/controller/common/HelloController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/repository/AppUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/repository/AppUserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/service/auth/UserDetailsAuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/service/auth/UserDetailsAuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/service/manager/AppUserManagerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/service/manager/AppUserManagerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/annotation/PermitByPass.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/component/SpaCsrfTokenRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/handler/SpaCsrfTokenRequestHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/config/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/converter/JwtAuthenticationConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/converter/JwtAuthenticationConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/interceptor/AuthInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/interceptor/AuthInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/resolver/AuthBearerTokenResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/resolver/AuthBearerTokenResolver.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,10 +34,10 @@
       <list>
         <option value="Python Script" />
         <option value="AnnotationType" />
-        <option value="Interface" />
         <option value="package-info" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -169,7 +178,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778195069771</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="changed Dependency">
+      <option name="closed" value="true" />
+      <created>1778201715399</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1778201715399</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -192,36 +209,48 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/converter/JwtAuthenticationConverter.java</url>
-          <line>36</line>
+          <line>41</line>
           <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/converter/JwtAuthenticationConverter.java</url>
-          <line>38</line>
+          <line>43</line>
           <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/converter/JwtAuthenticationConverter.java</url>
-          <line>39</line>
+          <line>44</line>
           <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/service/auth/UserDetailsAuthService.java</url>
-          <line>23</line>
-          <properties>
-            <option name="lambda-ordinal" value="0" />
-          </properties>
-          <option name="timeStamp" value="45" />
+          <url>file://$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/converter/JwtAuthenticationConverter.java</url>
+          <line>40</line>
+          <option name="timeStamp" value="61" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/handler/JwtAuthRequestHandler.java</url>
+          <line>27</line>
+          <option name="timeStamp" value="62" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/service/auth/UserDetailsAuthService.java</url>
-          <line>22</line>
-          <option name="timeStamp" value="46" />
+          <line>33</line>
+          <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/service/auth/UserDetailsAuthService.java</url>
-          <line>16</line>
-          <option name="timeStamp" value="47" />
+          <line>34</line>
+          <option name="timeStamp" value="65" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/interceptor/AuthInterceptor.java</url>
+          <line>29</line>
+          <option name="timeStamp" value="66" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/converter/JwtAuthenticationConverter.java</url>
+          <line>46</line>
+          <option name="timeStamp" value="67" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

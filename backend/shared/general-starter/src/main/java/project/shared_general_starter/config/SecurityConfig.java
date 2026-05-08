@@ -1,32 +1,26 @@
 package project.shared_general_starter.config;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.oauth2.core.AbstractOAuth2Token;
 import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
 import org.springframework.security.oauth2.core.OAuth2TokenValidator;
 import org.springframework.security.oauth2.jwt.*;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import project.shared_general_common_lib.properties.CorsProperties;
 import project.shared_general_common_lib.properties.JwtProperties;
-import project.shared_general_starter.component.SpaCsrfTokenRequestHandler;
+import project.shared_general_starter.handler.SpaCsrfTokenRequestHandler;
 import project.shared_general_starter.converter.JwtAuthenticationConverter;
 import project.shared_general_starter.resolver.AuthBearerTokenResolver;
 import project.shared_general_starter.service.base.UserDetailsBaseService;
 
-import java.io.IOException;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
@@ -65,13 +59,15 @@ public class SecurityConfig {
                 cors.configurationSource(corsConfigurationSource())
             )
             .csrf(csrf ->
-                csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                csrf
+                    .ignoringRequestMatchers(
+                        "/auth/hello"
+                    )
+                    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                     .csrfTokenRequestHandler(spaCsrfTokenRequestHandler)
             )
-            // Define access policies
             .authorizeHttpRequests(auth ->
-                // Allow public access to certain paths, e.g., login or health checks
-                auth.anyRequest().authenticated()
+                auth.anyRequest().permitAll()
             ).oauth2ResourceServer(oauth2 -> oauth2
                 .jwt(jwt ->
                     jwt.
