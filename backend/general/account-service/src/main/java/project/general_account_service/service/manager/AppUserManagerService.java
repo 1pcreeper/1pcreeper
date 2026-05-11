@@ -5,11 +5,13 @@ import org.springframework.boot.context.properties.source.MapConfigurationProper
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import project.general_account_service.model.entity.AppUser;
 import project.general_account_service.repository.AppUserRepository;
 import project.general_account_service.repository.base.AbstractBaseRepository;
 import project.general_account_service.service.base.AbstractBaseService;
+import project.shared_general_starter.model.exception.ResourceNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,11 +24,15 @@ public class AppUserManagerService extends AbstractBaseService<AppUser,Long> {
         super(repository, "AppUser");
         this.appUserRepository = repository;
     }
-    public Optional<AppUser> findByUid(String uid){
-        return appUserRepository.findByUid(uid);
+    public AppUser findByUid(String uid){
+        return appUserRepository.findByUid(uid).orElseThrow(
+            ()->new ResourceNotFoundException("Uid Not Found")
+        );
     }
-    public Optional<AppUser> findByName(String name){
-        return appUserRepository.findByName(name);
+    public AppUser findByName(String name){
+        return appUserRepository.findByName(name).orElseThrow(
+            ()->new UsernameNotFoundException("User Name Not Found")
+        );
     }
     public Page<AppUser> findByNameContaining(String partialName, Pageable pageable){
         return appUserRepository.findByNameContaining(partialName,pageable);
@@ -34,7 +40,9 @@ public class AppUserManagerService extends AbstractBaseService<AppUser,Long> {
     public List<AppUser> findByNameContaining(String partialName){
         return appUserRepository.findByNameContaining(partialName);
     }
-    public Optional<AppUser> findByEmail(String email){
-        return appUserRepository.findByEmail(email);
+    public AppUser findByEmail(String email){
+        return appUserRepository.findByEmail(email).orElseThrow(
+            ()-> new ResourceNotFoundException("Email Not Found")
+        );
     }
 }
