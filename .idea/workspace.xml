@@ -5,15 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="changed Dependency">
-      <change afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/mapper/AppUserMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/model/dto/base/APIBaseResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/model/dto/base/PaginationBaseResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/model/dto/object/AppUserDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/controller/common/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/controller/common/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/service/account/AccountSyncService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/service/account/AccountSyncService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/service/auth/UserDetailsAuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/service/auth/UserDetailsAuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/service/manager/AppUserManagerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/service/manager/AppUserManagerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/resources/db/changelog/changes/01-create-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/resources/db/changelog/changes/01-create-table.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +178,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778210768283</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="changed Dependency">
+      <option name="closed" value="true" />
+      <created>1778537454197</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1778537454197</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
