@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import project.general_account_service.model.entity.base.AbstractPersistableEntity;
 import project.shared_general_common_lib.constant.AppUserRole;
 
 import java.io.Serializable;
@@ -22,7 +23,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
-public class AppUser implements UserDetails , Serializable {
+public class AppUser extends AbstractPersistableEntity implements UserDetails , Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
