@@ -1,0 +1,50 @@
+server:
+    port: ${OFFICE_API_GATEWAY_SERVER_PORT}
+    servlet:
+        context-path: ${OFFICE_API_GATEWAY_CONTEXT_PATH}
+spring:
+    application:
+        name: office-api-gateway
+    main:
+        web-application-type: reactive 
+    config:
+        import: "optional:configserver:"
+    cloud:
+        gateway:
+            enabled: true
+        config:
+            discovery:
+                enabled: true
+                service-id: ${OFFICE_CONFIG_MAPPING_SERVER_HOSTNAME}
+            username: ${OFFICE_CONFIG_MAPPING_SECURITY_USERNAME}
+            password: ${OFFICE_CONFIG_MAPPING_SECURITY_PASSWORD}
+eureka:
+    instance:
+        prefer-ip-address: false
+    client:
+        register-with-eureka: true
+        fetch-registry: true
+        service-url:
+            defaultZone: http://admin:${OFFICE_SERVICE_REGISTRY_SECURITY_PASSWORD}@${OFFICE_SERVICE_REGISTRY_SERVER_IP_ADDRESS}:${OFFICE_SERVICE_REGISTRY_SERVER_PORT}/eureka
+logging:
+    level:
+        org.springframework.cloud.gateway: DEBUG
+properties:
+    servlet:
+        context-path: ${OFFICE_API_GATEWAY_CONTEXT_PATH}
+    spec:
+        office-account-service:
+            hostName: ${OFFICE_ACCOUNT_SERVICE_SERVER_HOSTNAME}
+            httpPort: ${OFFICE_ACCOUNT_SERVICE_SERVER_PORT}
+            grpcPort: ${OFFICE_ACCOUNT_SERVICE_GRPC_PORT}
+        office-auth-provider:
+            hostName: ${OFFICE_AUTH_PROVIDER_SERVER_HOSTNAME}
+            httpPort: ${OFFICE_AUTH_PROVIDER_SERVER_PORT}
+            grpcPort: ${OFFICE_AUTH_PROVIDER_GRPC_PORT}
+    jwt:
+        issuer-uri: ${OFFICE_OAUTH2_RESOURCE_JWT_ISSUER_LOCATION}
+    cors: 
+        allowed-origins: ${OFFICE_API_GATEWAY_CORS_ALLOWED_ORIGINS}
+grpc:
+    server:
+        port: ${OFFICE_API_GATEWAY_GRPC_PORT}

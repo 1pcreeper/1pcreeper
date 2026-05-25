@@ -38,8 +38,8 @@ properties:
             httpPort: ${GENERAL_ACCOUNT_SERVICE_SERVER_PORT}
             grpcPort: ${GENERAL_ACCOUNT_SERVICE_GRPC_PORT}
     jwt:
-        issuer-uri: ${OAUTH2_RESOURCE_JWT_ISSUER_LOCATION}
-    cors:
+        issuer-uri: ${GENERAL_OAUTH2_RESOURCE_JWT_ISSUER_LOCATION}
+    cors: 
         allowed-origins: ${GENERAL_API_GATEWAY_CORS_ALLOWED_ORIGINS}
 grpc:
     server:

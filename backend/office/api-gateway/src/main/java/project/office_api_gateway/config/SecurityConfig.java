@@ -1,4 +1,4 @@
-package project.general_api_gateway.config;
+package project.office_api_gateway.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,9 +12,8 @@ import org.springframework.security.web.server.csrf.CookieServerCsrfTokenReposit
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.reactive.CorsConfigurationSource;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
-import project.general_api_gateway.service.auth.UserDetailsAuthService;
-import project.shared_general_common_lib.properties.CorsProperties;
-import project.shared_general_common_lib.properties.JwtProperties;
+import project.shared_office_common_lib.properties.CorsProperties;
+import project.shared_office_common_lib.properties.JwtProperties;
 
 import java.util.Arrays;
 import java.util.List;

@@ -6,9 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Data
 @Component
-@ConfigurationProperties(prefix = "properties.spec.office-auth-provider")
-public class OfficeAuthProviderSpecProperties {
-    private String hostName;
-    private String httpPort;
-    private String grpcPort;
+@ConfigurationProperties(prefix = "properties.servlet")
+public class ServletProperties {
+    private String contextPath;
 }
