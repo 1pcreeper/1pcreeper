@@ -1,4 +1,4 @@
-package project.general_account_service.model.dto.base;
+package project.office_account_service.model.dto.base;
 
 import jakarta.annotation.Nullable;
 import lombok.Builder;

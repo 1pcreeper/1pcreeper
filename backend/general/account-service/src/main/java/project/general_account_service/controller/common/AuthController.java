@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import project.general_account_service.mapper.AppUserMapper;
-import project.general_account_service.model.dto.base.APIBaseResponseDTO;
+import project.shared_general_starter.model.dto.base.APIBaseResponseDTO;
 import project.general_account_service.model.dto.object.AppUserDTO;
 import project.general_account_service.model.dto.response.AppUserVerifyResponseDTO;
 import project.general_account_service.model.entity.AppUser;

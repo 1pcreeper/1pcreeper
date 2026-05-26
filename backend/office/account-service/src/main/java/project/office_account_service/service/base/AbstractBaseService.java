@@ -1,10 +1,10 @@
-package project.general_account_service.service.base;
+package project.office_account_service.service.base;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import project.general_account_service.repository.base.AbstractBaseRepository;
-import project.shared_general_starter.model.exception.ResourceNotFoundException;
+import project.office_account_service.model.exception.ResourceNotFoundException;
+import project.office_account_service.repository.base.AbstractBaseRepository;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package project.general_account_service.model.entity.base;
+package project.office_account_service.model.entity.base;
 
 import jakarta.persistence.*;
 import lombok.Getter;

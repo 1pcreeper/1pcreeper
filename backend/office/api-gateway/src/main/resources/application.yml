@@ -37,10 +37,6 @@ properties:
             hostName: ${OFFICE_ACCOUNT_SERVICE_SERVER_HOSTNAME}
             httpPort: ${OFFICE_ACCOUNT_SERVICE_SERVER_PORT}
             grpcPort: ${OFFICE_ACCOUNT_SERVICE_GRPC_PORT}
-        office-auth-provider:
-            hostName: ${OFFICE_AUTH_PROVIDER_SERVER_HOSTNAME}
-            httpPort: ${OFFICE_AUTH_PROVIDER_SERVER_PORT}
-            grpcPort: ${OFFICE_AUTH_PROVIDER_GRPC_PORT}
     jwt:
         issuer-uri: ${OFFICE_OAUTH2_RESOURCE_JWT_ISSUER_LOCATION}
     cors: 

@@ -1,4 +1,4 @@
-package project.general_account_service.model.entity.base;
+package project.office_account_service.model.entity.base;
 
 import java.time.LocalDateTime;
 
@@ -22,7 +22,7 @@ import jakarta.persistence.PreUpdate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import project.general_account_service.model.entity.AppUser;
+import project.office_account_service.model.entity.OfficeUser;
 
 @Data
 @NoArgsConstructor
@@ -45,12 +45,12 @@ public abstract class AbstractAuditableEntity extends AbstractPersistableEntity 
     @CreatedBy
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_by")
-    private AppUser createdBy;
+    private OfficeUser createdBy;
 
     @LastModifiedBy
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "updated_by")
-    private AppUser updatedBy;
+    private OfficeUser updatedBy;
 
     @PrePersist
     protected void onCreate() {

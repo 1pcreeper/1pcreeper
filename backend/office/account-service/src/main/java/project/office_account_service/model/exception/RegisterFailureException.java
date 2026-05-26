@@ -1,4 +1,4 @@
-package project.shared_general_starter.model.exception;
+package project.office_account_service.model.exception;
 
 import lombok.Getter;
 

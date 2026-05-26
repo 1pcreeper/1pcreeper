@@ -16,41 +16,26 @@
         <module name="general-config-mapping" />
         <module name="office-config-mapping" />
         <module name="general-account-service" />
+        <module name="office-api-gateway" />
         <module name="shared-general-starter" />
+        <module name="shared-office-common-lib" />
         <module name="shared-general-common-lib" />
         <module name="general-service-registry" />
         <module name="shared-general-auth-starter" />
       </profile>
-      <profile name="Annotation profile for shared-office-common-lib" enabled="true">
+      <profile name="Annotation profile for office-account-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
         </processorPath>
-        <module name="shared-office-common-lib" />
-      </profile>
-      <profile name="Annotation profile for office-api-gateway" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
-        </processorPath>
-        <module name="office-api-gateway" />
-      </profile>
-      <profile name="Annotation profile for office-auth-provider" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
-        </processorPath>
-        <module name="office-auth-provider" />
+        <module name="office-account-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="config-mapping" target="17" />
+      <module name="office-auth-provider" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -60,6 +45,7 @@
       <module name="general-api-gateway" options="-parameters" />
       <module name="general-config-mapping" options="-parameters" />
       <module name="general-service-registry" options="-parameters" />
+      <module name="office-account-service" options="-parameters" />
       <module name="office-api-gateway" options="-parameters" />
       <module name="office-auth-provider" options="-parameters" />
       <module name="office-config-mapping" options="-parameters" />

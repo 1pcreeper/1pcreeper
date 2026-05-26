@@ -1,4 +1,4 @@
-package project.general_account_service.repository.base;
+package project.office_account_service.repository.base;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;

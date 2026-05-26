@@ -26,7 +26,6 @@ public class GatewayConfig {
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
-            // Route for account service
             .route("account", r -> r.path(servletProperties.getContextPath()+"/account/**")
                 .filters(f -> f
                     .filter(logPath())  
@@ -34,8 +33,7 @@ public class GatewayConfig {
                 .uri("lb://" + generalAccountServiceSpecProperties.getHostName() + ":" + generalAccountServiceSpecProperties.getHttpPort()))
             .build();
     }
-
-    // Custom resolver to log the request path
+    
     private GatewayFilter logPath() {
         return (exchange, chain) -> {
             String path = exchange.getRequest().getURI().getPath();

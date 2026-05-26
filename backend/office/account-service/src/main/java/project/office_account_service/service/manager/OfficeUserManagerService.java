@@ -5,39 +5,39 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import project.general_account_service.model.entity.AppUser;
-import project.general_account_service.repository.AppUserRepository;
-import project.general_account_service.service.base.AbstractBaseService;
-import project.shared_general_starter.model.exception.ResourceNotFoundException;
+import project.office_account_service.model.entity.OfficeUser;
+import project.office_account_service.model.exception.ResourceNotFoundException;
+import project.office_account_service.repository.OfficeUserRepository;
+import project.office_account_service.service.base.AbstractBaseService;
 
 import java.util.List;
 
 @Service
-public class AppUserManagerService extends AbstractBaseService<AppUser,Long> {
-    private final AppUserRepository appUserRepository;
+public class OfficeUserManagerService extends AbstractBaseService<OfficeUser,Long> {
+    private final OfficeUserRepository officeUserRepository;
     @Autowired
-    public AppUserManagerService(AppUserRepository repository) {
-        super(repository, "AppUser");
-        this.appUserRepository = repository;
+    public OfficeUserManagerService(OfficeUserRepository officeUserRepository) {
+        super(officeUserRepository, "OfficeUser");
+        this.officeUserRepository = officeUserRepository;
     }
-    public AppUser findByUid(String uid){
-        return appUserRepository.findByUid(uid).orElseThrow(
+    public OfficeUser findByUid(String uid){
+        return officeUserRepository.findByUid(uid).orElseThrow(
             ()->new ResourceNotFoundException("Uid Not Found")
         );
     }
-    public AppUser findByName(String name){
-        return appUserRepository.findByName(name).orElseThrow(
+    public OfficeUser findByName(String name){
+        return officeUserRepository.findByName(name).orElseThrow(
             ()->new UsernameNotFoundException("User Name Not Found")
         );
     }
-    public Page<AppUser> findByNameContaining(String partialName, Pageable pageable){
-        return appUserRepository.findByNameContaining(partialName,pageable);
+    public Page<OfficeUser> findByNameContaining(String partialName, Pageable pageable){
+        return officeUserRepository.findByNameContaining(partialName,pageable);
     }
-    public List<AppUser> findByNameContaining(String partialName){
-        return appUserRepository.findByNameContaining(partialName);
+    public List<OfficeUser> findByNameContaining(String partialName){
+        return officeUserRepository.findByNameContaining(partialName);
     }
-    public AppUser findByEmail(String email){
-        return appUserRepository.findByEmail(email).orElseThrow(
+    public OfficeUser findByEmail(String email){
+        return officeUserRepository.findByEmail(email).orElseThrow(
             ()-> new ResourceNotFoundException("Email Not Found")
         );
     }

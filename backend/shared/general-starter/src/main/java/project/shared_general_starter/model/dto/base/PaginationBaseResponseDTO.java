@@ -1,4 +1,4 @@
-package project.general_account_service.model.dto.base;
+package project.shared_general_starter.model.dto.base;
 
 import lombok.Builder;
 import lombok.Data;

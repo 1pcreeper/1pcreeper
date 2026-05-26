@@ -8,23 +8,19 @@ import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import project.office_api_gateway.properties.OfficeAccountServiceSpecProperties;
-import project.office_api_gateway.properties.OfficeAuthProviderSpecProperties;
 import project.office_api_gateway.properties.ServletProperties;
 
 @Configuration
 @Slf4j
 public class GatewayConfig {
-    private OfficeAuthProviderSpecProperties officeAuthProviderSpecProperties;
     private OfficeAccountServiceSpecProperties officeAccountServiceSpecProperties;
     private ServletProperties servletProperties;
     
     @Autowired
     public GatewayConfig(
-        OfficeAuthProviderSpecProperties officeAuthProviderSpecProperties,
         OfficeAccountServiceSpecProperties officeAccountServiceSpecProperties, 
         ServletProperties servletProperties
     ) {
-        this.officeAuthProviderSpecProperties = officeAuthProviderSpecProperties;
         this.officeAccountServiceSpecProperties = officeAccountServiceSpecProperties;
         this.servletProperties = servletProperties;
     }
@@ -32,11 +28,6 @@ public class GatewayConfig {
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
-            .route("oauth", r -> r.path(servletProperties.getContextPath()+"/oauth/**")
-                .filters(f -> f
-                    .filter(logPath())
-                    .rewritePath(servletProperties.getContextPath()+"/oauth/(?<segment>.*)", "/${segment}"))
-                .uri("lb://" + officeAuthProviderSpecProperties.getHostName() + ":" + officeAuthProviderSpecProperties.getHttpPort()))
             .route("account", r -> r.path(servletProperties.getContextPath()+"/account/**")
                 .filters(f -> f
                     .filter(logPath())  

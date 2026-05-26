@@ -1,53 +1,51 @@
-package project.general_account_service.mapper;
+package project.office_account_service.mapper;
 
-import com.netflix.spectator.impl.StepDouble;
 import org.springframework.stereotype.Component;
-import project.general_account_service.model.dto.object.AppUserDTO;
-import project.general_account_service.model.dto.response.AppUserVerifyResponseDTO;
-import project.general_account_service.model.entity.AppUser;
+import project.office_account_service.model.dto.object.OfficeUserDTO;
+import project.office_account_service.model.dto.response.OfficeUserVerifyResponseDTO;
+import project.office_account_service.model.entity.OfficeUser;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
-public class AppUserMapper {
-    public AppUserDTO toAppUserDTO(AppUser appUser) {
-        if (appUser == null) {
+public class OfficeUserMapper {
+    public OfficeUserDTO toOfficeUserDTO(OfficeUser officeUser) {
+        if (officeUser == null) {
             return null;
         }
-        return AppUserDTO.builder()
-            .id(appUser.getId())
-            .uid(appUser.getUid())
-            .name(appUser.getName())
-            .displayName(appUser.getDisplayName())
-            .email(appUser.getEmail())
-            .roles(appUser.getRoles())
-            .createdAt(appUser.getCreatedAt())
-            .updatedAt(appUser.getUpdatedAt())
+        return OfficeUserDTO.builder()
+            .id(officeUser.getId())
+            .uid(officeUser.getUid())
+            .name(officeUser.getName())
+            .displayName(officeUser.getDisplayName())
+            .email(officeUser.getEmail())
+            .roles(officeUser.getRoles())
+            .createdAt(officeUser.getCreatedAt())
+            .updatedAt(officeUser.getUpdatedAt())
             .build();
     }
-    public AppUserVerifyResponseDTO toAppUserVerifyResponseDTO(AppUser appUser, Set<String> roles){
-        if (appUser == null || roles == null) {
+    public OfficeUserVerifyResponseDTO toOfficeUserVerifyResponseDTO(OfficeUser officeUser, Set<String> roles){
+        if (officeUser == null || roles == null) {
             return null;
         }
 
         Set<String> combinedRoles = new HashSet<>();
-        Set<String> appUserRoles = appUser.getRoles().stream().map(Enum::name).collect(Collectors.toSet());
-        combinedRoles.addAll(appUserRoles);
+        Set<String> officeUserRoles = officeUser.getRoles().stream().map(Enum::name).collect(Collectors.toSet());
+        combinedRoles.addAll(officeUserRoles);
         combinedRoles.addAll(roles);
         
         
-        return AppUserVerifyResponseDTO.builder()
-            .id(appUser.getId())
-            .uid(appUser.getUid())
-            .name(appUser.getName())
-            .displayName(appUser.getDisplayName())
-            .email(appUser.getEmail())
+        return OfficeUserVerifyResponseDTO.builder()
+            .id(officeUser.getId())
+            .uid(officeUser.getUid())
+            .name(officeUser.getName())
+            .displayName(officeUser.getDisplayName())
+            .email(officeUser.getEmail())
             .roles(combinedRoles)
-            .createdAt(appUser.getCreatedAt())
-            .updatedAt(appUser.getUpdatedAt())
+            .createdAt(officeUser.getCreatedAt())
+            .updatedAt(officeUser.getUpdatedAt())
             .build();
     }
 }

@@ -37,7 +37,7 @@
         <module>general/account-service</module>
         <module>office/service-registry</module>
         <module>office/config-mapping</module>
-        <module>office/auth-provider</module>
+        <module>office/account-service</module>
         <module>office/api-gateway</module>
         <module>shared/general-auth-starter</module>
         <module>shared/general-starter</module>

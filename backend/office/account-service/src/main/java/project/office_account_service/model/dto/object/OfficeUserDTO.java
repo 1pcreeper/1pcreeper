@@ -1,17 +1,17 @@
-package project.general_account_service.model.dto.object;
+package project.office_account_service.model.dto.object;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
 import lombok.Builder;
 import lombok.Data;
-import project.general_account_service.model.entity.enums.AppUserRole;
+import project.office_account_service.model.entity.enums.OfficeUserRole;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 
 @Data
 @Builder
-public class AppUserDTO {
+public class OfficeUserDTO {
     @Null
     private Long id;
     private String uid;
@@ -19,7 +19,7 @@ public class AppUserDTO {
     private String email;
     private String displayName;
     @NotNull
-    private Set<AppUserRole> roles;
+    private Set<OfficeUserRole> roles;
     @Null
     private LocalDateTime createdAt;
     @Null

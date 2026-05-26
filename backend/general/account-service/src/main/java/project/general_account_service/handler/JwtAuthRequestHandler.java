@@ -5,27 +5,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
-import project.general_account_service.service.account.AccountSyncService;
+import project.general_account_service.service.sync.AppUserSyncService;
 import project.shared_general_auth_starter.service.auth.FirebaseAuthService;
 import project.shared_general_starter.handler.base.JwtAuthRequestBaseHandler;
 
 @Service
 public class JwtAuthRequestHandler implements JwtAuthRequestBaseHandler {
     private final FirebaseAuthService firebaseAuthService;
-    private final AccountSyncService accountSyncService;
+    private final AppUserSyncService appUserSyncService;
     @Autowired
     public JwtAuthRequestHandler(
         FirebaseAuthService firebaseAuthService,
-        AccountSyncService accountSyncService
+        AppUserSyncService appUserSyncService
     ){
         this.firebaseAuthService = firebaseAuthService;
-        this.accountSyncService = accountSyncService;
+        this.appUserSyncService = appUserSyncService;
     }
     @Override
     public void handle(Jwt jwt) {
         String idToken = jwt.getTokenValue();
         try{
-            accountSyncService.findUserByIdTokenSync(idToken);
+            appUserSyncService.findUserByIdTokenSync(idToken);
         } catch (FirebaseAuthException e) {
             throw new BadCredentialsException("idToken Invalid");
         }

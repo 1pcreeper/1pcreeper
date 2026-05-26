@@ -33,12 +33,6 @@ public class SecurityConfig {
         this.jwtProperties = jwtProperties;
     }
 
-    // 在 WebFlux 中要使用 ReactiveJwtDecoder
-    @Bean
-    public ReactiveJwtDecoder jwtDecoder() {
-        return ReactiveJwtDecoders.fromIssuerLocation(jwtProperties.getIssuerUri());
-    }
-
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
         http

@@ -18,12 +18,12 @@ import java.util.Set;
 
 @Service
 @Slf4j
-public class AccountSyncService {
+public class AppUserSyncService {
     private final AppUserManagerService appUserManagerService;
     private final FirebaseAuthService firebaseAuthService;
 
     @Autowired
-    public AccountSyncService(
+    public AppUserSyncService(
         AppUserManagerService appUserManagerService,
         FirebaseAuthService firebaseAuthService
     ) {

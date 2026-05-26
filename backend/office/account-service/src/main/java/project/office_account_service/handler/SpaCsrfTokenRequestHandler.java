@@ -1,4 +1,4 @@
-package project.shared_general_starter.handler;
+package project.office_account_service.handler;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

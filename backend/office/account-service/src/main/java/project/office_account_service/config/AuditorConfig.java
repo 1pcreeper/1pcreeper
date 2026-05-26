@@ -1,10 +1,5 @@
-package project.general_account_service.config;
+package project.office_account_service.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.data.domain.AuditorAware;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-import project.general_account_service.model.entity.AppUser;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
@@ -12,6 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import project.office_account_service.model.entity.OfficeUser;
 
 import java.util.Optional;
 
@@ -19,15 +15,15 @@ import java.util.Optional;
 @EnableJpaAuditing
 public class AuditorConfig {
     @Bean
-    public AuditorAware<AppUser> auditorProvider() {
-        return new AuditorAware<AppUser>() {
+    public AuditorAware<OfficeUser> auditorProvider() {
+        return new AuditorAware<OfficeUser>() {
             @Override
-            public Optional<AppUser> getCurrentAuditor() {
+            public Optional<OfficeUser> getCurrentAuditor() {
                 return Optional.ofNullable(SecurityContextHolder.getContext())
                     .map(SecurityContext::getAuthentication)
                     .filter(Authentication::isAuthenticated)
                     .map(Authentication::getPrincipal)
-                    .map(principal -> principal instanceof AppUser ? (AppUser) principal : null);
+                    .map(principal -> principal instanceof OfficeUser ? (OfficeUser) principal : null);
             }
         };
     }

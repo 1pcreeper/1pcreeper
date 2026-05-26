@@ -1,6 +1,6 @@
-package project.general_account_service.constant;
+package project.office_account_service.constant;
 
-public class AppUserRoles {
-    public static final String APP_ADMIN = "APP_ADMIN";
-    public static final String APP_USER = "APP_USER";
+public class OfficeUserRoles {
+    public static final String OFFICE_ADMIN = "OFFICE_ADMIN";
+    public static final String OFFICE_USER = "OFFICE_USER";
 }

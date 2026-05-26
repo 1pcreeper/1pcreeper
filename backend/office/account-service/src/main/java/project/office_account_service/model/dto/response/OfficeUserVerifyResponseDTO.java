@@ -1,4 +1,4 @@
-package project.general_account_service.model.dto.response;
+package project.office_account_service.model.dto.response;
 
 import lombok.Builder;
 import lombok.Data;
@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Data
 @Builder
-public class AppUserVerifyResponseDTO {
+public class OfficeUserVerifyResponseDTO {
     private Long id;
     private String uid;
     private String name;

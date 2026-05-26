@@ -1,4 +1,4 @@
-package project.general_account_service.model.entity;
+package project.office_account_service.model.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import project.general_account_service.model.entity.base.AbstractPersistableEntity;
-import project.general_account_service.model.entity.enums.AppUserRole;
+import project.office_account_service.model.entity.base.AbstractPersistableEntity;
+import project.office_account_service.model.entity.enums.OfficeUserRole;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -23,7 +23,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
-public class AppUser extends AbstractPersistableEntity implements UserDetails , Serializable {
+public class OfficeUser extends AbstractPersistableEntity implements UserDetails , Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,7 +52,7 @@ public class AppUser extends AbstractPersistableEntity implements UserDetails , 
         joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private Set<AppUserRole> roles = new HashSet<>();
+    private Set<OfficeUserRole> roles = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
