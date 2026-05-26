@@ -23,6 +23,15 @@
         <module name="general-service-registry" />
         <module name="shared-general-auth-starter" />
       </profile>
+      <profile name="Annotation profile for shared-office-starter" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
+        </processorPath>
+        <module name="shared-office-starter" />
+      </profile>
       <profile name="Annotation profile for office-account-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -55,6 +64,7 @@
       <module name="shared-general-common-lib" options="-parameters" />
       <module name="shared-general-starter" options="-parameters" />
       <module name="shared-office-common-lib" options="-parameters" />
+      <module name="shared-office-starter" options="-parameters" />
     </option>
   </component>
 </project>

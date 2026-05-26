@@ -14,6 +14,7 @@
     <file url="file://$PROJECT_DIR$/backend/shared/general-common-lib/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/backend/shared/general-starter/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/backend/shared/office-common-lib/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend/shared/office-starter/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/backend/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/backend/src/main/resources" charset="UTF-8" />
   </component>

@@ -6,11 +6,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import project.office_account_service.model.exception.ResourceNotFoundException;
+import project.office_account_service.model.entity.OfficeUser;
 import project.office_account_service.service.manager.OfficeUserManagerService;
+import project.shared_office_starter.model.exception.ResourceNotFoundException;
+import project.shared_office_starter.service.base.UserDetailsBaseService;
 
 @Service
-public class UserDetailsAuthService implements UserDetailsService {
+public class UserDetailsAuthService implements UserDetailsBaseService {
     private final OfficeUserManagerService officeUserManagerService;
 
     @Autowired

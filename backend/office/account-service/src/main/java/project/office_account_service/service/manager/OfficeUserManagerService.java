@@ -6,9 +6,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import project.office_account_service.model.entity.OfficeUser;
-import project.office_account_service.model.exception.ResourceNotFoundException;
 import project.office_account_service.repository.OfficeUserRepository;
 import project.office_account_service.service.base.AbstractBaseService;
+import project.shared_office_starter.model.exception.ResourceNotFoundException;
 
 import java.util.List;
 

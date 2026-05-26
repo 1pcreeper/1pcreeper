@@ -41,6 +41,9 @@ public class OfficeUser extends AbstractPersistableEntity implements UserDetails
     @Column(name = "display_name", nullable = false, length = 20)
     private String displayName;
 
+    @Column(name = "password", nullable = false)
+    private String password;
+
     @Column(name = "created_at", insertable = false, updatable = false)
     private LocalDateTime createdAt;
 
@@ -61,12 +64,12 @@ public class OfficeUser extends AbstractPersistableEntity implements UserDetails
 
     @Override
     public String getPassword() {
-        return "";
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return id.toString();
+        return name;
     }
     
 

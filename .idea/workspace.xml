@@ -5,60 +5,68 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="changed Dependency">
-      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/advice/GlobalExceptionAdvice.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/config/AuditorConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/constant/OfficeUserRoles.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/handler/SpaCsrfTokenRequestHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/mapper/OfficeUserMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/dto/object/OfficeUserDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/dto/response/OfficeUserVerifyResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/entity/OfficeUser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/entity/base/AbstractAuditableEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/entity/base/AbstractPersistableEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/entity/enums/OfficeUserRole.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/exception/DatabaseUpdateFailureException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/exception/ObjectMappingException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/exception/PrincipalException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/exception/PropertyValidationException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/exception/RegisterFailureException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/exception/ResourceNotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/exception/TokenValidationException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/exception/UnAuthorizedException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/repository/OfficeUserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/repository/base/AbstractBaseRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/service/auth/UserDetailsAuthService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/service/base/AbstractBaseService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/service/manager/OfficeUserManagerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/model/dto/base/APIBaseResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.local" beforeDir="false" afterPath="$PROJECT_DIR$/.env.local" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/controller/common/AuthController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/handler/JwtAuthRequestHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/interceptor/AuthInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/dto/request/AuthLoginRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/dto/request/AuthRegisterRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/dto/response/AuthTokenResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/service/common/AccountService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/proto/account.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/office-common-lib/src/main/java/project/shared_office_common_lib/constant/JwtClaimKeysConstant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/office-starter/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/config/AsyncConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/config/GrpcSecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/config/GrpcStubConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/config/JacksonConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/config/KafkaConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/config/WebConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/constant/ContentConstant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/constant/KafkaGroupConstant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/converter/JwtAuthenticationConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/handler/base/JwtAuthRequestBaseHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/interceptor/AbstractAuthBaseInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/mapper/AbstractToolsMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/model/event/Event.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/resolver/AuthBearerTokenResolver.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/service/auth/PrincipalAuthService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/service/base/UserDetailsBaseService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/util/StringBlankUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/proto/account.proto" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/OfficeAuthProviderApplication.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/OfficeAccountServiceApplication.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/controller/common/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/controller/common/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/handler/JwtAuthRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/handler/JwtAuthRequestHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/interceptor/AuthInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/interceptor/AuthInterceptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/model/dto/base/APIBaseResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/dto/base/APIBaseResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/model/dto/base/PaginationBaseResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/dto/base/PaginationBaseResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/service/account/AccountSyncService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/service/sync/AppUserSyncService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/service/auth/UserDetailsAuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/service/auth/UserDetailsAuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/general/api-gateway/src/main/java/project/general_api_gateway/config/GatewayConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/api-gateway/src/main/java/project/general_api_gateway/config/GatewayConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/api-gateway/src/main/java/project/office_api_gateway/config/GatewayConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/api-gateway/src/main/java/project/office_api_gateway/config/GatewayConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/api-gateway/src/main/java/project/office_api_gateway/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/api-gateway/src/main/java/project/office_api_gateway/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/api-gateway/src/main/java/project/office_api_gateway/properties/OfficeAuthProviderSpecProperties.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/api-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/api-gateway/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/auth-provider/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/auth-provider/src/main/java/project/office_auth_provider/OfficeAuthProviderApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/auth-provider/src/main/java/project/office_auth_provider/config/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/auth-provider/src/main/resources/application.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/auth-provider/src/main/resources/db/changelog/changes/01-create-table.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/auth-provider/src/main/resources/db/changelog/db.changelog-master.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/repository/AppUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/repository/AppUserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/api-gateway/src/main/java/project/general_api_gateway/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/api-gateway/src/main/java/project/general_api_gateway/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/account-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/OfficeAccountServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/OfficeAccountServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/advice/GlobalExceptionAdvice.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/handler/SpaCsrfTokenRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/handler/SpaCsrfTokenRequestHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/mapper/OfficeUserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/mapper/OfficeUserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/dto/base/APIBaseResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/model/dto/base/APIBaseResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/dto/base/PaginationBaseResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/model/dto/base/PaginationBaseResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/entity/OfficeUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/entity/OfficeUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/exception/DatabaseUpdateFailureException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/model/exception/DatabaseUpdateFailureException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/exception/ObjectMappingException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/model/exception/ObjectMappingException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/exception/PrincipalException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/model/exception/PrincipalException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/exception/PropertyValidationException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/model/exception/PropertyValidationException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/exception/RegisterFailureException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/model/exception/RegisterFailureException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/exception/ResourceNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/model/exception/ResourceNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/exception/TokenValidationException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/model/exception/TokenValidationException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/model/exception/UnAuthorizedException.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/model/exception/UnAuthorizedException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/repository/OfficeUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/repository/OfficeUserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/service/auth/UserDetailsAuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/service/auth/UserDetailsAuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/service/base/AbstractBaseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/service/base/AbstractBaseService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/service/manager/OfficeUserManagerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/service/manager/OfficeUserManagerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/resources/db/changelog/changes/01-create-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/resources/db/changelog/changes/01-create-table.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/advice/GlobalExceptionAdvice.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/advice/GlobalExceptionAdvice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/model/vo/response/APIResponseVO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/model/vo/response/PaginationResponseVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/model/dto/base/PaginationBaseResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/compose/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/compose/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/general-starter/src/main/proto/general_account.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/general-starter/usage.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/office-common-lib/src/main/java/project/shared_office_common_lib/constant/ServiceRegistryIDNames.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/office-common-lib/src/main/java/project/shared_office_common_lib/constant/ServiceRegistryIDNames.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/office-common-lib/src/main/java/project/shared_office_common_lib/constant/role/SystemRole.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/office-common-lib/src/main/java/project/shared_office_common_lib/constant/role/SystemRoles.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,9 +170,11 @@
       <recent name="D:\Favorites\Code\1pcreeper\projects\001 Project\codes\current\1pcreeper-project\backend\shared\common-library\src\main\java\project" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="project.office_account_service.handler" />
-      <recent name="project.office_api_gateway.properties" />
-      <recent name="project.shared_general_starter.properties" />
+      <recent name="project.office_account_service.model.dto.response" />
+      <recent name="project.office_account_service.model.dto.request" />
+      <recent name="project.office_account_service.controller.common" />
+      <recent name="project.office_account_service.interceptor" />
+      <recent name="project.shared_office_common_lib.constant" />
     </key>
   </component>
   <component name="RunAnythingCache">

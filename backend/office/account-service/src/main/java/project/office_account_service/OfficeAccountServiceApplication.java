@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan(basePackages = {
     "project.office_account_service",
+    "project.shared_office_starter",
     "project.shared_office_common_lib"
 })
 public class OfficeAccountServiceApplication {

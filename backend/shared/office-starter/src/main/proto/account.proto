@@ -1,0 +1,25 @@
+
+syntax = "proto3";
+
+package office_account;
+option java_multiple_files = true;
+option java_package="project.shared_office_starter.grpc";
+option java_outer_classname="OfficeAccountServiceProto";
+
+service OfficeAccountRPCService{
+  rpc findById(OfficeUserRequest) returns (OfficeUserResponse);
+}
+//====================================================================================================
+message OfficeUserRequest{
+    string id = 1;
+}
+//message VerifyUserForBusinessRightsRequest{
+//    string userId = 1;
+//    string businessId = 2;
+//    repeated string rightIds = 3;
+//}
+//====================================================================================================
+message OfficeUserResponse{
+    string id = 1;
+}
+//========================================================================================================

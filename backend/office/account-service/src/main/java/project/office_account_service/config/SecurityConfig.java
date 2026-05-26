@@ -13,6 +13,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -30,14 +31,19 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
+import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
-import project.office_account_service.handler.SpaCsrfTokenRequestHandler;
+import project.shared_office_starter.converter.JwtAuthenticationConverter;
+import project.shared_office_common_lib.constant.ServiceRegistryIDNames;
 import project.shared_office_common_lib.properties.CorsProperties;
+import project.shared_office_starter.handler.SpaCsrfTokenRequestHandler;
+import project.shared_office_starter.resolver.AuthBearerTokenResolver;
+import project.shared_office_starter.service.base.UserDetailsBaseService;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -48,47 +54,63 @@ import java.util.List;
 import java.util.UUID;
 
 @Configuration
+@EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
 @EnableWebSecurity
 public class SecurityConfig {
+    private final UserDetailsBaseService userDetailsBaseService;
     private final SpaCsrfTokenRequestHandler spaCsrfTokenRequestHandler;
     private final CorsProperties corsProperties;
+    private final JwtAuthenticationConverter jwtAuthenticationConverter;
+    private final AuthBearerTokenResolver authBearerTokenResolver;
+
     @Autowired
     public SecurityConfig(
+        UserDetailsBaseService userDetailsBaseService,
         SpaCsrfTokenRequestHandler spaCsrfTokenRequestHandler,
-        CorsProperties corsProperties
-    ){
+        CorsProperties corsProperties,
+        JwtAuthenticationConverter jwtAuthenticationConverter,
+        AuthBearerTokenResolver authBearerTokenResolver
+    ) {
+        this.userDetailsBaseService = userDetailsBaseService;
         this.spaCsrfTokenRequestHandler = spaCsrfTokenRequestHandler;
         this.corsProperties = corsProperties;
+        this.jwtAuthenticationConverter = jwtAuthenticationConverter;
+        this.authBearerTokenResolver = authBearerTokenResolver;
     }
-    
-    
+
+
     @Bean
     @Order(1)
     public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
         OAuth2AuthorizationServerConfigurer authorizationServerConfigurer =
             OAuth2AuthorizationServerConfigurer.authorizationServer();
         http
+            .userDetailsService(userDetailsBaseService)
             .securityMatcher(authorizationServerConfigurer.getEndpointsMatcher())
             .with(authorizationServerConfigurer, (authorizationServer) ->
                 authorizationServer
-                    .oidc(Customizer.withDefaults())	
+                    .oidc(Customizer.withDefaults())
             )
             .authorizeHttpRequests((authorize) ->
                 authorize
-                    .anyRequest().authenticated()
+                    .anyRequest().permitAll()
             )
             .getConfigurer(OAuth2AuthorizationServerConfigurer.class)
-            .oidc(Customizer.withDefaults()); 
+            .oidc(Customizer.withDefaults());
 
         http.exceptionHandling((exceptions) -> exceptions
                 .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/auth/login"))
             )
-            .oauth2ResourceServer((resourceServer) -> 
-                resourceServer.jwt(Customizer.withDefaults()));
+            .oauth2ResourceServer((resourceServer) ->
+                resourceServer.jwt(jwt ->
+                        jwt
+                            .jwtAuthenticationConverter(jwtAuthenticationConverter)
+                    )
+                    .bearerTokenResolver(authBearerTokenResolver));
 
         return http.build();
     }
-    
+
     @Bean
     @Order(2)
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
@@ -102,15 +124,17 @@ public class SecurityConfig {
                     .csrfTokenRequestHandler(spaCsrfTokenRequestHandler)
             )
             .authorizeHttpRequests((authorize) -> authorize
-                // Open up register, login, and decode endpoints
-                .requestMatchers("/auth/register", "/auth/login", "/auth/decode").permitAll()
-                .anyRequest().authenticated()
-            )
-            .formLogin(Customizer.withDefaults());
+                .anyRequest().permitAll()
+            ).oauth2ResourceServer((resourceServer) ->
+                resourceServer.jwt(jwt ->
+                        jwt
+                            .jwtAuthenticationConverter(jwtAuthenticationConverter)
+                    )
+                    .bearerTokenResolver(authBearerTokenResolver));;
 
         return http.build();
     }
-    
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
@@ -118,33 +142,27 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(); // Encrypts passwords safely!
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public UserDetailsService userDetailsService() {
-        return new InMemoryUserDetailsManager();
-    }
-    
-    @Bean
     public RegisteredClientRepository registeredClientRepository() {
-        RegisteredClient registeredClient = RegisteredClient.withId(UUID.randomUUID().toString())
-            .clientId("my-client")
-            .clientSecret("{noop}my-secret")
+        RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
+            .clientId("oidc-client")
+            .clientSecret("{noop}secret")
             .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
             .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
             .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-            .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-            .redirectUri("http://127.0.0.1:8086/api/v1/account/auth/hello")
+            .redirectUri("lb://" + ServiceRegistryIDNames.OFFICE_API_GATEWAY)
+            .postLogoutRedirectUri("lb://" + ServiceRegistryIDNames.OFFICE_API_GATEWAY)
             .scope(OidcScopes.OPENID)
             .scope(OidcScopes.PROFILE)
-            .scope("read")
-            .scope("write")
+            .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
             .build();
 
-        return new InMemoryRegisteredClientRepository(registeredClient);
+        return new InMemoryRegisteredClientRepository(oidcClient);
     }
-    
+
     @Bean
     public KeyPair keyPair() {
         try {
@@ -177,7 +195,7 @@ public class SecurityConfig {
     public JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
         return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource);
     }
-    
+
     @Bean
     public AuthorizationServerSettings authorizationServerSettings() {
         return AuthorizationServerSettings.builder()

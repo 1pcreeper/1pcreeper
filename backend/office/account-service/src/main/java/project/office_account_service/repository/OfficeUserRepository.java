@@ -15,9 +15,9 @@ import java.util.Optional;
 public interface OfficeUserRepository extends AbstractBaseRepository<OfficeUser,Long> {
     @Query("SELECT u FROM OfficeUser u WHERE u.uid = :uid")
     Optional<OfficeUser> findByUid(@Param("uid")String uid);
-    @Query("SELECT u FROM OfficeUser u WHERE u.name = :name")
+    @Query("SELECT u FROM OfficeUser u WHERE LOWER(u.name) = LOWER(:name)")
     Optional<OfficeUser> findByName(@Param("name")String name);
-    @Query("SELECT u FROM OfficeUser u WHERE u.email = :email")
+    @Query("SELECT u FROM OfficeUser u WHERE LOWER(u.email) = LOWER(:email)")
     Optional<OfficeUser> findByEmail(@Param("email")String email);
     @Query("SELECT u FROM OfficeUser u WHERE u.name LIKE %:partialName%")
     Page<OfficeUser> findByNameContaining(@Param("partialName") String partialName, Pageable pageable);

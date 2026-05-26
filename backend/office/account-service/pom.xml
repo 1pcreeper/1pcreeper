@@ -18,6 +18,25 @@
         </dependency>
         <dependency>
             <groupId>project</groupId>
+            <artifactId>shared-office-starter</artifactId>
+            <version>1.0.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.persistence</groupId>
+                    <artifactId>javax.persistence-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.hibernate</groupId>
+                    <artifactId>hibernate-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.vladmihalcea</groupId>
+                    <artifactId>hibernate-types-55</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>project</groupId>
             <artifactId>shared-office-common-lib</artifactId>
             <version>1.0.0</version>
         </dependency>

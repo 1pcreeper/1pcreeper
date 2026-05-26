@@ -16,9 +16,9 @@ import java.util.Optional;
 public interface AppUserRepository extends AbstractBaseRepository<AppUser,Long> {
     @Query("SELECT u FROM AppUser u WHERE u.uid = :uid")
     Optional<AppUser> findByUid(@Param("uid")String uid);
-    @Query("SELECT u FROM AppUser u WHERE u.name = :name")
+    @Query("SELECT u FROM AppUser u WHERE LOWER(u.name) = LOWER(:name)")
     Optional<AppUser> findByName(@Param("name")String name);
-    @Query("SELECT u FROM AppUser u WHERE u.email = :email")
+    @Query("SELECT u FROM AppUser u WHERE LOWER(u.email) = LOWER(:email)")
     Optional<AppUser> findByEmail(@Param("email")String email);
     @Query("SELECT u FROM AppUser u WHERE u.name LIKE %:partialName%")
     Page<AppUser> findByNameContaining(@Param("partialName") String partialName, Pageable pageable);

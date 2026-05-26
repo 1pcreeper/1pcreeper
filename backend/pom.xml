@@ -37,11 +37,12 @@
         <module>general/account-service</module>
         <module>office/service-registry</module>
         <module>office/config-mapping</module>
-        <module>office/account-service</module>
         <module>office/api-gateway</module>
+        <module>office/account-service</module>
         <module>shared/general-auth-starter</module>
         <module>shared/general-starter</module>
         <module>shared/general-common-lib</module>
+        <module>shared/office-starter</module>
         <module>shared/office-common-lib</module>
 	</modules>
 
