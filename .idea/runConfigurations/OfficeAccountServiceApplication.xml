@@ -1,10 +1,10 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="OfficeAuthProviderApplication" type="Application" factoryName="Application">
+  <configuration default="false" name="OfficeAccountServiceApplication" type="Application" factoryName="Application">
     <option name="envFilePaths">
       <option value="$PROJECT_DIR$/.env.local" />
     </option>
-    <option name="MAIN_CLASS_NAME" value="project.office_auth_provider.OfficeAuthProviderApplication" />
-    <module name="office-auth-provider" />
+    <option name="MAIN_CLASS_NAME" value="project.office_account_service.OfficeAccountServiceApplication" />
+    <module name="office-account-service" />
     <extension name="net.ashald.envfile">
       <option name="IS_ENABLED" value="true" />
       <option name="IS_SUBST" value="false" />

@@ -1,4 +1,4 @@
-package project.general_account_service.service.account;
+package project.general_account_service.service.sync;
 
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
@@ -40,7 +40,7 @@ public class AccountSyncService {
         try {
             return appUserManagerService.findByUid(uid);
         } catch (ResourceNotFoundException e) {
-            log.info("New SAML user {} detected, creating domain account.", email);
+            log.info("New SAML user {} detected, creating domain sync.", email);
         }
         boolean isEmailNotExisted = false;
         boolean isUidNotExisted = false;

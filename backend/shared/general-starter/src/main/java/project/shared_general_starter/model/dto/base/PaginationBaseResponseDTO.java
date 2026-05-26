@@ -1,14 +1,13 @@
-package project.shared_general_starter.model.vo.response;
+package project.general_account_service.model.dto.base;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class PaginationResponseVO<DTO> {
+public class PaginationBaseResponseDTO<DTO> {
     private List<DTO> content;
     private Integer pageNumber;
     private Integer pageSize;
