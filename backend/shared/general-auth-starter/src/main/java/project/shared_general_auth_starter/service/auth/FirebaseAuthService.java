@@ -6,7 +6,6 @@ import com.google.firebase.auth.FirebaseToken;
 import com.google.firebase.auth.UserRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import project.shared_general_common_lib.constant.AppUserRole;
 import project.shared_general_common_lib.constant.CookieKeyConstant;
 import project.shared_general_common_lib.constant.FirebaseClaimKeysConstant;
 import project.shared_general_auth_starter.model.bo.request.FirebaseCreateUserRequestBO;
@@ -15,7 +14,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class FirebaseAuthService {
@@ -50,7 +48,7 @@ public class FirebaseAuthService {
     
     public Set<String> getRoles(String uid) throws FirebaseAuthException {
         UserRecord userRecord = getUser(uid);
-        Object roleData = userRecord.getCustomClaims().get(CookieKeyConstant.SECURE);
+        Object roleData = userRecord.getCustomClaims().getOrDefault(FirebaseClaimKeysConstant.ROLE_KEY,List.of());
         try{
             List<String> roleList = (List<String>) roleData;
             return new HashSet<>(roleList);

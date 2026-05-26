@@ -9,7 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import project.general_account_service.model.entity.base.AbstractPersistableEntity;
-import project.shared_general_common_lib.constant.AppUserRole;
+import project.general_account_service.model.entity.enums.AppUserRole;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

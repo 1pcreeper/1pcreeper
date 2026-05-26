@@ -17,8 +17,10 @@ import project.shared_general_common_lib.constant.FirebaseClaimKeysConstant;
 import project.shared_general_starter.handler.base.JwtAuthRequestBaseHandler;
 import project.shared_general_starter.service.base.UserDetailsBaseService;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
@@ -37,14 +39,20 @@ public class JwtAuthenticationConverter implements Converter<Jwt, AbstractAuthen
 
     @Override
     public AbstractAuthenticationToken convert(Jwt source) {
+
+        List<GrantedAuthority> combinedAuthorities = new ArrayList<>();
         
         jwtAuthRequestBaseHandler.handle(source);
-        Collection<GrantedAuthority> authorities = extractAuthorities(source);
+        combinedAuthorities.addAll(extractAuthorities(source));
 
         String uid = source.getSubject();
         UserDetails userDetails = userDetailsBaseService.loadUserByUsername(uid);
 
-        return new UsernamePasswordAuthenticationToken(userDetails, source, authorities);
+        if (userDetails.getAuthorities() != null) {
+            combinedAuthorities.addAll(userDetails.getAuthorities());
+        }
+
+        return new UsernamePasswordAuthenticationToken(userDetails, source, combinedAuthorities);
     };
 
     private Collection<GrantedAuthority> extractAuthorities(Jwt jwt) {
@@ -54,6 +62,6 @@ public class JwtAuthenticationConverter implements Converter<Jwt, AbstractAuthen
                 .map(role -> new SimpleGrantedAuthority(role.toString()))
                 .collect(Collectors.toList());
         }
-        return Collections.emptyList();
+        return List.of();
     }
 }

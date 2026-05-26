@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
 import lombok.Builder;
 import lombok.Data;
-import project.shared_general_common_lib.constant.AppUserRole;
+import project.general_account_service.model.entity.enums.AppUserRole;
 
 import java.time.LocalDateTime;
 import java.util.Set;

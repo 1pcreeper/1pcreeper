@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import project.general_account_service.model.entity.AppUser;
 import project.general_account_service.service.manager.AppUserManagerService;
 import project.shared_general_auth_starter.service.auth.FirebaseAuthService;
-import project.shared_general_common_lib.constant.AppUserRole;
+import project.general_account_service.model.entity.enums.AppUserRole;
 import project.shared_general_starter.model.exception.DatabaseUpdateFailureException;
 import project.shared_general_starter.model.exception.ResourceNotFoundException;
 

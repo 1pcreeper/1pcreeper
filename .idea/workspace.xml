@@ -5,10 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="changed Dependency">
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/OfficeAuthProviderApplication.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.local" beforeDir="false" afterPath="$PROJECT_DIR$/.env.local" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/model/dto/response/AppUserVerifyResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/auth-provider/src/main/java/project/office_auth_provider/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/general-common-lib/src/main/java/project/shared_general_common_lib/constant/role/SystemRole.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/general-common-lib/src/main/java/project/shared_general_common_lib/constant/role/SystemRoles.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/office-common-lib/src/main/java/project/shared_office_common_lib/constant/role/SystemRole.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/office-common-lib/src/main/java/project/shared_office_common_lib/constant/role/SystemRoles.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/controller/common/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/controller/common/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/mapper/AppUserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/mapper/AppUserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/model/dto/object/AppUserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/model/dto/object/AppUserDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/model/entity/AppUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/model/entity/AppUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/service/account/AccountSyncService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/service/account/AccountSyncService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/general-auth-starter/src/main/java/project/shared_general_auth_starter/service/auth/FirebaseAuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/general-auth-starter/src/main/java/project/shared_general_auth_starter/service/auth/FirebaseAuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/general-common-lib/src/main/java/project/shared_general_common_lib/constant/AppUserRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/model/entity/enums/AppUserRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/general-common-lib/src/main/java/project/shared_general_common_lib/constant/AppUserRoles.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/constant/AppUserRoles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/converter/JwtAuthenticationConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/converter/JwtAuthenticationConverter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +100,7 @@
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/1pcreeper/projects/001 Project/codes/v001/1pcreeper-project/backend/office/auth-provider",
+    "last_opened_file_path": "E:/1pcreeper/projects/001 Project/codes/v001/1pcreeper-project/backend/shared/office-common-lib/src/main/java/project/shared_office_common_lib/constant/role",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15625",
     "project.structure.side.proportion": "0.3034483",
@@ -97,11 +109,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\shared\office-common-lib\src\main\java\project\shared_office_common_lib\constant\role" />
       <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\office\auth-provider" />
       <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\shared\general-starter\src\main\java\project\shared_general_starter" />
       <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\general\account-service\src\main\resources" />
       <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\general\account-service" />
-      <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\shared\general-auth-library" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\general\api-gateway\src\main\java\project\general_api_gateway" />
@@ -121,7 +133,7 @@
       <command value="mvn mvn clean install -DskipTests" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.OfficeAuthProviderApplication">
+  <component name="RunManager" selected="Application.GeneralAccountServiceApplication">
     <list>
       <item itemvalue="Application.GeneralServiceRegistryApplication " />
       <item itemvalue="Application.GeneralConfigMappingApplication" />
@@ -237,22 +249,22 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/converter/JwtAuthenticationConverter.java</url>
-          <line>41</line>
+          <line>45</line>
           <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/converter/JwtAuthenticationConverter.java</url>
-          <line>43</line>
+          <line>47</line>
           <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/converter/JwtAuthenticationConverter.java</url>
-          <line>44</line>
+          <line>48</line>
           <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/converter/JwtAuthenticationConverter.java</url>
-          <line>40</line>
+          <line>44</line>
           <option name="timeStamp" value="61" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -267,7 +279,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/converter/JwtAuthenticationConverter.java</url>
-          <line>46</line>
+          <line>54</line>
           <option name="timeStamp" value="67" />
         </line-breakpoint>
       </breakpoints>
