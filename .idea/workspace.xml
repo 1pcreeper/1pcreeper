@@ -5,10 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="changed Dependency">
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/OfficeWorkforceServiceApplication.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/api-gateway/src/main/java/project/office_api_gateway/properties/OfficeWorkforceServiceSpecProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.local" beforeDir="false" afterPath="$PROJECT_DIR$/.env.local" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/controller/common/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/controller/common/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/dummy-service/src/main/java/project/office_dummy_service/constant/OfficeUserRoles.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/dummy-service/src/main/java/project/office_dummy_service/constant/UserRoles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/dummy-service/src/main/java/project/office_dummy_service/controller/common/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/dummy-service/src/main/java/project/office_dummy_service/controller/common/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/api-gateway/src/main/java/project/office_api_gateway/config/GatewayConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/api-gateway/src/main/java/project/office_api_gateway/config/GatewayConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/api-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/api-gateway/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,6 +73,7 @@
     "Application.OfficeConfigMappingApplication.executor": "Run",
     "Application.OfficeDummyServiceApplication.executor": "Run",
     "Application.OfficeServiceRegistryApplication .executor": "Run",
+    "Application.OfficeWorkforceServiceApplication.executor": "Run",
     "Application.project.general_service_registry.GeneralServiceRegistryApplication .executor": "Run",
     "Maven.config-mapping [clean].executor": "Run",
     "Maven.config-mapping [install].executor": "Run",
@@ -114,11 +120,11 @@
       <recent name="D:\Favorites\Code\1pcreeper\projects\001 Project\codes\current\1pcreeper-project\backend\shared\common-library\src\main\java\project" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="project.office_api_gateway.properties" />
       <recent name="project.office_account_service.properties" />
       <recent name="project.shared_office_common_lib.properties" />
       <recent name="project.office_account_service.model.dto.response" />
       <recent name="project.office_account_service.model.dto.request" />
-      <recent name="project.office_account_service.controller.common" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -127,7 +133,7 @@
       <command value="mvn mvn clean install -DskipTests" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.OfficeDummyServiceApplication">
+  <component name="RunManager" selected="Application.OfficeAPIGatewayApplication">
     <list>
       <item itemvalue="Application.GeneralServiceRegistryApplication " />
       <item itemvalue="Application.GeneralConfigMappingApplication" />
@@ -137,6 +143,7 @@
       <item itemvalue="Application.OfficeConfigMappingApplication" />
       <item itemvalue="Application.OfficeAPIGatewayApplication" />
       <item itemvalue="Application.OfficeAccountServiceApplication" />
+      <item itemvalue="Application.OfficeWorkforceServiceApplication" />
       <item itemvalue="Application.GeneralDummyServiceApplication" />
       <item itemvalue="Application.OfficeDummyServiceApplication" />
     </list>
@@ -262,7 +269,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779871033115</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="changed Dependency">
+      <option name="closed" value="true" />
+      <created>1779877594797</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1779877594797</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

@@ -22,18 +22,19 @@
         <module name="office-service-registry" />
         <module name="office-config-mapping" />
         <module name="general-account-service" />
+        <module name="office-dummy-service" />
         <module name="shared-office-common-lib" />
         <module name="general-dummy-service" />
         <module name="shared-general-auth-starter" />
       </profile>
-      <profile name="Annotation profile for office-dummy-service" enabled="true">
+      <profile name="Annotation profile for office-workforce-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
         </processorPath>
-        <module name="office-dummy-service" />
+        <module name="office-workforce-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -55,6 +56,7 @@
       <module name="office-config-mapping" options="-parameters" />
       <module name="office-dummy-service" options="-parameters" />
       <module name="office-service-registry" options="-parameters" />
+      <module name="office-workforce-service" options="-parameters" />
       <module name="project" options="-parameters" />
       <module name="shared-general-auth-starter" options="-parameters" />
       <module name="shared-general-common-lib" options="-parameters" />

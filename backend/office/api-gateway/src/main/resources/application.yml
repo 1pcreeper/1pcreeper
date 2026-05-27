@@ -37,6 +37,10 @@ properties:
             hostName: ${OFFICE_ACCOUNT_SERVICE_SERVER_HOSTNAME}
             httpPort: ${OFFICE_ACCOUNT_SERVICE_SERVER_PORT}
             grpcPort: ${OFFICE_ACCOUNT_SERVICE_GRPC_PORT}
+        office-workforce-service:
+            hostName: ${OFFICE_WORKFORCE_SERVICE_SERVER_HOSTNAME}
+            httpPort: ${OFFICE_WORKFORCE_SERVICE_SERVER_PORT}
+            grpcPort: ${OFFICE_WORKFORCE_SERVICE_GRPC_PORT}
     jwt:
         issuer-uri: ${OFFICE_OAUTH2_RESOURCE_JWT_ISSUER_LOCATION}
     cors: 
