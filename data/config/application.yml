@@ -1,73 +1,75 @@
 spring:
-  cloud:
-    loadbalancer:
-      enabled: true
-    config:
-      discovery:
-        enabled: true
-        service-id: ${OFFICE_CONFIG_MAPPING_SERVER_HOSTNAME}
-      username: ${OFFICE_CONFIG_MAPPING_SECURITY_USERNAME}
-      password: ${OFFICE_CONFIG_MAPPING_SECURITY_PASSWORD}
-  jpa:
-    hibernate:
-      ddl-auto: none
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-        jdbc:
-          lob:
-            non_contextual_creation: true
-        type:
-          descriptor:
-            sql:
-              BasicBinder:
-                trace:
-                  enabled: true
-        dialect:
-          storage_engine: innodb
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: ${OFFICE_OAUTH2_RESOURCE_JWT_ISSUER_LOCATION}
-  main:
-    allow-bean-definition-overriding: true
-  kafka:
-    bootstrap-servers: ${OFFICE_KAFKA_BOOTSTRAP_SERVERS}
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-    consumer:
-      group-id: office-public-group
-      auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      properties:
-        spring.json.trusted.packages: project.shared_office_starter
-    listener:
-      ack-mode: manual_immediate
-      concurrency: 3
+    cloud:
+        loadbalancer:
+            enabled: true
+        config:
+            discovery:
+                enabled: true
+                service-id: ${OFFICE_CONFIG_MAPPING_SERVER_HOSTNAME}
+            username: ${OFFICE_CONFIG_MAPPING_SECURITY_USERNAME}
+            password: ${OFFICE_CONFIG_MAPPING_SECURITY_PASSWORD}
+    jpa:
+        hibernate:
+            ddl-auto: none
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
+        show-sql: true
+        properties:
+            hibernate:
+                format_sql: true
+                jdbc:
+                    lob:
+                        non_contextual_creation: true
+                type:
+                    descriptor:
+                        sql:
+                            BasicBinder:
+                                trace:
+                                    enabled: true
+                dialect:
+                    storage_engine: innodb
+    security:
+        oauth2:
+            resourceserver:
+                jwt:
+                    issuer-uri: ${OFFICE_OAUTH2_RESOURCE_JWT_ISSUER_LOCATION}
+    main:
+        allow-bean-definition-overriding: true
+    kafka:
+        bootstrap-servers: ${OFFICE_KAFKA_BOOTSTRAP_SERVERS}
+        producer:
+            key-serializer: org.apache.kafka.common.serialization.StringSerializer
+            value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+        consumer:
+            group-id: office-public-group
+            auto-offset-reset: earliest
+            key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+            value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+            properties:
+                spring.json.trusted.packages: project.shared_office_starter
+        listener:
+            ack-mode: manual_immediate
+            concurrency: 3
 logging:
-  level:
-    org:
-      hibernate:
-        SQL: DEBUG
-        type.descriptor.sql.BasicBinder: TRACE
+    level:
+        org:
+            hibernate:
+                SQL: DEBUG
+                type.descriptor.sql.BasicBinder: TRACE
 grpc:
-  client:
-    office-account-service:
-      address: ${OFFICE_ACCOUNT_SERVICE_SERVER_HOSTNAME}
-      port: ${OFFICE_ACCOUNT_SERVICE_GRPC_PORT}
+    client:
+        office-account-service:
+            address: ${OFFICE_ACCOUNT_SERVICE_SERVER_HOSTNAME}
+            port: ${OFFICE_ACCOUNT_SERVICE_GRPC_PORT}
 eureka:
-  instance:
-    prefer-ip-address: false
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://admin:${OFFICE_SERVICE_REGISTRY_SECURITY_PASSWORD}@${OFFICE_SERVICE_REGISTRY_SERVER_IP_ADDRESS}:${OFFICE_SERVICE_REGISTRY_SERVER_PORT}/eureka
+    instance:
+        prefer-ip-address: false
+    client:
+        register-with-eureka: true
+        fetch-registry: true
+        service-url:
+            defaultZone: http://admin:${OFFICE_SERVICE_REGISTRY_SECURITY_PASSWORD}@${OFFICE_SERVICE_REGISTRY_SERVER_IP_ADDRESS}:${OFFICE_SERVICE_REGISTRY_SERVER_PORT}/eureka
 properties:
-  jwt:
-    issuer-uri: ${OFFICE_OAUTH2_RESOURCE_JWT_ISSUER_LOCATION}
+    jwt:
+        issuer-uri: ${OFFICE_OAUTH2_RESOURCE_JWT_ISSUER_LOCATION}
+    http:
+        is-secured: ${OFFICE_HTTP_SECURE}

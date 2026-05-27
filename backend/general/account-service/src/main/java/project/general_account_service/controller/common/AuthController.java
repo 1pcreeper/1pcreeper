@@ -5,10 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import project.general_account_service.mapper.AppUserMapper;
+import project.shared_general_common_lib.constant.CookieKeyConstant;
 import project.shared_general_starter.model.dto.base.APIBaseResponseDTO;
 import project.general_account_service.model.dto.object.AppUserDTO;
 import project.general_account_service.model.dto.response.AppUserVerifyResponseDTO;
@@ -41,7 +43,9 @@ public class AuthController {
         return "Hello";
     }
     @GetMapping("/verify")
-    public ResponseEntity<APIBaseResponseDTO<AppUserVerifyResponseDTO>> verify(@AuthenticationPrincipal AppUser appUser){
+    public ResponseEntity<APIBaseResponseDTO<AppUserVerifyResponseDTO>> verify(
+        @AuthenticationPrincipal AppUser appUser
+    ){
         if(Objects.isNull(appUser)){
              throw new AuthorizationDeniedException("User Not Verified");
         }

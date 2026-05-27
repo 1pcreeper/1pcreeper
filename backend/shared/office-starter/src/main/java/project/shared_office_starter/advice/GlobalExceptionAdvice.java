@@ -1,11 +1,11 @@
-package project.shared_general_starter.advice;
+package project.shared_office_starter.advice;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import project.shared_general_starter.model.exception.*;
-import project.shared_general_starter.model.dto.base.APIBaseResponseDTO;
+import project.shared_office_starter.model.dto.base.APIBaseResponseDTO;
+import project.shared_office_starter.model.exception.*;
 
 @RestControllerAdvice
 public class GlobalExceptionAdvice {

@@ -36,6 +36,11 @@ properties:
     security: dummy
     cors:
         allowed-origins: ${OFFICE_ACCOUNT_SERVICE_CORS_ALLOWED_ORIGINS}
+    jwt:
+        secret: ${OFFICE_ACCOUNT_SERVICE_JWT_SECRET}
 grpc:
     server:
         port: ${OFFICE_ACCOUNT_SERVICE_GRPC_PORT}
+jwt:
+    secret: ${OFFICE_ACCOUNT_SERVICE_JWT_SECRET}
+    expiration.millis: ${OFFICE_ACCOUNT_SERVICE_JWT_EXPIRATION_MILLIS}

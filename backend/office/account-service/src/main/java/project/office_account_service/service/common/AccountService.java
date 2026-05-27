@@ -1,5 +1,7 @@
 package project.office_account_service.service.common;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
@@ -10,6 +12,7 @@ import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import project.office_account_service.constant.OfficeUserRoles;
 import project.office_account_service.mapper.OfficeUserMapper;
 import project.office_account_service.model.dto.request.AuthLoginRequestDTO;
@@ -20,15 +23,13 @@ import project.office_account_service.service.manager.OfficeUserManagerService;
 import project.shared_office_common_lib.constant.JwtClaimKeysConstant;
 import project.shared_office_common_lib.constant.ServiceRegistryIDNames;
 import project.shared_office_starter.model.exception.DatabaseUpdateFailureException;
+import project.shared_office_starter.model.exception.RegisterFailureException;
 import project.shared_office_starter.model.exception.ResourceNotFoundException;
 import project.shared_office_starter.model.exception.UnAuthorizedException;
 import project.shared_office_starter.service.base.UserDetailsBaseService;
 
 import java.time.Instant;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class AccountService {
@@ -38,6 +39,8 @@ public class AccountService {
     private final RegisteredClientRepository clientRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserDetailsBaseService userDetailsBaseService;
+
+    @Autowired
     public AccountService(
         OfficeUserManagerService officeUserManagerService,
         OfficeUserMapper officeUserMapper,
@@ -54,44 +57,61 @@ public class AccountService {
         this.userDetailsBaseService = userDetailsBaseService;
     }
 
+    @Transactional
     public AuthTokenResponseDTO register(AuthRegisterRequestDTO requestDTO) {
         checkExistingOfficeUser(requestDTO.getName(), requestDTO.getPassword());
         OfficeUser newOfficeUser = officeUserMapper.toOfficeUser(requestDTO);
         newOfficeUser.setUid(UUID.randomUUID().toString());
+        newOfficeUser.setPassword(passwordEncoder.encode(requestDTO.getPassword()));
         OfficeUser savedOfficeUser = officeUserManagerService.save(newOfficeUser);
-        return null;
+        JwtClaimsSet claimsSet = createJwtClaimsSet(savedOfficeUser);
+        String token = this.jwtEncoder.encode(JwtEncoderParameters.from(claimsSet)).getTokenValue();
+        return officeUserMapper.toAuthTokenResponseDTO(savedOfficeUser, token);
     }
 
     public AuthTokenResponseDTO login(AuthLoginRequestDTO requestDTO) {
         String name = requestDTO.getName().trim().toLowerCase();
-        String password = passwordEncoder.encode(requestDTO.getPassword());
-        
-        OfficeUser existingOfficeUser = officeUserManagerService.findByName(name);
-        if(!password.equals(existingOfficeUser.getPassword())){
+        String password = requestDTO.getPassword();
+
+        OfficeUser existingOfficeUser;
+        try {
+            existingOfficeUser = officeUserManagerService.findByName(name);
+        } catch (UsernameNotFoundException e) {
             throw new UnAuthorizedException("Wrong User Name Or Password");
         }
 
-        Instant now = Instant.now();
-        JwtClaimsSet claims = JwtClaimsSet.builder()
-            .issuer("office-account-service")
-            .issuedAt(now)
-            .expiresAt(now.plusSeconds(3600L))
-            .subject(existingOfficeUser.getUid())
-            .claim(JwtClaimKeysConstant.ROLE_KEY, List.of(OfficeUserRoles.OFFICE_USER))
-            .build();
+        if (!passwordEncoder.matches(password, existingOfficeUser.getPassword())) {
+            throw new UnAuthorizedException("Wrong User Name Or Password");
+        }
 
-        String token = this.jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
-        
-        return officeUserMapper.toAuthTokenResponseDTO(existingOfficeUser,token);
+
+        JwtClaimsSet claimsSet = createJwtClaimsSet(existingOfficeUser);
+
+        String token = this.jwtEncoder.encode(JwtEncoderParameters.from(claimsSet)).getTokenValue();
+
+        return officeUserMapper.toAuthTokenResponseDTO(existingOfficeUser, token);
     }
 
     private void checkExistingOfficeUser(String name, String password) {
         try {
             if (Objects.nonNull(officeUserManagerService.findByName(name))) {
-                throw new DatabaseUpdateFailureException("User Name Already existed");
+                throw new RegisterFailureException("User Name Already existed");
             }
-        } catch (ResourceNotFoundException e) {
+        } catch (UsernameNotFoundException e) {
             return;
         }
+    }
+
+    private JwtClaimsSet createJwtClaimsSet(OfficeUser officeUser) {
+        Instant now = Instant.now();
+        return JwtClaimsSet.builder()
+            .issuer("office-account-service")
+            .issuedAt(now)
+            .expiresAt(now.plusSeconds(3600L))
+            .subject(officeUser.getUid())
+            .claim(JwtClaimKeysConstant.ROLE_KEY,
+                officeUser.getRoles() == null ? new ArrayList<>() : officeUser.getRoles()
+            )
+            .build();
     }
 }

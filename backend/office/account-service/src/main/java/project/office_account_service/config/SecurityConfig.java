@@ -16,6 +16,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -38,6 +39,7 @@ import org.springframework.security.web.authentication.LoginUrlAuthenticationEnt
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
+import project.office_account_service.properties.JwtSecretProperties;
 import project.shared_office_starter.converter.JwtAuthenticationConverter;
 import project.shared_office_common_lib.constant.ServiceRegistryIDNames;
 import project.shared_office_common_lib.properties.CorsProperties;
@@ -45,6 +47,7 @@ import project.shared_office_starter.handler.SpaCsrfTokenRequestHandler;
 import project.shared_office_starter.resolver.AuthBearerTokenResolver;
 import project.shared_office_starter.service.base.UserDetailsBaseService;
 
+import javax.crypto.spec.SecretKeySpec;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.interfaces.RSAPrivateKey;
@@ -62,20 +65,22 @@ public class SecurityConfig {
     private final CorsProperties corsProperties;
     private final JwtAuthenticationConverter jwtAuthenticationConverter;
     private final AuthBearerTokenResolver authBearerTokenResolver;
-
+    private final JwtSecretProperties jwtSecretProperties;
     @Autowired
     public SecurityConfig(
         UserDetailsBaseService userDetailsBaseService,
         SpaCsrfTokenRequestHandler spaCsrfTokenRequestHandler,
         CorsProperties corsProperties,
         JwtAuthenticationConverter jwtAuthenticationConverter,
-        AuthBearerTokenResolver authBearerTokenResolver
+        AuthBearerTokenResolver authBearerTokenResolver,
+        JwtSecretProperties jwtSecretProperties
     ) {
         this.userDetailsBaseService = userDetailsBaseService;
         this.spaCsrfTokenRequestHandler = spaCsrfTokenRequestHandler;
         this.corsProperties = corsProperties;
         this.jwtAuthenticationConverter = jwtAuthenticationConverter;
         this.authBearerTokenResolver = authBearerTokenResolver;
+        this.jwtSecretProperties = jwtSecretProperties;
     }
 
 
@@ -91,6 +96,11 @@ public class SecurityConfig {
                 authorizationServer
                     .oidc(Customizer.withDefaults())
             )
+            .cors(
+                cors->
+                    cors.configurationSource(corsConfigurationSource())
+            )
+            .csrf(csrfCustomize())
             .authorizeHttpRequests((authorize) ->
                 authorize
                     .anyRequest().permitAll()
@@ -115,13 +125,10 @@ public class SecurityConfig {
     @Order(2)
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf ->
-                csrf
-                    .ignoringRequestMatchers(
-                        "/auth/hello"
-                    )
-                    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                    .csrfTokenRequestHandler(spaCsrfTokenRequestHandler)
+            .csrf(csrfCustomize())
+            .cors(
+                cors->
+                    cors.configurationSource(corsConfigurationSource())
             )
             .authorizeHttpRequests((authorize) -> authorize
                 .anyRequest().permitAll()
@@ -217,5 +224,16 @@ public class SecurityConfig {
                 return configuration;
             }
         };
+    }
+    
+    
+    private Customizer<CsrfConfigurer<HttpSecurity>> csrfCustomize(){
+        return csrf->
+            csrf
+                .ignoringRequestMatchers(
+                    "/auth/**"
+                )
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .csrfTokenRequestHandler(spaCsrfTokenRequestHandler);
     }
 }

@@ -14,8 +14,12 @@ public class AuthBearerTokenResolver implements BearerTokenResolver {
     @Override
     public String resolve(HttpServletRequest request){
         String header = request.getHeader("Authorization");
-        if (header != null && header.startsWith("Bearer ")) {
-            return header.substring(7);
+        if (header != null) {
+            if(header.startsWith("Bearer ")){
+                return header.substring(7);
+            }else{
+                return null;
+            }
         }
         Cookie[] cookies = request.getCookies();
         if (Objects.nonNull(cookies)) {
