@@ -24,6 +24,7 @@ import project.shared_office_starter.model.dto.base.APIBaseResponseDTO;
 import project.shared_office_starter.service.auth.PrincipalAuthService;
 
 import java.security.Principal;
+import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -66,7 +67,7 @@ public class AuthController {
             .httpOnly(httpProperties.getSecured())
             .sameSite("Lax")
             .path("/")
-            .maxAge(36000)
+            .maxAge(Duration.ofDays(1).getSeconds())
             .build();
         return ResponseEntity
             .accepted()
@@ -89,7 +90,7 @@ public class AuthController {
             .httpOnly(httpProperties.getSecured())
             .sameSite("Lax")
             .path("/")
-            .maxAge(36000)
+            .maxAge(Duration.ofDays(1).getSeconds())
             .build();
         return ResponseEntity
             .accepted()

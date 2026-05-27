@@ -19,6 +19,7 @@ import project.office_account_service.model.dto.request.AuthLoginRequestDTO;
 import project.office_account_service.model.dto.request.AuthRegisterRequestDTO;
 import project.office_account_service.model.dto.response.AuthTokenResponseDTO;
 import project.office_account_service.model.entity.OfficeUser;
+import project.office_account_service.model.entity.enums.OfficeUserRole;
 import project.office_account_service.service.manager.OfficeUserManagerService;
 import project.shared_office_common_lib.constant.JwtClaimKeysConstant;
 import project.shared_office_common_lib.constant.ServiceRegistryIDNames;
@@ -63,6 +64,7 @@ public class AccountService {
         OfficeUser newOfficeUser = officeUserMapper.toOfficeUser(requestDTO);
         newOfficeUser.setUid(UUID.randomUUID().toString());
         newOfficeUser.setPassword(passwordEncoder.encode(requestDTO.getPassword()));
+        newOfficeUser.setRoles(Set.of(OfficeUserRole.OFFICE_USER));
         OfficeUser savedOfficeUser = officeUserManagerService.save(newOfficeUser);
         JwtClaimsSet claimsSet = createJwtClaimsSet(savedOfficeUser);
         String token = this.jwtEncoder.encode(JwtEncoderParameters.from(claimsSet)).getTokenValue();

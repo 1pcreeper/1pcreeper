@@ -66,6 +66,7 @@ public class SecurityConfig {
     private final JwtAuthenticationConverter jwtAuthenticationConverter;
     private final AuthBearerTokenResolver authBearerTokenResolver;
     private final JwtSecretProperties jwtSecretProperties;
+
     @Autowired
     public SecurityConfig(
         UserDetailsBaseService userDetailsBaseService,
@@ -97,7 +98,7 @@ public class SecurityConfig {
                     .oidc(Customizer.withDefaults())
             )
             .cors(
-                cors->
+                cors ->
                     cors.configurationSource(corsConfigurationSource())
             )
             .csrf(csrfCustomize())
@@ -127,7 +128,7 @@ public class SecurityConfig {
         http
             .csrf(csrfCustomize())
             .cors(
-                cors->
+                cors ->
                     cors.configurationSource(corsConfigurationSource())
             )
             .authorizeHttpRequests((authorize) -> authorize
@@ -137,7 +138,8 @@ public class SecurityConfig {
                         jwt
                             .jwtAuthenticationConverter(jwtAuthenticationConverter)
                     )
-                    .bearerTokenResolver(authBearerTokenResolver));;
+                    .bearerTokenResolver(authBearerTokenResolver)
+            );
 
         return http.build();
     }
@@ -225,10 +227,10 @@ public class SecurityConfig {
             }
         };
     }
-    
-    
-    private Customizer<CsrfConfigurer<HttpSecurity>> csrfCustomize(){
-        return csrf->
+
+
+    private Customizer<CsrfConfigurer<HttpSecurity>> csrfCustomize() {
+        return csrf ->
             csrf
                 .ignoringRequestMatchers(
                     "/auth/**"
