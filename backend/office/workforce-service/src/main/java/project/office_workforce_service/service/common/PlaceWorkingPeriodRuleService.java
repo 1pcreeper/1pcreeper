@@ -38,7 +38,7 @@ public class PlaceWorkingPeriodRuleService {
         Pageable pageable) {
 
         return paginationMapper.toDTO(
-            ruleManager.findRules(placeId, workingPeriodId, pageable),
+            ruleManager.search(placeId, workingPeriodId, pageable),
             mapper::toWorkingPeriodRuleResponseDTO
         );
     }
