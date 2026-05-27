@@ -5,17 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="Change">
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/mapper/CompanyMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/mapper/OccupationMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/mapper/OrganizationMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/mapper/PersonMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/mapper/PlaceMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/mapper/PlaceRuleMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/mapper/ScheduleMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/mapper/StaffMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/mapper/StaffOccupationMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/mapper/StaffSchedulePreferenceMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/mapper/WorkingPeriodMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/common/CompanyService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/common/OccupationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/common/OrganizationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/common/PersonService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/common/PlaceOccupationRuleService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/common/PlaceScheduleRuleService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/common/PlaceService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/common/PlaceWorkingPeriodRuleService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/common/ScheduleService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/common/StaffOccupationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/common/StaffSchedulePreferenceService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/common/StaffService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/common/WorkingPeriodService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -336,7 +338,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779912881499</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Change">
+      <option name="closed" value="true" />
+      <created>1779914728549</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1779914728549</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
