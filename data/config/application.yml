@@ -31,7 +31,7 @@ spring:
         oauth2:
             resourceserver:
                 jwt:
-                    issuer-uri: ${OFFICE_OAUTH2_RESOURCE_JWT_ISSUER_LOCATION}
+                    jwk-set-uri: ${OFFICE_OAUTH2_RESOURCE_JWT_JWKS_URI}
     main:
         allow-bean-definition-overriding: true
     kafka:
@@ -70,6 +70,6 @@ eureka:
             defaultZone: http://admin:${OFFICE_SERVICE_REGISTRY_SECURITY_PASSWORD}@${OFFICE_SERVICE_REGISTRY_SERVER_IP_ADDRESS}:${OFFICE_SERVICE_REGISTRY_SERVER_PORT}/eureka
 properties:
     jwt:
-        issuer-uri: ${OFFICE_OAUTH2_RESOURCE_JWT_ISSUER_LOCATION}
+        jwks-uri: ${OFFICE_OAUTH2_RESOURCE_JWT_JWKS_URI}
     http:
         is-secured: ${OFFICE_HTTP_SECURE}

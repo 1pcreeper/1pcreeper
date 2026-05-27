@@ -7,6 +7,7 @@ import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.oauth2.server.servlet.OAuth2AuthorizationServerJwtAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -24,6 +25,7 @@ import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.core.oidc.OidcScopes;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.JwtDecoders;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.oauth2.server.authorization.client.InMemoryRegisteredClientRepository;
@@ -40,6 +42,7 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import project.office_account_service.properties.JwtSecretProperties;
+import project.shared_office_common_lib.properties.JwtProperties;
 import project.shared_office_starter.converter.JwtAuthenticationConverter;
 import project.shared_office_common_lib.constant.ServiceRegistryIDNames;
 import project.shared_office_common_lib.properties.CorsProperties;
@@ -66,6 +69,7 @@ public class SecurityConfig {
     private final JwtAuthenticationConverter jwtAuthenticationConverter;
     private final AuthBearerTokenResolver authBearerTokenResolver;
     private final JwtSecretProperties jwtSecretProperties;
+    private final JwtProperties jwtProperties;
 
     @Autowired
     public SecurityConfig(
@@ -74,7 +78,8 @@ public class SecurityConfig {
         CorsProperties corsProperties,
         JwtAuthenticationConverter jwtAuthenticationConverter,
         AuthBearerTokenResolver authBearerTokenResolver,
-        JwtSecretProperties jwtSecretProperties
+        JwtSecretProperties jwtSecretProperties,
+        JwtProperties jwtProperties
     ) {
         this.userDetailsBaseService = userDetailsBaseService;
         this.spaCsrfTokenRequestHandler = spaCsrfTokenRequestHandler;
@@ -82,6 +87,7 @@ public class SecurityConfig {
         this.jwtAuthenticationConverter = jwtAuthenticationConverter;
         this.authBearerTokenResolver = authBearerTokenResolver;
         this.jwtSecretProperties = jwtSecretProperties;
+        this.jwtProperties = jwtProperties;
     }
 
 
@@ -209,6 +215,7 @@ public class SecurityConfig {
     public AuthorizationServerSettings authorizationServerSettings() {
         return AuthorizationServerSettings.builder()
             .jwkSetEndpoint("/oauth2/jwks")
+            .oidcClientRegistrationEndpoint("/oauth2/oidc/register")
             .build();
     }
 

@@ -8,5 +8,5 @@ import org.springframework.stereotype.Component;
 @Component
 @ConfigurationProperties(prefix = "properties.jwt")
 public class JwtProperties {
-    private String issuerUri;
+    private String jwksUri;
 }

@@ -30,7 +30,7 @@ public class UserSyncService {
         }
         User newUser = new User();
         newUser.setUid(uid);
-        newUser.setRoles(Set.of(UserRole.USER));
+        newUser.setRoles(Set.of(UserRole.DUMMY_USER));
         return userManagerService.save(newUser);
     }
 }

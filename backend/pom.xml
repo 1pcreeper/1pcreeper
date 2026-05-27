@@ -40,6 +40,7 @@
         <module>office/config-mapping</module>
         <module>office/api-gateway</module>
         <module>office/account-service</module>
+        <module>office/dummy-service</module>
         <module>shared/general-auth-starter</module>
         <module>shared/general-starter</module>
         <module>shared/general-common-lib</module>
