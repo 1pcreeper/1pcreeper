@@ -12,7 +12,7 @@ public class UserManagerService extends AbstractBaseService<User,Long> {
     private final UserRepository userRepository;
     @Autowired
     public UserManagerService(UserRepository userRepository) {
-        super(userRepository, "OfficeUser");
+        super(userRepository, "User");
         this.userRepository = userRepository;
     }
     public User findByUid(String uid){
