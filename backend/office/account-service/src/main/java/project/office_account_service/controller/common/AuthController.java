@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
+import project.office_account_service.constant.OfficeUserRoles;
 import project.office_account_service.mapper.OfficeUserMapper;
 import project.office_account_service.model.dto.request.AuthLoginRequestDTO;
 import project.office_account_service.model.dto.request.AuthRegisterRequestDTO;
@@ -102,7 +104,7 @@ public class AuthController {
             );
     }
 
-    @PermitAll
+    @Secured({OfficeUserRoles.OFFICE_USER})
     @GetMapping("/verify")
     public ResponseEntity<APIBaseResponseDTO<OfficeUserVerifyResponseDTO>> verify(
         @AuthenticationPrincipal OfficeUser officeUser

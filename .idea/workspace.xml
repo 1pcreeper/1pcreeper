@@ -5,19 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="changed Dependency">
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/OfficeDummyServiceApplication.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/dummy-service/src/main/java/project/office_dummy_service/service/sync/UserSyncService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.local" beforeDir="false" afterPath="$PROJECT_DIR$/.env.local" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/general/dummy-service/src/main/java/project/general_dummy_service/model/entity/enums/UserRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/dummy-service/src/main/java/project/general_dummy_service/model/entity/enums/UserRole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/general/dummy-service/src/main/java/project/general_dummy_service/service/sync/UserSyncService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/dummy-service/src/main/java/project/general_dummy_service/service/sync/UserSyncService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/shared/office-common-lib/src/main/java/project/shared_office_common_lib/properties/JwtProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/office-common-lib/src/main/java/project/shared_office_common_lib/properties/JwtProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/config/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/data/config/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/controller/common/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/controller/common/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/dummy-service/src/main/java/project/office_dummy_service/constant/OfficeUserRoles.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/dummy-service/src/main/java/project/office_dummy_service/constant/UserRoles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/dummy-service/src/main/java/project/office_dummy_service/controller/common/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/dummy-service/src/main/java/project/office_dummy_service/controller/common/AuthController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +66,7 @@
     "Application.OfficeAccountServiceApplication.executor": "Run",
     "Application.OfficeAuthProviderApplication.executor": "Run",
     "Application.OfficeConfigMappingApplication.executor": "Run",
-    "Application.OfficeDummyServiceApplication.executor": "Debug",
+    "Application.OfficeDummyServiceApplication.executor": "Run",
     "Application.OfficeServiceRegistryApplication .executor": "Run",
     "Application.project.general_service_registry.GeneralServiceRegistryApplication .executor": "Run",
     "Maven.config-mapping [clean].executor": "Run",
@@ -263,7 +254,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779861309094</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="changed Dependency">
+      <option name="closed" value="true" />
+      <created>1779871033115</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1779871033115</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -348,11 +347,6 @@
           <url>file://$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/service/common/AccountService.java</url>
           <line>98</line>
           <option name="timeStamp" value="85" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/office/dummy-service/src/main/java/project/office_dummy_service/handler/JwtAuthRequestHandler.java</url>
-          <line>17</line>
-          <option name="timeStamp" value="87" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/converter/JwtAuthenticationConverter.java</url>
