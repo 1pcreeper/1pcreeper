@@ -5,11 +5,68 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="Change">
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/resources/db/changelog/changes/02-create-index.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/resources/db/changelog/changes/03-mock-data.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/object/CompanyDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/object/CompanyDetailDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/object/OccupationDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/object/OrganizationDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/object/PersonDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/object/PersonDetailDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/object/PlaceDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/object/PlaceOccupationRuleDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/object/PlaceScheduleRuleDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/object/PlaceWorkingPeriodRuleDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/object/ScheduleDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/object/StaffDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/object/StaffDetailDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/object/StaffOccupationDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/object/StaffSchedulePreferenceDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/object/WorkingPeriodDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/CompanyCreateRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/CompanyDetailRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/CompanyUpdateRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/OccupationCreateRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/OccupationUpdateRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/OrganizationCreateRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/OrganizationUpdateRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/PersonCreateRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/PersonUpdateRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/PlaceCreateRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/PlaceOccupationRuleCreateRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/PlaceOccupationRuleUpdateRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/PlaceScheduleRuleCreateRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/PlaceScheduleRuleUpdateRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/PlaceUpdateRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/PlaceWorkingPeriodRuleCreateRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/PlaceWorkingPeriodRuleUpdateRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/ScheduleCreateRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/ScheduleStatusUpdateRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/ScheduleUpdateRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/StaffCreateRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/StaffDetailRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/StaffOccupationCreateRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/StaffOccupationUpdateRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/StaffSchedulePreferenceCreateRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/StaffSchedulePreferenceUpdateRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/StaffUpdateRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/WorkingPeriodCreateRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/WorkingPeriodUpdateRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/CompanyDetailResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/CompanyResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/OccupationResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/OrganizationResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/PersonDetailResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/PersonResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/PlaceOccupationRuleResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/PlaceResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/PlaceScheduleRuleResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/PlaceWorkingPeriodRuleResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/ScheduleResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/StaffDetailResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/StaffOccupationResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/StaffResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/StaffSchedulePreferenceResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/WorkingPeriodResponseDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/resources/db/changelog/changes/01-create-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/resources/db/changelog/changes/01-create-table.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/resources/db/changelog/db.changelog-master.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/resources/db/changelog/db.changelog-master.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -313,7 +370,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779906244135</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Change">
+      <option name="closed" value="true" />
+      <created>1779909925934</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1779909925934</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
