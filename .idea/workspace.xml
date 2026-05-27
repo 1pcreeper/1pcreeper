@@ -5,10 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="changed Dependency">
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/GeneralDummyServiceApplication.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.local" beforeDir="false" afterPath="$PROJECT_DIR$/.env.local" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/handler/JwtAuthRequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/handler/JwtAuthRequestHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/model/entity/AppUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/model/entity/AppUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/service/sync/AppUserSyncService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/service/sync/AppUserSyncService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/controller/common/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/controller/common/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/service/common/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/service/common/AccountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +66,7 @@
     "Application.GeneralAPIGatewayApplication.executor": "Run",
     "Application.GeneralAccountServiceApplication.executor": "Run",
     "Application.GeneralConfigMappingApplication.executor": "Run",
+    "Application.GeneralDummyServiceApplication.executor": "Run",
     "Application.GeneralServiceRegistryApplication .executor": "Run",
     "Application.OfficeAPIGatewayApplication.executor": "Run",
     "Application.OfficeAccountServiceApplication.executor": "Run",
@@ -125,7 +132,7 @@
       <command value="mvn mvn clean install -DskipTests" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.OfficeAccountServiceApplication">
+  <component name="RunManager" selected="Application.GeneralDummyServiceApplication">
     <list>
       <item itemvalue="Application.GeneralServiceRegistryApplication " />
       <item itemvalue="Application.GeneralConfigMappingApplication" />
@@ -135,6 +142,7 @@
       <item itemvalue="Application.OfficeConfigMappingApplication" />
       <item itemvalue="Application.OfficeAPIGatewayApplication" />
       <item itemvalue="Application.OfficeAccountServiceApplication" />
+      <item itemvalue="Application.GeneralDummyServiceApplication" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -234,7 +242,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779848392864</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="changed Dependency">
+      <option name="closed" value="true" />
+      <created>1779852667074</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1779852667074</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

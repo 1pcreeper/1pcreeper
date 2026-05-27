@@ -1,4 +1,4 @@
-package project.general_account_service.model.entity;
+package project.general_dummy_service.model.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import project.general_account_service.model.entity.base.AbstractPersistableEntity;
-import project.general_account_service.model.entity.enums.AppUserRole;
+import project.general_dummy_service.model.entity.base.AbstractPersistableEntity;
+import project.general_dummy_service.model.entity.enums.UserRole;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -23,7 +23,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
-public class AppUser extends AbstractPersistableEntity implements UserDetails , Serializable {
+public class User extends AbstractPersistableEntity implements UserDetails , Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,15 +31,6 @@ public class AppUser extends AbstractPersistableEntity implements UserDetails , 
 
     @Column(name = "uid", nullable = false, unique = true, length = 255)
     private String uid;
-
-    @Column(name = "name", unique = true, length = 20)
-    private String name;
-
-    @Column(name = "email", unique = true)
-    private String email;
-
-    @Column(name = "display_name", nullable = false, length = 20)
-    private String displayName;
 
     @Column(name = "created_at", insertable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -52,7 +43,7 @@ public class AppUser extends AbstractPersistableEntity implements UserDetails , 
         joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private Set<AppUserRole> roles = new HashSet<>();
+    private Set<UserRole> roles = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -66,7 +57,7 @@ public class AppUser extends AbstractPersistableEntity implements UserDetails , 
 
     @Override
     public String getUsername() {
-        return name;
+        return uid;
     }
     
 
