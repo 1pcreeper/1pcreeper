@@ -38,7 +38,7 @@ public class AuthController {
     }
     
 
-    @Secured({UserRoles.OFFICE_USER})
+    @Secured({UserRoles.WORKFORCE_ADMIN})
     @GetMapping("/verify")
     public ResponseEntity<APIBaseResponseDTO<UserVerifyResponseDTO>> verify(
         @AuthenticationPrincipal User user
