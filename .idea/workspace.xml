@@ -4,26 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="changed Dependency">
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/CompanyDetailManagerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/CompanyManagerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/OccupationManagerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/OrganizationManagerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/PersonDetailManagerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/PersonManagerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/PlaceManagerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/PlaceOccupationRuleManagerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/PlaceScheduleRuleManagerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/PlaceWorkingPeriodRuleManagerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/ScheduleManagerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/StaffDetailManagerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/StaffManagerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/StaffOccupationManagerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/StaffSchedulePreferenceManagerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/WorkingPeriodManagerService.java" afterDir="false" />
+    <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="Change">
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/resources/db/changelog/changes/02-create-index.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/resources/db/changelog/changes/03-mock-data.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/dummy-service/src/main/java/project/office_dummy_service/service/manager/UserManagerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/dummy-service/src/main/java/project/office_dummy_service/service/manager/UserManagerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/UserManagerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/UserManagerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/resources/db/changelog/changes/01-create-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/resources/db/changelog/changes/01-create-table.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/resources/db/changelog/db.changelog-master.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/resources/db/changelog/db.changelog-master.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +93,7 @@
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/1pcreeper/projects/001 Project/codes/v001/1pcreeper-project/backend/office/account-service/src/main/java/project/office_account_service",
+    "last_opened_file_path": "E:/1pcreeper/projects/001 Project/codes/v001/1pcreeper-project/backend/office/workforce-service/src/main/resources/db/changelog/changes",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15625",
     "project.structure.side.proportion": "0.3034483",
@@ -116,11 +102,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\office\workforce-service\src\main\resources\db\changelog\changes" />
       <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\office\account-service\src\main\java\project\office_account_service" />
       <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\shared\general-starter\src\main\java\project\shared_general_starter\model" />
       <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\office\account-service\src\main\java\project\office_account_service\model" />
       <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\shared\office-common-lib\src\main\java\project\shared_office_common_lib\constant\role" />
-      <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\office\auth-provider" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\general\api-gateway\src\main\java\project\general_api_gateway" />
@@ -143,7 +129,7 @@
       <command value="mvn mvn clean install -DskipTests" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.OfficeAccountServiceApplication">
+  <component name="RunManager" selected="Application.OfficeWorkforceServiceApplication">
     <list>
       <item itemvalue="Application.GeneralServiceRegistryApplication " />
       <item itemvalue="Application.GeneralConfigMappingApplication" />
@@ -319,7 +305,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779904920614</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Change">
+      <option name="closed" value="true" />
+      <created>1779906244135</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1779906244135</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -335,7 +329,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="changed Dependency" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed Dependency" />
+    <MESSAGE value="Change" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

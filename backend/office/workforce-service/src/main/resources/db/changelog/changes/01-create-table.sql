@@ -65,9 +65,9 @@ CREATE TABLE persons (
    office_tel VARCHAR(50) NULL CHECK (office_tel ~ '^[+]([0-9]){3}\s([0-9])+$' OR office_tel IS NULL),
    mobile_tel VARCHAR(50) NULL CHECK (mobile_tel ~ '^[+]([0-9]){3}\s([0-9])+$' OR mobile_tel IS NULL),
    email VARCHAR(255) CHECK (email <> '' AND email NOT LIKE '% %' AND email ~ '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9._%+-]+\.[a-zA-Z]{2,}$'),
-   hk_id VARCHAR(255) UNIQUE NULL CHECK (hk_id ~ '^[A-Z][0-9]{6}\\([0-9]\\)$' OR hk_id IS NULL),
-   cn_id VARCHAR(255) UNIQUE NULL CHECK (cn_id ~ '^[1-9]\\d{5}(18|19|20)\\d{2}((0[1-9])|10|11|12)((0[1-9]|[12]\\d|3[01]))\\d{3}[\\dXx]$' OR cn_id IS NULL),
-   mo_id VARCHAR(255) UNIQUE NULL CHECK (mo_id ~ '^\\d{8}$' OR mo_id IS NULL),
+   hk_id VARCHAR(255) UNIQUE NULL CHECK (hk_id ~ '^[A-Z][0-9]{6}\([0-9]\)$' OR hk_id IS NULL),
+   cn_id VARCHAR(255) UNIQUE NULL CHECK (cn_id ~ '^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|10|11|12)((0[1-9]|[12]\d|3[01]))\d{3}[\dXx]$' OR cn_id IS NULL),
+   mo_id VARCHAR(255) UNIQUE NULL CHECK (mo_id ~ '^\d{8}$' OR mo_id IS NULL),
    passport_id VARCHAR(255) NULL CHECK (passport_id ~ '^[A-Z0-9]+$' OR passport_id IS NULL),
    is_active BOOLEAN DEFAULT TRUE
  ) INHERITS (abstract_auditable_entity);
