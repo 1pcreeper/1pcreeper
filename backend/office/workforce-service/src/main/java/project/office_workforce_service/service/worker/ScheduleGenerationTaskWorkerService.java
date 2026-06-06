@@ -32,23 +32,18 @@ public class ScheduleGenerationTaskWorkerService {
         ScheduleGenerationTask task = scheduleGenerationTaskManagerService.findById(taskId);
 
         try {
-            // =========================================================
-            // 🚀 YOUR AUTO-SCHEDULE GENERATION ALGORITHM GOES HERE!
-            // 1. Fetch Place Rules
-            // 2. Fetch Staff Preferences
-            // 3. Apply constraints and match them up
-            // 4. Save new Schedule entities
-            // =========================================================
-
-            // Simulating heavy CPU work...
-            Thread.sleep(5000);
+            
+            
+            
+            
+            
+            
+            
             
             task.setStatus(TaskStatus.COMPLETED);
             task.setCompletedAt(LocalDateTime.now());
             scheduleGenerationTaskManagerService.save(task);
-
             log.info("Successfully completed schedule generation for Task ID: {}", taskId);
-
         } catch (Exception e) {
             log.error("Failed schedule generation for Task ID: {}", taskId, e);
             
