@@ -1,0 +1,23 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strictPropertyInitialization": false,
+    "strict": true,
+    "jsx": "react-jsx",
+    "paths": {
+      "@/*": ["./*"],
+      "tailwind.config": ["./tailwind.config.js"]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts",
+    "nativewind-env.d.ts",
+    "**.jpg",
+    "**.png"
+  ]
+}

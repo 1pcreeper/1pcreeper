@@ -21,6 +21,7 @@ DROP TABLE IF EXISTS user_roles CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS abstract_persistable_entity CASCADE;
 
+DROP TYPE IF EXISTS task_status;
 DROP TYPE IF EXISTS schedule_status;
 DROP TYPE IF EXISTS transaction_method;
 DROP TYPE IF EXISTS work_type;
@@ -30,6 +31,7 @@ CREATE TYPE gender AS ENUM ('MALE', 'FEMALE');
 CREATE TYPE work_type AS ENUM ('FULL_TIME', 'FULL_PART_TIME', 'PART_TIME','CONTRACT','FREELANCE');
 CREATE TYPE transaction_method AS ENUM ('DEPOSIT','WITHDRAWAL','OVERWRITE','SYSTEM_UPDATE');
 CREATE TYPE schedule_status AS ENUM ('ACTIVE','INACTIVE','DRAFT');
+CREATE TYPE task_status AS ENUM ('PENDING', 'PROCESSING', 'COMPLETED', 'FAILED');
 
 CREATE TABLE abstract_persistable_entity (
     id SERIAL PRIMARY KEY,
@@ -205,4 +207,13 @@ CREATE TABLE schedules(
    staff_id INTEGER NOT NULL REFERENCES staffs(id) ON DELETE CASCADE,
    status schedule_status NOT NULL,
    remark TEXT
+) INHERITS (abstract_auditable_entity);
+
+CREATE TABLE schedule_generation_tasks (
+    id SERIAL PRIMARY KEY,
+    status task_status NOT NULL,
+    requested_by INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    started_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    completed_at TIMESTAMP NULL,
+    error_message TEXT NULL
 ) INHERITS (abstract_auditable_entity);

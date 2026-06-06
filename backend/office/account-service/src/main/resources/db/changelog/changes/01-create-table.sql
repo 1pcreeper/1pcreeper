@@ -35,3 +35,9 @@ CREATE TABLE abstract_auditable_entity (
   FOREIGN KEY (created_by) REFERENCES "users"(id) ON DELETE CASCADE,
   FOREIGN KEY (updated_by) REFERENCES "users"(id) ON DELETE CASCADE
 ) INHERITS (abstract_persistable_entity);
+
+INSERT INTO users (id, uid, name, display_name, password, created_at) 
+VALUES (0, '00000000-0000-0000-0000-000000000000', 'system', 'System', 'SYSTEM', CURRENT_TIMESTAMP);
+
+INSERT INTO user_roles (user_id, role) 
+VALUES (0, 'OFFICE_ADMIN');

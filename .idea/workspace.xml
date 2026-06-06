@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="Change">
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/common/PlaceWorkingPeriodRuleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/common/PlaceWorkingPeriodRuleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/resources/db/changelog/changes/01-create-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/resources/db/changelog/changes/01-create-table.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/resources/db/changelog/changes/01-create-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/resources/db/changelog/changes/01-create-table.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/resources/db/changelog/changes/03-mock-data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/resources/db/changelog/changes/03-mock-data.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +92,7 @@
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/1pcreeper/projects/001 Project/codes/v001/1pcreeper-project/backend/office/workforce-service/src/main/resources/db/changelog/changes",
+    "last_opened_file_path": "E:/1pcreeper/projects/001 Project/codes/v001/1pcreeper-project/backend/office/account-service/src/main/resources/db/changelog/changes",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15625",
     "project.structure.side.proportion": "0.3034483",
@@ -98,11 +101,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\office\account-service\src\main\resources\db\changelog\changes" />
       <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\office\workforce-service\src\main\resources\db\changelog\changes" />
       <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\office\account-service\src\main\java\project\office_account_service" />
       <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\shared\general-starter\src\main\java\project\shared_general_starter\model" />
       <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\office\account-service\src\main\java\project\office_account_service\model" />
-      <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\shared\office-common-lib\src\main\java\project\shared_office_common_lib\constant\role" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\general\api-gateway\src\main\java\project\general_api_gateway" />
@@ -349,7 +352,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779917375620</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Change">
+      <option name="closed" value="true" />
+      <created>1779917433801</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1779917433801</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
