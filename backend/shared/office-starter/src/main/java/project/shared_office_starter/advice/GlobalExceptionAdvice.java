@@ -51,6 +51,13 @@ public class GlobalExceptionAdvice {
         );
     }
 
+    @ExceptionHandler(TaskProcessingException.class)
+    public ResponseEntity<APIBaseResponseDTO<Object>> handleTaskProcessingException(TaskProcessingException e){
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(
+            APIBaseResponseDTO.error(e.getMessage())
+        );
+    }
+
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<APIBaseResponseDTO<Object>> handleIllegalArgumentException(IllegalArgumentException e){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(

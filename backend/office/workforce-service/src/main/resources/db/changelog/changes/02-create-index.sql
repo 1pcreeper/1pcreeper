@@ -44,3 +44,8 @@ CREATE INDEX idx_companies_name_zh_trgm ON companies USING gin (lower(name_chine
 
 -- Place Searches
 CREATE INDEX idx_places_name_trgm ON places USING gin (lower(name) gin_trgm_ops);
+
+-- Task Index
+CREATE UNIQUE INDEX idx_single_processing_task 
+ON schedule_generation_tasks(status) 
+WHERE status = 'PROCESSING';

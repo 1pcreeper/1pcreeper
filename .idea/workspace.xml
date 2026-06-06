@@ -5,10 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="Change">
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/controller/common/ScheduleGenerationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/mapper/ScheduleGenerationTaskMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/ScheduleGenerationStatusResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/ScheduleGenerationTaskResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/entity/ScheduleGenerationTask.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/entity/enums/TaskStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/repository/ScheduleGenerationTaskRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/runner/StuckTaskCleanupRunner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/common/ScheduleGenerationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/ScheduleGenerationTaskManagerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/worker/ScheduleGenerationTaskWorkerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/model/exception/TaskProcessingException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/resources/db/changelog/changes/01-create-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/resources/db/changelog/changes/01-create-table.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/resources/db/changelog/changes/01-create-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/resources/db/changelog/changes/01-create-table.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/resources/db/changelog/changes/03-mock-data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/resources/db/changelog/changes/03-mock-data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/resources/db/changelog/changes/02-create-index.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/resources/db/changelog/changes/02-create-index.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/advice/GlobalExceptionAdvice.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/advice/GlobalExceptionAdvice.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +32,8 @@
         <option value="Python Script" />
         <option value="AnnotationType" />
         <option value="package-info" />
-        <option value="Enum" />
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -115,11 +126,11 @@
       <recent name="D:\Favorites\Code\1pcreeper\projects\001 Project\codes\current\1pcreeper-project\backend\shared\common-library\src\main\java\project" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="project.office_workforce_service.model.dto.response" />
+      <recent name="project.shared_office_starter.model.exception" />
       <recent name="project.office_api_gateway.properties" />
       <recent name="project.office_account_service.properties" />
       <recent name="project.shared_office_common_lib.properties" />
-      <recent name="project.office_account_service.model.dto.response" />
-      <recent name="project.office_account_service.model.dto.request" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -360,7 +371,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779917433801</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Change">
+      <option name="closed" value="true" />
+      <created>1780757003980</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1780757003980</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
