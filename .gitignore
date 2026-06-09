@@ -29,5 +29,5 @@ build/
 !**/src/main/**/build/
 
 ### Project ###
-.env
+.env/**
 **/secret
