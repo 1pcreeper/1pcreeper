@@ -5,6 +5,10 @@
     <file url="file://$PROJECT_DIR$/backend/general/api-gateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/backend/general/config-mapping/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/backend/general/dummy-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend/general/event-producer-middleware/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend/general/event-producer-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend/general/obj-gen-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/backend/general/service-registry/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/backend/office/account-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/backend/office/api-gateway/src/main/java" charset="UTF-8" />

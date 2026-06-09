@@ -37,6 +37,10 @@ properties:
             hostName: ${GENERAL_ACCOUNT_SERVICE_SERVER_HOSTNAME}
             httpPort: ${GENERAL_ACCOUNT_SERVICE_SERVER_PORT}
             grpcPort: ${GENERAL_ACCOUNT_SERVICE_GRPC_PORT}
+        general-obj-generate-service:
+            hostName: ${GENERAL_OBJ_GENERATE_SERVICE_SERVER_HOSTNAME}
+            httpPort: ${GENERAL_OBJ_GENERATE_SERVICE_SERVER_PORT}
+            grpcPort: ${GENERAL_OBJ_GENERATE_SERVICE_GRPC_PORT}
     jwt:
         issuer-uri: ${GENERAL_OAUTH2_RESOURCE_JWT_ISSUER_LOCATION}
     cors: 

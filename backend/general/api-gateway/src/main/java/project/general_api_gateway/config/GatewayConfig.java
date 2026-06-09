@@ -8,6 +8,7 @@ import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import project.general_api_gateway.properties.GeneralAccountServiceSpecProperties;
+import project.general_api_gateway.properties.GeneralObjGenerateServiceSpecProperties;
 import project.general_api_gateway.properties.ServletProperties;
 
 @Configuration
@@ -15,11 +16,16 @@ import project.general_api_gateway.properties.ServletProperties;
 public class GatewayConfig {
     
     private GeneralAccountServiceSpecProperties generalAccountServiceSpecProperties;
+    private GeneralObjGenerateServiceSpecProperties generalObjGenerateServiceSpecProperties;
     private ServletProperties servletProperties;
     
     @Autowired
-    public GatewayConfig(GeneralAccountServiceSpecProperties generalAccountServiceSpecProperties, ServletProperties servletProperties) {
+    public GatewayConfig(
+        GeneralAccountServiceSpecProperties generalAccountServiceSpecProperties,
+        GeneralObjGenerateServiceSpecProperties generalObjGenerateServiceSpecProperties,
+        ServletProperties servletProperties) {
         this.generalAccountServiceSpecProperties = generalAccountServiceSpecProperties;
+        this.generalObjGenerateServiceSpecProperties = generalObjGenerateServiceSpecProperties;
         this.servletProperties = servletProperties;
     }
 
@@ -31,6 +37,11 @@ public class GatewayConfig {
                     .filter(logPath())  
                     .rewritePath(servletProperties.getContextPath()+"/account/(?<segment>.*)", "/${segment}")) 
                 .uri("lb://" + generalAccountServiceSpecProperties.getHostName() + ":" + generalAccountServiceSpecProperties.getHttpPort()))
+            .route("obj-generate", r -> r.path(servletProperties.getContextPath()+"/obj-generate/**")
+                .filters(f -> f
+                    .filter(logPath())
+                    .rewritePath(servletProperties.getContextPath()+"/obj-generate/(?<segment>.*)", "/${segment}"))
+                .uri("lb://" + generalObjGenerateServiceSpecProperties.getHostName() + ":" + generalObjGenerateServiceSpecProperties.getHttpPort()))
             .build();
     }
     

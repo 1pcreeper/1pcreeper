@@ -5,8 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="Change">
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/GeneralObjGenerateServiceApplication.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/general/api-gateway/src/main/java/project/general_api_gateway/properties/GeneralObjGenerateServiceSpecProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.local" beforeDir="false" afterPath="$PROJECT_DIR$/.env.local" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/worker/ScheduleGenerationTaskWorkerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/worker/ScheduleGenerationTaskWorkerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/api-gateway/src/main/java/project/general_api_gateway/config/GatewayConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/api-gateway/src/main/java/project/general_api_gateway/config/GatewayConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/api-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/api-gateway/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/model/event/Event.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/model/event/Event.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,6 +69,9 @@
     "Application.GeneralAccountServiceApplication.executor": "Run",
     "Application.GeneralConfigMappingApplication.executor": "Run",
     "Application.GeneralDummyServiceApplication.executor": "Run",
+    "Application.GeneralEventProducerMiddlewareApplication.executor": "Run",
+    "Application.GeneralEventProducerServiceApplication.executor": "Run",
+    "Application.GeneralObjGenerateServiceApplication.executor": "Run",
     "Application.GeneralServiceRegistryApplication .executor": "Run",
     "Application.OfficeAPIGatewayApplication.executor": "Run",
     "Application.OfficeAccountServiceApplication.executor": "Run",
@@ -113,11 +126,11 @@
       <recent name="D:\Favorites\Code\1pcreeper\projects\001 Project\codes\current\1pcreeper-project\backend\shared\common-library\src\main\java\project" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="project.general_api_gateway.properties" />
       <recent name="project.office_workforce_service.model.dto.response" />
       <recent name="project.shared_office_starter.model.exception" />
       <recent name="project.office_api_gateway.properties" />
       <recent name="project.office_account_service.properties" />
-      <recent name="project.shared_office_common_lib.properties" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -126,12 +139,13 @@
       <command value="mvn mvn clean install -DskipTests" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.OfficeWorkforceServiceApplication">
+  <component name="RunManager" selected="Application.GeneralObjGenerateServiceApplication">
     <list>
       <item itemvalue="Application.GeneralServiceRegistryApplication " />
       <item itemvalue="Application.GeneralConfigMappingApplication" />
       <item itemvalue="Application.GeneralAPIGatewayApplication" />
       <item itemvalue="Application.GeneralAccountServiceApplication" />
+      <item itemvalue="Application.GeneralObjGenerateServiceApplication" />
       <item itemvalue="Application.OfficeServiceRegistryApplication " />
       <item itemvalue="Application.OfficeConfigMappingApplication" />
       <item itemvalue="Application.OfficeAPIGatewayApplication" />
@@ -374,7 +388,15 @@
       <option name="project" value="LOCAL" />
       <updated>1780764745387</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Change">
+      <option name="closed" value="true" />
+      <created>1780777658348</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1780777658348</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

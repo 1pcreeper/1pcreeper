@@ -35,6 +35,7 @@
         <module>general/config-mapping</module>
         <module>general/api-gateway</module>
         <module>general/account-service</module>
+        <module>general/obj-generate-service</module>
         <module>general/dummy-service</module>
         <module>office/service-registry</module>
         <module>office/config-mapping</module>
