@@ -13,6 +13,8 @@ import project.general_obj_generate_service.model.entity.User;
 import project.general_obj_generate_service.service.common.ObjProjectService;
 import project.shared_general_starter.model.dto.base.APIBaseResponseDTO;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/projects") // Gateway prepends /api/v1/obj-generate
@@ -26,13 +28,13 @@ public class ProjectController {
         @AuthenticationPrincipal User user,
         @RequestParam("name") String name,
         @RequestParam(value = "prompt", required = false) String prompt,
-        @RequestPart("referenceImage") MultipartFile referenceImage) {
+        @RequestPart("referenceFiles") List<MultipartFile> referenceFiles) {
         
         String uid = user.getUid();
 
         log.info("📥 [API] Received new project request '{}' from user: {}", name, uid);
         
-        ObjProject createdProject = objProjectService.createProject(uid, name, prompt, referenceImage);
+        ObjProject createdProject = objProjectService.createProject(uid, name, prompt, referenceFiles);
 
         // Return the new Project ID to the frontend so it can start polling the status or redirect to the editor page
         return ResponseEntity.ok().body(

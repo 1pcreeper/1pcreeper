@@ -22,6 +22,9 @@ import project.general_obj_generate_service.service.manager.UserManagerService;
 import project.general_obj_generate_service.service.storage.StorageService;
 import org.springframework.cloud.stream.function.StreamBridge;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Slf4j
 @Service
 public class ObjProjectService {
@@ -77,7 +80,7 @@ public class ObjProjectService {
     }
 
     @Transactional
-    public ObjProject createProject(String uid, String name, String prompt, MultipartFile referenceImage) {
+    public ObjProject createProject(String uid, String name, String prompt, List<MultipartFile> referenceFiles) {
         
         User currentUser = userManagerService.findByUid(uid);
         
@@ -89,22 +92,27 @@ public class ObjProjectService {
         
         newProject.setCreatedBy(currentUser);
         newProject = objProjectManagerService.save(newProject);
-        
-        String minioPath = storageService.uploadInputFile(newProject.getId(), referenceImage);
-        
-        ProjectResource resource = ProjectResource.builder()
-            .project(newProject)
-            .resourceType(ResourceType.REFERENCE_IMAGE)
-            .minioUrl(minioPath)
-            .fileName(referenceImage.getOriginalFilename())
-            .build();
 
-        resourceManagerService.save(resource);
+        List<String> minioPaths = new ArrayList<>();
+
+        // Loop through and upload all files
+        for (MultipartFile file : referenceFiles) {
+            String path = storageService.uploadInputFile(newProject.getId(), file);
+            minioPaths.add(path);
+
+            // Save each file as a database resource
+            ProjectResource resource = ProjectResource.builder()
+                .project(newProject)
+                .resourceType(ResourceType.REFERENCE_IMAGE)
+                .minioUrl(path)
+                .fileName(file.getOriginalFilename())
+                .build();
+            resourceManagerService.save(resource);
+        }
         
         ObjGenerationCreateTaskEvent taskEvent = ObjGenerationCreateTaskEvent.builder()
             .projectId(newProject.getId())
-            .minioInputPath(minioPath)
-            .fileName(referenceImage.getOriginalFilename())
+            .minioInputPaths(minioPaths)
             .build();
         
         boolean isSent = streamBridge.send(StreamBridgeTopics.OBJ_TASK_CHANNEL, taskEvent);

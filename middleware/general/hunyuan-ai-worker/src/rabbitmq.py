@@ -1,4 +1,5 @@
 import json
+from typing import List
 
 import pika
 import requests
@@ -11,8 +12,7 @@ from src.minio_client import get_minio_client
 
 class ObjGenerationTaskEvent(BaseModel):
     projectId: int
-    minioInputPath: str  # e.g., "inputs/project_123_ref.jpg"
-    fileName: str
+    minioInputPaths: List[str]
 
 
 def start_consumer():
@@ -55,15 +55,21 @@ def process_message(
         task = ObjGenerationTaskEvent(**payload)
         print(f"📦 [RabbitMQ] Processing job for Project {task.projectId}")
 
-        # 1. Fetch file from MinIO storage
-        response = minio_client.get_object(bucket_name, task.minioInputPath)
-        image_data: bytes = response.read()
+        image_data_list = []
+
+        # Fetch ALL files from MinIO
+        for path in task.minioInputPaths:
+            response = minio_client.get_object(bucket_name, path)
+            image_data_list.append(response.read())
+
         response.close()
         response.release_conn()
 
-        # 2. Execute the inference engine
         glb_stream, obj_stream = execute_hunyuan_inference(
-            task.projectId, image_data)
+            task.projectId, image_data_list)
+
+        response.close()
+        response.release_conn()
 
         # 3. Save generated mesh assets back to MinIO
         glb_path: str = f"outputs/{task.projectId}/scene.glb"
