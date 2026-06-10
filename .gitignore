@@ -28,6 +28,17 @@ target/
 build/
 !**/src/main/**/build/
 
+### Python ###
+**/__pycache__/
+.venv/
+.eggs/
+**/.mypy_cache/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+
 ### Project ###
 .env/**
-**/secret
+/secret
+/data/local
+/data/prod

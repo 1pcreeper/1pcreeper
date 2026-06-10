@@ -24,6 +24,21 @@ spring:
                 service-id: ${GENERAL_CONFIG_MAPPING_SERVER_HOSTNAME}
             username: ${GENERAL_CONFIG_MAPPING_SECURITY_USERNAME}
             password: ${GENERAL_CONFIG_MAPPING_SECURITY_PASSWORD}
+        stream:
+            binders:
+                rabbit-broker:
+                    type: rabbit
+                    environment:
+                        spring:
+                            rabbitmq:
+                                host: localhost
+                                port: 30002
+                                username: guest
+                                password: guest
+            bindings:
+                objTaskChannel-out-0:
+                    destination: obj-generation-queue
+                    binder: rabbit-broker
 eureka:
     instance:
         prefer-ip-address: false
@@ -39,3 +54,8 @@ properties:
 grpc:
     server:
         port: ${GENERAL_OBJ_GENERATE_SERVICE_GRPC_PORT}
+minio:
+    endpoint: http://localhost:30000 # Updated port
+    access-key: admin
+    secret-key: password123
+    bucket-name: 3d-projects

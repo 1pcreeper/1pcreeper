@@ -38,6 +38,8 @@ public class GatewayConfig {
                     .rewritePath(servletProperties.getContextPath()+"/account/(?<segment>.*)", "/${segment}")) 
                 .uri("lb://" + generalAccountServiceSpecProperties.getHostName() + ":" + generalAccountServiceSpecProperties.getHttpPort()))
             .route("obj-generate", r -> r.path(servletProperties.getContextPath()+"/obj-generate/**")
+                .and()
+                .predicate(exchange -> !exchange.getRequest().getURI().getPath().contains("/internal/"))
                 .filters(f -> f
                     .filter(logPath())
                     .rewritePath(servletProperties.getContextPath()+"/obj-generate/(?<segment>.*)", "/${segment}"))

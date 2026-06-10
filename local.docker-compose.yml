@@ -1,0 +1,79 @@
+version: "3.8"
+
+services:
+    # 1. Object Storage (For 3D Inputs/Outputs)
+    general-minio1:
+        image: minio/minio:latest
+        container_name: general-minio1
+        hostname: general-minio1
+        restart: always
+        ports:
+            - "30000:9000" # API Port
+            - "30001:9001" # Web Console Port
+        environment:
+            MINIO_ROOT_USER: admin
+            MINIO_ROOT_PASSWORD: password123
+        volumes:
+            - ./data/local/general/volumes/minio1:/data
+        command: server /data --console-address ":9001"
+        networks:
+            - general-network
+
+    # 2. Task Queue (For FastAPI 3D Generation Workers)
+    general-rabbitmq:
+        image: rabbitmq:3-management-alpine
+        container_name: general-rabbitmq
+        hostname: general-rabbitmq
+        restart: always
+        ports:
+            - "30002:5672" # App communication port
+            - "30003:15672" # Web UI Console Port
+        environment:
+            RABBITMQ_DEFAULT_USER: guest
+            RABBITMQ_DEFAULT_PASS: guest
+        volumes:
+            - ./data/local/general/volumes/rabbitmq:/var/lib/rabbitmq
+        networks:
+            - general-network
+
+    # 3. Zookeeper (Required for traditional Kafka cluster management)
+    general-zookeeper1:
+        image: confluentinc/cp-zookeeper:7.8.0
+        container_name: general-zookeeper1
+        hostname: general-zookeeper1
+        restart: always
+        ports:
+            - "30004:2181"
+        environment:
+            - ZOOKEEPER_CLIENT_PORT=2181
+            - ZOOKEEPER_SERVER_ID=1
+            - ALLOW_ANONYMOUS_LOGIN=yes
+        volumes:
+            - ./data/local/general/volumes/zookeeper1:/bitnami/zookeeper
+        networks:
+            - general-network
+
+    # 4. Apache Kafka (For future event streaming and audit logs)
+    general-kafka1:
+        image: confluentinc/cp-kafka:7.8.0
+        container_name: general-kafka1
+        hostname: general-kafka1
+        restart: always
+        ports:
+            - "30005:9092"
+        depends_on:
+            - general-zookeeper1
+        environment:
+            - KAFKA_BROKER_ID=1
+            - ALLOW_PLAINTEXT_LISTENER=yes
+            - KAFKA_ZOOKEEPER_CONNECT=general-zookeeper1:2181
+            - KAFKA_LISTENERS=PLAINTEXT://:9092
+            - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+        volumes:
+            - ./data/local/general/volumes/kafka1:/bitnami/kafka
+        networks:
+            - general-network
+networks:
+    general-network:
+        name: general-network
+        driver: bridge

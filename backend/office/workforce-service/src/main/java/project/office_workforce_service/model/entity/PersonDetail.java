@@ -30,6 +30,7 @@ public class PersonDetail extends AbstractAuditableEntity {
     private Gender gender;
 
     private String nationality;
+    
     private String occupation;
 
     @Column(columnDefinition = "TEXT")

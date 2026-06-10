@@ -12,6 +12,7 @@ import org.springframework.security.oauth2.core.OAuth2TokenValidator;
 import org.springframework.security.oauth2.jwt.*;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import project.shared_general_common_lib.properties.CorsProperties;
@@ -60,14 +61,14 @@ public class SecurityConfig {
             )
             .csrf(csrf ->
                 csrf
-                    .ignoringRequestMatchers(
-                        "/auth/hello"
-                    )
                     .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                     .csrfTokenRequestHandler(spaCsrfTokenRequestHandler)
+                    .ignoringRequestMatchers("/internal/**")
             )
             .authorizeHttpRequests(auth ->
-                auth.anyRequest().permitAll()
+                auth
+                    .requestMatchers("/internal/**","/public/**").permitAll()
+                    .anyRequest().authenticated()
             ).oauth2ResourceServer(oauth2 -> oauth2
                 .jwt(jwt ->
                     jwt.
