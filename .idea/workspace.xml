@@ -4,48 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="Change">
-      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/config/MinioConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/constant/StreamBridgeTopics.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/controller/common/ProjectController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/controller/common/internal/InternalProjectController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/model/dto/request/ProjectCreateCompletionRequestDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/model/entity/ObjProject.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/model/entity/ProjectObject.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/model/entity/ProjectResource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/model/entity/ProjectShare.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/model/entity/enums/AccessLevel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/model/entity/enums/ProjectStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/model/entity/enums/ResourceType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/model/entity/enums/SourceType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/model/event/ObjGenerationCreateTaskEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/properties/MinioProperties.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/repository/ObjProjectRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/repository/ProjectObjectRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/repository/ProjectResourceRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/repository/ProjectShareRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/service/common/ObjProjectService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/service/manager/ObjProjectManagerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/service/manager/ProjectObjectManagerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/service/manager/ProjectResourceManagerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/service/manager/ProjectShareManagerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/service/storage/MinioStorageService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/service/storage/StorageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.local" beforeDir="false" afterPath="$PROJECT_DIR$/.env.local" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/general/api-gateway/src/main/java/project/general_api_gateway/config/GatewayConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/api-gateway/src/main/java/project/general_api_gateway/config/GatewayConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/general/api-gateway/src/main/java/project/general_api_gateway/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/api-gateway/src/main/java/project/general_api_gateway/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/general/api-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/api-gateway/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/general/obj-generate-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/model/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/model/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/entity/PersonDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/entity/PersonDetail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/config/application.yml" beforeDir="false" />
-    </list>
+    <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="Change" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -440,7 +399,15 @@
       <option name="project" value="LOCAL" />
       <updated>1781027173130</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Change">
+      <option name="closed" value="true" />
+      <created>1781053671146</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1781053671146</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
