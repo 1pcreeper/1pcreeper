@@ -1,6 +1,38 @@
 version: "3.8"
 
 services:
+    hunyuan-ai-worker:
+        build:
+        context: ./middleware/general/hunyuan-ai-worker
+        dockerfile: dockerfile
+        container_name: hunyuan-ai-worker
+        hostname: hunyuan-ai-worker
+        restart: always
+        depends_on:
+            - general-rabbitmq
+            - general-minio1
+        environment:
+            - GENERAL_RABBITMQ_HOST=general-rabbitmq
+            - GENERAL_RABBITMQ_PORT=5672
+            - GENERAL_MINIO_ENDPOINT=general-minio1:9000
+            - HUNYUAN_ROOT=/app/Hunyuan3D
+        volumes:
+            - ./data/local/general/volumes/hunyuan-ai-worker/ai/Hunyuan3D:/app/Hunyuan3D
+        networks:
+            - general-network
+        deploy:
+            resources:
+                reservations:
+                    devices:
+                        - driver: nvidia
+                          count: all
+                          capabilities: [gpu]
+                limits:
+                    devices:
+                        - driver: nvidia
+                          count: all
+                          capabilities: [gpu]
+
     # 1. Object Storage (For 3D Inputs/Outputs)
     general-minio1:
         image: minio/minio:latest

@@ -1,10 +1,12 @@
 from minio import Minio
+from src.env import (GENERAL_MINIO_ACCESS_KEY, GENERAL_MINIO_ENDPOINT,
+                     GENERAL_MINIO_SECRET_KEY)
 
 
 def get_minio_client() -> Minio:
     return Minio(
-        endpoint="localhost:30000",
-        access_key="admin",
-        secret_key="password123",
+        endpoint=GENERAL_MINIO_ENDPOINT,
+        access_key=GENERAL_MINIO_ACCESS_KEY,
+        secret_key=GENERAL_MINIO_SECRET_KEY,
         secure=False
     )
