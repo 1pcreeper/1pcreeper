@@ -1,0 +1,29 @@
+# Use the official PyTorch image with CUDA 12.1 (Adjust if your GPU needs a different CUDA version)
+FROM pytorch/pytorch:2.1.0-cuda12.1-cudnn8-runtime
+
+# Set working directory
+WORKDIR /
+RUN mkdir -p /app
+WORKDIR /app
+
+# Install system dependencies required for OpenCV, 3D rendering, and Git
+RUN apt-get update && apt-get install -y \
+    git \
+    libgl1 \
+    libglib2.0-0 \
+    libopengl0 \
+    libegl1 \
+    && rm -rf /var/lib/apt/lists/*
+
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -U openmim
+RUN mim install mmcv mmdet mmsegmentation
+RUN pip install mmcv==2.1.0 -f https://download.openmmlab.com/mmcv/dist/cu121/torch2.1.0/index.html
+RUN pip install mmdet mmsegmentation
+
+COPY ./src/* /app/src/
+EXPOSE 80
+
+ENTRYPOINT ["python", "/app/src"]

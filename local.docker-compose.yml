@@ -1,6 +1,36 @@
 version: "3.8"
 
 services:
+    polyroom-ai-worker:
+        build:
+            context: ./middleware/general/polyroom-ai-worker
+            dockerfile: dockerfile
+        container_name: polyroom-ai-worker
+        hostname: polyroom-ai-worker
+        restart: always
+        ports:
+            - "30020:80"
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+        depends_on:
+            - general-rabbitmq
+            - general-minio1
+        environment:
+            - GENERAL_RABBITMQ_HOST=general-rabbitmq
+            - GENERAL_RABBITMQ_PORT=5672
+            - GENERAL_MINIO_ENDPOINT=general-minio1:9000
+            - GENERAL_OBJ_GENERATE_SERVICE_IP_ADDRESS=host.docker.internal:10001
+        volumes:
+            - F:/AI/PolyRoom:/app/src/Polyroom
+        networks:
+            - general-network
+        deploy:
+            resources:
+                reservations:
+                    devices:
+                        - driver: nvidia
+                          count: all
+                          capabilities: [gpu]
     hunyuan-ai-worker:
         build:
             context: ./middleware/general/hunyuan-ai-worker
@@ -21,7 +51,7 @@ services:
             - GENERAL_MINIO_ENDPOINT=general-minio1:9000
             - GENERAL_OBJ_GENERATE_SERVICE_IP_ADDRESS=host.docker.internal:10001
         volumes:
-            - F:/Code Test/Hunyuan3D-2:/app/src/Hunyuan3D
+            - F:/AI/Hunyuan3D-2:/app/src/Hunyuan3D
         networks:
             - general-network
         deploy:

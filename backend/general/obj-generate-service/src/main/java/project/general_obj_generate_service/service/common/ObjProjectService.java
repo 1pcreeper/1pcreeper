@@ -115,7 +115,7 @@ public class ObjProjectService {
             .minioInputPaths(minioPaths)
             .build();
         
-        boolean isSent = streamBridge.send(StreamBridgeTopics.OBJ_TASK_CHANNEL, taskEvent);
+        boolean isSent = streamBridge.send(StreamBridgeTopics.OBJ_TASK_CHANNEL_OUT_0, taskEvent);
 
         if (!isSent) {
             log.error("❌ [RabbitMQ] Failed to queue task for Project {}", savedProject.getId());

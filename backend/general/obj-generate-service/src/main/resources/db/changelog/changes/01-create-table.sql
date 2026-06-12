@@ -88,3 +88,31 @@ CREATE TABLE project_shares (
     FOREIGN KEY (project_id) REFERENCES obj_projects(id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 ) INHERITS (abstract_auditable_entity);
+
+CREATE TABLE object_texturing_tasks (
+    id SERIAL PRIMARY KEY,
+    task_id UUID UNIQUE DEFAULT gen_random_uuid(),
+    project_id INTEGER NOT NULL,
+    status project_status DEFAULT 'PENDING',
+    target_object_ids INTEGER[] NOT NULL,
+    texture_resource_ids INTEGER[] NOT NULL,
+    error_message TEXT,
+    FOREIGN KEY (project_id) REFERENCES obj_projects(id) ON DELETE CASCADE
+) INHERITS (abstract_auditable_entity);
+
+
+CREATE TABLE custom_object_tasks (
+    id SERIAL PRIMARY KEY,
+    task_id UUID UNIQUE DEFAULT gen_random_uuid(),
+    project_id INTEGER NOT NULL,
+    status project_status DEFAULT 'PENDING',
+    generation_source_type resource_type NOT NULL,
+    text_prompt TEXT,
+    source_resource_id INTEGER DEFAULT NULL,
+    resulting_object_id INTEGER DEFAULT NULL,
+    error_message TEXT,
+    FOREIGN KEY (project_id) REFERENCES obj_projects(id) ON DELETE CASCADE,
+    FOREIGN KEY (source_resource_id) REFERENCES project_resources(id) ON DELETE SET NULL,
+    FOREIGN KEY (resulting_object_id) REFERENCES project_objects(id) ON DELETE SET NULL
+) INHERITS (abstract_auditable_entity);
+
