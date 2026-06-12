@@ -2,74 +2,96 @@ import io
 import os
 import subprocess
 import tempfile
-import time
+from concurrent.futures import process
 from typing import List, Tuple
+from unittest import result
 
-from minio import Minio
-from src.env import (GENERAL_HUNYUAN_AI_WORKER_HUNYUAN_ROOT,
-                     GENERAL_HUNYUAN_AI_WORKER_PYTHON_EXEC)
+from env import GENERAL_HUNYUAN_AI_WORKER_HUNYUAN_ROOT
 
 
 def execute_hunyuan_inference(project_id: int, image_bytes_list: List[bytes]) -> Tuple[io.BytesIO, io.BytesIO]:
+    """
+    Executes Hunyuan3D-2 GPU inference by calling our dedicated runner script.
+    """
+    image_count = len(image_bytes_list)
+    print(
+        f"🤖 [Hunyuan AI] Orchestrating GPU inference for Project {project_id}...", flush=True)
 
     with tempfile.TemporaryDirectory() as temp_dir:
         input_dir = os.path.join(temp_dir, "inputs")
         output_dir = os.path.join(temp_dir, "output")
         os.makedirs(input_dir, exist_ok=True)
+        os.makedirs(output_dir, exist_ok=True)
 
-        # 1. Write ALL images to the temporary inputs folder
+        # 1. Write the images to the temporary sandbox
+        img_paths = []
         for idx, img_bytes in enumerate(image_bytes_list):
-            img_path = os.path.join(input_dir, f"view_{idx}.jpg")
+            img_path = os.path.join(input_dir, f"view_{idx}.png")
             with open(img_path, "wb") as f:
                 f.write(img_bytes)
+            img_paths.append(img_path)
 
-        # 2. Build the Command Line execution string
-        # ⚠️ NOTE: Check your local Hunyuan3D documentation!
-        # If it requires a folder, pass the `input_dir`.
-        # If it requires specific flags like --front, --back, --left, you will need to map them here.
+        glb_out = os.path.join(output_dir, "mesh.glb")
+        obj_out = os.path.join(output_dir, "mesh.obj")
+
+        # 2. Locate our physical runner script
+        # __file__ looks at the current location of hunyuan.py, ensuring it always finds inference_runner.py
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        runner_script = os.path.join(current_dir, "inference_runner.py")
+
+        # 3. Setup the environment so Python knows where to find 'hy3dgen'
+        env = os.environ.copy()
+        # os.pathsep automatically uses ';' for Windows and ':' for Linux/Docker!
+        env["PYTHONPATH"] = f"{GENERAL_HUNYUAN_AI_WORKER_HUNYUAN_ROOT}{os.pathsep}{env.get('PYTHONPATH', '')}"
+
+        # 4. Build the exact command-line array
+        # This translates to: python src/inference_runner.py --out_glb ... --out_obj ... --images img1.png img2.png
         command = [
-            GENERAL_HUNYUAN_AI_WORKER_PYTHON_EXEC,
-            os.path.join(GENERAL_HUNYUAN_AI_WORKER_HUNYUAN_ROOT, "main.py"),
-            "--image_dir", input_dir,  # Passing the whole folder of references
-            "--save_folder", output_dir
-        ]
+            "python", runner_script,
+            "--out_glb", glb_out,
+            "--out_obj", obj_out,
+            "--model_path", os.path.join(
+                GENERAL_HUNYUAN_AI_WORKER_HUNYUAN_ROOT),
+            "--images"
+        ] + img_paths
 
-        print(f"⚙️ [Hunyuan AI] Executing: {' '.join(command)}")
+        print(
+            f"⚙️ [Hunyuan AI] Booting subprocess: {runner_script}", flush=True)
 
-        # 3. Run the AI! (This will block the thread for several minutes while the GPU works)
-        # capture_output=True grabs the AI's terminal logs so we can see if it crashed.
-        result = subprocess.run(
-            command, cwd=GENERAL_HUNYUAN_AI_WORKER_HUNYUAN_ROOT, capture_output=True, text=True)
+        # 5. Execute!
+        process = subprocess.Popen(
+            command,
+            cwd=GENERAL_HUNYUAN_AI_WORKER_HUNYUAN_ROOT,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,  # Merge errors into the standard output stream
+            text=True,
+            env=env,
+            bufsize=1,  # Force line-buffering so it prints immediately
+            universal_newlines=True
+        )
 
-        if result.returncode != 0:
-            print(f"❌ [Hunyuan AI] GPU Inference crashed!\n{result.stderr}")
+        for line in process.stdout:
+            # end="" prevents double spacing
+            print(f"🖥️ [Worker {project_id}] {line}", end="")
+
+        # 3. Wait for the process to formally close
+        process.wait()
+
+        # 6. Catch errors
+        if process.returncode != 0 or not os.path.exists(glb_out):
+            print(
+                f"❌ [Hunyuan AI] GPU Inference crashed!\n--- STDERR ---\n{process.stderr}\n--- STDOUT ---\n{process.stdout}", flush=True)
             raise RuntimeError(
-                "Hunyuan3D process failed. Check GPU VRAM and dependencies.")
+                "Hunyuan3D process failed. Check your console logs.")
 
-        # 4. Hunt for the generated files inside the output folder
-        glb_path = None
-        obj_path = None
-
-        # Walk through whatever folder structure Hunyuan created to find our meshes
-        for root, dirs, files in os.walk(output_dir):
-            for file in files:
-                if file.endswith(".glb"):
-                    glb_path = os.path.join(root, file)
-                elif file.endswith(".obj"):
-                    obj_path = os.path.join(root, file)
-
-        if not glb_path or not obj_path:
-            raise FileNotFoundError(
-                f"AI finished successfully, but could not find .glb or .obj in {output_dir}")
-
-        # 5. Load the generated 3D files back into RAM so RabbitMQ can upload them to MinIO
-        with open(glb_path, "rb") as f:
+        # 7. Read the generated meshes back into RAM
+        with open(glb_out, "rb") as f:
             glb_stream = io.BytesIO(f.read())
 
-        with open(obj_path, "rb") as f:
+        with open(obj_out, "rb") as f:
             obj_stream = io.BytesIO(f.read())
 
         print(
-            f"🎨 [Hunyuan AI] 3D Generation 100% successful for Project {project_id}!")
+            f"🎨 [Hunyuan AI] 3D Generation 100% successful for Project {project_id}!", flush=True)
 
         return glb_stream, obj_stream

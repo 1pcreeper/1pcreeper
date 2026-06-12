@@ -3,11 +3,15 @@ version: "3.8"
 services:
     hunyuan-ai-worker:
         build:
-        context: ./middleware/general/hunyuan-ai-worker
-        dockerfile: dockerfile
+            context: ./middleware/general/hunyuan-ai-worker
+            dockerfile: dockerfile
         container_name: hunyuan-ai-worker
         hostname: hunyuan-ai-worker
         restart: always
+        ports:
+            - "30010:80"
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
         depends_on:
             - general-rabbitmq
             - general-minio1
@@ -15,19 +19,14 @@ services:
             - GENERAL_RABBITMQ_HOST=general-rabbitmq
             - GENERAL_RABBITMQ_PORT=5672
             - GENERAL_MINIO_ENDPOINT=general-minio1:9000
-            - HUNYUAN_ROOT=/app/Hunyuan3D
+            - GENERAL_OBJ_GENERATE_SERVICE_IP_ADDRESS=host.docker.internal:10001
         volumes:
-            - ./data/local/general/volumes/hunyuan-ai-worker/ai/Hunyuan3D:/app/Hunyuan3D
+            - F:/Code Test/Hunyuan3D-2:/app/src/Hunyuan3D
         networks:
             - general-network
         deploy:
             resources:
                 reservations:
-                    devices:
-                        - driver: nvidia
-                          count: all
-                          capabilities: [gpu]
-                limits:
                     devices:
                         - driver: nvidia
                           count: all

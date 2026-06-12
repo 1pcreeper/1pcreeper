@@ -91,18 +91,18 @@ public class ObjProjectService {
             .build();
         
         newProject.setCreatedBy(currentUser);
-        newProject = objProjectManagerService.save(newProject);
+        ObjProject savedProject = objProjectManagerService.save(newProject);
 
         List<String> minioPaths = new ArrayList<>();
 
         // Loop through and upload all files
         for (MultipartFile file : referenceFiles) {
-            String path = storageService.uploadInputFile(newProject.getId(), file);
+            String path = storageService.uploadInputFile(savedProject.getId(), file);
             minioPaths.add(path);
 
             // Save each file as a database resource
             ProjectResource resource = ProjectResource.builder()
-                .project(newProject)
+                .project(savedProject)
                 .resourceType(ResourceType.REFERENCE_IMAGE)
                 .minioUrl(path)
                 .fileName(file.getOriginalFilename())
@@ -111,14 +111,16 @@ public class ObjProjectService {
         }
         
         ObjGenerationCreateTaskEvent taskEvent = ObjGenerationCreateTaskEvent.builder()
-            .projectId(newProject.getId())
+            .projectId(savedProject.getId())
             .minioInputPaths(minioPaths)
             .build();
         
         boolean isSent = streamBridge.send(StreamBridgeTopics.OBJ_TASK_CHANNEL, taskEvent);
 
         if (!isSent) {
-            log.error("❌ [RabbitMQ] Failed to queue task for Project {}", newProject.getId());
+            log.error("❌ [RabbitMQ] Failed to queue task for Project {}", savedProject.getId());
+            savedProject.setStatus(ProjectStatus.FAILED);
+            objProjectManagerService.save(savedProject);
             throw new RuntimeException("Message broker unavailable");
         }
 

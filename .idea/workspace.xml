@@ -4,7 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="Change" />
+    <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="Change">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/service/common/ObjProjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/service/common/ObjProjectService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local.docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/local.docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/src/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/src/__main__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/src/env.py" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/src/env.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/src/hunyuan.py" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/src/hunyuan.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/src/minio_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/src/minio_client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/src/rabbitmq.py" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/src/rabbitmq.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/src/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/src/server.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -50,53 +62,53 @@
     <option name="showMembers" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.GeneralAPIGatewayApplication.executor": "Run",
-    "Application.GeneralAccountServiceApplication.executor": "Run",
-    "Application.GeneralConfigMappingApplication.executor": "Run",
-    "Application.GeneralDummyServiceApplication.executor": "Run",
-    "Application.GeneralEventProducerMiddlewareApplication.executor": "Run",
-    "Application.GeneralEventProducerServiceApplication.executor": "Run",
-    "Application.GeneralObjGenerateServiceApplication.executor": "Run",
-    "Application.GeneralServiceRegistryApplication .executor": "Run",
-    "Application.OfficeAPIGatewayApplication.executor": "Run",
-    "Application.OfficeAccountServiceApplication.executor": "Run",
-    "Application.OfficeAuthProviderApplication.executor": "Run",
-    "Application.OfficeConfigMappingApplication.executor": "Run",
-    "Application.OfficeDummyServiceApplication.executor": "Run",
-    "Application.OfficeServiceRegistryApplication .executor": "Run",
-    "Application.OfficeWorkforceServiceApplication.executor": "Run",
-    "Application.project.general_service_registry.GeneralServiceRegistryApplication .executor": "Run",
-    "Maven.config-mapping [clean].executor": "Run",
-    "Maven.config-mapping [install].executor": "Run",
-    "Maven.general-api-gateway [clean].executor": "Run",
-    "Maven.general-api-gateway [install].executor": "Run",
-    "Maven.general-service-registry [clean].executor": "Run",
-    "Maven.general-service-registry [install].executor": "Run",
-    "Maven.project [clean,-X].executor": "Run",
-    "Maven.project [clean].executor": "Run",
-    "Maven.project [install].executor": "Run",
-    "Maven.project [mvn,clean,install,-DskipTests].executor": "Run",
-    "Maven.project [site].executor": "Run",
-    "Maven.project [validate].executor": "Run",
-    "Maven.shared-general-auth-starter [clean].executor": "Run",
-    "Maven.shared-general-auth-starter [install].executor": "Run",
-    "Maven.shared-general-starter [clean].executor": "Run",
-    "Maven.shared-general-starter [install].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/1pcreeper/projects/001 Project/codes/v001/1pcreeper-project/backend/general/dummy-service/src/main/resources/db/changelog/changes",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15625",
-    "project.structure.side.proportion": "0.3034483",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.GeneralAPIGatewayApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.GeneralAccountServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.GeneralConfigMappingApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.GeneralDummyServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.GeneralEventProducerMiddlewareApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.GeneralEventProducerServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.GeneralObjGenerateServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.GeneralServiceRegistryApplication .executor&quot;: &quot;Run&quot;,
+    &quot;Application.OfficeAPIGatewayApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.OfficeAccountServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.OfficeAuthProviderApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.OfficeConfigMappingApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.OfficeDummyServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.OfficeServiceRegistryApplication .executor&quot;: &quot;Run&quot;,
+    &quot;Application.OfficeWorkforceServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.project.general_service_registry.GeneralServiceRegistryApplication .executor&quot;: &quot;Run&quot;,
+    &quot;Maven.config-mapping [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.config-mapping [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.general-api-gateway [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.general-api-gateway [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.general-service-registry [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.general-service-registry [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.project [clean,-X].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.project [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.project [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.project [mvn,clean,install,-DskipTests].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.project [site].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.project [validate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.shared-general-auth-starter [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.shared-general-auth-starter [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.shared-general-starter [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.shared-general-starter [install].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/1pcreeper/projects/001 Project/codes/v001/1pcreeper-project/backend/general/dummy-service/src/main/resources/db/changelog/changes&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15625&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.3034483&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\general\dummy-service\src\main\resources\db\changelog\changes" />
@@ -415,7 +427,15 @@
       <option name="project" value="LOCAL" />
       <updated>1781067938450</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Change">
+      <option name="closed" value="true" />
+      <created>1781080001897</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1781080001897</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
