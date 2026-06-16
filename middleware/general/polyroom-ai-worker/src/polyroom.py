@@ -50,8 +50,6 @@ def execute_polyroom_inference(project_id: int, image_bytes_list: List[bytes]) -
             "python", runner_script,
             "--out_glb", glb_out,
             "--out_obj", obj_out,
-            "--model_path", os.path.join(
-                GENERAL_POLYROOM_AI_WORKER_POLYROOM_ROOT),
             "--images"
         ] + img_paths
 
