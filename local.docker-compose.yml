@@ -113,18 +113,6 @@ services:
             - ./data/local/general/volumes/kafka1:/var/lib/kafka/data
         networks:
             - general-network
-    kafka-ui:
-        image: provectuslabs/kafka-ui:latest
-        container_name: kafka-ui
-        ports:
-            - "30006:8080"
-        depends_on:
-            - general-kafka1
-        environment:
-            - KAFKA_CLUSTERS_0_NAME=general-kafka-cluster
-            - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=localhost:29092
-        networks:
-            - general-network
 networks:
     general-network:
         name: general-network
