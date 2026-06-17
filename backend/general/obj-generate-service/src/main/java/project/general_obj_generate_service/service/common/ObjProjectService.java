@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import project.general_obj_generate_service.constant.StreamBridgeTopics;
+import project.shared_general_common_lib.constant.StreamBridgeTopicsConstant;
 import project.general_obj_generate_service.model.dto.request.ProjectCreateCompletionRequestDTO;
 import project.general_obj_generate_service.model.entity.ObjProject;
 import project.general_obj_generate_service.model.entity.ProjectObject;
@@ -14,13 +14,14 @@ import project.general_obj_generate_service.model.entity.User;
 import project.general_obj_generate_service.model.entity.enums.ProjectStatus;
 import project.general_obj_generate_service.model.entity.enums.ResourceType;
 import project.general_obj_generate_service.model.entity.enums.SourceType;
-import project.general_obj_generate_service.model.event.ObjGenerationCreateTaskEvent;
+import project.shared_general_starter.model.event.ProjectGenerationCreateEvent;
 import project.general_obj_generate_service.service.manager.ObjProjectManagerService;
 import project.general_obj_generate_service.service.manager.ProjectObjectManagerService;
 import project.general_obj_generate_service.service.manager.ProjectResourceManagerService;
 import project.general_obj_generate_service.service.manager.UserManagerService;
 import project.general_obj_generate_service.service.storage.StorageService;
 import org.springframework.cloud.stream.function.StreamBridge;
+import project.shared_general_starter.service.producer.KafkaPolyroomProducerService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,7 @@ public class ObjProjectService {
     private final ProjectResourceManagerService resourceManagerService;
     private final StorageService storageService;
     private final StreamBridge streamBridge;
+    private final  KafkaPolyroomProducerService kafkaPolyroomProducerService;
 
     @Autowired
     public ObjProjectService(
@@ -43,7 +45,8 @@ public class ObjProjectService {
         UserManagerService userManagerService, 
         ProjectResourceManagerService resourceManagerService,
         StorageService storageService,
-        StreamBridge streamBridge
+        StreamBridge streamBridge,
+        KafkaPolyroomProducerService kafkaPolyroomProducerService
     ) {
         this.objProjectManagerService = objProjectManagerService;
         this.projectObjectManagerService = projectObjectManagerService;
@@ -51,6 +54,7 @@ public class ObjProjectService {
         this.resourceManagerService = resourceManagerService;
         this.storageService = storageService;
         this.streamBridge = streamBridge;
+        this.kafkaPolyroomProducerService = kafkaPolyroomProducerService;
     }
 
     @Transactional
@@ -110,12 +114,12 @@ public class ObjProjectService {
             resourceManagerService.save(resource);
         }
         
-        ObjGenerationCreateTaskEvent taskEvent = ObjGenerationCreateTaskEvent.builder()
+        ProjectGenerationCreateEvent taskEvent = ProjectGenerationCreateEvent.builder()
             .projectId(savedProject.getId())
             .minioInputPaths(minioPaths)
             .build();
         
-        boolean isSent = streamBridge.send(StreamBridgeTopics.OBJ_TASK_CHANNEL_OUT_0, taskEvent);
+        boolean isSent = kafkaPolyroomProducerService.produceProjectGenerationCreateEvent(taskEvent);
 
         if (!isSent) {
             log.error("❌ [RabbitMQ] Failed to queue task for Project {}", savedProject.getId());

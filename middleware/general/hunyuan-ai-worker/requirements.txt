@@ -5,6 +5,7 @@ requests==2.31.0
 numpy==1.26.4
 diffusers==0.27.2
 huggingface-hub==0.24.0
+confluent-kafka
 
 ## Hunyuan3D dependencies
 pandas

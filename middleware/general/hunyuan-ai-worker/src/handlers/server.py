@@ -3,7 +3,8 @@ from contextlib import asynccontextmanager
 from typing import AsyncGenerator, Dict
 
 from fastapi import FastAPI
-from rabbitmq import start_consumer
+from listeners.generate_uv_mapping_obj_listener import \
+    start_generate_uv_mapping_obj_listener
 
 
 @asynccontextmanager
@@ -11,7 +12,8 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     print("⚡ [FastAPI] Booting up background workers...", flush=True)
 
     # Start RabbitMQ in a background thread
-    consumer_thread = threading.Thread(target=start_consumer, daemon=True)
+    consumer_thread = threading.Thread(
+        target=start_generate_uv_mapping_obj_listener, daemon=True)
     consumer_thread.start()
 
     yield

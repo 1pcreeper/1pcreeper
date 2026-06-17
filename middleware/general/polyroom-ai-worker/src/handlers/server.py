@@ -3,16 +3,25 @@ from contextlib import asynccontextmanager
 from typing import AsyncGenerator, Dict
 
 from fastapi import FastAPI
-from rabbitmq import start_consumer
+from src.config.env import GENERAL_KAFKA_BOOTSTRAP_SERVERS
+from src.listeners.project_generator_listener import \
+    start_project_generator_listener
+from src.utils.kafka_admin import create_topic_if_not_exists
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     print("⚡ [FastAPI] Booting up background workers...", flush=True)
 
-    # Start RabbitMQ in a background thread
-    consumer_thread = threading.Thread(target=start_consumer, daemon=True)
-    consumer_thread.start()
+    create_topic_if_not_exists(
+        broker=GENERAL_KAFKA_BOOTSTRAP_SERVERS,
+        topic_name="general-kafka-polyroom-project-generate-topic"
+    )
+
+    # Start Kafka in a background thread
+    project_generator_listener_thread = threading.Thread(
+        target=start_project_generator_listener, daemon=True)
+    project_generator_listener_thread.start()
 
     yield
 

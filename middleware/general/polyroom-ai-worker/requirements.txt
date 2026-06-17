@@ -7,6 +7,7 @@ shapely==2.0.4
 mmdet==3.3.0
 mmsegmentation==1.2.2
 trimesh==4.4.1
+confluent-kafka
 
 opencv-python
 numpy==1.24.4

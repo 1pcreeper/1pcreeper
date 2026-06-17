@@ -1,18 +1,23 @@
+import base64
 import json
 import os
+import time
+import uuid
 from typing import List
 
+import confluent_kafka
 import pika
 import requests
-from env import (GENERAL_HUNYUAN_AI_WORKER_QUEUE_FROM_NAME,
-                 GENERAL_HUNYUAN_AI_WORKER_QUEUE_TO_EXCHANGE,
-                 GENERAL_OBJ_GENERATE_SERVICE_IP_ADDRESS,
-                 GENERAL_RABBITMQ_HOST, GENERAL_RABBITMQ_PORT)
-from hunyuan import execute_hunyuan_inference
-from minio_client import get_minio_client
+from confluent_kafka import (Consumer, KafkaError, KafkaException,
+                             TopicPartition)
 from pika.adapters.blocking_connection import BlockingChannel
 from pika.spec import Basic, BasicProperties
 from pydantic import BaseModel, ValidationError
+from src.config.env import (GENERAL_KAFKA_BOOTSTRAP_SERVERS,
+                            GENERAL_OBJ_GENERATE_SERVICE_IP_ADDRESS)
+from src.config.minio_client import get_minio_client
+from src.services.project_generator_service import \
+    execute_polyroom_inference_project_generator
 
 
 class ObjGenerationTaskEvent(BaseModel):
@@ -20,52 +25,87 @@ class ObjGenerationTaskEvent(BaseModel):
     minioInputPaths: List[str]
 
 
-def start_consumer():
-    connection = pika.BlockingConnection(
-        pika.ConnectionParameters(
-            host=GENERAL_RABBITMQ_HOST, port=GENERAL_RABBITMQ_PORT,
-            heartbeat=3600,
-            blocked_connection_timeout=3600
-        )
-    )
-    channel = connection.channel()
+conf = {
+    'bootstrap.servers': GENERAL_KAFKA_BOOTSTRAP_SERVERS,
+    'group.id': 'general-public-group',
+    'auto.offset.reset': 'earliest',
+    'enable.auto.commit': False
+}
 
-    exchange_name = GENERAL_HUNYUAN_AI_WORKER_QUEUE_TO_EXCHANGE
-    channel.exchange_declare(exchange=exchange_name,
-                             exchange_type='topic', durable=True)
 
-    queue_name = GENERAL_HUNYUAN_AI_WORKER_QUEUE_FROM_NAME
-    channel.queue_declare(queue=queue_name, durable=True)
+def start_project_generator_listener():
+    consumer = Consumer(conf)
 
-    channel.queue_bind(exchange=exchange_name,
-                       queue=queue_name, routing_key='#')
+    topic_name = "general-kafka-polyroom-project-generate-topic"
+    partition_id = 0
+    topic_partition = TopicPartition(
+        topic_name, partition_id, confluent_kafka.OFFSET_BEGINNING)
 
-    channel.basic_qos(prefetch_count=1)
+    consumer.assign([topic_partition])
 
-    channel.basic_consume(
-        queue=queue_name, on_message_callback=process_message)
+    print("🎧 [Kafka] Listening for tasks...", flush=True)
 
-    print("🎧 [RabbitMQ] Bound to obj-generation-queue Exchange. Listening for tasks...", flush=True)
-    channel.start_consuming()
+    try:
+        # 4. Continuous polling loop
+        while True:
+            # Poll for new messages, waiting up to 1 second
+            msg = consumer.poll(timeout=1.0)
+
+            if msg is None:
+                continue
+
+            if msg.error():
+                # 1. Ignore "End of Partition" warnings (completely normal)
+                if msg.error().code() == KafkaError._PARTITION_EOF:
+                    continue
+
+                # 2. Handle the "Topic not ready yet" race condition gracefully
+                elif msg.error().code() == KafkaError.UNKNOWN_TOPIC_OR_PART:
+                    print(
+                        f"⚠️ [Kafka] Topic metadata syncing, retrying... ({msg.error()})")
+                    time.sleep(1)  # Wait 1 second and let it try again!
+                    continue
+
+                # 3. If it's a genuine fatal error, print it and break
+                else:
+                    print(f"❌ [Kafka] Consumer error: {msg.error()}")
+                    break
+
+            # 5. Process the message
+            try:
+                # Decode the raw bytes into a string, then parse the JSON
+                raw_bytes = msg.value()
+                json_string = base64.b64decode(raw_bytes).decode("utf-8")
+                event_data = json.loads(json_string)
+
+                print(f"✅Task Consumed: {event_data}\n")
+                process_message(event=event_data, consumer=consumer)
+
+            except json.JSONDecodeError:
+                # Fallback if a message isn't valid JSON
+                print(
+                    f"⚠️ Received non-JSON message: {msg.value().decode('utf-8')}\n")
+
+    except KeyboardInterrupt:
+        print("\nShutting down consumer...")
+    finally:
+        # Close down consumer to commit final offsets and leave the group cleanly
+        consumer.close()
 
 
 def process_message(
-    ch: BlockingChannel,
-    method: Basic.Deliver,
-    properties: BasicProperties,
-    body: bytes
+    event: any,
+    consumer: Consumer
 ) -> None:
     minio_client = get_minio_client()
     bucket_name: str = "3d-projects"
     project_id = None  # Scoped outside so the exception block can read it safely
 
     try:
-        # 1. Parse JSON Payload
-        payload = json.loads(body.decode('utf-8'))
-        task = ObjGenerationTaskEvent(**payload)
+        task = ObjGenerationTaskEvent(**event)
         project_id = task.projectId
         print(
-            f"📦 [RabbitMQ] Processing job for Project {project_id}", flush=True)
+            f"📦 [Kafka] Processing job for Project {project_id}", flush=True)
         processing_callback = f"http://{GENERAL_OBJ_GENERATE_SERVICE_IP_ADDRESS}/internal/projects/{project_id}/complete"
         processing_payload = {
             "status": "PROCESSING",
@@ -87,12 +127,14 @@ def process_message(
                 response.release_conn()
 
         # 3. Run Inference Subprocess
-        glb_stream, obj_stream = execute_hunyuan_inference(
+        glb_stream, obj_stream = execute_polyroom_inference_project_generator(
             project_id, image_data_list)
 
+        mesh_uuid = uuid.uuid4()
+
         # 4. Save generated mesh assets back to MinIO
-        glb_path: str = f"outputs/{project_id}/scene.glb"
-        obj_path: str = f"outputs/{project_id}/scene.obj"
+        glb_path: str = f"outputs/{project_id}/{mesh_uuid}.glb"
+        obj_path: str = f"outputs/{project_id}/{mesh_uuid}.obj"
 
         minio_client.put_object(
             bucket_name, glb_path, glb_stream, length=glb_stream.getbuffer(
@@ -117,17 +159,17 @@ def process_message(
 
         if res.status_code == 200:
             print(
-                f"✅ [RabbitMQ] Successfully finalized Project {project_id}!", flush=True)
-            ch.basic_ack(delivery_tag=method.delivery_tag)
+                f"✅ [Kafka] Successfully finalized Project {project_id}!", flush=True)
+            consumer.commit()
         else:
             print(
                 f"⚠️ [Webhook] obj-generate-service returned status {res.status_code}. Requeuing task.", flush=True)
-            ch.basic_nack(delivery_tag=method.delivery_tag, requeue=True)
+
             raise RuntimeError(
                 f"obj-generate-service callback failed with status {res.status_code}")
 
     except Exception as e:
-        print(f"❌ [RabbitMQ] Pipeline failure encountered: {e}", flush=True)
+        print(f"❌ [Kafka] Pipeline failure encountered: {e}", flush=True)
 
         # If we successfully determined the project ID before the crash, update the state to FAILED
         if project_id is not None:
@@ -144,8 +186,5 @@ def process_message(
             except Exception as webhook_err:
                 print(
                     f"⚠️ [Webhook] Failed to dispatch error fallback to obj-generate-service: {webhook_err}", flush=True)
-
-        # CRITICAL POISON PILL PROTECTION:
-        # Acknowledge the message so it leaves the queue. If you requeue a code crash or bad data,
-        # the queue loops forever, running inference and overheating your GPU infinitely!
-        ch.basic_ack(delivery_tag=method.delivery_tag)
+    finally:
+        consumer.commit()

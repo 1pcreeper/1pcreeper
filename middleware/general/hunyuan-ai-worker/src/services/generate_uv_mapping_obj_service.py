@@ -6,10 +6,11 @@ from concurrent.futures import process
 from typing import List, Tuple
 from unittest import result
 
-from env import GENERAL_HUNYUAN_AI_WORKER_HUNYUAN_ROOT
+from src.config.env import (GENERAL_HUNYUAN_AI_WORKER_HUNYUAN_ROOT,
+                            GENERAL_HUNYUAN_AI_WORKER_SCRIPT_ROOT)
 
 
-def execute_hunyuan_inference(project_id: int, image_bytes_list: List[bytes]) -> Tuple[io.BytesIO, io.BytesIO]:
+def execute_hunyuan_inference_generate_uv_mapping_object(project_id: int, image_bytes_list: List[bytes]) -> Tuple[io.BytesIO, io.BytesIO]:
     """
     Executes Hunyuan3D-2 GPU inference by calling our dedicated runner script.
     """
@@ -35,9 +36,8 @@ def execute_hunyuan_inference(project_id: int, image_bytes_list: List[bytes]) ->
         obj_out = os.path.join(output_dir, "mesh.obj")
 
         # 2. Locate our physical runner script
-        # __file__ looks at the current location of hunyuan.py, ensuring it always finds inference_runner.py
-        current_dir = os.path.dirname(os.path.abspath(__file__))
-        runner_script = os.path.join(current_dir, "inference_runner.py")
+        runner_script = os.path.join(
+            GENERAL_HUNYUAN_AI_WORKER_SCRIPT_ROOT, "generate_uv_mapping_obj_runner.py")
 
         # 3. Setup the environment so Python knows where to find 'hy3dgen'
         env = os.environ.copy()

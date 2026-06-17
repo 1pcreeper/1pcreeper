@@ -6,9 +6,9 @@ import traceback
 import cv2
 import numpy as np
 import trimesh
-from env import GENERAL_POLYROOM_AI_WORKER_POLYROOM_ROOT
 from shapely.geometry import Polygon
 from shapely.ops import unary_union
+from src.config.env import GENERAL_POLYROOM_AI_WORKER_POLYROOM_ROOT
 
 sys.path.insert(0, GENERAL_POLYROOM_AI_WORKER_POLYROOM_ROOT)
 parser = argparse.ArgumentParser()

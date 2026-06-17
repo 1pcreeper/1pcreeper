@@ -24,21 +24,6 @@ spring:
                 service-id: ${GENERAL_CONFIG_MAPPING_SERVER_HOSTNAME}
             username: ${GENERAL_CONFIG_MAPPING_SECURITY_USERNAME}
             password: ${GENERAL_CONFIG_MAPPING_SECURITY_PASSWORD}
-        stream:
-            binders:
-                rabbit-broker:
-                    type: rabbit
-                    environment:
-                        spring:
-                            rabbitmq:
-                                host: localhost
-                                port: 30002
-                                username: guest
-                                password: guest
-            bindings:
-                objTaskChannel-out-0:
-                    destination: obj-generation-queue
-                    binder: rabbit-broker
 eureka:
     instance:
         prefer-ip-address: false

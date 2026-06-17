@@ -1,5 +1,7 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
+DROP TABLE IF EXISTS custom_object_tasks CASCADE;
+DROP TABLE IF EXISTS object_texturing_tasks CASCADE;
 DROP TABLE IF EXISTS project_shares CASCADE;
 DROP TABLE IF EXISTS project_objects CASCADE;
 DROP TABLE IF EXISTS project_resources CASCADE;
@@ -14,8 +16,9 @@ DROP TYPE IF EXISTS project_status CASCADE;
 DROP TYPE IF EXISTS resource_type CASCADE;
 DROP TYPE IF EXISTS source_type CASCADE;
 DROP TYPE IF EXISTS access_level CASCADE;
+DROP TYPE IF EXISTS material_category CASCADE;
 
-
+CREATE TYPE material_category AS ENUM ('WOOD', 'METAL', 'CONCRETE', 'FABRIC', 'TILE', 'BRICK', 'MISC');
 CREATE TYPE project_status AS ENUM ('PENDING', 'PROCESSING', 'READY', 'FAILED');
 CREATE TYPE resource_type AS ENUM ('REFERENCE_IMAGE', 'CUSTOM_TEXTURE', 'TEXT_PROMPT');
 CREATE TYPE source_type AS ENUM ('AI_GENERATED', 'USER_UPLOADED', 'SYSTEM_PRIMITIVE');
@@ -49,6 +52,15 @@ CREATE TABLE abstract_auditable_entity (
   FOREIGN KEY (updated_by) REFERENCES users(id) ON DELETE CASCADE
 ) INHERITS (abstract_persistable_entity);
 
+CREATE TABLE material_library (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    category material_category DEFAULT 'MISC',
+    minio_base_color_url TEXT NOT NULL,       -- The main texture image
+    minio_normal_map_url TEXT,                -- Optional: Adds 3D bump/depth
+    minio_roughness_map_url TEXT,             -- Optional: Controls reflection
+    is_active BOOLEAN DEFAULT TRUE            -- Soft delete toggle
+) INHERITS (abstract_auditable_entity);
 
 CREATE TABLE obj_projects (
     id SERIAL PRIMARY KEY,
@@ -94,12 +106,13 @@ CREATE TABLE object_texturing_tasks (
     task_id UUID UNIQUE DEFAULT gen_random_uuid(),
     project_id INTEGER NOT NULL,
     status project_status DEFAULT 'PENDING',
-    target_object_ids INTEGER[] NOT NULL,
-    texture_resource_ids INTEGER[] NOT NULL,
+    target_object_ids INTEGER[] NOT NULL,               -- Which 3D objects to paint
+    custom_texture_resource_ids INTEGER[] DEFAULT '{}', -- User uploaded images
+    material_library_ids INTEGER[] DEFAULT '{}',         -- Selected from public library
+    texture_mapping JSONB DEFAULT '{}'::jsonb,
     error_message TEXT,
     FOREIGN KEY (project_id) REFERENCES obj_projects(id) ON DELETE CASCADE
 ) INHERITS (abstract_auditable_entity);
-
 
 CREATE TABLE custom_object_tasks (
     id SERIAL PRIMARY KEY,
@@ -115,4 +128,3 @@ CREATE TABLE custom_object_tasks (
     FOREIGN KEY (source_resource_id) REFERENCES project_resources(id) ON DELETE SET NULL,
     FOREIGN KEY (resulting_object_id) REFERENCES project_objects(id) ON DELETE SET NULL
 ) INHERITS (abstract_auditable_entity);
-

@@ -13,11 +13,10 @@ services:
         extra_hosts:
             - "host.docker.internal:host-gateway"
         depends_on:
-            - general-rabbitmq
+            - general-kafka1
             - general-minio1
         environment:
-            - GENERAL_RABBITMQ_HOST=general-rabbitmq
-            - GENERAL_RABBITMQ_PORT=5672
+            - GENERAL_KAFKA_BOOTSTRAP_SERVERS=general-kafka1:9092
             - GENERAL_MINIO_ENDPOINT=general-minio1:9000
             - GENERAL_OBJ_GENERATE_SERVICE_IP_ADDRESS=host.docker.internal:10001
         volumes:
@@ -43,11 +42,10 @@ services:
         extra_hosts:
             - "host.docker.internal:host-gateway"
         depends_on:
-            - general-rabbitmq
+            - general-kafka1
             - general-minio1
         environment:
-            - GENERAL_RABBITMQ_HOST=general-rabbitmq
-            - GENERAL_RABBITMQ_PORT=5672
+            - GENERAL_KAFKA_BOOTSTRAP_SERVERS=general-kafka1:9092
             - GENERAL_MINIO_ENDPOINT=general-minio1:9000
             - GENERAL_OBJ_GENERATE_SERVICE_IP_ADDRESS=host.docker.internal:10001
         volumes:
@@ -62,7 +60,6 @@ services:
                           count: all
                           capabilities: [gpu]
 
-    # 1. Object Storage (For 3D Inputs/Outputs)
     general-minio1:
         image: minio/minio:latest
         container_name: general-minio1
@@ -79,25 +76,6 @@ services:
         command: server /data --console-address ":9001"
         networks:
             - general-network
-
-    # 2. Task Queue (For FastAPI 3D Generation Workers)
-    general-rabbitmq:
-        image: rabbitmq:3-management-alpine
-        container_name: general-rabbitmq
-        hostname: general-rabbitmq
-        restart: always
-        ports:
-            - "30002:5672" # App communication port
-            - "30003:15672" # Web UI Console Port
-        environment:
-            RABBITMQ_DEFAULT_USER: guest
-            RABBITMQ_DEFAULT_PASS: guest
-        volumes:
-            - ./data/local/general/volumes/rabbitmq:/var/lib/rabbitmq
-        networks:
-            - general-network
-
-    # 3. Zookeeper (Required for traditional Kafka cluster management)
     general-zookeeper1:
         image: confluentinc/cp-zookeeper:7.8.0
         container_name: general-zookeeper1
@@ -110,11 +88,9 @@ services:
             - ZOOKEEPER_SERVER_ID=1
             - ALLOW_ANONYMOUS_LOGIN=yes
         volumes:
-            - ./data/local/general/volumes/zookeeper1:/bitnami/zookeeper
+            - ./data/local/general/volumes/zookeeper1:/var/lib/zookeeper/data
         networks:
             - general-network
-
-    # 4. Apache Kafka (For future event streaming and audit logs)
     general-kafka1:
         image: confluentinc/cp-kafka:7.8.0
         container_name: general-kafka1
@@ -122,16 +98,31 @@ services:
         restart: always
         ports:
             - "30005:9092"
+            - "29092:29092"
         depends_on:
             - general-zookeeper1
         environment:
             - KAFKA_BROKER_ID=1
+            - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
             - ALLOW_PLAINTEXT_LISTENER=yes
             - KAFKA_ZOOKEEPER_CONNECT=general-zookeeper1:2181
-            - KAFKA_LISTENERS=PLAINTEXT://:9092
-            - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+            - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
+            - KAFKA_LISTENERS=PLAINTEXT://:9092,PLAINTEXT_INTERNAL://:29092
+            - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://general-kafka1:9092,PLAINTEXT_INTERNAL://localhost:29092
         volumes:
-            - ./data/local/general/volumes/kafka1:/bitnami/kafka
+            - ./data/local/general/volumes/kafka1:/var/lib/kafka/data
+        networks:
+            - general-network
+    kafka-ui:
+        image: provectuslabs/kafka-ui:latest
+        container_name: kafka-ui
+        ports:
+            - "30006:8080"
+        depends_on:
+            - general-kafka1
+        environment:
+            - KAFKA_CLUSTERS_0_NAME=general-kafka-cluster
+            - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=localhost:29092
         networks:
             - general-network
 networks:

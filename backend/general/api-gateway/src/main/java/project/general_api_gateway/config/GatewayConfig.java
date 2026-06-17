@@ -33,6 +33,8 @@ public class GatewayConfig {
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
             .route("account", r -> r.path(servletProperties.getContextPath()+"/account/**")
+                .and()
+                .predicate(exchange -> !exchange.getRequest().getURI().getPath().contains("/internal/"))
                 .filters(f -> f
                     .filter(logPath())  
                     .rewritePath(servletProperties.getContextPath()+"/account/(?<segment>.*)", "/${segment}")) 

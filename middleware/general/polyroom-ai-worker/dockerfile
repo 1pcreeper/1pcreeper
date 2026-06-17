@@ -3,6 +3,7 @@ FROM pytorch/pytorch:2.1.0-cuda12.1-cudnn8-runtime
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Etc/UTC
+ENV PYTHONPATH=/app
 
 # Set working directory
 WORKDIR /
@@ -32,7 +33,7 @@ RUN pip install /app/packages/opencv_python_headless-4.13.0.92-cp37-abi3-manylin
 RUN pip install --no-cache-dir -i https://pypi.tuna.tsinghua.edu.cn/simple numpy==1.24.4 trimesh==4.4.1 shapely==2.0.4 mapbox_earcut mmdet==3.3.0 mmsegmentation==1.2.2
 RUN pip install numpy==1.24.4
 
-COPY ./src/* /app/src/
+COPY ./src/ /app/src/
 EXPOSE 80
 
-ENTRYPOINT ["python", "/app/src"]
+ENTRYPOINT ["python", "src"]

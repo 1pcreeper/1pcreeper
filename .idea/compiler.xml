@@ -17,15 +17,12 @@
         <module name="office-account-service" />
         <module name="office-api-gateway" />
         <module name="office-workforce-service" />
-        <module name="shared-general-starter" />
         <module name="shared-general-common-lib" />
         <module name="general-service-registry" />
         <module name="office-service-registry" />
         <module name="office-config-mapping" />
-        <module name="general-account-service" />
         <module name="office-dummy-service" />
         <module name="shared-office-common-lib" />
-        <module name="general-dummy-service" />
         <module name="shared-general-auth-starter" />
       </profile>
       <profile name="Annotation profile for general-obj-generate-service" enabled="true">
@@ -36,6 +33,33 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
         </processorPath>
         <module name="general-obj-generate-service" />
+      </profile>
+      <profile name="Annotation profile for general-account-service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
+        </processorPath>
+        <module name="general-account-service" />
+      </profile>
+      <profile name="Annotation profile for general-dummy-service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
+        </processorPath>
+        <module name="general-dummy-service" />
+      </profile>
+      <profile name="Annotation profile for shared-general-starter" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
+        </processorPath>
+        <module name="shared-general-starter" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

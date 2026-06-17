@@ -6,6 +6,8 @@ WORKDIR /
 RUN mkdir -p /app
 WORKDIR /app
 
+ENV PYTHONPATH=/app
+
 # Install system dependencies required for OpenCV, 3D rendering, and Git
 RUN apt-get update && apt-get install -y \
     git \
@@ -19,7 +21,7 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY ./src/* /app/src/
+COPY ./src/ /app/src/
 EXPOSE 80
 
-ENTRYPOINT ["python", "/app/src"]
+ENTRYPOINT ["python", "src"]

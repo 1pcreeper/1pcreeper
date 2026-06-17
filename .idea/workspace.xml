@@ -5,12 +5,50 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="Change">
+      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/config/KafkaTopicConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/model/entity/MaterialLibrary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/model/entity/enums/MaterialCategory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/repository/MaterialLibraryRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/service/editor/ProjectMaterialEditorService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/service/manager/MaterialLibraryManagerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/general-common-lib/src/main/java/project/shared_general_common_lib/constant/KafkaTopicGroupsConstant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/general-common-lib/src/main/java/project/shared_general_common_lib/constant/StreamBridgeTopicsConstant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/model/event/GenerateUVMappingObjectEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/service/producer/KafkaHunyuanProducerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/service/producer/KafkaPolyroomProducerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.local" beforeDir="false" afterPath="$PROJECT_DIR$/.env.local" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/api-gateway/src/main/java/project/general_api_gateway/config/GatewayConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/api-gateway/src/main/java/project/general_api_gateway/config/GatewayConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/obj-generate-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/constant/StreamBridgeTopics.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/model/entity/ObjectTexturingTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/model/entity/ObjectTexturingTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/model/event/ObjGenerationCreateTaskEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/model/event/ProjectGenerationCreateEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/service/common/ObjProjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/service/common/ObjProjectService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/resources/db/changelog/changes/01-create-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/resources/db/changelog/changes/01-create-table.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/general-starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/general-starter/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hs_err_pid31120.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local.docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/local.docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/src/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/src/__main__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/src/env.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/src/hunyuan.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/src/inference_runner.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/src/minio_client.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/src/rabbitmq.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/src/server.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/start.bat" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/general/hunyuan-ai-worker/start.bat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/middleware/general/polyroom-ai-worker/dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/general/polyroom-ai-worker/dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/middleware/general/polyroom-ai-worker/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/general/polyroom-ai-worker/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware/general/polyroom-ai-worker/src/inference_runner.py" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/general/polyroom-ai-worker/src/inference_runner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware/general/polyroom-ai-worker/src/polyroom.py" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/general/polyroom-ai-worker/src/polyroom.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/general/polyroom-ai-worker/src/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/middleware/general/polyroom-ai-worker/src/__main__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/general/polyroom-ai-worker/src/env.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/general/polyroom-ai-worker/src/inference_runner.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/general/polyroom-ai-worker/src/minio_client.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/general/polyroom-ai-worker/src/polyroom.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/general/polyroom-ai-worker/src/rabbitmq.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/general/polyroom-ai-worker/src/server.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,8 +61,8 @@
         <option value="Python Script" />
         <option value="AnnotationType" />
         <option value="package-info" />
-        <option value="Enum" />
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -133,7 +171,7 @@
       <command value="mvn mvn clean install -DskipTests" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.GeneralAccountServiceApplication">
+  <component name="RunManager" selected="Application.GeneralObjGenerateServiceApplication">
     <list>
       <item itemvalue="Application.GeneralServiceRegistryApplication " />
       <item itemvalue="Application.GeneralConfigMappingApplication" />
@@ -446,7 +484,15 @@
       <option name="project" value="LOCAL" />
       <updated>1781266586837</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Change">
+      <option name="closed" value="true" />
+      <created>1781631057022</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1781631057022</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -582,6 +628,10 @@
           <url>file://$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/converter/JwtAuthenticationConverter.java</url>
           <line>54</line>
           <option name="timeStamp" value="97" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/middleware/general/polyroom-ai-worker/src/__main__.py</url>
+          <option name="timeStamp" value="98" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -1,4 +1,4 @@
-package project.general_obj_generate_service.model.event;
+package project.shared_general_starter.model.event;
 
 import lombok.Builder;
 import lombok.Data;
@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 @Builder
-public class ObjGenerationCreateTaskEvent {
+public class ProjectGenerationCreateEvent {
     private Long projectId;
     private List<String> minioInputPaths;
 }

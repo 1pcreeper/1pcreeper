@@ -2,14 +2,16 @@ import io
 import os
 import subprocess
 import tempfile
+import uuid
 from concurrent.futures import process
 from typing import List, Tuple
 from unittest import result
 
-from env import GENERAL_POLYROOM_AI_WORKER_POLYROOM_ROOT
+from src.config.env import (GENERAL_POLYROOM_AI_WORKER_POLYROOM_ROOT,
+                            GENERAL_POLYROOM_AI_WORKER_SCRIPT_ROOT)
 
 
-def execute_polyroom_inference(project_id: int, image_bytes_list: List[bytes]) -> Tuple[io.BytesIO, io.BytesIO]:
+def execute_polyroom_inference_project_generator(project_id: int, image_bytes_list: List[bytes]) -> Tuple[io.BytesIO, io.BytesIO]:
     """
     Executes Polyroom GPU inference by calling our dedicated runner script.
     """
@@ -31,13 +33,14 @@ def execute_polyroom_inference(project_id: int, image_bytes_list: List[bytes]) -
                 f.write(img_bytes)
             img_paths.append(img_path)
 
-        glb_out = os.path.join(output_dir, "mesh.glb")
-        obj_out = os.path.join(output_dir, "mesh.obj")
+        mesh_uuid = uuid.uuid4()
+
+        glb_out = os.path.join(output_dir, f"{mesh_uuid}.glb")
+        obj_out = os.path.join(output_dir, f"{mesh_uuid}.obj")
 
         # 2. Locate our physical runner script
-        # __file__ looks at the current location of hunyuan.py, ensuring it always finds inference_runner.py
-        current_dir = os.path.dirname(os.path.abspath(__file__))
-        runner_script = os.path.join(current_dir, "inference_runner.py")
+        runner_script = os.path.join(
+            GENERAL_POLYROOM_AI_WORKER_SCRIPT_ROOT, "project_generator_runner.py")
 
         # 3. Setup the environment so Python knows where to find 'hy3dgen'
         env = os.environ.copy()
