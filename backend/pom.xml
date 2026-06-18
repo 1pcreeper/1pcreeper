@@ -21,7 +21,11 @@
 		<license/>
 	</licenses>
 	<developers>
-		<developer/>
+		<developer>
+            <name>1pcreeper</name>
+            <email>linchikin116@gmail.com</email>
+            <url>https://1pcreeper.com</url>
+        </developer>
 	</developers>
 	<scm>
 		<connection/>
@@ -42,6 +46,7 @@
         <module>office/api-gateway</module>
         <module>office/account-service</module>
         <module>office/workforce-service</module>
+        <module>office/expenditure-service</module>
         <module>office/dummy-service</module>
         <module>shared/general-auth-starter</module>
         <module>shared/general-starter</module>

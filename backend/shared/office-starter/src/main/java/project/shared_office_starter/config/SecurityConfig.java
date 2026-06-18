@@ -1,4 +1,4 @@
-package project.office_workforce_service.config;
+package project.shared_office_starter.config;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +7,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
-import org.springframework.security.oauth2.core.OAuth2TokenValidator;
 import org.springframework.security.oauth2.jwt.*;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
@@ -21,7 +19,6 @@ import project.shared_office_starter.handler.SpaCsrfTokenRequestHandler;
 import project.shared_office_starter.resolver.AuthBearerTokenResolver;
 import project.shared_office_starter.service.base.UserDetailsBaseService;
 
-import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 
@@ -61,14 +58,14 @@ public class SecurityConfig {
             )
             .csrf(csrf ->
                 csrf
-                    .ignoringRequestMatchers(
-                        "/auth/hello"
-                    )
                     .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                     .csrfTokenRequestHandler(spaCsrfTokenRequestHandler)
+                    .ignoringRequestMatchers("/internal/**")
             )
             .authorizeHttpRequests(auth ->
-                auth.anyRequest().permitAll()
+                auth
+                    .requestMatchers("/internal/**","/public/**").permitAll()
+                    .anyRequest().authenticated()
             ).oauth2ResourceServer(oauth2 -> oauth2
                 .jwt(jwt ->
                     jwt

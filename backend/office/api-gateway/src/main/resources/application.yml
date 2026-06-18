@@ -41,6 +41,10 @@ properties:
             hostName: ${OFFICE_WORKFORCE_SERVICE_SERVER_HOSTNAME}
             httpPort: ${OFFICE_WORKFORCE_SERVICE_SERVER_PORT}
             grpcPort: ${OFFICE_WORKFORCE_SERVICE_GRPC_PORT}
+        office-expenditure-service:
+            hostName: ${OFFICE_EXPENDITURE_SERVICE_SERVER_HOSTNAME}
+            httpPort: ${OFFICE_EXPENDITURE_SERVICE_SERVER_PORT}
+            grpcPort: ${OFFICE_EXPENDITURE_SERVICE_GRPC_PORT}
     jwt:
         issuer-uri: ${OFFICE_OAUTH2_RESOURCE_JWT_ISSUER_LOCATION}
     cors: 

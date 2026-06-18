@@ -8,6 +8,7 @@ import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import project.office_api_gateway.properties.OfficeAccountServiceSpecProperties;
+import project.office_api_gateway.properties.OfficeExpenditureServiceSpecProperties;
 import project.office_api_gateway.properties.OfficeWorkforceServiceSpecProperties;
 import project.office_api_gateway.properties.ServletProperties;
 
@@ -16,16 +17,19 @@ import project.office_api_gateway.properties.ServletProperties;
 public class GatewayConfig {
     private final OfficeAccountServiceSpecProperties officeAccountServiceSpecProperties;
     private final OfficeWorkforceServiceSpecProperties officeWorkforceServiceSpecProperties;
+    private final OfficeExpenditureServiceSpecProperties officeExpenditureServiceSpecProperties;
     private final ServletProperties servletProperties;
     
     @Autowired
     public GatewayConfig(
         OfficeAccountServiceSpecProperties officeAccountServiceSpecProperties, 
         OfficeWorkforceServiceSpecProperties officeWorkforceServiceSpecProperties,
+        OfficeExpenditureServiceSpecProperties officeExpenditureServiceSpecProperties,
         ServletProperties servletProperties
     ) {
         this.officeAccountServiceSpecProperties = officeAccountServiceSpecProperties;
         this.officeWorkforceServiceSpecProperties = officeWorkforceServiceSpecProperties;
+        this.officeExpenditureServiceSpecProperties = officeExpenditureServiceSpecProperties;
         this.servletProperties = servletProperties;
     }
 
@@ -33,15 +37,26 @@ public class GatewayConfig {
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
             .route("account", r -> r.path(servletProperties.getContextPath()+"/account/**")
+                .and()
+                .predicate(exchange -> !exchange.getRequest().getURI().getPath().contains("/internal/"))
                 .filters(f -> f
                     .filter(logPath())  
                     .rewritePath(servletProperties.getContextPath()+"/account/(?<segment>.*)", "/${segment}")) 
                 .uri("lb://" + officeAccountServiceSpecProperties.getHostName() + ":" + officeAccountServiceSpecProperties.getHttpPort()))
             .route("workforce", r -> r.path(servletProperties.getContextPath()+"/workforce/**")
+                .and()
+                .predicate(exchange -> !exchange.getRequest().getURI().getPath().contains("/internal/"))
                 .filters(f -> f
                     .filter(logPath())
                     .rewritePath(servletProperties.getContextPath()+"/workforce/(?<segment>.*)", "/${segment}"))
                 .uri("lb://" + officeWorkforceServiceSpecProperties.getHostName() + ":" + officeWorkforceServiceSpecProperties.getHttpPort()))
+            .route("expenditure", r -> r.path(servletProperties.getContextPath()+"/expenditure/**")
+                .and()
+                .predicate(exchange -> !exchange.getRequest().getURI().getPath().contains("/internal/"))
+                .filters(f -> f
+                    .filter(logPath())
+                    .rewritePath(servletProperties.getContextPath()+"/expenditure/(?<segment>.*)", "/${segment}"))
+                .uri("lb://" + officeExpenditureServiceSpecProperties.getHostName() + ":" + officeExpenditureServiceSpecProperties.getHttpPort()))
             .build();
     }
 

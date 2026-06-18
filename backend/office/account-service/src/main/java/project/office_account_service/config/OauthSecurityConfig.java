@@ -7,7 +7,6 @@ import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.oauth2.server.servlet.OAuth2AuthorizationServerJwtAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -18,14 +17,12 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.core.oidc.OidcScopes;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.JwtDecoders;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.oauth2.server.authorization.client.InMemoryRegisteredClientRepository;
@@ -35,7 +32,6 @@ import org.springframework.security.oauth2.server.authorization.config.annotatio
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
@@ -50,7 +46,6 @@ import project.shared_office_starter.handler.SpaCsrfTokenRequestHandler;
 import project.shared_office_starter.resolver.AuthBearerTokenResolver;
 import project.shared_office_starter.service.base.UserDetailsBaseService;
 
-import javax.crypto.spec.SecretKeySpec;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.interfaces.RSAPrivateKey;
@@ -62,7 +57,7 @@ import java.util.UUID;
 @Configuration
 @EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
 @EnableWebSecurity
-public class SecurityConfig {
+public class OauthSecurityConfig {
     private final UserDetailsBaseService userDetailsBaseService;
     private final SpaCsrfTokenRequestHandler spaCsrfTokenRequestHandler;
     private final CorsProperties corsProperties;
@@ -72,7 +67,7 @@ public class SecurityConfig {
     private final JwtProperties jwtProperties;
 
     @Autowired
-    public SecurityConfig(
+    public OauthSecurityConfig(
         UserDetailsBaseService userDetailsBaseService,
         SpaCsrfTokenRequestHandler spaCsrfTokenRequestHandler,
         CorsProperties corsProperties,
@@ -110,7 +105,8 @@ public class SecurityConfig {
             .csrf(csrfCustomize())
             .authorizeHttpRequests((authorize) ->
                 authorize
-                    .anyRequest().permitAll()
+                    .requestMatchers("/public/**").permitAll()
+                    .anyRequest().authenticated()
             )
             .getConfigurer(OAuth2AuthorizationServerConfigurer.class)
             .oidc(Customizer.withDefaults());
@@ -240,7 +236,7 @@ public class SecurityConfig {
         return csrf ->
             csrf
                 .ignoringRequestMatchers(
-                    "/auth/**"
+                    "/auth/**" , "/internal/**"
                 )
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .csrfTokenRequestHandler(spaCsrfTokenRequestHandler);

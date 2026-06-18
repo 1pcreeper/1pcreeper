@@ -4,7 +4,44 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="Change" />
+    <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="Change">
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/OfficeExpenditureServiceApplication.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/api-gateway/src/main/java/project/office_api_gateway/properties/OfficeExpenditureServiceSpecProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/OfficeExpenditureServiceApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/config/AuditorConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/constant/UserRoles.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/controller/common/AuthController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/handler/JwtAuthRequestHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/interceptor/AuthInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/mapper/UserMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/model/dto/object/UserDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/model/dto/response/UserVerifyResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/model/entity/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/model/entity/base/AbstractAuditableEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/model/entity/base/AbstractPersistableEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/model/entity/enums/UserRole.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/repository/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/repository/base/AbstractBaseRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/service/auth/UserDetailsAuthService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/service/base/AbstractBaseService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/service/manager/UserManagerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/service/sync/UserSyncService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/resources/db/changelog/changes/01-create-table.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/resources/db/changelog/db.changelog-master.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.local" beforeDir="false" afterPath="$PROJECT_DIR$/.env.local" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/OfficeAccountServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/OfficeAccountServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/config/OauthSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/api-gateway/src/main/java/project/office_api_gateway/config/GatewayConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/api-gateway/src/main/java/project/office_api_gateway/config/GatewayConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/api-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/api-gateway/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,11 +51,11 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
-        <option value="AnnotationType" />
         <option value="package-info" />
         <option value="Interface" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="AnnotationType" />
       </list>
     </option>
   </component>
@@ -50,53 +87,54 @@
     <option name="showMembers" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.GeneralAPIGatewayApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.GeneralAccountServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.GeneralConfigMappingApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.GeneralDummyServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.GeneralEventProducerMiddlewareApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.GeneralEventProducerServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.GeneralObjGenerateServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.GeneralServiceRegistryApplication .executor&quot;: &quot;Run&quot;,
-    &quot;Application.OfficeAPIGatewayApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.OfficeAccountServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.OfficeAuthProviderApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.OfficeConfigMappingApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.OfficeDummyServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.OfficeServiceRegistryApplication .executor&quot;: &quot;Run&quot;,
-    &quot;Application.OfficeWorkforceServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.project.general_service_registry.GeneralServiceRegistryApplication .executor&quot;: &quot;Run&quot;,
-    &quot;Maven.config-mapping [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.config-mapping [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.general-api-gateway [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.general-api-gateway [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.general-service-registry [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.general-service-registry [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.project [clean,-X].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.project [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.project [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.project [mvn,clean,install,-DskipTests].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.project [site].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.project [validate].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.shared-general-auth-starter [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.shared-general-auth-starter [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.shared-general-starter [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.shared-general-starter [install].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/1pcreeper/projects/001 Project/codes/v001/1pcreeper-project/backend/general/dummy-service/src/main/resources/db/changelog/changes&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15625&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.3034483&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.GeneralAPIGatewayApplication.executor": "Run",
+    "Application.GeneralAccountServiceApplication.executor": "Run",
+    "Application.GeneralConfigMappingApplication.executor": "Run",
+    "Application.GeneralDummyServiceApplication.executor": "Run",
+    "Application.GeneralEventProducerMiddlewareApplication.executor": "Run",
+    "Application.GeneralEventProducerServiceApplication.executor": "Run",
+    "Application.GeneralObjGenerateServiceApplication.executor": "Run",
+    "Application.GeneralServiceRegistryApplication .executor": "Run",
+    "Application.OfficeAPIGatewayApplication.executor": "Run",
+    "Application.OfficeAccountServiceApplication.executor": "Run",
+    "Application.OfficeAuthProviderApplication.executor": "Run",
+    "Application.OfficeConfigMappingApplication.executor": "Run",
+    "Application.OfficeDummyServiceApplication.executor": "Run",
+    "Application.OfficeExpenditureServiceApplication.executor": "Run",
+    "Application.OfficeServiceRegistryApplication .executor": "Run",
+    "Application.OfficeWorkforceServiceApplication.executor": "Run",
+    "Application.project.general_service_registry.GeneralServiceRegistryApplication .executor": "Run",
+    "Maven.config-mapping [clean].executor": "Run",
+    "Maven.config-mapping [install].executor": "Run",
+    "Maven.general-api-gateway [clean].executor": "Run",
+    "Maven.general-api-gateway [install].executor": "Run",
+    "Maven.general-service-registry [clean].executor": "Run",
+    "Maven.general-service-registry [install].executor": "Run",
+    "Maven.project [clean,-X].executor": "Run",
+    "Maven.project [clean].executor": "Run",
+    "Maven.project [install].executor": "Run",
+    "Maven.project [mvn,clean,install,-DskipTests].executor": "Run",
+    "Maven.project [site].executor": "Run",
+    "Maven.project [validate].executor": "Run",
+    "Maven.shared-general-auth-starter [clean].executor": "Run",
+    "Maven.shared-general-auth-starter [install].executor": "Run",
+    "Maven.shared-general-starter [clean].executor": "Run",
+    "Maven.shared-general-starter [install].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/1pcreeper/projects/001 Project/codes/v001/1pcreeper-project",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15625",
+    "project.structure.side.proportion": "0.3034483",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\general\dummy-service\src\main\resources\db\changelog\changes" />
@@ -113,10 +151,10 @@
       <recent name="D:\Favorites\Code\1pcreeper\projects\001 Project\codes\current\1pcreeper-project\backend\general\service-registry\src\main\java" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="project.office_api_gateway.properties" />
       <recent name="project.general_api_gateway.properties" />
       <recent name="project.office_workforce_service.model.dto.response" />
       <recent name="project.shared_office_starter.model.exception" />
-      <recent name="project.office_api_gateway.properties" />
       <recent name="project.office_account_service.properties" />
     </key>
   </component>
@@ -126,7 +164,7 @@
       <command value="mvn mvn clean install -DskipTests" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.GeneralObjGenerateServiceApplication">
+  <component name="RunManager" selected="Application.OfficeExpenditureServiceApplication">
     <list>
       <item itemvalue="Application.GeneralServiceRegistryApplication " />
       <item itemvalue="Application.GeneralConfigMappingApplication" />
@@ -138,6 +176,7 @@
       <item itemvalue="Application.OfficeAPIGatewayApplication" />
       <item itemvalue="Application.OfficeAccountServiceApplication" />
       <item itemvalue="Application.OfficeWorkforceServiceApplication" />
+      <item itemvalue="Application.OfficeExpenditureServiceApplication" />
       <item itemvalue="Application.GeneralDummyServiceApplication" />
       <item itemvalue="Application.OfficeDummyServiceApplication" />
     </list>
