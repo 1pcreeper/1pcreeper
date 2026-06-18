@@ -5,42 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="Change">
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/OfficeExpenditureServiceApplication.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/api-gateway/src/main/java/project/office_api_gateway/properties/OfficeExpenditureServiceSpecProperties.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/OfficeExpenditureServiceApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/config/AuditorConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/constant/UserRoles.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/controller/common/AuthController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/handler/JwtAuthRequestHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/interceptor/AuthInterceptor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/mapper/UserMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/model/dto/object/UserDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/model/dto/response/UserVerifyResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/model/entity/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/model/entity/base/AbstractAuditableEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/model/entity/base/AbstractPersistableEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/model/entity/enums/UserRole.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/repository/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/repository/base/AbstractBaseRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/service/auth/UserDetailsAuthService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/service/base/AbstractBaseService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/service/manager/UserManagerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/java/project/office_expenditure_service/service/sync/UserSyncService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/resources/db/changelog/changes/01-create-table.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/resources/db/changelog/db.changelog-master.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.local" beforeDir="false" afterPath="$PROJECT_DIR$/.env.local" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/OfficeAccountServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/OfficeAccountServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/config/OauthSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/api-gateway/src/main/java/project/office_api_gateway/config/GatewayConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/api-gateway/src/main/java/project/office_api_gateway/config/GatewayConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/api-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/api-gateway/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/resources/db/changelog/changes/01-create-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/resources/db/changelog/changes/01-create-table.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -494,7 +460,15 @@
       <option name="project" value="LOCAL" />
       <updated>1781700598329</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Change">
+      <option name="closed" value="true" />
+      <created>1781772041028</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1781772041028</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
