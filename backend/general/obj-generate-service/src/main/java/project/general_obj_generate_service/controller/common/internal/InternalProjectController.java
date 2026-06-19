@@ -17,12 +17,12 @@ public class InternalProjectController {
     private ObjProjectService objProjectService;
 
     @PermitAll
-    @PatchMapping("/{projectId}/complete")
+    @PatchMapping("/{projectId}/status")
     public ResponseEntity<APIBaseResponseDTO<Void>> handleGenerationComplete(
         @PathVariable Long projectId,
         @RequestBody ProjectCreateCompletionRequestDTO requestDTO
     ) {
-        objProjectService.completeGeneration(requestDTO,projectId);
+        objProjectService.updateGenerationStatus(requestDTO,projectId);
         return ResponseEntity.ok().body(
             APIBaseResponseDTO.success(
                 null

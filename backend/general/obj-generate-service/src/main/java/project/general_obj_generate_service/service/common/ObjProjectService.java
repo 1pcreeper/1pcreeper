@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import project.shared_general_common_lib.constant.StreamBridgeTopicsConstant;
 import project.general_obj_generate_service.model.dto.request.ProjectCreateCompletionRequestDTO;
 import project.general_obj_generate_service.model.entity.ObjProject;
 import project.general_obj_generate_service.model.entity.ProjectObject;
@@ -58,7 +57,7 @@ public class ObjProjectService {
     }
 
     @Transactional
-    public void completeGeneration(ProjectCreateCompletionRequestDTO requestDTO, Long projectId) {
+    public void updateGenerationStatus(ProjectCreateCompletionRequestDTO requestDTO, Long projectId) {
         try {
             ObjProject existingObjProject = objProjectManagerService.findById(projectId);
             existingObjProject.setStatus(requestDTO.getStatus());

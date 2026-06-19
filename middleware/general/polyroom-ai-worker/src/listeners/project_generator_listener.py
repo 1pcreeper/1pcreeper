@@ -106,7 +106,7 @@ def process_message(
         project_id = task.projectId
         print(
             f"📦 [Kafka] Processing job for Project {project_id}", flush=True)
-        processing_callback = f"http://{GENERAL_OBJ_GENERATE_SERVICE_IP_ADDRESS}/internal/projects/{project_id}/complete"
+        processing_callback = f"http://{GENERAL_OBJ_GENERATE_SERVICE_IP_ADDRESS}/internal/projects/{project_id}/status"
         processing_payload = {
             "status": "PROCESSING",
             "viewGlbUrl": None,
@@ -146,7 +146,7 @@ def process_message(
         )
 
         # 5. Success Webhook callback to Spring Boot
-        callback_url: str = f"http://{GENERAL_OBJ_GENERATE_SERVICE_IP_ADDRESS}/internal/projects/{project_id}/complete"
+        callback_url: str = f"http://{GENERAL_OBJ_GENERATE_SERVICE_IP_ADDRESS}/internal/projects/{project_id}/status"
         webhook_payload = {
             "status": "READY",
             "viewGlbUrl": f"/{bucket_name}/{glb_path}",
@@ -174,7 +174,7 @@ def process_message(
         # If we successfully determined the project ID before the crash, update the state to FAILED
         if project_id is not None:
             try:
-                callback_url = f"http://{GENERAL_OBJ_GENERATE_SERVICE_IP_ADDRESS}/internal/projects/{project_id}/complete"
+                callback_url = f"http://{GENERAL_OBJ_GENERATE_SERVICE_IP_ADDRESS}/internal/projects/{project_id}/status"
                 fail_payload = {
                     "status": "FAILED",
                     "viewGlbUrl": None,
@@ -183,8 +183,7 @@ def process_message(
                 print(
                     f"🔗 [Webhook] Sending FAILURE signal to obj-generate-service for Project {project_id}...", flush=True)
                 requests.patch(callback_url, json=fail_payload, timeout=5)
+                consumer.commit()
             except Exception as webhook_err:
                 print(
                     f"⚠️ [Webhook] Failed to dispatch error fallback to obj-generate-service: {webhook_err}", flush=True)
-    finally:
-        consumer.commit()
