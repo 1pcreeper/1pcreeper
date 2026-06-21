@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="Change">
-      <change afterPath="$PROJECT_DIR$/backend/shared/general-common-lib/src/main/java/project/shared_general_common_lib/properties/KafkaProperties.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/controller/common/internal/InternalProjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/controller/common/internal/InternalProjectController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/service/common/ObjProjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/service/common/ObjProjectService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/resources/db/changelog/changes/01-create-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/resources/db/changelog/changes/01-create-table.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/resources/db/changelog/changes/01-create-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/expenditure-service/src/main/resources/db/changelog/changes/01-create-table.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/config/KafkaConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/config/KafkaConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/constant/KafkaGroupConstant.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/service/editor/ProjectMaterialEditorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/service/editor/ProjectMaterialEditorService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -482,7 +477,15 @@
       <option name="project" value="LOCAL" />
       <updated>1781772306221</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Change">
+      <option name="closed" value="true" />
+      <created>1781836985565</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1781836985565</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

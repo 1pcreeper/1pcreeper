@@ -20,6 +20,7 @@ import project.general_obj_generate_service.service.manager.ProjectResourceManag
 import project.general_obj_generate_service.service.manager.UserManagerService;
 import project.general_obj_generate_service.service.storage.StorageService;
 import org.springframework.cloud.stream.function.StreamBridge;
+import project.shared_general_starter.model.exception.DatabaseUpdateFailureException;
 import project.shared_general_starter.service.producer.KafkaPolyroomProducerService;
 
 import java.util.ArrayList;
@@ -78,7 +79,7 @@ public class ObjProjectService {
 
         } catch (Exception e) {
             log.error("❌ [Webhook] Failed to finalize project {}: {}", projectId, e.getMessage());
-            throw new RuntimeException("Failed to complete project generation for ID: " + projectId, e);
+            throw new DatabaseUpdateFailureException("Failed to complete project generation for ID: " + projectId);
         }
     }
 
@@ -124,7 +125,7 @@ public class ObjProjectService {
             log.error("❌ [RabbitMQ] Failed to queue task for Project {}", savedProject.getId());
             savedProject.setStatus(ProjectStatus.FAILED);
             objProjectManagerService.save(savedProject);
-            throw new RuntimeException("Message broker unavailable");
+            throw new DatabaseUpdateFailureException("Message broker unavailable");
         }
 
         log.info("🚀 [Service] Project {} created and dispatched for generation!", newProject.getId());

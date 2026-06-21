@@ -11,6 +11,7 @@ import project.general_obj_generate_service.model.entity.enums.ProjectStatus;
 import project.shared_general_starter.model.event.GenerateUVMappingObjectEvent;
 import project.general_obj_generate_service.service.manager.*;
 import project.general_obj_generate_service.service.storage.StorageService;
+import project.shared_general_starter.model.exception.DatabaseUpdateFailureException;
 import project.shared_general_starter.service.producer.KafkaHunyuanProducerService;
 
 import java.util.List;
@@ -86,7 +87,7 @@ public class ProjectMaterialEditorService {
 
         if (!sent) {
             log.error("❌ Failed to push event to RabbitMQ for Task: {}", savedTask.getTaskId());
-            throw new RuntimeException("AI Worker is currently offline.");
+            throw new DatabaseUpdateFailureException("AI Worker is currently offline.");
         }
 
         return savedTask;
