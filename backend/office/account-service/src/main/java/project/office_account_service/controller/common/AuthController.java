@@ -38,7 +38,6 @@ public class AuthController {
     private final AccountService accountService;
     private final HttpProperties httpProperties;
     private final PrincipalAuthService principalAuthService;
-
     @Autowired
     public AuthController(
         OfficeUserMapper officeUserMapper,
@@ -67,7 +66,7 @@ public class AuthController {
         ResponseCookie cookie = ResponseCookie.from(CookieKeyConstant.SECURE, responseDTO.getToken())
             .secure(httpProperties.getSecured())
             .httpOnly(httpProperties.getSecured())
-            .sameSite("Lax")
+            .sameSite("None")
             .path("/")
             .maxAge(Duration.ofDays(1).getSeconds())
             .build();
@@ -90,7 +89,7 @@ public class AuthController {
         ResponseCookie cookie = ResponseCookie.from(CookieKeyConstant.SECURE, responseDTO.getToken())
             .secure(httpProperties.getSecured())
             .httpOnly(httpProperties.getSecured())
-            .sameSite("Lax")
+            .sameSite("None")
             .path("/")
             .maxAge(Duration.ofDays(1).getSeconds())
             .build();

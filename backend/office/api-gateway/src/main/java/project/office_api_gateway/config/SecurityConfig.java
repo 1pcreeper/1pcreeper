@@ -9,6 +9,7 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.csrf.CookieServerCsrfTokenRepository;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.reactive.CorsConfigurationSource;
+import org.springframework.web.cors.reactive.CorsWebFilter;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 import project.shared_office_common_lib.properties.CorsProperties;
 import project.shared_office_common_lib.properties.JwtProperties;
@@ -17,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Configuration
-@EnableWebFluxSecurity // 注意：改用 WebFluxSecurity
+@EnableWebFluxSecurity
 public class SecurityConfig {
     private final CorsProperties corsProperties;
     private final JwtProperties jwtProperties;
@@ -37,7 +38,7 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(ServerHttpSecurity.CsrfSpec::disable)
             .authorizeExchange(exchange -> exchange
-                .anyExchange().permitAll() 
+                .anyExchange().permitAll()
             );
 
         return http.build();

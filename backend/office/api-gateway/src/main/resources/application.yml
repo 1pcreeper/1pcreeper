@@ -2,6 +2,11 @@ server:
     port: ${OFFICE_API_GATEWAY_SERVER_PORT}
     servlet:
         context-path: ${OFFICE_API_GATEWAY_CONTEXT_PATH}
+    ssl:
+        enabled: true
+        key-store: classpath:localhost+1.p12
+        key-store-password: changeit
+        key-store-type: PKCS12
 spring:
     application:
         name: office-api-gateway

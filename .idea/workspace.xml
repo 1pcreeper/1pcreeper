@@ -5,9 +5,98 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="Change">
+      <change afterPath="$PROJECT_DIR$/backend/office/api-gateway/src/main/java/project/office_api_gateway/factory/CrossSiteCookieFilterFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.local" beforeDir="false" afterPath="$PROJECT_DIR$/.env.local" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/service/common/ObjProjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/service/common/ObjProjectService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/service/editor/ProjectMaterialEditorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/obj-generate-service/src/main/java/project/general_obj_generate_service/service/editor/ProjectMaterialEditorService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/general/api-gateway/src/main/java/project/general_api_gateway/config/GatewayConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/general/api-gateway/src/main/java/project/general_api_gateway/config/GatewayConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/controller/common/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/controller/common/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/api-gateway/src/main/java/project/office_api_gateway/config/GatewayConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/api-gateway/src/main/java/project/office_api_gateway/config/GatewayConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/api-gateway/src/main/java/project/office_api_gateway/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/api-gateway/src/main/java/project/office_api_gateway/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/api-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/api-gateway/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/.env" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/eslint.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/postcss.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/public/favicon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/public/icons.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/App.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/assets/hero.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/assets/react.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/assets/vite.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/components/AnswerDataForm.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/components/AppLayout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/components/DataTable.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/components/ProtectedRoute.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/components/SearchableDropdown.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/components/TopicSubtopicSelector.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/components/ui/alert-dialog.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/components/ui/badge.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/components/ui/button.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/components/ui/card.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/components/ui/dialog.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/components/ui/input.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/components/ui/label.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/components/ui/select.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/components/ui/textarea.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/context/AuthContext.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/dto/auth.dto.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/dto/base.dto.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/dto/enums.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/dto/exerciseRound.dto.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/dto/grade.dto.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/dto/question.dto.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/dto/subscription.dto.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/dto/subtopic.dto.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/dto/topic.dto.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/dto/user.dto.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/dto/word.dto.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/lib/axios.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/lib/config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/lib/utils.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/main.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/mock/auth.mock.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/mock/exerciseRounds.mock.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/mock/grades.mock.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/mock/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/mock/questions.mock.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/mock/subscriptions.mock.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/mock/subtopics.mock.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/mock/topics.mock.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/mock/users.mock.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/mock/words.mock.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/pages/DashboardPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/pages/ExerciseRoundsPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/pages/GradesPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/pages/LoginPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/pages/LogoutPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/pages/QuestionsPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/pages/SubscriptionsPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/pages/SubtopicsPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/pages/TopicsPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/pages/UsersPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/pages/WordsPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/services/AuthService.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/services/ExerciseRoundService.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/services/GradeService.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/services/QuestionService.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/services/SubscriptionService.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/services/SubtopicService.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/services/TopicService.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/services/UserService.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/services/WordService.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/src/utils/regex.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/tailwind.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/tsconfig.app.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/tsconfig.node.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/template/web/template-1-web/vite.config.ts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,11 +200,11 @@
       <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\shared\general-starter\src\main\java\project\shared_general_starter\model" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\office\api-gateway\src\main\resources" />
       <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\general\obj-generate-service\src\main\resources\db\changelog\changes" />
       <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\general\api-gateway\src\main\java\project\general_api_gateway" />
       <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\general\api-gateway\src\main\java" />
       <recent name="D:\Favorites\Code\1pcreeper\projects\001 Project\codes\current\1pcreeper-project\backend\general\config-mapping\src\main\java" />
-      <recent name="D:\Favorites\Code\1pcreeper\projects\001 Project\codes\current\1pcreeper-project\backend\general\service-registry\src\main\java" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="project.office_api_gateway.properties" />
@@ -131,7 +220,7 @@
       <command value="mvn mvn clean install -DskipTests" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.GeneralObjGenerateServiceApplication">
+  <component name="RunManager" selected="Application.OfficeExpenditureServiceApplication">
     <list>
       <item itemvalue="Application.GeneralServiceRegistryApplication " />
       <item itemvalue="Application.GeneralConfigMappingApplication" />
@@ -485,7 +574,15 @@
       <option name="project" value="LOCAL" />
       <updated>1781836985565</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Change">
+      <option name="closed" value="true" />
+      <created>1782076418514</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1782076418514</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

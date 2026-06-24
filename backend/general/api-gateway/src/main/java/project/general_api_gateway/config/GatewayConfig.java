@@ -14,11 +14,11 @@ import project.general_api_gateway.properties.ServletProperties;
 @Configuration
 @Slf4j
 public class GatewayConfig {
-    
+
     private GeneralAccountServiceSpecProperties generalAccountServiceSpecProperties;
     private GeneralObjGenerateServiceSpecProperties generalObjGenerateServiceSpecProperties;
     private ServletProperties servletProperties;
-    
+
     @Autowired
     public GatewayConfig(
         GeneralAccountServiceSpecProperties generalAccountServiceSpecProperties,
@@ -32,28 +32,29 @@ public class GatewayConfig {
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
-            .route("account", r -> r.path(servletProperties.getContextPath()+"/account/**")
-                .and()
-                .predicate(exchange -> !exchange.getRequest().getURI().getPath().contains("/internal/"))
-                .filters(f -> f
-                    .filter(logPath())  
-                    .rewritePath(servletProperties.getContextPath()+"/account/(?<segment>.*)", "/${segment}")) 
-                .uri("lb://" + generalAccountServiceSpecProperties.getHostName() + ":" + generalAccountServiceSpecProperties.getHttpPort()))
-            .route("obj-generate", r -> r.path(servletProperties.getContextPath()+"/obj-generate/**")
+            .route("account", r -> r.path(servletProperties.getContextPath() + "/account/**")
                 .and()
                 .predicate(exchange -> !exchange.getRequest().getURI().getPath().contains("/internal/"))
                 .filters(f -> f
                     .filter(logPath())
-                    .rewritePath(servletProperties.getContextPath()+"/obj-generate/(?<segment>.*)", "/${segment}"))
+                    .rewritePath(servletProperties.getContextPath() + "/account/(?<segment>.*)", "/${segment}")
+                )
+                .uri("lb://" + generalAccountServiceSpecProperties.getHostName() + ":" + generalAccountServiceSpecProperties.getHttpPort()))
+            .route("obj-generate", r -> r.path(servletProperties.getContextPath() + "/obj-generate/**")
+                .and()
+                .predicate(exchange -> !exchange.getRequest().getURI().getPath().contains("/internal/"))
+                .filters(f -> f
+                    .filter(logPath())
+                    .rewritePath(servletProperties.getContextPath() + "/obj-generate/(?<segment>.*)", "/${segment}"))
                 .uri("lb://" + generalObjGenerateServiceSpecProperties.getHostName() + ":" + generalObjGenerateServiceSpecProperties.getHttpPort()))
             .build();
     }
-    
+
     private GatewayFilter logPath() {
         return (exchange, chain) -> {
             String path = exchange.getRequest().getURI().getPath();
             log.debug(path);
-            return chain.filter(exchange); 
+            return chain.filter(exchange);
         };
     }
 }
