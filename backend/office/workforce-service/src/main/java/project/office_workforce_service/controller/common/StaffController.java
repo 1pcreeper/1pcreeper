@@ -3,12 +3,15 @@ package project.office_workforce_service.controller.common;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import project.office_workforce_service.constant.UserRoles;
 import project.office_workforce_service.model.dto.request.StaffCreateRequestDTO;
 import project.office_workforce_service.model.dto.request.StaffUpdateRequestDTO;
+import project.office_workforce_service.model.dto.response.CompanyResponseDTO;
+import project.office_workforce_service.model.dto.response.StaffDetailResponseDTO;
 import project.office_workforce_service.model.dto.response.StaffResponseDTO;
 import project.office_workforce_service.model.entity.enums.WorkType;
 import project.office_workforce_service.service.common.StaffService;
@@ -33,7 +36,7 @@ public class StaffController {
         @RequestParam(required = false) Long companyId,
         @RequestParam(required = false) Long orgId,
         @RequestParam(required = false) WorkType workType,
-        @RequestParam(required = false) Boolean isActive,
+        @RequestParam(required = false,defaultValue = "true") Boolean isActive,
         Pageable pageable) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(staffService.search(q, companyId, orgId, workType, isActive, pageable)));
     }
@@ -55,5 +58,17 @@ public class StaffController {
     public ResponseEntity<APIBaseResponseDTO<StaffResponseDTO>> update(
         @PathVariable Long id, @Valid @RequestBody StaffUpdateRequestDTO request) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(staffService.update(id, request)));
+    }
+
+    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @GetMapping()
+    public ResponseEntity<APIBaseResponseDTO<PaginationBaseResponseDTO<StaffResponseDTO>>> findAll(@PageableDefault Pageable pageable) {
+        return ResponseEntity.ok(APIBaseResponseDTO.success(staffService.findAll(pageable)));
+    }
+
+    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @GetMapping("/details/{id}")
+    public ResponseEntity<APIBaseResponseDTO<StaffDetailResponseDTO>> findByIdInDetail(@PathVariable Long id) {
+        return ResponseEntity.ok(APIBaseResponseDTO.success(staffService.findByIdInDetail(id)));
     }
 }

@@ -2,6 +2,8 @@ package project.office_workforce_service.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import project.office_workforce_service.model.entity.base.AbstractAuditableEntity;
 import project.office_workforce_service.model.entity.enums.WorkType;
 
@@ -32,6 +34,8 @@ public class Staff extends AbstractAuditableEntity {
     private String custId;
 
     @Enumerated(EnumType.STRING)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
+    @Column(name = "type", nullable = false)
     private WorkType type;
 
     @Builder.Default

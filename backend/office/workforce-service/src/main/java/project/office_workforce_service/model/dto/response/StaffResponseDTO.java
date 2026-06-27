@@ -12,16 +12,14 @@ import project.office_workforce_service.model.entity.enums.WorkType;
 @AllArgsConstructor
 public class StaffResponseDTO {
     private Long id;
-
-    // Flattened data for frontend convenience
+    
     private Long personId;
     private String personNameEnglish;
+    private String personNameChinese;
     private Long orgId;
     private String orgName;
 
     private String custId;
     private WorkType type;
     private Boolean isActive;
-
-    private StaffDetailResponseDTO details;
 }

@@ -11,10 +11,10 @@ const officeAPI = async <P, R>(
     method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' = 'GET',
     data?: P,
     requiresAuth: boolean = false,
-    allowCredentials: boolean = true
+    ignoreCredentials: boolean = false
 ): Promise<R> => {
     const url = VITE_OFFICE_BASE_URL + OFFICE_BASE_PATH + path;
-    const response = await apiRequest<P, APIBaseResponseDTO<R>>(url, method, data, requiresAuth, allowCredentials);
+    const response = await apiRequest<P, APIBaseResponseDTO<R>>(url, method, data, requiresAuth, ignoreCredentials);
     if (!response.success) {
         console.log(response);
         console.error(response.message);

@@ -1,6 +1,7 @@
 package project.office_workforce_service.mapper;
 
 import org.springframework.stereotype.Component;
+import project.office_workforce_service.model.dto.object.StaffOccupationDTO;
 import project.office_workforce_service.model.dto.request.StaffOccupationCreateRequestDTO;
 import project.office_workforce_service.model.dto.request.StaffOccupationUpdateRequestDTO;
 import project.office_workforce_service.model.dto.response.StaffOccupationResponseDTO;
@@ -37,6 +38,20 @@ public class StaffOccupationMapper {
             .occupationId(so.getOccupation() != null ? so.getOccupation().getId() : null)
             .occupationName(so.getOccupation() != null ? so.getOccupation().getName() : null)
             .remark(so.getRemark())
+            .build();
+    }
+    
+    public StaffOccupationDTO toStaffOccupationDTO(StaffOccupation staffOccupation){
+        if (staffOccupation == null) return null;
+
+        return StaffOccupationDTO.builder()
+            .id(staffOccupation.getId())
+            .staffId(staffOccupation.getStaff() != null ? staffOccupation.getStaff().getId() : null)
+            .occupationId(staffOccupation.getOccupation() != null ? staffOccupation.getOccupation().getId() : null)
+            .occupationName(staffOccupation.getOccupation() != null ? staffOccupation.getOccupation().getName() : null)
+            .remark(staffOccupation.getRemark())
+            .createdAt(staffOccupation.getCreatedAt())
+            .updatedAt(staffOccupation.getUpdatedAt())
             .build();
     }
 }

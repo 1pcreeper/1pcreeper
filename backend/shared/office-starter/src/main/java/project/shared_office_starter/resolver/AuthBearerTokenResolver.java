@@ -13,6 +13,16 @@ public class AuthBearerTokenResolver implements BearerTokenResolver {
 
     @Override
     public String resolve(HttpServletRequest request){
+        
+        final String IGNORE_CREDENTIALS_HEADER = "Ignore-Credentials";
+        
+        String ignoreCredentialsHeader = request.getHeader(IGNORE_CREDENTIALS_HEADER);
+        if(Objects.nonNull(ignoreCredentialsHeader)){
+            if(ignoreCredentialsHeader.equalsIgnoreCase("true")){
+                return null;
+            }
+        }
+        
         String header = request.getHeader("Authorization");
         if (header != null) {
             if(header.startsWith("Bearer ")){

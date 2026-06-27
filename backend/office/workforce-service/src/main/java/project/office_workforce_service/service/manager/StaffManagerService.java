@@ -3,7 +3,9 @@ package project.office_workforce_service.service.manager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
+import project.office_workforce_service.model.entity.Company;
 import project.office_workforce_service.model.entity.Staff;
 import project.office_workforce_service.model.entity.enums.WorkType;
 import project.office_workforce_service.repository.StaffRepository;
@@ -31,5 +33,8 @@ public class StaffManagerService extends AbstractBaseService<Staff, Long> {
             throw new PropertyValidationException("Staff must be associated with a valid Company and Person.");
         }
         return super.save(staff);
+    }
+    public Page<Staff> findAllByIsActive(@Param("isActive") Boolean isActive, Pageable pageable){
+        return  staffRepository.findAllByIsActive(isActive,pageable);
     }
 }

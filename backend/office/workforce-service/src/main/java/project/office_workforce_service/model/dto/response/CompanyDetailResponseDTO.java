@@ -4,14 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import project.office_workforce_service.model.dto.object.CompanyDTO;
+import project.office_workforce_service.model.dto.object.CompanyDetailDTO;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class CompanyDetailResponseDTO {
-    private String bio;
-    private String address;
-    private String industry;
-    private String website;
+    private CompanyDTO company;
+    private CompanyDetailDTO detailDTO;
 }

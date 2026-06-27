@@ -9,6 +9,7 @@ import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authorization.AuthorizationDeniedException;
+import org.springframework.security.config.annotation.web.oauth2.resourceserver.OAuth2ResourceServerSecurityMarker;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,7 @@ import project.office_account_service.model.entity.OfficeUser;
 import project.office_account_service.service.common.AccountService;
 import project.shared_office_common_lib.constant.CookieKeyConstant;
 import project.shared_office_common_lib.properties.HttpProperties;
+import project.shared_office_starter.annotation.PermitAllCredentials;
 import project.shared_office_starter.model.dto.base.APIBaseResponseDTO;
 import project.shared_office_starter.service.auth.PrincipalAuthService;
 
@@ -38,6 +40,7 @@ public class AuthController {
     private final AccountService accountService;
     private final HttpProperties httpProperties;
     private final PrincipalAuthService principalAuthService;
+
     @Autowired
     public AuthController(
         OfficeUserMapper officeUserMapper,
@@ -52,12 +55,14 @@ public class AuthController {
     }
 
     @PermitAll
+    @PermitAllCredentials
     @GetMapping("/hello")
     public String echoHello() {
         return "Hello";
     }
 
     @PermitAll
+    @PermitAllCredentials
     @PostMapping("/register")
     public ResponseEntity<APIBaseResponseDTO<AuthTokenResponseDTO>> register(
         @Valid @RequestBody AuthRegisterRequestDTO requestDTO
@@ -66,7 +71,8 @@ public class AuthController {
         ResponseCookie cookie = ResponseCookie.from(CookieKeyConstant.SECURE, responseDTO.getToken())
             .secure(httpProperties.getSecured())
             .httpOnly(httpProperties.getSecured())
-            .sameSite("None")
+            .sameSite(httpProperties.getSecured() ? "None" : "Lax")
+            .partitioned(httpProperties.getSecured())
             .path("/")
             .maxAge(Duration.ofDays(1).getSeconds())
             .build();
@@ -81,6 +87,7 @@ public class AuthController {
     }
 
     @PermitAll
+    @PermitAllCredentials
     @PostMapping("/login")
     public ResponseEntity<APIBaseResponseDTO<AuthTokenResponseDTO>> login(
         @Valid @RequestBody AuthLoginRequestDTO requestDTO
@@ -89,7 +96,8 @@ public class AuthController {
         ResponseCookie cookie = ResponseCookie.from(CookieKeyConstant.SECURE, responseDTO.getToken())
             .secure(httpProperties.getSecured())
             .httpOnly(httpProperties.getSecured())
-            .sameSite("None")
+            .sameSite(httpProperties.getSecured() ? "None" : "Lax")
+            .partitioned(httpProperties.getSecured())
             .path("/")
             .maxAge(Duration.ofDays(1).getSeconds())
             .build();

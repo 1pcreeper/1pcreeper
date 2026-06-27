@@ -3,6 +3,7 @@ package project.office_workforce_service.controller.common;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class CompanyController {
     @GetMapping("/search")
     public ResponseEntity<APIBaseResponseDTO<PaginationBaseResponseDTO<CompanyResponseDTO>>> search(
         @RequestParam(required = false) String q,
-        @RequestParam(required = false) Boolean isActive,
+        @RequestParam(required = false,defaultValue = "true") Boolean isActive,
         Pageable pageable) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(companyService.search(q, isActive, pageable)));
     }
@@ -38,6 +39,12 @@ public class CompanyController {
     @GetMapping("/{id}")
     public ResponseEntity<APIBaseResponseDTO<CompanyResponseDTO>> findById(@PathVariable Long id) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(companyService.findById(id)));
+    }
+
+    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @GetMapping
+    public ResponseEntity<APIBaseResponseDTO<PaginationBaseResponseDTO<CompanyResponseDTO>>> findAll(@PageableDefault Pageable pageable) {
+        return ResponseEntity.ok(APIBaseResponseDTO.success(companyService.findAll(pageable)));
     }
 
     @Secured({UserRoles.WORKFORCE_ADMIN})

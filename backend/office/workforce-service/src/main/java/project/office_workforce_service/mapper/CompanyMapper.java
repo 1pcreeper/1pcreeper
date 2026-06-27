@@ -1,6 +1,7 @@
 package project.office_workforce_service.mapper;
 
 import org.springframework.stereotype.Component;
+import project.office_workforce_service.model.dto.object.CompanyDTO;
 import project.office_workforce_service.model.dto.request.CompanyCreateRequestDTO;
 import project.office_workforce_service.model.dto.request.CompanyDetailRequestDTO;
 import project.office_workforce_service.model.dto.request.CompanyUpdateRequestDTO;
@@ -50,18 +51,8 @@ public class CompanyMapper {
         if (request.getIsActive() != null) entity.setIsActive(request.getIsActive());
     }
 
-    public CompanyResponseDTO toResponseDTO(Company company, CompanyDetail detail) {
+    public CompanyResponseDTO toResponseDTO(Company company) {
         if (company == null) return null;
-
-        CompanyDetailResponseDTO detailResponse = null;
-        if (detail != null) {
-            detailResponse = CompanyDetailResponseDTO.builder()
-                .bio(detail.getBio())
-                .address(detail.getAddress())
-                .industry(detail.getIndustry())
-                .website(detail.getWebsite())
-                .build();
-        }
 
         return CompanyResponseDTO.builder()
             .id(company.getId())
@@ -72,7 +63,23 @@ public class CompanyMapper {
             .email(company.getEmail())
             .tel(company.getTel())
             .isActive(company.getIsActive())
-            .details(detailResponse)
+            .build();
+    }
+    
+    public CompanyDTO toCompanyDTO(Company company){
+        if (company == null) return null;
+        
+        return CompanyDTO.builder()
+            .id(company.getId())
+            .nameEnglish(company.getNameEnglish())
+            .nameChinese(company.getNameChinese())
+            .businessRegistrationNumber(company.getBusinessRegistrationNumber())
+            .secretaryLicenseNumber(company.getSecretaryLicenseNumber())
+            .email(company.getEmail())
+            .tel(company.getTel())
+            .isActive(company.getIsActive())
+            .createdAt(company.getCreatedAt())
+            .updatedAt(company.getUpdatedAt())
             .build();
     }
 }

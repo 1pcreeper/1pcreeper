@@ -2,6 +2,7 @@ package project.office_workforce_service.service.common;
 
 import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,14 +39,13 @@ public class CompanyService {
 
         return paginationMapper.toDTO(
             companyManagerService.search(q, isActive, pageable),
-            company -> companyMapper.toResponseDTO(company, null)
+            company -> companyMapper.toResponseDTO(company)
         );
     }
 
     public CompanyResponseDTO findById(Long id) {
         Company company = companyManagerService.findById(id);
-        CompanyDetail detail = companyDetailManagerService.findByCompanyId(id);
-        return companyMapper.toResponseDTO(company, detail);
+        return companyMapper.toResponseDTO(company);
     }
 
     @Transactional
@@ -59,7 +59,7 @@ public class CompanyService {
             savedDetail = companyDetailManagerService.save(detail);
         }
 
-        return companyMapper.toResponseDTO(savedCompany, savedDetail);
+        return companyMapper.toResponseDTO(savedCompany);
     }
 
     @Transactional
@@ -83,6 +83,11 @@ public class CompanyService {
             savedDetail = companyDetailManagerService.save(savedDetail);
         }
 
-        return companyMapper.toResponseDTO(savedCompany, savedDetail);
+        return companyMapper.toResponseDTO(savedCompany);
+    }
+
+    public PaginationBaseResponseDTO<CompanyResponseDTO> findAll(Pageable pageable){
+        Page<Company> companies = companyManagerService.findAllByIsActive(true,pageable);
+        return paginationMapper.toDTO(companies,(c)->companyMapper.toResponseDTO(c));
     }
 }

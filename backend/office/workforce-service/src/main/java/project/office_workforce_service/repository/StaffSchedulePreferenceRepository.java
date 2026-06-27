@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import project.office_workforce_service.model.entity.StaffSchedulePreference;
 import project.office_workforce_service.repository.base.AbstractBaseRepository;
 
+import java.util.List;
+
 @Repository
 public interface StaffSchedulePreferenceRepository extends AbstractBaseRepository<StaffSchedulePreference, Long> {
 
@@ -21,4 +23,7 @@ public interface StaffSchedulePreferenceRepository extends AbstractBaseRepositor
                                                     @Param("placeId") Long placeId,
                                                     @Param("weekDay") Integer weekDay,
                                                     Pageable pageable);
+
+    @Query("SELECT ssp FROM StaffSchedulePreference ssp WHERE ssp.staff.id = :staffId")
+    List<StaffSchedulePreference> findByStaffId(@Param("staffId") Long staffId);
 }

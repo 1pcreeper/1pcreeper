@@ -12,6 +12,6 @@ export default class OfficeWorkforceAuthContentService {
         return new OfficeWorkforceAuthContentService();
     }
     public async verify(): Promise<OfficeWorkforceUserVerifyResponseDTO> {
-        return await officeAPI<null, OfficeWorkforceUserVerifyResponseDTO>("/workforce/auth/verify", "GET", null, true);
+        return await officeAPI<null, OfficeWorkforceUserVerifyResponseDTO>("/workforce/auth/verify", "GET", null);
     }
 }

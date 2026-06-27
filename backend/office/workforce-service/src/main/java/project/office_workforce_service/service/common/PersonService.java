@@ -38,14 +38,14 @@ public class PersonService {
 
         return paginationMapper.toDTO(
             personManagerService.search(q, isActive, pageable),
-            person -> personMapper.toResponseDTO(person, null)
+            person -> personMapper.toResponseDTO(person)
         );
     }
 
     public PersonResponseDTO findById(Long id) {
         Person person = personManagerService.findById(id);
         PersonDetail detail = personDetailManagerService.findByPersonId(id);
-        return personMapper.toResponseDTO(person, detail);
+        return personMapper.toResponseDTO(person);
     }
 
     @Transactional
@@ -53,7 +53,7 @@ public class PersonService {
         Person newPerson = personMapper.toEntity(requestDTO);
         Person savedPerson = personManagerService.save(newPerson);
 
-        return personMapper.toResponseDTO(savedPerson, null);
+        return personMapper.toResponseDTO(savedPerson);
     }
 
     @Transactional
@@ -68,6 +68,6 @@ public class PersonService {
             detail = personDetailManagerService.findByPersonId(id);
         } catch (Exception ignored) {}
 
-        return personMapper.toResponseDTO(savedPerson, detail);
+        return personMapper.toResponseDTO(savedPerson);
     }
 }

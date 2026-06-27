@@ -21,4 +21,6 @@ public interface CompanyRepository extends AbstractBaseRepository<Company, Long>
     Page<Company> search(@Param("q") String q,
                          @Param("isActive") Boolean isActive,
                          Pageable pageable);
+    @Query("SELECT c FROM Company c WHERE c.isActive = :isActive")
+    Page<Company> findAllByIsActive(@Param("isActive") Boolean isActive, Pageable pageable);
 }

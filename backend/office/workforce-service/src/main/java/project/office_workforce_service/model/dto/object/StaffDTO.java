@@ -17,6 +17,7 @@ public class StaffDTO {
     private Long companyId;
     private Long personId;
     private Long orgId;
+    private String orgName;
     private String custId;
     private WorkType type;
     private Boolean isActive;

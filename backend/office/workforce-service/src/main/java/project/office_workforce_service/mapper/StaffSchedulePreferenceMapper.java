@@ -1,6 +1,7 @@
 package project.office_workforce_service.mapper;
 
 import org.springframework.stereotype.Component;
+import project.office_workforce_service.model.dto.object.StaffSchedulePreferenceDTO;
 import project.office_workforce_service.model.dto.request.StaffSchedulePreferenceCreateRequestDTO;
 import project.office_workforce_service.model.dto.request.StaffSchedulePreferenceUpdateRequestDTO;
 import project.office_workforce_service.model.dto.response.StaffSchedulePreferenceResponseDTO;
@@ -49,6 +50,22 @@ public class StaffSchedulePreferenceMapper {
             .workingPeriodId(pref.getWorkingPeriod() != null ? pref.getWorkingPeriod().getId() : null)
             .workingPeriodName(pref.getWorkingPeriod() != null ? pref.getWorkingPeriod().getName() : null)
             .priorityIndex(pref.getPriorityIndex())
+            .build();
+    }
+
+    public StaffSchedulePreferenceDTO toStaffSchedulePreferenceDTO(StaffSchedulePreference staffSchedulePreference) {
+        return StaffSchedulePreferenceDTO.builder()
+            .id(staffSchedulePreference.getId())
+            .staffId(staffSchedulePreference.getStaff() != null ? staffSchedulePreference.getStaff().getId() : null)
+            .placeId(staffSchedulePreference.getPlace() != null ? staffSchedulePreference.getPlace().getId() : null)
+            .placeName(staffSchedulePreference.getPlace() != null ? staffSchedulePreference.getPlace().getName() : null)
+            .placeAddress(staffSchedulePreference.getPlace() != null ? staffSchedulePreference.getPlace().getAddress() : null)
+            .weekDay(staffSchedulePreference.getWeekDay())
+            .workingPeriodId(staffSchedulePreference.getWorkingPeriod() != null ? staffSchedulePreference.getWorkingPeriod().getId() : null)
+            .workingPeriodName(staffSchedulePreference.getWorkingPeriod() != null ? staffSchedulePreference.getWorkingPeriod().getName() : null)
+            .createdAt(staffSchedulePreference.getCreatedAt())
+            .updatedAt(staffSchedulePreference.getUpdatedAt())
+            .priorityIndex(staffSchedulePreference.getPriorityIndex())
             .build();
     }
 }

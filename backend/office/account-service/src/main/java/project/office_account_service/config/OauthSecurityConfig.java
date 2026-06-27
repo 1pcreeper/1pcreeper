@@ -50,6 +50,12 @@ import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
+import java.sql.Date;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAmount;
+import java.time.temporal.TemporalUnit;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -119,7 +125,8 @@ public class OauthSecurityConfig {
                         jwt
                             .jwtAuthenticationConverter(jwtAuthenticationConverter)
                     )
-                    .bearerTokenResolver(authBearerTokenResolver));
+                    .bearerTokenResolver(authBearerTokenResolver)
+            );
 
         return http.build();
     }
@@ -192,6 +199,7 @@ public class OauthSecurityConfig {
         RSAKey rsaKey = new RSAKey.Builder(publicKey)
             .privateKey(privateKey)
             .keyID(UUID.randomUUID().toString())
+            .expirationTime(Date.valueOf(LocalDate.now().plusDays(2)))
             .build();
         JWKSet jwkSet = new JWKSet(rsaKey);
         return new ImmutableJWKSet<>(jwkSet);

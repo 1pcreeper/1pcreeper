@@ -22,7 +22,7 @@ public class WebConfig implements WebMvcConfigurer {
         AuthBearerTokenResolver authBearerTokenResolver,
         CorsProperties corsProperties,
         AbstractAuthBaseInterceptor abstractAuthBaseInterceptor
-    ){
+    ) {
         this.authBearerTokenResolver = authBearerTokenResolver;
         this.corsProperties = corsProperties;
         this.abstractAuthBaseInterceptor = abstractAuthBaseInterceptor;
@@ -34,9 +34,13 @@ public class WebConfig implements WebMvcConfigurer {
             abstractAuthBaseInterceptor
         );
     }
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-            .allowedOrigins(corsProperties.getAllowedOriginsArray());
+            .allowedOrigins(corsProperties.getAllowedOriginsArray())
+            .allowCredentials(true)
+            .allowedHeaders("*")
+            .allowedMethods("*");
     }
 }

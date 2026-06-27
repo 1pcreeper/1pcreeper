@@ -1,6 +1,7 @@
 package project.office_workforce_service.mapper;
 
 import org.springframework.stereotype.Component;
+import project.office_workforce_service.model.dto.object.StaffDTO;
 import project.office_workforce_service.model.dto.request.StaffCreateRequestDTO;
 import project.office_workforce_service.model.dto.request.StaffDetailRequestDTO;
 import project.office_workforce_service.model.dto.request.StaffUpdateRequestDTO;
@@ -11,6 +12,9 @@ import project.office_workforce_service.model.entity.Organization;
 import project.office_workforce_service.model.entity.Person;
 import project.office_workforce_service.model.entity.Staff;
 import project.office_workforce_service.model.entity.StaffDetail;
+import project.office_workforce_service.model.entity.enums.WorkType;
+
+import java.time.LocalDateTime;
 
 @Component
 public class StaffMapper {
@@ -46,26 +50,34 @@ public class StaffMapper {
         if (request.getIsActive() != null) entity.setIsActive(request.getIsActive());
     }
 
-    public StaffResponseDTO toResponseDTO(Staff staff, StaffDetail detail) {
+    public StaffResponseDTO toResponseDTO(Staff staff) {
         if (staff == null) return null;
-
-        StaffDetailResponseDTO detailResponse = null;
-        if (detail != null) {
-            detailResponse = StaffDetailResponseDTO.builder()
-                .maxWorkingHrs(detail.getMaxWorkingHrs())
-                .build();
-        }
 
         return StaffResponseDTO.builder()
             .id(staff.getId())
             .personId(staff.getPerson() != null ? staff.getPerson().getId() : null)
             .personNameEnglish(staff.getPerson() != null ? staff.getPerson().getNameEnglish() : null)
+            .personNameChinese(staff.getPerson() != null ? staff.getPerson().getNameChinese() : null)
             .orgId(staff.getOrg() != null ? staff.getOrg().getId() : null)
             .orgName(staff.getOrg() != null ? staff.getOrg().getName() : null)
             .custId(staff.getCustId())
             .type(staff.getType())
             .isActive(staff.getIsActive())
-            .details(detailResponse)
             .build();
     }
+
+    public StaffDTO toStaffDTO(Staff staff) {
+        if (staff == null) return null;
+
+        return StaffDTO.builder()
+            .id(staff.getId())
+            .companyId(staff.getCompany() != null ? staff.getCompany().getId() : null)
+            .personId(staff.getPerson() != null ? staff.getPerson().getId() : null)
+            .orgId(staff.getOrg() != null ? staff.getOrg().getId() : null)
+            .orgName(staff.getOrg()!=null ? staff.getOrg().getName():null)
+            .custId(staff.getCustId())
+            .type(staff.getType())
+            .isActive(staff.getIsActive())
+            .build();
+    } 
 }

@@ -18,7 +18,4 @@ public class CompanyResponseDTO {
     private String email;
     private String tel;
     private Boolean isActive;
-
-    // Nested details so the frontend gets everything it needs in one call!
-    private CompanyDetailResponseDTO details;
 }

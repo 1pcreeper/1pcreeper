@@ -2,22 +2,24 @@ package project.office_workforce_service.service.common;
 
 import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import project.office_workforce_service.mapper.StaffMapper;
+import project.office_workforce_service.mapper.*;
+import project.office_workforce_service.model.dto.object.*;
 import project.office_workforce_service.model.dto.request.StaffCreateRequestDTO;
 import project.office_workforce_service.model.dto.request.StaffUpdateRequestDTO;
+import project.office_workforce_service.model.dto.response.StaffDetailResponseDTO;
 import project.office_workforce_service.model.dto.response.StaffResponseDTO;
-import project.office_workforce_service.model.entity.Company;
-import project.office_workforce_service.model.entity.Organization;
-import project.office_workforce_service.model.entity.Person;
-import project.office_workforce_service.model.entity.Staff;
-import project.office_workforce_service.model.entity.StaffDetail;
+import project.office_workforce_service.model.entity.*;
 import project.office_workforce_service.model.entity.enums.WorkType;
 import project.office_workforce_service.service.manager.*;
 import project.shared_office_starter.mapper.PaginationMapper;
 import project.shared_office_starter.model.dto.base.PaginationBaseResponseDTO;
+import project.shared_office_starter.model.exception.ResourceNotFoundException;
+
+import java.util.List;
 
 @Service
 public class StaffService {
@@ -35,8 +37,26 @@ public class StaffService {
     @Autowired
     private StaffMapper staffMapper;
     @Autowired
+    private StaffDetailMapper staffDetailMapper;
+    @Autowired
     private PaginationMapper paginationMapper;
-
+    @Autowired
+    private CompanyMapper companyMapper;
+    @Autowired
+    private PersonDetailManagerService personDetailManagerService;
+    @Autowired
+    private PersonMapper personMapper;
+    @Autowired
+    private PersonDetailMapper personDetailMapper;
+    @Autowired
+    private StaffOccupationManagerService staffOccupationManagerService;
+    @Autowired
+    private StaffSchedulePreferenceManagerService staffSchedulePreferenceManagerService;
+    @Autowired
+    private StaffOccupationMapper staffOccupationMapper;
+    @Autowired
+    private StaffSchedulePreferenceMapper staffSchedulePreferenceMapper;
+    
     public PaginationBaseResponseDTO<StaffResponseDTO> search(
         @Nullable String q,
         @Nullable Long companyId,
@@ -47,14 +67,65 @@ public class StaffService {
 
         return paginationMapper.toDTO(
             staffManagerService.searchStaff(q, companyId, orgId, workType, isActive, pageable),
-            staff -> staffMapper.toResponseDTO(staff, null)
+            staff -> staffMapper.toResponseDTO(staff)
         );
     }
 
     public StaffResponseDTO findById(Long id) {
         Staff staff = staffManagerService.findById(id);
-        StaffDetail detail = staffDetailManagerService.findByStaffId(id);
-        return staffMapper.toResponseDTO(staff, detail);
+        return staffMapper.toResponseDTO(staff);
+    }
+
+    public StaffDetailResponseDTO findByIdInDetail(Long id) {
+        Staff staff = staffManagerService.findById(id);
+        StaffDetail staffDetail;
+        PersonDetail personDetail;
+        List<StaffOccupation> staffOccupations;
+        List<StaffSchedulePreference> staffSchedulePreferences;
+        try{
+            staffDetail  = staffDetailManagerService.findByStaffId(id);
+        }catch(ResourceNotFoundException e){
+            staffDetail = null;
+        }
+        try{
+            personDetail = personDetailManagerService.findByPersonId(staff.getPerson().getId());
+        }catch (ResourceNotFoundException e){
+            personDetail = null;
+        }
+        try{
+            staffOccupations = staffOccupationManagerService.findByStaffId(staff.getId());
+        }catch(ResourceNotFoundException e){
+            staffOccupations = null;
+        }
+        try{
+            staffSchedulePreferences = staffSchedulePreferenceManagerService.findByStaffId(staff.getId());
+        }catch(ResourceNotFoundException e){
+            staffSchedulePreferences = null;
+        }
+        
+        Company company = staff.getCompany();
+        Person person = staff.getPerson();
+
+        CompanyDTO companyDTO = companyMapper.toCompanyDTO(company);
+        StaffDTO staffDTO = staffMapper.toStaffDTO(staff);
+        StaffDetailDTO staffDetailDTO = staffDetailMapper.toStaffDetailDTO(staffDetail);
+        PersonDTO personDTO = personMapper.toPersonDTO(person);
+        PersonDetailDTO personDetailDTO = personDetailMapper.tpPersonDetailDTO(personDetail);
+        List<StaffOccupationDTO> staffOccupationDTOs = staffOccupations
+            .stream().map(so->staffOccupationMapper.toStaffOccupationDTO(so)).toList();
+        List<StaffSchedulePreferenceDTO> staffSchedulePreferenceDTOs = staffSchedulePreferences
+            .stream().map(ssp->staffSchedulePreferenceMapper.toStaffSchedulePreferenceDTO(ssp))
+            .toList();
+        
+        return StaffDetailResponseDTO.builder()
+            .company(companyDTO)
+            .staff(staffDTO)
+            .staffDetail(staffDetailDTO)
+            .person(personDTO)
+            .personDetail(personDetailDTO)
+            .staffOccupations(staffOccupationDTOs)
+            .schedulePreferences(staffSchedulePreferenceDTOs)
+            .build();
     }
 
     @Transactional
@@ -69,7 +140,7 @@ public class StaffService {
         StaffDetail detail = staffMapper.toDetailEntity(requestDTO.getDetails(), savedStaff);
         StaffDetail savedDetail = staffDetailManagerService.save(detail);
 
-        return staffMapper.toResponseDTO(savedStaff, savedDetail);
+        return staffMapper.toResponseDTO(savedStaff);
     }
 
     @Transactional
@@ -97,6 +168,11 @@ public class StaffService {
             savedDetail = staffDetailManagerService.save(savedDetail);
         }
 
-        return staffMapper.toResponseDTO(savedStaff, savedDetail);
+        return staffMapper.toResponseDTO(savedStaff);
+    }
+    
+    public PaginationBaseResponseDTO<StaffResponseDTO> findAll(Pageable pageable){
+        Page<Staff> staffs = staffManagerService.findAllByIsActive(true,pageable);
+        return paginationMapper.toDTO(staffs,(s)->staffMapper.toResponseDTO(s));
     }
 }

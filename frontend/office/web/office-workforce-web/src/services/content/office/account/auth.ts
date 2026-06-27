@@ -14,9 +14,9 @@ export default class OfficeAccountAuthContentService {
     }
     public async login(requestDTO: OfficeAccountAuthLoginRequestDTO): Promise<OfficeAccountAuthTokenResponseDTO> {
         return await officeAPI<OfficeAccountAuthLoginRequestDTO, OfficeAccountAuthTokenResponseDTO>(
-            "/account/auth/login", "POST", requestDTO, false, false);
+            "/account/auth/login", "POST", requestDTO, false, true);
     }
     public async verify(): Promise<OfficeAccountOfficeUserVerifyResponseDTO> {
-        return await officeAPI<null, OfficeAccountOfficeUserVerifyResponseDTO>("/account/auth/verify", "GET", null, false, false);
+        return await officeAPI<null, OfficeAccountOfficeUserVerifyResponseDTO>("/account/auth/verify", "GET", null);
     }
 }

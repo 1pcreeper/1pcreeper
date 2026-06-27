@@ -14,7 +14,7 @@ export default function Login() {
         setError('');
         try {
             await officeAuthContext.login(name, password);
-            navigate('/dashboard');
+            navigate('/companies');
         } catch (err) {
             setError('Invalid credentials');
         }

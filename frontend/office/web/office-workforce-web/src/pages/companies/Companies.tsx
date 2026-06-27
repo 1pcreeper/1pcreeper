@@ -1,5 +1,8 @@
+import { CompanyCreateRequestDTO } from '@/models/dto/office/workforce/request.dto';
+import { CompanyResponseDTO } from '@/models/dto/office/workforce/response.dto';
+import CompanyContentService from '@/services/content/office/workforce/CompanyContentService';
 import { ArrowRight, Building2, Plus } from 'lucide-react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 interface Company {
@@ -8,35 +11,62 @@ interface Company {
     activeStaff: number;
 }
 
-const mockCompanies: Company[] = [
-    { id: 'c1', name: 'Acme Corp', activeStaff: 42 },
-    { id: 'c2', name: 'Globex Inc', activeStaff: 120 },
-    { id: 'c3', name: 'Initech', activeStaff: 8 },
-];
-
 export default function Companies() {
     const navigate = useNavigate();
-    const [companies, setCompanies] = useState<Company[]>(mockCompanies);
+    const [companies, setCompanies] = useState<CompanyResponseDTO[]>([]);
     const [isCreating, setIsCreating] = useState(false);
-    const [newCompanyName, setNewCompanyName] = useState('');
+    const [newCompany, setNewCompany] = useState<CompanyCreateRequestDTO>({
+        nameEnglish: "",
+        nameChinese: "",
+        businessRegistrationNumber: "",
+        secretaryLicenseNumber: "",
+        email: "",
+        tel: "",
+        details: {
+            bio: "",
+            address: "",
+            industry: "",
+            website: ""
+        }
+    });
+    const companyContentService = CompanyContentService.getInstance();
+    const [page, setPage] = useState<number>(0);
+    const pageSize = 10;
 
-    const handleSelectCompany = (id: string) => {
+    const handleSelectCompany = (id: number) => {
         navigate(`/companies/${id}/dashboard`);
     };
 
-    const handleCreateCompany = (e: React.FormEvent) => {
+    const handleCreateCompany = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!newCompanyName.trim()) return;
 
-        const newCompany: Company = {
-            id: `c${Date.now()}`,
-            name: newCompanyName,
-            activeStaff: 0,
-        };
-        setCompanies([...companies, newCompany]);
-        setNewCompanyName('');
+        const savedCompany: CompanyResponseDTO = await companyContentService.create(newCompany);
+        setCompanies([...companies, savedCompany]);
+        setNewCompany({
+            nameEnglish: "",
+            nameChinese: "",
+            businessRegistrationNumber: "",
+            secretaryLicenseNumber: "",
+            email: "",
+            tel: "",
+            details: {
+                bio: "",
+                address: "",
+                industry: "",
+                website: ""
+            }
+        });
         setIsCreating(false);
     };
+
+    const fetchCompanies = async () => {
+        const response = await companyContentService.findAll({ page, size: pageSize });
+        setCompanies(response.content);
+    };
+
+    useEffect(() => {
+        fetchCompanies();
+    }, []);
 
     return (
         <div className="min-h-screen bg-slate-50 p-8 flex flex-col items-center justify-center">
@@ -68,8 +98,8 @@ export default function Companies() {
                                 className="w-full text-left p-4 hover:bg-indigo-50 transition-colors flex items-center justify-between group"
                             >
                                 <div>
-                                    <h3 className="text-base font-bold text-slate-900 group-hover:text-indigo-700 transition-colors">{company.name}</h3>
-                                    <p className="text-xs text-slate-500 mt-1">{company.activeStaff} Active Staff</p>
+                                    <h3 className="text-base font-bold text-slate-900 group-hover:text-indigo-700 transition-colors">{company.nameChinese}</h3>
+                                    <p className="text-xs text-slate-500 mt-1">{company.nameEnglish}</p>
                                 </div>
                                 <div className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center group-hover:border-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-all">
                                     <ArrowRight className="w-4 h-4" />
@@ -90,9 +120,12 @@ export default function Companies() {
                         <form onSubmit={handleCreateCompany} className="flex gap-3">
                             <input
                                 type="text"
-                                value={newCompanyName}
-                                onChange={(e) => setNewCompanyName(e.target.value)}
-                                placeholder="Company Name"
+                                value={newCompany.nameChinese}
+                                onChange={(e) => {
+                                    const newCompanyTmp = { ...newCompany, nameChinese: e.target.value }
+                                    setNewCompany(newCompanyTmp);
+                                }}
+                                placeholder="Company Chinese Name"
                                 className="flex-1 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                                 autoFocus
                             />
@@ -105,7 +138,6 @@ export default function Companies() {
                             </button>
                             <button
                                 type="submit"
-                                disabled={!newCompanyName.trim()}
                                 className="px-4 py-2 bg-indigo-600 text-white hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg text-sm font-bold transition-colors shadow-sm"
                             >
                                 Create

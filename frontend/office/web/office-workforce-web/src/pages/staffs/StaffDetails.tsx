@@ -1,12 +1,19 @@
 import { Modal } from '@/components/ui/Modal';
-import { format } from 'date-fns';
+import { formatPostgresDate } from '@/lib/utils';
+import { StaffSchedulePreferenceDTO } from '@/models/dto/office/workforce/object.dto';
+import { StaffDetailResponseDTO } from '@/models/dto/office/workforce/response.dto';
+import CompanyContentService from '@/services/content/office/workforce/CompanyContentService';
+import StaffContentService from '@/services/content/office/workforce/StaffContentService';
 import { ArrowLeft, Briefcase, Building, Calendar, Clock, CreditCard, FileText, Mail, MapPin, Phone, Plus, Search, User } from 'lucide-react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 export default function StaffDetails() {
-    const { companyId, staffId } = useParams();
+    const staffContentService = StaffContentService.getInstance();
+    const companyContentService = CompanyContentService.getInstance();
+    const { id } = useParams();
     const navigate = useNavigate();
+    const [staffDetail, setStaffDetail] = useState<StaffDetailResponseDTO | null>(null);
 
     const [activeTab, setActiveTab] = useState<'schedule_preference' | 'salary' | 'other'>('schedule_preference');
     const [isPreferenceModalOpen, setIsPreferenceModalOpen] = useState(false);
@@ -15,67 +22,71 @@ export default function StaffDetails() {
     const [prefFormData, setPrefFormData] = useState({ placeId: '1', placeName: 'Main Headquarters', weekDay: 1, workingPeriodName: 'Day Shift', priorityIndex: 1 });
 
     // Mock data representing full payload
-    const staffDetail = {
-        id: staffId,
+    const staffDetailDisplay = {
+        id: staffDetail?.staff.id || "",
         person: {
-            id: 'P-1234',
-            name_english: 'Alice Smith',
-            name_chinese: '愛麗絲',
-            office_tel: '+852 23456789',
-            mobile_tel: '+852 98765432',
-            email: 'alice.smith@example.com',
-            hk_id: 'A123456(7)',
-            cn_id: '110105199001011234',
-            mo_id: '12345678',
-            passport_id: 'K12345678',
+            id: staffDetail?.person.id || "",
+            name_english: staffDetail?.person.nameEnglish || "",
+            name_chinese: staffDetail?.person.nameChinese || "",
+            office_tel: staffDetail?.person.officeTel || "",
+            mobile_tel: staffDetail?.person.mobileTel || "",
+            email: staffDetail?.person.email || "",
+            hk_id: staffDetail?.person.hkId || "",
+            cn_id: staffDetail?.person.cnId || "",
+            mo_id: staffDetail?.person.moId || "",
+            passport_id: staffDetail?.person.passportId || "",
             details: {
-                date_of_birth: '1990-05-15',
-                gender: 'FEMALE',
-                nationality: 'HKSAR',
-                occupation: 'Software Engineer',
-                address: '123 Tech Park, Kowloon, Hong Kong',
-                wechat_id: 'alice_s_123',
-                instagram_id: '@alicesmith',
-                website: 'https://alicesmith.dev',
-                bio: 'Alice is a senior software engineer with over 8 years of experience building scalable backend services. She is passionate about mentoring junior developers and contributing to open-source software.'
+                date_of_birth: staffDetail?.personDetail.dateOfBirth ? formatPostgresDate(staffDetail?.personDetail.dateOfBirth) : null,
+                gender: staffDetail?.personDetail.gender || "",
+                nationality: staffDetail?.personDetail.nationality || "",
+                occupation: staffDetail?.personDetail.occupation || "",
+                address: staffDetail?.personDetail.address || "",
+                wechat_id: staffDetail?.personDetail.wechatId || "",
+                instagram_id: staffDetail?.personDetail.instagramId || "",
+                website: staffDetail?.personDetail.website || "",
+                bio: staffDetail?.personDetail.bio || ""
             }
         },
-        staffInfo: {
-            id: staffId,
-            company_name: 'Acme Corp',
-            org_name: 'Engineering',
-            cust_id: 'EMP-001',
-            work_type: 'FULL_TIME'
-        },
-        staffDetails: {
-            max_working_hours: 45,
-            occupations: [
-                { id: '1', name: 'Software Engineer', remark: 'Lead Backend Developer' },
-                { id: '2', name: 'Project Manager', remark: 'Acting Head for Q3' }
-            ]
+        staff: {
+            id: staffDetail?.staff.id || "",
+            company_name: staffDetail?.company ? companyContentService.getDisplayName(staffDetail?.company!) : "",
+            org_name: staffDetail?.staff.orgName || "",
+            cust_id: staffDetail?.staff.custId || "",
+            work_type: staffDetail?.staff.type || "",
+            details: {
+                max_working_hours: staffDetail?.staffDetail.maxWorkingHrs || "",
+                occupations: [...staffDetail?.staffOccupations || []]
+            }
         }
     };
 
-    const [preferences, setPreferences] = useState([
-        { id: '1', placeId: '1', placeName: 'Main Headquarters', weekDay: 1, workingPeriodName: 'Day Shift', priorityIndex: 1 },
-        { id: '2', placeId: '2', placeName: 'Downtown Branch', weekDay: 2, workingPeriodName: 'Night Shift', priorityIndex: 2 }
-    ]);
+    const [preferences, setPreferences] = useState<StaffSchedulePreferenceDTO[]>([]);
 
-    const p = staffDetail.person;
+    const p = staffDetailDisplay.person;
     const d = p.details;
-    const si = staffDetail.staffInfo;
-    const sd = staffDetail.staffDetails;
+    const si = staffDetailDisplay.staff;
+    const sd = staffDetailDisplay.staff.details;
 
     const handleAddPreference = (e: React.FormEvent) => {
         e.preventDefault();
-        setPreferences([...preferences, {
-            id: Date.now().toString(),
-            ...prefFormData
-        }]);
+        //TO BE IMPLEMENTED
         setIsPreferenceModalOpen(false);
     };
 
     const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+    const fetchStaff = async () => {
+        if (!id || Number.isNaN(id)) {
+            navigate("/errors/not-found");
+        }
+        const response = await staffContentService.findByIdInDetail(Number(id));
+        setStaffDetail(response);
+        setPreferences(response.schedulePreferences);
+    }
+
+    useEffect(() => {
+        fetchStaff();
+    }, []);
 
     return (
         <div className="flex flex-col h-full bg-slate-50 relative">
@@ -219,7 +230,7 @@ export default function StaffDetails() {
                                                 <div className="flex flex-col gap-3">
                                                     {sd.occupations.map(occ => (
                                                         <div key={occ.id} className="bg-slate-50 border border-slate-200 rounded px-4 py-3 flex flex-col gap-1">
-                                                            <div className="text-sm font-bold text-slate-900">{occ.name}</div>
+                                                            <div className="text-sm font-bold text-slate-900">{occ.occupationName}</div>
                                                             {occ.remark && <div className="text-xs text-slate-600">{occ.remark}</div>}
                                                         </div>
                                                     ))}
@@ -237,7 +248,7 @@ export default function StaffDetails() {
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5">
                                             <div>
                                                 <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5"><Calendar className="w-3 h-3" /> Date of Birth</label>
-                                                <div className="text-sm font-medium text-slate-900">{format(new Date(d.date_of_birth), 'MMM d, yyyy')}</div>
+                                                <div className="text-sm font-medium text-slate-900">{d.date_of_birth}</div>
                                             </div>
                                             <div>
                                                 <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Gender</label>

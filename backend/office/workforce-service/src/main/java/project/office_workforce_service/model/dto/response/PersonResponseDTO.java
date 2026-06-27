@@ -17,7 +17,4 @@ public class PersonResponseDTO {
     private String mobileTel;
     private String hkId;
     private Boolean isActive;
-
-    // Allows sending details back in the same payload if required by the client
-    private PersonDetailResponseDTO details;
 }

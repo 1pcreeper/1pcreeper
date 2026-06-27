@@ -15,8 +15,11 @@ public class StaffSchedulePreferenceDTO {
     private Long id;
     private Long staffId;
     private Long placeId;
+    private String placeName;
+    private String placeAddress;
     private Integer weekDay;
     private Long workingPeriodId;
+    private String workingPeriodName;
     private Integer priorityIndex;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

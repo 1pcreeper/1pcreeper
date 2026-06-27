@@ -15,6 +15,7 @@ public class StaffOccupationDTO {
     private Long id;
     private Long staffId;
     private Long occupationId;
+    private String occupationName;
     private String remark;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

@@ -7,7 +7,7 @@ export const apiRequest = async <P, R>(
     method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' = 'GET',
     data?: P,
     requiresAuth: boolean = false,
-    allowCredentials: boolean = true
+    ignoreCredentials: boolean = false
 ): Promise<R> => {
     try {
         const headers: HeadersInit = {
@@ -24,14 +24,16 @@ export const apiRequest = async <P, R>(
             headers["Authorization"] = `Bearer ${token}`;
         }
 
-        const options: RequestInit = {
+        if (ignoreCredentials) {
+            headers["Ignore-Credentials"] = "true";
+        }
+
+        const options: RequestInit =
+        {
             method,
             headers,
+            "credentials": "include"
         };
-
-        if (allowCredentials) {
-            options["credentials"] = 'include';
-        }
 
         if (data) {
             options.body = JSON.stringify(data);

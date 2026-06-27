@@ -1,6 +1,7 @@
 package project.office_workforce_service.mapper;
 
 import org.springframework.stereotype.Component;
+import project.office_workforce_service.model.dto.object.PersonDTO;
 import project.office_workforce_service.model.dto.request.PersonCreateRequestDTO;
 import project.office_workforce_service.model.dto.request.PersonUpdateRequestDTO;
 import project.office_workforce_service.model.dto.response.PersonDetailResponseDTO;
@@ -40,24 +41,9 @@ public class PersonMapper {
         if (request.getIsActive() != null) entity.setIsActive(request.getIsActive());
     }
 
-    public PersonResponseDTO toResponseDTO(Person person, PersonDetail detail) {
+    public PersonResponseDTO toResponseDTO(Person person) {
         if (person == null) {
             return null;
-        }
-
-        PersonDetailResponseDTO detailResponse = null;
-        if (detail != null) {
-            detailResponse = PersonDetailResponseDTO.builder()
-                .bio(detail.getBio())
-                .dateOfBirth(detail.getDateOfBirth())
-                .gender(detail.getGender())
-                .nationality(detail.getNationality())
-                .occupation(detail.getOccupation())
-                .address(detail.getAddress())
-                .wechatId(detail.getWechatId())
-                .instagramId(detail.getInstagramId())
-                .website(detail.getWebsite())
-                .build();
         }
 
         return PersonResponseDTO.builder()
@@ -68,7 +54,28 @@ public class PersonMapper {
             .mobileTel(person.getMobileTel())
             .hkId(person.getHkId())
             .isActive(person.getIsActive())
-            .details(detailResponse)
+            .build();
+    }
+
+    public PersonDTO toPersonDTO(Person person) {
+        if (person == null) {
+            return null;
+        }
+
+        return PersonDTO.builder()
+            .id(person.getId())
+            .nameEnglish(person.getNameEnglish())
+            .nameChinese(person.getNameChinese())
+            .officeTel(person.getOfficeTel())
+            .mobileTel(person.getMobileTel())
+            .email(person.getEmail())
+            .hkId(person.getHkId())
+            .cnId(person.getCnId())
+            .moId(person.getMoId())
+            .passportId(person.getPassportId())
+            .isActive(person.getIsActive())
+            .createdAt(person.getCreatedAt())
+            .updatedAt(person.getUpdatedAt())
             .build();
     }
 }

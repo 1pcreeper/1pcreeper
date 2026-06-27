@@ -3,6 +3,7 @@ package project.office_workforce_service.service.manager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import project.office_workforce_service.model.entity.Company;
 import project.office_workforce_service.repository.CompanyRepository;
@@ -21,5 +22,8 @@ public class CompanyManagerService extends AbstractBaseService<Company, Long> {
 
     public Page<Company> search(String q, Boolean isActive, Pageable pageable) {
         return companyRepository.search(q, isActive, pageable);
+    }
+    public Page<Company> findAllByIsActive(Boolean isActive, Pageable pageable){
+        return companyRepository.findAllByIsActive(isActive,pageable);
     }
 }

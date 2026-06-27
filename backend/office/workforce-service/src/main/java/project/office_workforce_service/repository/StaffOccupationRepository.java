@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import project.office_workforce_service.model.entity.StaffOccupation;
 import project.office_workforce_service.repository.base.AbstractBaseRepository;
 
+import java.util.List;
+
 @Repository
 public interface StaffOccupationRepository extends AbstractBaseRepository<StaffOccupation, Long> {
 
@@ -19,4 +21,7 @@ public interface StaffOccupationRepository extends AbstractBaseRepository<StaffO
                                  @Param("occupationId") Long occupationId,
                                  @Param("q") String q,
                                  Pageable pageable);
+
+    @Query("SELECT so FROM StaffOccupation so WHERE so.staff.id = :staffId")
+    List<StaffOccupation> findByStaffId(@Param("staffId") Long staffId);
 }
