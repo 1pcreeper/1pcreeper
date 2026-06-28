@@ -1,0 +1,20 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="ignoredPackages">
+        <list>
+          <option value="altgraph" />
+          <option value="docx" />
+          <option value="jdcal" />
+          <option value="pefile" />
+          <option value="Pillow" />
+          <option value="pyinstaller" />
+          <option value="pyinstaller-hooks-contrib" />
+          <option value="pywin32-ctypes" />
+          <option value="numpy" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
