@@ -37,7 +37,11 @@ build/
 **/*.pyd
 
 ### Project ###
-.env/**
-/secret
-/data/local
-/data/prod
+.env.local
+.env.prod
+/secret/local/**
+/secret/prod/**
+/data/local/**
+/data/prod/**
+/infra/local/**
+/infra/prod/**

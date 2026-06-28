@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="Change">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/compose/docker-compose.yml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,12 +33,12 @@
     &quot;assignee&quot;: &quot;1pcreeper&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/1pcreeper/1pcreeper-project&quot;,
-    &quot;accountId&quot;: &quot;c2aa6cf9-763f-4138-ab41-336e63140c2d&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/1pcreeper/1pcreeper-project",
+    "accountId": "04513f27-9dcf-4441-9c63-40c4c8048423"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -130,22 +129,12 @@
       <command value="mvn mvn clean install -DskipTests" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.GeneralServiceRegistryApplication ">
-    <list>
-      <item itemvalue="Application.GeneralServiceRegistryApplication " />
-      <item itemvalue="Application.GeneralConfigMappingApplication" />
-      <item itemvalue="Application.GeneralAPIGatewayApplication" />
-      <item itemvalue="Application.GeneralAccountServiceApplication" />
-      <item itemvalue="Application.GeneralObjGenerateServiceApplication" />
-      <item itemvalue="Application.OfficeServiceRegistryApplication " />
-      <item itemvalue="Application.OfficeConfigMappingApplication" />
-      <item itemvalue="Application.OfficeAPIGatewayApplication" />
-      <item itemvalue="Application.OfficeAccountServiceApplication" />
-      <item itemvalue="Application.OfficeWorkforceServiceApplication" />
-      <item itemvalue="Application.OfficeExpenditureServiceApplication" />
-      <item itemvalue="Application.GeneralDummyServiceApplication" />
-      <item itemvalue="Application.OfficeDummyServiceApplication" />
-    </list>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-4e2b1448bda8-9a97661f3031-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-252.27397.106" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -538,136 +527,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/converter/JwtAuthenticationConverter.java</url>
-          <line>45</line>
-          <option name="timeStamp" value="36" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/converter/JwtAuthenticationConverter.java</url>
-          <line>47</line>
-          <option name="timeStamp" value="37" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/converter/JwtAuthenticationConverter.java</url>
-          <line>48</line>
-          <option name="timeStamp" value="38" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/converter/JwtAuthenticationConverter.java</url>
-          <line>44</line>
-          <option name="timeStamp" value="61" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/handler/JwtAuthRequestHandler.java</url>
-          <line>31</line>
-          <option name="timeStamp" value="62" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/general/account-service/src/main/java/project/general_account_service/interceptor/AuthInterceptor.java</url>
-          <line>20</line>
-          <option name="timeStamp" value="66" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/shared/general-starter/src/main/java/project/shared_general_starter/converter/JwtAuthenticationConverter.java</url>
-          <line>54</line>
-          <option name="timeStamp" value="67" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/converter/JwtAuthenticationConverter.java</url>
-          <line>48</line>
-          <option name="timeStamp" value="79" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/interceptor/AuthInterceptor.java</url>
-          <line>15</line>
-          <option name="timeStamp" value="80" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/service/common/AccountService.java</url>
-          <line>62</line>
-          <option name="timeStamp" value="82" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/service/common/AccountService.java</url>
-          <line>99</line>
-          <option name="timeStamp" value="83" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/service/common/AccountService.java</url>
-          <line>102</line>
-          <option name="timeStamp" value="84" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/service/common/AccountService.java</url>
-          <line>98</line>
-          <option name="timeStamp" value="85" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/converter/JwtAuthenticationConverter.java</url>
-          <line>44</line>
-          <option name="timeStamp" value="88" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/resolver/AuthBearerTokenResolver.java</url>
-          <line>20</line>
-          <option name="timeStamp" value="89" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/resolver/AuthBearerTokenResolver.java</url>
-          <line>21</line>
-          <option name="timeStamp" value="90" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/resolver/AuthBearerTokenResolver.java</url>
-          <line>22</line>
-          <option name="timeStamp" value="91" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/resolver/AuthBearerTokenResolver.java</url>
-          <line>23</line>
-          <option name="timeStamp" value="92" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/resolver/AuthBearerTokenResolver.java</url>
-          <line>25</line>
-          <option name="timeStamp" value="93" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/converter/JwtAuthenticationConverter.java</url>
-          <line>42</line>
-          <option name="timeStamp" value="94" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/converter/JwtAuthenticationConverter.java</url>
-          <line>45</line>
-          <option name="timeStamp" value="95" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/converter/JwtAuthenticationConverter.java</url>
-          <line>47</line>
-          <option name="timeStamp" value="96" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/converter/JwtAuthenticationConverter.java</url>
-          <line>54</line>
-          <option name="timeStamp" value="97" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/resolver/AuthBearerTokenResolver.java</url>
-          <line>28</line>
-          <option name="timeStamp" value="99" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/resolver/AuthBearerTokenResolver.java</url>
-          <line>33</line>
-          <option name="timeStamp" value="100" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/resolver/AuthBearerTokenResolver.java</url>
-          <line>32</line>
-          <option name="timeStamp" value="101" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/middleware/general/polyroom-ai-worker/src/__main__.py</url>
           <option name="timeStamp" value="98" />

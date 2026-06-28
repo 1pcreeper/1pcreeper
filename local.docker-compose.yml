@@ -1,12 +1,12 @@
 version: "3.8"
 
 services:
-    polyroom-ai-worker:
+    general-polyroom-ai-worker:
         build:
-            context: ./middleware/general/polyroom-ai-worker
+            context: ./module/general/worker/polyroom-ai-worker
             dockerfile: dockerfile
-        container_name: polyroom-ai-worker
-        hostname: polyroom-ai-worker
+        container_name: general-polyroom-ai-worker
+        hostname: general-polyroom-ai-worker
         restart: always
         ports:
             - "30020:80"
@@ -30,12 +30,12 @@ services:
                         - driver: nvidia
                           count: all
                           capabilities: [gpu]
-    hunyuan-ai-worker:
+    general-hunyuan-ai-worker:
         build:
-            context: ./middleware/general/hunyuan-ai-worker
+            context: ./module/general/worker/hunyuan-ai-worker
             dockerfile: dockerfile
-        container_name: hunyuan-ai-worker
-        hostname: hunyuan-ai-worker
+        container_name: general-hunyuan-ai-worker
+        hostname: general-hunyuan-ai-worker
         restart: always
         ports:
             - "30010:80"
@@ -72,7 +72,7 @@ services:
             MINIO_ROOT_USER: admin
             MINIO_ROOT_PASSWORD: password123
         volumes:
-            - ./data/local/general/volumes/minio1:/data
+            - ./data/local/general/inf/minio1/docker/volume:/data
         command: server /data --console-address ":9001"
         networks:
             - general-network
@@ -88,7 +88,7 @@ services:
             - ZOOKEEPER_SERVER_ID=1
             - ALLOW_ANONYMOUS_LOGIN=yes
         volumes:
-            - ./data/local/general/volumes/zookeeper1:/var/lib/zookeeper/data
+            - ./data/local/general/inf/zookeeper1/docker/volume:/var/lib/zookeeper/data
         networks:
             - general-network
     general-kafka1:
@@ -110,7 +110,7 @@ services:
             - KAFKA_LISTENERS=PLAINTEXT://:9092,PLAINTEXT_INTERNAL://:29092
             - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://general-kafka1:9092,PLAINTEXT_INTERNAL://localhost:29092
         volumes:
-            - ./data/local/general/volumes/kafka1:/var/lib/kafka/data
+            - ./data/local/general/inf/kafka1/docker/volume:/var/lib/kafka/data
         networks:
             - general-network
 networks:
