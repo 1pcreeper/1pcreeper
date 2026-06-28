@@ -1,5 +1,6 @@
 package project.office_workforce_service.controller.common;
 
+import jakarta.annotation.Nullable;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -62,13 +63,22 @@ public class StaffController {
 
     @Secured({UserRoles.WORKFORCE_ADMIN})
     @GetMapping()
-    public ResponseEntity<APIBaseResponseDTO<PaginationBaseResponseDTO<StaffResponseDTO>>> findAll(@PageableDefault Pageable pageable) {
-        return ResponseEntity.ok(APIBaseResponseDTO.success(staffService.findAll(pageable)));
+    public ResponseEntity<APIBaseResponseDTO<PaginationBaseResponseDTO<StaffResponseDTO>>> findAll(
+        @PageableDefault Pageable pageable,
+        @Nullable @RequestParam(value = "companyId",required = false)Long companyId
+        ) {
+        return ResponseEntity.ok(APIBaseResponseDTO.success(staffService.findAll(pageable,companyId)));
     }
 
     @Secured({UserRoles.WORKFORCE_ADMIN})
     @GetMapping("/details/{id}")
     public ResponseEntity<APIBaseResponseDTO<StaffDetailResponseDTO>> findByIdInDetail(@PathVariable Long id) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(staffService.findByIdInDetail(id)));
+    }
+    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @DeleteMapping("/{id}")
+    public ResponseEntity<APIBaseResponseDTO<Void>> delete(@PathVariable("id") Long id) {
+        staffService.delete(id);
+        return ResponseEntity.ok(APIBaseResponseDTO.success(null));
     }
 }

@@ -1,5 +1,5 @@
 import { useCompanyStore } from '@/store/useCompanyStore';
-import { Briefcase, Building, CalendarCheck, ChevronDown, Clock, FolderTree, LayoutDashboard, MapPin, Users } from 'lucide-react';
+import { Building, CalendarCheck, ChevronDown, Clock, FolderTree, LayoutDashboard, User, Users } from 'lucide-react';
 import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { cn } from '../../lib/utils';
@@ -9,23 +9,22 @@ const mainNav = [
     { icon: CalendarCheck, label: 'Schedules', path: 'schedules' },
 ];
 
-const peopleNav = [
-    { icon: Users, label: 'Staff', path: 'staffs' },
+const individualNav = [
+    { icon: User, label: 'Person', path: 'persons' },
 ];
 
 const companyNav = [
+    { icon: Users, label: 'Staff', path: 'staffs' },
     { icon: Building, label: 'Organizations', path: 'organizations' },
-    { icon: MapPin, label: 'Places', path: 'places' },
     { icon: Clock, label: 'Periods', path: 'periods' },
-    { icon: Briefcase, label: 'Occupations', path: 'occupations' }
 ];
 
 export default function Sidebar() {
     const location = useLocation();
     const { currentSelectedCompany } = useCompanyStore();
     const companyId = currentSelectedCompany?.id || null;
-    const [isPeopleNavOpen, setIsPeopleNavOpen] = useState(
-        peopleNav.some(item => location.pathname.includes(item.path))
+    const [isIndividualNavOpen, setIsPeopleNavOpen] = useState(
+        individualNav.some(item => location.pathname.includes(item.path))
     );
     const [isCompanyNavOpen, setIsCompanyNavOpen] = useState(
         companyNav.some(item => location.pathname.includes(item.path))
@@ -57,25 +56,25 @@ export default function Sidebar() {
 
             <div className="mt-4 mb-1 mx-2">
                 <button
-                    onClick={() => setIsPeopleNavOpen(!isPeopleNavOpen)}
+                    onClick={() => setIsPeopleNavOpen(!isIndividualNavOpen)}
                     className="w-full flex items-center justify-between px-2.5 py-1.5 text-[10px] font-bold text-slate-400 hover:text-slate-600 uppercase tracking-wider rounded transition-colors focus:outline-none"
                 >
                     <div className="flex items-center gap-2">
                         <FolderTree className="w-3 h-3" />
-                        <span>People</span>
+                        <span>Individual</span>
                     </div>
-                    <ChevronDown className={cn("w-3 h-3 transition-transform", isPeopleNavOpen ? "rotate-180" : "")} />
+                    <ChevronDown className={cn("w-3 h-3 transition-transform", isIndividualNavOpen ? "rotate-180" : "")} />
                 </button>
             </div>
 
-            {isPeopleNavOpen && (
+            {isIndividualNavOpen && (
                 <div className="flex flex-col gap-1 anim-fade-in pl-2">
                     {
                         companyId &&
-                        peopleNav.map((item) => (
+                        individualNav.map((item) => (
                             <NavLink
                                 key={item.path}
-                                to={`/companies/${companyId}/${item.path}`}
+                                to={`/${item.path}`}
                                 className={({ isActive }) =>
                                     cn(
                                         "flex items-center gap-2.5 mx-2 px-2.5 py-1.5 rounded-md text-xs font-bold transition-all cursor-pointer",

@@ -32,3 +32,25 @@ export interface OrganizationCreateRequestDTO {
     name: string;
     bio: string;
 }
+export interface OrganizationUpdateRequestDTO {
+    name: string;
+    bio: string;
+}
+export interface PersonCreateRequestDTO {
+    nameEnglish: string;
+    nameChinese: string;
+    officeTel: string;
+    mobileTel: string;
+    email: string;
+    hkId: string;
+    cnId: string;
+    moId: string;
+    passportId: string;
+}
+export interface PersonUpdateRequestDTO {
+    nameEnglish: string;
+    nameChinese: string;
+    officeTel: string;
+    mobileTel: string;
+    email: string;
+}

@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import project.office_workforce_service.model.entity.Organization;
+import project.office_workforce_service.model.entity.Staff;
 import project.office_workforce_service.repository.OrganizationRepository;
 import project.office_workforce_service.service.base.AbstractBaseService;
 
@@ -26,5 +27,9 @@ public class OrganizationManagerService extends AbstractBaseService<Organization
     
     public Page<Organization> findAllByIsActive(Boolean isActive, Pageable pageable){
         return organizationRepository.findAllByIsActive(isActive,pageable);
+    }
+    
+    public Page<Organization> findAllByCompanyIdAndIsActive(Long companyId, Boolean isActive,Pageable pageable){
+        return  organizationRepository.findAllByCompanyIdAndIsActive(companyId,isActive,pageable);
     }
 }

@@ -12,6 +12,7 @@ import project.office_workforce_service.model.dto.request.CompanyUpdateRequestDT
 import project.office_workforce_service.model.dto.response.CompanyResponseDTO;
 import project.office_workforce_service.model.entity.Company;
 import project.office_workforce_service.model.entity.CompanyDetail;
+import project.office_workforce_service.model.entity.Staff;
 import project.office_workforce_service.service.manager.CompanyDetailManagerService;
 import project.office_workforce_service.service.manager.CompanyManagerService;
 import project.shared_office_starter.mapper.PaginationMapper;
@@ -89,5 +90,12 @@ public class CompanyService {
     public PaginationBaseResponseDTO<CompanyResponseDTO> findAll(Pageable pageable){
         Page<Company> companies = companyManagerService.findAllByIsActive(true,pageable);
         return paginationMapper.toDTO(companies,(c)->companyMapper.toResponseDTO(c));
+    }
+
+    @Transactional
+    public void delete(Long id){
+        Company existingCompany = companyManagerService.findById(id);
+        existingCompany.setIsActive(false);
+        companyManagerService.save(existingCompany);
     }
 }

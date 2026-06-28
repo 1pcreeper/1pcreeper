@@ -51,3 +51,32 @@ export interface OrganizationResponseDTO {
     bio: string;
     isActive: boolean;
 }
+
+export interface PlaceResponseDTO {
+    id: number;
+    orgId: number;
+    orgName: string;
+    name: string;
+    address: string;
+    isActive: boolean;
+}
+export interface PersonResponseDTO {
+    id: number;
+    nameEnglish: string;
+    nameChinese: string;
+    officeTel: string;
+    mobileTel: string;
+    email: string;
+    hkId: string;
+    cnId: string;
+    moId: string;
+    passportId: string;
+    isActive: boolean;
+    createdAt: string;
+    updatedAt: string;
+}
+export interface PersonDetailResponseDTO {
+    person: PersonDTO;
+    detail: PersonDetailDTO;
+    staffs: StaffDTO[];
+}

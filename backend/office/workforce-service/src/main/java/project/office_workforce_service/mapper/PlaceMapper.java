@@ -35,6 +35,7 @@ public class PlaceMapper {
         return PlaceResponseDTO.builder()
             .id(place.getId())
             .orgId(place.getOrg() != null ? place.getOrg().getId() : null)
+            .orgName(place.getOrg() != null ? place.getOrg().getName() : null)
             .name(place.getName())
             .address(place.getAddress())
             .isActive(place.getIsActive())

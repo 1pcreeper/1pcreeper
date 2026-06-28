@@ -18,12 +18,18 @@ export default function Orchestrator() {
         const companyIdResult = extractCompanyId();
         const localStorageCompanyId = localStorage.getItem("currentSelectedCompany");
         if (companyIdResult) {
+            if (currentSelectedCompany?.id === companyIdResult) {
+                return;
+            }
             const companyResult = await companyContentService.findById(companyIdResult);
             setCurrentSelectedCompany(companyResult);
             localStorage.setItem("currentSelectedCompany", String(companyResult.id));
             return;
         }
         if (localStorageCompanyId && !Number.isNaN(localStorageCompanyId)) {
+            if (String(currentSelectedCompany?.id) === localStorageCompanyId) {
+                return;
+            }
             const companyResult = await companyContentService.findById(Number(localStorageCompanyId));
             setCurrentSelectedCompany(companyResult);
             localStorage.setItem("currentSelectedCompany", String(companyResult.id));

@@ -30,6 +30,4 @@ public class PersonUpdateRequestDTO {
     @Size(max = 255)
     @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9._%+-]+\\.[a-zA-Z]{2,}$", message = "Invalid email format or contains spaces")
     private String email;
-
-    private Boolean isActive;
 }

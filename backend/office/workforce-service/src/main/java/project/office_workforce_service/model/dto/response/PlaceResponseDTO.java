@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class PlaceResponseDTO {
     private Long id;
     private Long orgId;
+    private String orgName;
     private String name;
     private String address;
     private Boolean isActive;

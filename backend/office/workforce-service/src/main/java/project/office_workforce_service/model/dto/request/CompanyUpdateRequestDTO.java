@@ -35,8 +35,6 @@ public class CompanyUpdateRequestDTO {
     @Pattern(regexp = "^[+]([0-9]){3}\\s([0-9])+$", message = "Invalid telephone format")
     private String tel;
 
-    private Boolean isActive;
-
     // Allows updating details in the same payload
     private CompanyDetailRequestDTO details;
 }

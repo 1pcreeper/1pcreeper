@@ -12,6 +12,8 @@ import project.office_workforce_service.repository.StaffRepository;
 import project.office_workforce_service.service.base.AbstractBaseService;
 import project.shared_office_starter.model.exception.PropertyValidationException;
 
+import java.util.List;
+
 @Service
 public class StaffManagerService extends AbstractBaseService<Staff, Long> {
 
@@ -36,5 +38,13 @@ public class StaffManagerService extends AbstractBaseService<Staff, Long> {
     }
     public Page<Staff> findAllByIsActive(@Param("isActive") Boolean isActive, Pageable pageable){
         return  staffRepository.findAllByIsActive(isActive,pageable);
+    }
+    
+    public Page<Staff> findAllByCompanyIdAndIsActive( Long companyId, Boolean isActive, Pageable pageable){
+        return staffRepository.findAllByCompanyIdAndIsActive(companyId,isActive,pageable);
+    }
+
+    public List<Staff> findByPersonId(Long personId){
+        return staffRepository.findByPersonId(personId);
     }
 }

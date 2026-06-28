@@ -16,6 +16,4 @@ public class OrganizationUpdateRequestDTO {
     private String name;
 
     private String bio;
-
-    private Boolean isActive;
 }

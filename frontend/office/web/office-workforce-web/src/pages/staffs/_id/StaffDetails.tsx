@@ -86,7 +86,7 @@ export default function StaffDetails() {
 
     useEffect(() => {
         fetchStaff();
-    }, []);
+    }, [id]);
 
     return (
         <div className="flex flex-col h-full bg-slate-50 relative">
@@ -108,7 +108,7 @@ export default function StaffDetails() {
 
                     <div className="flex flex-col lg:flex-row gap-6">
                         {/* Big Avatar Sidebar */}
-                        <div className="w-full lg:w-72 flex-shrink-0">
+                        <div className="w-full lg:w-72 shrink-0">
                             <div className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden flex flex-col items-center py-10 px-6 h-full">
                                 <div className="relative mb-5">
                                     <div className="w-40 h-40 rounded-full bg-indigo-50 border-4 border-white shadow-sm flex items-center justify-center overflow-hidden">
@@ -159,31 +159,31 @@ export default function StaffDetails() {
                                                 <div className="text-sm font-medium text-slate-900">{p.name_english}</div>
                                             </div>
                                             <div className="col-span-2">
-                                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5"><Mail className="w-3 h-3" /> Email</label>
+                                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5"><Mail className="w-3 h-3" /> Email</label>
                                                 <div className="text-sm text-slate-900 truncate" title={p.email}>{p.email}</div>
                                             </div>
                                             <div>
-                                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5"><Phone className="w-3 h-3" /> Mobile Tel</label>
+                                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5"><Phone className="w-3 h-3" /> Mobile Tel</label>
                                                 <div className="text-sm font-mono text-slate-700">{p.mobile_tel || '-'}</div>
                                             </div>
                                             <div>
-                                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5"><Phone className="w-3 h-3" /> Office Tel</label>
+                                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5"><Phone className="w-3 h-3" /> Office Tel</label>
                                                 <div className="text-sm font-mono text-slate-700">{p.office_tel || '-'}</div>
                                             </div>
                                             <div>
-                                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5"><CreditCard className="w-3 h-3" /> HK ID</label>
+                                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5"><CreditCard className="w-3 h-3" /> HK ID</label>
                                                 <div className="text-sm font-mono text-slate-700">{p.hk_id || '-'}</div>
                                             </div>
                                             <div>
-                                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5"><CreditCard className="w-3 h-3" /> Passport ID</label>
+                                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5"><CreditCard className="w-3 h-3" /> Passport ID</label>
                                                 <div className="text-sm font-mono text-slate-700">{p.passport_id || '-'}</div>
                                             </div>
                                             <div>
-                                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5"><CreditCard className="w-3 h-3" /> CN ID</label>
+                                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5"><CreditCard className="w-3 h-3" /> CN ID</label>
                                                 <div className="text-sm font-mono text-slate-700">{p.cn_id || '-'}</div>
                                             </div>
                                             <div>
-                                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5"><CreditCard className="w-3 h-3" /> MO ID</label>
+                                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5"><CreditCard className="w-3 h-3" /> MO ID</label>
                                                 <div className="text-sm font-mono text-slate-700">{p.mo_id || '-'}</div>
                                             </div>
                                         </div>
@@ -196,7 +196,7 @@ export default function StaffDetails() {
                                         </div>
                                         <div className="grid grid-cols-2 gap-x-4 gap-y-5">
                                             <div className="col-span-2">
-                                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5"><Building className="w-3 h-3" /> Company</label>
+                                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5"><Building className="w-3 h-3" /> Company</label>
                                                 <div className="text-sm font-medium text-slate-900">{si.company_name}</div>
                                             </div>
                                             <div className="col-span-2">
@@ -267,19 +267,19 @@ export default function StaffDetails() {
                                         </h3>
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5">
                                             <div>
-                                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5"><Calendar className="w-3 h-3" /> Date of Birth</label>
+                                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5"><Calendar className="w-3 h-3" /> Date of Birth</label>
                                                 <div className="text-sm font-medium text-slate-900">{d.date_of_birth}</div>
                                             </div>
                                             <div>
-                                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Gender</label>
+                                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Gender</label>
                                                 <div className="text-sm font-medium text-slate-900 capitalize">{d.gender.toLowerCase()}</div>
                                             </div>
                                             <div className="md:col-span-2">
-                                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5"><MapPin className="w-3 h-3" /> Address</label>
+                                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5"><MapPin className="w-3 h-3" /> Address</label>
                                                 <div className="text-sm text-slate-700">{d.address}</div>
                                             </div>
                                             <div className="md:col-span-2">
-                                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5"><Search className="w-3 h-3" /> Bio</label>
+                                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5"><Search className="w-3 h-3" /> Bio</label>
                                                 <p className="text-sm text-slate-600 leading-relaxed bg-slate-50 p-3 rounded border border-slate-100">{d.bio}</p>
                                             </div>
                                         </div>

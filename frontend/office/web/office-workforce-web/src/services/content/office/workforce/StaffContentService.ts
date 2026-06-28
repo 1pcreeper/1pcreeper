@@ -22,11 +22,11 @@ export default class StaffContentService {
     public async findByIdInDetail(id: number): Promise<StaffDetailResponseDTO> {
         return await officeAPI<null, StaffDetailResponseDTO>(`/workforce/staffs/details/${id}`, "GET", null);
     }
-    public async findAll(page: PageParams): Promise<PaginationBaseResponseDTO<StaffResponseDTO>> {
-        return await officeAPI<null, PaginationBaseResponseDTO<StaffResponseDTO>>(`/workforce/staffs?page=${page.page}&size=${page.size}`, "GET", null);
+    public async findAllS1(companyId: number, page: PageParams): Promise<PaginationBaseResponseDTO<StaffResponseDTO>> {
+        return await officeAPI<null, PaginationBaseResponseDTO<StaffResponseDTO>>(`/workforce/staffs?companyId=${companyId}&page=${page.page}&size=${page.size}`, "GET", null);
     }
-    public async search(q: string, page: PageParams): Promise<PaginationBaseResponseDTO<StaffResponseDTO>> {
-        return await officeAPI<null, PaginationBaseResponseDTO<StaffResponseDTO>>(`/workforce/staffs/search?q=${q}&page=${page.page}&size=${page.size}`, "GET", null);
+    public async searchS1(q: string, companyId: number, page: PageParams): Promise<PaginationBaseResponseDTO<StaffResponseDTO>> {
+        return await officeAPI<null, PaginationBaseResponseDTO<StaffResponseDTO>>(`/workforce/staffs/search?q=${q}&companyId=${companyId}&page=${page.page}&size=${page.size}`, "GET", null);
     }
     public getDisplayName(staff: StaffResponseDTO): string {
         if (staff.personNameChinese) {

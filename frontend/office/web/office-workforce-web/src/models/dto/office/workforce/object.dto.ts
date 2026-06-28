@@ -15,6 +15,7 @@ export interface CompanyDTO {
 export interface StaffDTO {
     id: number;
     companyId: number;
+    companyName: string;
     personId: number;
     orgId: number;
     orgName: string;

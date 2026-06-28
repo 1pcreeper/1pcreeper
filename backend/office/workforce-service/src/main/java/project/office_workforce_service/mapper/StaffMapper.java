@@ -47,7 +47,7 @@ public class StaffMapper {
         if (newOrg != null) entity.setOrg(newOrg);
         if (request.getCustId() != null) entity.setCustId(request.getCustId());
         if (request.getType() != null) entity.setType(request.getType());
-        if (request.getIsActive() != null) entity.setIsActive(request.getIsActive());
+        entity.setIsActive(true);
     }
 
     public StaffResponseDTO toResponseDTO(Staff staff) {
@@ -72,6 +72,7 @@ public class StaffMapper {
         return StaffDTO.builder()
             .id(staff.getId())
             .companyId(staff.getCompany() != null ? staff.getCompany().getId() : null)
+            .companyName(getCompanyNameChineseOrEnglish(staff))
             .personId(staff.getPerson() != null ? staff.getPerson().getId() : null)
             .orgId(staff.getOrg() != null ? staff.getOrg().getId() : null)
             .orgName(staff.getOrg()!=null ? staff.getOrg().getName():null)
@@ -80,4 +81,13 @@ public class StaffMapper {
             .isActive(staff.getIsActive())
             .build();
     } 
+    private String getCompanyNameChineseOrEnglish(Staff staff){
+        if(staff.getCompany().getNameChinese()!=null){
+            return staff.getCompany().getNameChinese();
+        }
+        if(staff.getCompany().getNameEnglish()!=null){
+            return staff.getCompany().getNameEnglish();
+        }
+        return null;
+    }
 }

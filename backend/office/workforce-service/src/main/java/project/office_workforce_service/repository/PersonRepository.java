@@ -23,4 +23,7 @@ public interface PersonRepository extends AbstractBaseRepository<Person, Long> {
     Page<Person> search(@Param("q") String q,
                         @Param("isActive") Boolean isActive,
                         Pageable pageable);
+
+    @Query("SELECT p FROM Person p WHERE p.isActive = :isActive")
+    Page<Person> findAllByIsActive(@Param("isActive") Boolean isActive, Pageable pageable);
 }

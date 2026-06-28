@@ -1,13 +1,17 @@
 import { EntityPageLayout } from '@/components/layout/EntityPageLayout';
 import { Column, DataTable } from '@/components/ui/DataTable';
+import { PaginationBaseResponseDTO } from '@/models/dto/base/base.dto';
 import { StaffResponseDTO } from '@/models/dto/office/workforce/response.dto';
 import StaffContentService from '@/services/content/office/workforce/StaffContentService';
 import { useCompanyStore } from '@/store/useCompanyStore';
 import { Users } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 export default function Staffs() {
+    const [searchParams, setSearchParams] = useSearchParams();
+    const pageParam = searchParams.get("page");
+    const qParam = searchParams.get("q");
     const navigate = useNavigate();
     const { currentSelectedCompany } = useCompanyStore();
     const companyId = currentSelectedCompany?.id;
@@ -16,10 +20,10 @@ export default function Staffs() {
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [selectedStaff, setSelectedStaff] = useState<StaffResponseDTO | null>(null);
     const staffContentService = StaffContentService.getInstance();
-    const [search, setSearch] = useState<string>("");
-
-    const [page, setPage] = useState<number>(0);
-    const size = 10;
+    const [search, setSearch] = useState<string>(qParam || "");
+    const [page, setPage] = useState<number>(Number.isNaN(pageParam) ? 0 : Number(pageParam));
+    const [size, setSize] = useState<number>(10);
+    const [totalPages, setTotalPages] = useState<number>(0);
 
     const [formData, setFormData] = useState({ name: '', role: 'Software Engineer', department: 'Engineering', status: 'Active', type: 'FULL_TIME', cust_id: '' });
 
@@ -40,19 +44,26 @@ export default function Staffs() {
     ];
 
     const fetchStaffs = async () => {
+        let response: PaginationBaseResponseDTO<StaffResponseDTO>;
         if (!search || search.trim() === "") {
-            const response = await staffContentService.findAll({ page, size });
-            setData(response.content);
+            response = await staffContentService.findAllS1(companyId || 0, { page, size });
+            settleResponseContent(response);
         }
         else {
-            const response = await staffContentService.search(search, { page, size });
-            setData(response.content);
+            response = await staffContentService.searchS1(search, companyId || 0, { page, size });
+            settleResponseContent(response);
         }
+    };
+
+    const settleResponseContent = (response: PaginationBaseResponseDTO<StaffResponseDTO>) => {
+        setData(response.content);
+        setSize(response.pageSize);
+        setTotalPages(response.totalPages);
     };
 
     useEffect(() => {
         fetchStaffs();
-    }, [search]);
+    }, [search, page, companyId]);
 
     return (
         <>
@@ -63,15 +74,22 @@ export default function Staffs() {
                 searchPlaceholder="Search staff by name or role..."
                 icon={<Users className="w-5 h-5" />}
                 searchBarValue={search}
-                onSearchBarChange={(e) => { setSearch(e.target.value) }}
+                onSearchBarChange={(e) => {
+                    setSearch(e.target.value);
+                    setSearchParams({
+                        q: e.target.value,
+                        page: String(page)
+                    })
+                }}
             >
                 <DataTable
                     data={data}
                     columns={columns}
                     onRowClick={(staff) => navigate(`/staffs/${staff.id}`)}
                     emptyMessage="No staff members found."
-                    pageNumber={1}
-                    totalPages={1}
+                    pageNumber={page}
+                    totalPages={totalPages}
+                    onPageChange={p => setPage(p)}
                 />
             </EntityPageLayout>
 

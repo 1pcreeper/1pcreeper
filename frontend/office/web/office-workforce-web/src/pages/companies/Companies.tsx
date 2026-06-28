@@ -60,7 +60,7 @@ export default function Companies() {
     };
 
     const fetchCompanies = async () => {
-        const response = await companyContentService.findAll({ page, size: pageSize });
+        const response = await companyContentService.findAllS1({ page, size: pageSize });
         setCompanies(response.content);
     };
 

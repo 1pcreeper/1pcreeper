@@ -59,4 +59,10 @@ public class CompanyController {
         @PathVariable Long id, @Valid @RequestBody CompanyUpdateRequestDTO request) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(companyService.update(id, request)));
     }
+    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @DeleteMapping("/{id}")
+    public ResponseEntity<APIBaseResponseDTO<Void>> delete(@PathVariable("id") Long id) {
+        companyService.delete(id);
+        return ResponseEntity.ok(APIBaseResponseDTO.success(null));
+    }
 }

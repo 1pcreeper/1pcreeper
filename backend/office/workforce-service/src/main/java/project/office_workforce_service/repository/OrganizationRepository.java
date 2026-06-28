@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import project.office_workforce_service.model.entity.Organization;
+import project.office_workforce_service.model.entity.Staff;
 import project.office_workforce_service.repository.base.AbstractBaseRepository;
 
 @Repository
@@ -21,7 +22,13 @@ public interface OrganizationRepository extends AbstractBaseRepository<Organizat
                               @Param("q") String q,
                               @Param("isActive") Boolean isActive,
                               Pageable pageable);
-    @Query("SELECT o FROM Organization o WHERE o.isActive = :isActive)")
+    @Query("SELECT o FROM Organization o WHERE o.isActive = :isActive")
     Page<Organization> findAllByIsActive(@Param("isActive") Boolean isActive,
                               Pageable pageable);
+    @Query("SELECT o FROM Organization o WHERE o.company.id = :companyId AND o.isActive = :isActive")
+    Page<Organization> findAllByCompanyIdAndIsActive(
+        @Param("companyId") Long companyId,
+        @Param("isActive") Boolean isActive,
+        Pageable pageable
+    );
 }

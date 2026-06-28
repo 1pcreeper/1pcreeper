@@ -1,15 +1,19 @@
 package project.office_workforce_service.controller.common;
 
+import jakarta.annotation.Nullable;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import project.office_workforce_service.constant.UserRoles;
 import project.office_workforce_service.model.dto.request.PersonCreateRequestDTO;
 import project.office_workforce_service.model.dto.request.PersonUpdateRequestDTO;
+import project.office_workforce_service.model.dto.response.PersonDetailResponseDTO;
 import project.office_workforce_service.model.dto.response.PersonResponseDTO;
+import project.office_workforce_service.model.dto.response.StaffResponseDTO;
 import project.office_workforce_service.service.common.PersonService;
 import project.shared_office_starter.model.dto.base.APIBaseResponseDTO;
 import project.shared_office_starter.model.dto.base.PaginationBaseResponseDTO;
@@ -47,5 +51,23 @@ public class PersonController {
     public ResponseEntity<APIBaseResponseDTO<PersonResponseDTO>> update(
         @PathVariable Long id, @Valid @RequestBody PersonUpdateRequestDTO request) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(personService.update(id, request)));
+    }
+    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @GetMapping()
+    public ResponseEntity<APIBaseResponseDTO<PaginationBaseResponseDTO<PersonResponseDTO>>> findAll(
+        @PageableDefault Pageable pageable
+    ) {
+        return ResponseEntity.ok(APIBaseResponseDTO.success(personService.findAll(pageable)));
+    }
+    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @DeleteMapping("/{id}")
+    public ResponseEntity<APIBaseResponseDTO<Void>> delete(@PathVariable("id") Long id) {
+        personService.delete(id);
+        return ResponseEntity.ok(APIBaseResponseDTO.success(null));
+    }
+    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @GetMapping("/details/{id}")
+    public ResponseEntity<APIBaseResponseDTO<PersonDetailResponseDTO>> findByIdInDetail(@PathVariable Long id) {
+        return ResponseEntity.ok(APIBaseResponseDTO.success(personService.findByIdInDetail(id)));
     }
 }

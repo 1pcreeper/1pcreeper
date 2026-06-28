@@ -19,7 +19,7 @@ export default class CompanyContentService {
     public async findById(id: number): Promise<CompanyResponseDTO> {
         return await officeAPI<null, CompanyResponseDTO>(`/workforce/companies/${id}`, "GET", null);
     }
-    public async findAll(page: PageParams): Promise<PaginationBaseResponseDTO<CompanyResponseDTO>> {
+    public async findAllS1(page: PageParams): Promise<PaginationBaseResponseDTO<CompanyResponseDTO>> {
         return await officeAPI<null, PaginationBaseResponseDTO<CompanyResponseDTO>>(`/workforce/companies?page=${page.page}&size=${page.size}`, "GET", null);
     }
 

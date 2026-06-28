@@ -3,6 +3,8 @@ package project.office_workforce_service.mapper;
 import org.springframework.stereotype.Component;
 import project.office_workforce_service.model.dto.object.PersonDetailDTO;
 import project.office_workforce_service.model.dto.object.StaffDetailDTO;
+import project.office_workforce_service.model.dto.response.PersonDetailResponseDTO;
+import project.office_workforce_service.model.entity.Person;
 import project.office_workforce_service.model.entity.PersonDetail;
 import project.office_workforce_service.model.entity.StaffDetail;
 

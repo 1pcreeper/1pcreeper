@@ -48,7 +48,7 @@ public class CompanyMapper {
         if (request.getSecretaryLicenseNumber() != null) entity.setSecretaryLicenseNumber(request.getSecretaryLicenseNumber());
         if (request.getEmail() != null) entity.setEmail(request.getEmail());
         if (request.getTel() != null) entity.setTel(request.getTel());
-        if (request.getIsActive() != null) entity.setIsActive(request.getIsActive());
+        entity.setIsActive(true);
     }
 
     public CompanyResponseDTO toResponseDTO(Company company) {

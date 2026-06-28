@@ -10,6 +10,8 @@ import project.office_workforce_service.model.entity.Staff;
 import project.office_workforce_service.model.entity.enums.WorkType;
 import project.office_workforce_service.repository.base.AbstractBaseRepository;
 
+import java.util.List;
+
 @Repository
 public interface StaffRepository extends AbstractBaseRepository<Staff, Long> {
 
@@ -34,4 +36,12 @@ public interface StaffRepository extends AbstractBaseRepository<Staff, Long> {
 
     @Query("SELECT s FROM Staff s WHERE s.isActive = :isActive")
     Page<Staff> findAllByIsActive(@Param("isActive") Boolean isActive, Pageable pageable);
+    @Query("SELECT s FROM Staff s WHERE s.company.id = :companyId AND s.isActive = :isActive")
+    Page<Staff> findAllByCompanyIdAndIsActive(
+        @Param("companyId") Long companyId,
+        @Param("isActive") Boolean isActive, 
+        Pageable pageable
+    );
+    @Query("SELECT s FROM Staff s WHERE s.person.id = :personId")
+    List<Staff> findByPersonId(@Param("personId")Long personId);
 }

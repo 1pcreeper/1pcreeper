@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 import project.office_workforce_service.model.dto.object.PersonDTO;
 import project.office_workforce_service.model.dto.request.PersonCreateRequestDTO;
 import project.office_workforce_service.model.dto.request.PersonUpdateRequestDTO;
-import project.office_workforce_service.model.dto.response.PersonDetailResponseDTO;
 import project.office_workforce_service.model.dto.response.PersonResponseDTO;
 import project.office_workforce_service.model.entity.Person;
 import project.office_workforce_service.model.entity.PersonDetail;
@@ -38,7 +37,7 @@ public class PersonMapper {
         if (request.getOfficeTel() != null) entity.setOfficeTel(request.getOfficeTel());
         if (request.getMobileTel() != null) entity.setMobileTel(request.getMobileTel());
         if (request.getEmail() != null) entity.setEmail(request.getEmail());
-        if (request.getIsActive() != null) entity.setIsActive(request.getIsActive());
+        entity.setIsActive(true);
     }
 
     public PersonResponseDTO toResponseDTO(Person person) {
@@ -50,10 +49,16 @@ public class PersonMapper {
             .id(person.getId())
             .nameEnglish(person.getNameEnglish())
             .nameChinese(person.getNameChinese())
-            .email(person.getEmail())
+            .officeTel(person.getOfficeTel())
             .mobileTel(person.getMobileTel())
+            .email(person.getEmail())
             .hkId(person.getHkId())
+            .cnId(person.getCnId())
+            .moId(person.getMoId())
+            .passportId(person.getPassportId())
             .isActive(person.getIsActive())
+            .createdAt(person.getCreatedAt())
+            .updatedAt(person.getUpdatedAt())
             .build();
     }
 

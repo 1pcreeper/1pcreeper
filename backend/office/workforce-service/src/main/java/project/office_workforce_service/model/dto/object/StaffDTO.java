@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 public class StaffDTO {
     private Long id;
     private Long companyId;
+    private String companyName;
     private Long personId;
     private Long orgId;
     private String orgName;

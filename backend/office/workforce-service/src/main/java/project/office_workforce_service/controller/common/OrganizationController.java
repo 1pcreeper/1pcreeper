@@ -1,5 +1,6 @@
 package project.office_workforce_service.controller.common;
 
+import jakarta.annotation.Nullable;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -11,6 +12,7 @@ import project.office_workforce_service.constant.UserRoles;
 import project.office_workforce_service.model.dto.request.OrganizationCreateRequestDTO;
 import project.office_workforce_service.model.dto.request.OrganizationUpdateRequestDTO;
 import project.office_workforce_service.model.dto.response.OrganizationResponseDTO;
+import project.office_workforce_service.model.entity.Organization;
 import project.office_workforce_service.service.common.OrganizationService;
 import project.shared_office_starter.model.dto.base.APIBaseResponseDTO;
 import project.shared_office_starter.model.dto.base.PaginationBaseResponseDTO;
@@ -31,7 +33,7 @@ public class OrganizationController {
     public ResponseEntity<APIBaseResponseDTO<PaginationBaseResponseDTO<OrganizationResponseDTO>>> search(
         @RequestParam(required = false) Long companyId,
         @RequestParam(required = false) String q,
-        @RequestParam(required = false,defaultValue = "true") Boolean isActive,
+        @RequestParam(required = false, defaultValue = "true") Boolean isActive,
         Pageable pageable
     ) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(organizationService.search(companyId, q, isActive, pageable)));
@@ -52,12 +54,23 @@ public class OrganizationController {
     @Secured({UserRoles.WORKFORCE_ADMIN})
     @PutMapping("/{id}")
     public ResponseEntity<APIBaseResponseDTO<OrganizationResponseDTO>> update(
-        @PathVariable Long id, @Valid @RequestBody OrganizationUpdateRequestDTO request) {
+        @PathVariable("id") Long id, @Valid @RequestBody OrganizationUpdateRequestDTO request) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(organizationService.update(id, request)));
     }
+
     @Secured({UserRoles.WORKFORCE_ADMIN})
     @GetMapping()
-    public ResponseEntity<APIBaseResponseDTO<PaginationBaseResponseDTO<OrganizationResponseDTO>>> findAll(@PageableDefault Pageable pageable){
-        return ResponseEntity.ok(APIBaseResponseDTO.success(organizationService.findAll(pageable)));
+    public ResponseEntity<APIBaseResponseDTO<PaginationBaseResponseDTO<OrganizationResponseDTO>>> findAll(
+        @PageableDefault Pageable pageable,
+        @Nullable @RequestParam(value = "companyId", required = false) Long companyId
+    ) {
+        return ResponseEntity.ok(APIBaseResponseDTO.success(organizationService.findAll(pageable,companyId)));
+    }
+
+    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @DeleteMapping("/{id}")
+    public ResponseEntity<APIBaseResponseDTO<Void>> delete(@PathVariable("id") Long id) {
+        organizationService.delete(id);
+        return ResponseEntity.ok(APIBaseResponseDTO.success(null));
     }
 }

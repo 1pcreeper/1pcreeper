@@ -21,8 +21,6 @@ public class StaffUpdateRequestDTO {
 
     private WorkType type;
 
-    private Boolean isActive;
-
     @Valid
     private StaffDetailRequestDTO details;
 }

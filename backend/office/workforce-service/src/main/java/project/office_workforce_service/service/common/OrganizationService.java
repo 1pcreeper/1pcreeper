@@ -7,12 +7,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 import project.office_workforce_service.mapper.OrganizationMapper;
 import project.office_workforce_service.model.dto.request.OrganizationCreateRequestDTO;
 import project.office_workforce_service.model.dto.request.OrganizationUpdateRequestDTO;
 import project.office_workforce_service.model.dto.response.OrganizationResponseDTO;
 import project.office_workforce_service.model.entity.Company;
 import project.office_workforce_service.model.entity.Organization;
+import project.office_workforce_service.model.entity.Staff;
 import project.office_workforce_service.service.manager.CompanyManagerService;
 import project.office_workforce_service.service.manager.OrganizationManagerService;
 import project.shared_office_starter.mapper.PaginationMapper;
@@ -66,9 +68,21 @@ public class OrganizationService {
         return organizationMapper.toResponseDTO(organizationManagerService.save(existingOrg));
     }
     
-    public PaginationBaseResponseDTO<OrganizationResponseDTO> findAll(Pageable pageable){
+    public PaginationBaseResponseDTO<OrganizationResponseDTO> findAll(
+        Pageable pageable,
+        @Nullable Long companyId
+    ){
+        Page<Organization> organization = companyId != null ?
+            organizationManagerService.findAllByCompanyIdAndIsActive(companyId, true, pageable)
+            : organizationManagerService.findAllByIsActive(true, pageable);
         return paginationMapper.toDTO(organizationManagerService.findAllByIsActive(true,pageable),
             org->organizationMapper.toResponseDTO(org)
         );
+    }
+    @Transactional
+    public void delete(Long id){
+        Organization existingOrg = organizationManagerService.findById(id);
+        existingOrg.setIsActive(false);
+        organizationManagerService.save(existingOrg);
     }
 }

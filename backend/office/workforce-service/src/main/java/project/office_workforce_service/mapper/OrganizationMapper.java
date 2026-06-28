@@ -26,7 +26,7 @@ public class OrganizationMapper {
 
         if (request.getName() != null) entity.setName(request.getName());
         if (request.getBio() != null) entity.setBio(request.getBio());
-        if (request.getIsActive() != null) entity.setIsActive(request.getIsActive());
+        entity.setIsActive(true);
     }
 
     public OrganizationResponseDTO toResponseDTO(Organization organization) {

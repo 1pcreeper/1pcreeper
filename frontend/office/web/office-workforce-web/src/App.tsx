@@ -12,12 +12,12 @@ import { OfficeAuthContextProvider } from './contexts/OfficeAuthContext';
 import Orchestrator from './Orchestrator';
 import Logout from './pages/auth/Logout';
 import Dashboard from './pages/companies/_id/dashboard/Dashboard';
-import Occupations from './pages/companies/_id/occupations/Occupations';
 import Organizations from './pages/companies/_id/organizations/Organizations';
 import Periods from './pages/companies/_id/periods/Periods';
-import Places from './pages/companies/_id/places/Places';
 import Schedules from './pages/companies/_id/schedules/Schedules';
-import StaffDetails from './pages/staffs/StaffDetails';
+import PersonDetails from './pages/persons/_id/PersonDetails';
+import Persons from './pages/persons/Persons';
+import StaffDetails from './pages/staffs/_id/StaffDetails';
 import Staffs from './pages/staffs/Staffs';
 
 const router = createBrowserRouter([
@@ -63,28 +63,28 @@ const router = createBrowserRouter([
                                         element: <Dashboard />
                                     },
                                     {
-                                        path: "/companies/:id/organizations",
-                                        element: <Organizations />
+                                        path: "/companies/:id/schedules",
+                                        element: <Schedules />
                                     },
                                     {
-                                        path: "/companies/:id/places",
-                                        element: <Places />
+                                        path: "/companies/:id/organizations",
+                                        element: <Organizations />
                                     },
                                     {
                                         path: "/companies/:id/periods",
                                         element: <Periods />
                                     },
                                     {
-                                        path: "/companies/:id/occupations",
-                                        element: <Occupations />
-                                    },
-                                    {
                                         path: "/companies/:id/staffs",
                                         element: <Staffs />
                                     },
                                     {
-                                        path: "/companies/:id/schedules",
-                                        element: <Schedules />
+                                        path: "/persons",
+                                        element: <Persons />
+                                    },
+                                    {
+                                        path: "/persons/:id",
+                                        element: <PersonDetails />
                                     },
                                     {
                                         path: "/staffs/:id",
