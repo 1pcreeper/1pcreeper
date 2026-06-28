@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="Change">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -128,6 +129,23 @@
       <command value="mvn clean -X" />
       <command value="mvn mvn clean install -DskipTests" />
     </option>
+  </component>
+  <component name="RunManager" selected="Application.GeneralServiceRegistryApplication ">
+    <list>
+      <item itemvalue="Application.GeneralServiceRegistryApplication " />
+      <item itemvalue="Application.GeneralConfigMappingApplication" />
+      <item itemvalue="Application.GeneralAPIGatewayApplication" />
+      <item itemvalue="Application.GeneralAccountServiceApplication" />
+      <item itemvalue="Application.GeneralObjGenerateServiceApplication" />
+      <item itemvalue="Application.OfficeServiceRegistryApplication " />
+      <item itemvalue="Application.OfficeConfigMappingApplication" />
+      <item itemvalue="Application.OfficeAPIGatewayApplication" />
+      <item itemvalue="Application.OfficeAccountServiceApplication" />
+      <item itemvalue="Application.OfficeWorkforceServiceApplication" />
+      <item itemvalue="Application.OfficeExpenditureServiceApplication" />
+      <item itemvalue="Application.GeneralDummyServiceApplication" />
+      <item itemvalue="Application.OfficeDummyServiceApplication" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -490,7 +508,15 @@
       <option name="project" value="LOCAL" />
       <updated>1782635246838</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Change">
+      <option name="closed" value="true" />
+      <created>1782635746581</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1782635746581</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
