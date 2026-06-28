@@ -2,40 +2,42 @@ import { EntityPageLayout } from '@/components/layout/EntityPageLayout';
 import { Column, DataTable } from '@/components/ui/DataTable';
 import { DeleteModal } from '@/components/ui/DeleteModal';
 import { Modal } from '@/components/ui/Modal';
+import { OrganizationCreateRequestDTO } from '@/models/dto/office/workforce/request.dto';
+import { OrganizationResponseDTO } from '@/models/dto/office/workforce/response.dto';
+import OrganizationContentService from '@/services/content/office/workforce/OrganizationContentService';
+import { useCompanyStore } from '@/store/useCompanyStore';
 import { Building } from 'lucide-react';
 import React, { useState } from 'react';
 
-type Organization = { id: string; name: string; code: string; parent: string; status: string; bio?: string };
-
-const MOCK_DATA: Organization[] = [
-    { id: '1', name: 'Engineering Dept', code: 'ENG', parent: 'Acme Corp', status: 'Active' },
-    { id: '2', name: 'Human Resources', code: 'HR', parent: 'Acme Corp', status: 'Active' },
-    { id: '3', name: 'North America Sales', code: 'NA-SALES', parent: 'Sales Div', status: 'Active' },
-];
-
 export default function Organizations() {
-    const [data, setData] = useState(MOCK_DATA);
+    const { currentSelectedCompany } = useCompanyStore();
+    const organizationContentService = OrganizationContentService.getInstance();
+    const [data, setData] = useState<OrganizationResponseDTO[]>([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-    const [selectedOrg, setSelectedOrg] = useState<Organization | null>(null);
+    const [selectedOrg, setSelectedOrg] = useState<OrganizationResponseDTO | null>(null);
 
-    const [formData, setFormData] = useState({ name: '', code: '', parent: '1', status: 'Active', bio: '' });
+    const [formData, setFormData] = useState<OrganizationCreateRequestDTO>({
+        name: "",
+        bio: "",
+        companyId: currentSelectedCompany?.id || 0
+    });
 
-    const columns: Column<Organization>[] = [
-        { header: 'Name', accessorKey: 'name', cell: (row) => <span className="font-bold text-slate-900">{row.name}</span> },
-        { header: 'Code', cell: (row) => <span className="text-slate-500 font-mono">{row.code}</span> },
-        { header: 'Parent Org', accessorKey: 'parent', cell: (row) => <span className="text-slate-600">{row.parent}</span> },
+    const columns: Column<OrganizationResponseDTO>[] = [
+        { header: 'ID', accessorKey: 'id', cell: (row) => <span className="font-bold text-slate-900">{row.id}</span> },
+        { header: 'Name', accessorKey: "name", cell: (row) => <span className="text-slate-500 font-mono">{row.name}</span> },
+        { header: 'Bio', accessorKey: 'bio', cell: (row) => <span className="text-slate-600">{row.bio}</span> },
         {
             header: 'Status',
             cell: (row) => (
-                <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold ${row.status === 'Active' ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-100 text-slate-600'}`}>
-                    {row.status}
+                <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold ${row.isActive ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-100 text-slate-600'}`}>
+                    {row.isActive ? "Active" : "Inactive"}
                 </span>
             )
         },
     ];
 
-    const handleOpenModal = (org?: Organization) => {
+    const handleOpenModal = (org?: OrganizationResponseDTO) => {
         if (org) {
             setSelectedOrg(org);
             setFormData({ name: org.name, code: org.code, parent: '1', status: org.status, bio: org.bio || '' });

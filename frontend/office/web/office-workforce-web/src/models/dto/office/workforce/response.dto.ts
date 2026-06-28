@@ -43,3 +43,11 @@ export interface StaffDetailResponseDTO {
     staffOccupations: StaffOccupationDTO[];
     schedulePreferences: StaffSchedulePreferenceDTO[];
 }
+
+export interface OrganizationResponseDTO {
+    id: number;
+    companyId: number;
+    name: string;
+    bio: string;
+    isActive: boolean;
+}

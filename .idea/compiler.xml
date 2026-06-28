@@ -9,7 +9,6 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
         </processorPath>
         <module name="shared-office-starter" />
         <module name="general-api-gateway" />
@@ -22,21 +21,13 @@
         <module name="shared-general-common-lib" />
         <module name="general-service-registry" />
         <module name="office-service-registry" />
+        <module name="office-expenditure-service" />
         <module name="office-config-mapping" />
         <module name="general-account-service" />
         <module name="office-dummy-service" />
         <module name="shared-office-common-lib" />
         <module name="general-dummy-service" />
         <module name="shared-general-auth-starter" />
-      </profile>
-      <profile name="Annotation profile for office-expenditure-service" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
-        </processorPath>
-        <module name="office-expenditure-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

@@ -27,3 +27,8 @@ export interface StaffCreateRequestDTO {
     type: WorkType
     details: StaffDetailRequestDTO;
 }
+export interface OrganizationCreateRequestDTO {
+    companyId: number;
+    name: string;
+    bio: string;
+}

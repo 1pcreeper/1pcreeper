@@ -24,9 +24,10 @@ export default function Staffs() {
     const [formData, setFormData] = useState({ name: '', role: 'Software Engineer', department: 'Engineering', status: 'Active', type: 'FULL_TIME', cust_id: '' });
 
     const columns: Column<StaffResponseDTO>[] = [
+        { header: 'Staff ID', accessorKey: 'id', cell: (row) => <span className="text-slate-500">{row.id}</span> },
         { header: 'Name', accessorKey: 'personNameEnglish', cell: (row) => <span className="font-bold text-slate-900">{staffContentService.getDisplayName(row)}</span> },
         { header: 'Organization', accessorKey: 'orgName', cell: (row) => <span className="text-slate-600">{row.orgName}</span> },
-        { header: 'Cust', accessorKey: 'custId', cell: (row) => <span className="text-slate-500">{row.custId}</span> },
+        { header: 'Person ID', accessorKey: 'personId', cell: (row) => <span className="text-slate-500">{row.personId}</span> },
         {
             header: 'Status',
             cell: (row) => (

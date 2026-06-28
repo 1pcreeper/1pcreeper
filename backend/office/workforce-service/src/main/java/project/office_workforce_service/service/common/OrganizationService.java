@@ -2,7 +2,9 @@ package project.office_workforce_service.service.common;
 
 import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.office_workforce_service.mapper.OrganizationMapper;
@@ -62,5 +64,11 @@ public class OrganizationService {
         organizationMapper.updateEntity(requestDTO, existingOrg);
 
         return organizationMapper.toResponseDTO(organizationManagerService.save(existingOrg));
+    }
+    
+    public PaginationBaseResponseDTO<OrganizationResponseDTO> findAll(Pageable pageable){
+        return paginationMapper.toDTO(organizationManagerService.findAllByIsActive(true,pageable),
+            org->organizationMapper.toResponseDTO(org)
+        );
     }
 }

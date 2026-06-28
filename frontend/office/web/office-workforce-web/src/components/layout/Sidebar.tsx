@@ -9,8 +9,11 @@ const mainNav = [
     { icon: CalendarCheck, label: 'Schedules', path: 'schedules' },
 ];
 
-const entityNav = [
+const peopleNav = [
     { icon: Users, label: 'Staff', path: 'staffs' },
+];
+
+const companyNav = [
     { icon: Building, label: 'Organizations', path: 'organizations' },
     { icon: MapPin, label: 'Places', path: 'places' },
     { icon: Clock, label: 'Periods', path: 'periods' },
@@ -21,8 +24,11 @@ export default function Sidebar() {
     const location = useLocation();
     const { currentSelectedCompany } = useCompanyStore();
     const companyId = currentSelectedCompany?.id || null;
-    const [isEntitiesOpen, setIsEntitiesOpen] = useState(
-        entityNav.some(item => location.pathname.includes(item.path))
+    const [isPeopleNavOpen, setIsPeopleNavOpen] = useState(
+        peopleNav.some(item => location.pathname.includes(item.path))
+    );
+    const [isCompanyNavOpen, setIsCompanyNavOpen] = useState(
+        companyNav.some(item => location.pathname.includes(item.path))
     );
 
     return (
@@ -51,22 +57,59 @@ export default function Sidebar() {
 
             <div className="mt-4 mb-1 mx-2">
                 <button
-                    onClick={() => setIsEntitiesOpen(!isEntitiesOpen)}
+                    onClick={() => setIsPeopleNavOpen(!isPeopleNavOpen)}
                     className="w-full flex items-center justify-between px-2.5 py-1.5 text-[10px] font-bold text-slate-400 hover:text-slate-600 uppercase tracking-wider rounded transition-colors focus:outline-none"
                 >
                     <div className="flex items-center gap-2">
                         <FolderTree className="w-3 h-3" />
-                        <span>Entities</span>
+                        <span>People</span>
                     </div>
-                    <ChevronDown className={cn("w-3 h-3 transition-transform", isEntitiesOpen ? "rotate-180" : "")} />
+                    <ChevronDown className={cn("w-3 h-3 transition-transform", isPeopleNavOpen ? "rotate-180" : "")} />
                 </button>
             </div>
 
-            {isEntitiesOpen && (
+            {isPeopleNavOpen && (
                 <div className="flex flex-col gap-1 anim-fade-in pl-2">
                     {
                         companyId &&
-                        entityNav.map((item) => (
+                        peopleNav.map((item) => (
+                            <NavLink
+                                key={item.path}
+                                to={`/companies/${companyId}/${item.path}`}
+                                className={({ isActive }) =>
+                                    cn(
+                                        "flex items-center gap-2.5 mx-2 px-2.5 py-1.5 rounded-md text-xs font-bold transition-all cursor-pointer",
+                                        isActive
+                                            ? "bg-indigo-50 text-indigo-600 border border-indigo-100"
+                                            : "text-slate-600 hover:bg-slate-100 hover:text-slate-900 border border-transparent"
+                                    )
+                                }
+                            >
+                                <item.icon className="w-3.5 h-3.5 flex-shrink-0" />
+                                <span className="truncate">{item.label}</span>
+                            </NavLink>
+                        ))}
+                </div>
+            )}
+
+            <div className="mt-4 mb-1 mx-2">
+                <button
+                    onClick={() => setIsCompanyNavOpen(!isCompanyNavOpen)}
+                    className="w-full flex items-center justify-between px-2.5 py-1.5 text-[10px] font-bold text-slate-400 hover:text-slate-600 uppercase tracking-wider rounded transition-colors focus:outline-none"
+                >
+                    <div className="flex items-center gap-2">
+                        <FolderTree className="w-3 h-3" />
+                        <span>Company</span>
+                    </div>
+                    <ChevronDown className={cn("w-3 h-3 transition-transform", isCompanyNavOpen ? "rotate-180" : "")} />
+                </button>
+            </div>
+
+            {isCompanyNavOpen && (
+                <div className="flex flex-col gap-1 anim-fade-in pl-2">
+                    {
+                        companyId &&
+                        companyNav.map((item) => (
                             <NavLink
                                 key={item.path}
                                 to={`/companies/${companyId}/${item.path}`}

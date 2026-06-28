@@ -5,70 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="Change">
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/mapper/PersonDetailMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/mapper/StaffDetailMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/annotation/PermitAllCredentials.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.env.local" beforeDir="false" afterPath="$PROJECT_DIR$/.env.local" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/config/OauthSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/config/OauthSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/controller/common/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/controller/common/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/interceptor/AuthInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/account-service/src/main/java/project/office_account_service/interceptor/AuthInterceptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/api-gateway/src/main/java/project/office_api_gateway/factory/CrossSiteCookieFilterFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/api-gateway/src/main/java/project/office_api_gateway/factory/CrossSiteCookieFilterFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/controller/common/CompanyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/controller/common/CompanyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/controller/common/StaffController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/controller/common/StaffController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/mapper/CompanyMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/mapper/CompanyMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/mapper/PersonMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/mapper/PersonMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/mapper/StaffMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/mapper/StaffMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/mapper/StaffOccupationMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/mapper/StaffOccupationMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/mapper/StaffSchedulePreferenceMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/mapper/StaffSchedulePreferenceMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/object/StaffDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/object/StaffDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/object/StaffOccupationDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/object/StaffOccupationDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/object/StaffSchedulePreferenceDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/object/StaffSchedulePreferenceDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/CompanyDetailResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/CompanyDetailResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/CompanyResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/CompanyResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/PersonDetailResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/PersonDetailResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/PersonResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/PersonResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/StaffDetailResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/StaffDetailResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/StaffResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/StaffResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/entity/Staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/entity/Staff.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/repository/CompanyRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/repository/CompanyRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/repository/StaffOccupationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/repository/StaffOccupationRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/repository/StaffRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/repository/StaffRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/repository/StaffSchedulePreferenceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/repository/StaffSchedulePreferenceRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/common/CompanyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/common/CompanyService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/common/PersonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/common/PersonService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/common/StaffService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/common/StaffService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/CompanyManagerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/CompanyManagerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/StaffManagerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/StaffManagerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/StaffOccupationManagerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/StaffOccupationManagerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/StaffSchedulePreferenceManagerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/StaffSchedulePreferenceManagerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/config/WebConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/resolver/AuthBearerTokenResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/resolver/AuthBearerTokenResolver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/.env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/api/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/api/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/api/office.api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/api/office.api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/components/layout/EntityPageLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/components/layout/EntityPageLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/components/layout/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/components/layout/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/controller/common/OrganizationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/controller/common/OrganizationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/repository/OrganizationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/repository/OrganizationRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/common/OrganizationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/common/OrganizationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/OrganizationManagerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/OrganizationManagerService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/components/layout/Sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/components/layout/Sidebar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/components/protected/BasicProtected.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/components/protected/BasicProtected.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/contexts/OfficeAuthContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/contexts/OfficeAuthContext.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/lib/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/lib/utils.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/main.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/models/dto/office/workforce/object.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/models/dto/office/workforce/object.dto.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/models/dto/office/workforce/request.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/models/dto/office/workforce/request.dto.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/models/dto/office/workforce/response.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/models/dto/office/workforce/response.dto.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/pages/auth/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/pages/auth/Login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/pages/companies/Companies.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/pages/companies/Companies.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/pages/companies/_id/organizations/Organizations.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/pages/companies/_id/organizations/Organizations.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/pages/staffs/StaffDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/pages/staffs/StaffDetails.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/pages/staffs/Staffs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/pages/staffs/Staffs.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/services/content/office/account/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/services/content/office/account/auth.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/services/content/office/workforce/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/services/content/office/workforce/auth.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/vite.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,7 +105,7 @@
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/1pcreeper/projects/001 Project/codes/v001/1pcreeper-project",
+    "last_opened_file_path": "E:/1pcreeper/projects/001 Project/codes/v001/1pcreeper",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15625",
     "project.structure.side.proportion": "0.3034483",
@@ -192,7 +141,7 @@
       <command value="mvn mvn clean install -DskipTests" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.OfficeWorkforceServiceApplication">
+  <component name="RunManager" selected="Application.GeneralAccountServiceApplication">
     <list>
       <item itemvalue="Application.GeneralServiceRegistryApplication " />
       <item itemvalue="Application.GeneralConfigMappingApplication" />
@@ -554,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1782076418514</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Change">
+      <option name="closed" value="true" />
+      <created>1782590641235</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1782590641235</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

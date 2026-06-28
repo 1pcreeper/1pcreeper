@@ -21,4 +21,7 @@ public interface OrganizationRepository extends AbstractBaseRepository<Organizat
                               @Param("q") String q,
                               @Param("isActive") Boolean isActive,
                               Pageable pageable);
+    @Query("SELECT o FROM Organization o WHERE o.isActive = :isActive)")
+    Page<Organization> findAllByIsActive(@Param("isActive") Boolean isActive,
+                              Pageable pageable);
 }

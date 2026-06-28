@@ -126,7 +126,7 @@ export default function StaffDetails() {
                                         {si.work_type.replace(/_/g, ' ')}
                                     </span>
                                     <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-700 tracking-wider">
-                                        {si.cust_id}
+                                        PersonID: {p.id}
                                     </span>
                                 </div>
                             </div>
@@ -147,12 +147,16 @@ export default function StaffDetails() {
                                     {/* Left Column: Personal Information */}
                                     <div className="flex flex-col gap-5">
                                         <div>
-                                            <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-4 border-b border-slate-100 pb-2">Personal</h3>
+                                            <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-1 border-b border-slate-100 pb-2">Personal</h3>
                                         </div>
                                         <div className="grid grid-cols-2 gap-x-4 gap-y-5">
                                             <div>
-                                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Person ID</label>
-                                                <div className="text-sm font-medium text-slate-900">{p.id}</div>
+                                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Chinese Name</label>
+                                                <div className="text-sm font-medium text-slate-900">{p.name_chinese}</div>
+                                            </div>
+                                            <div>
+                                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">English Name</label>
+                                                <div className="text-sm font-medium text-slate-900">{p.name_english}</div>
                                             </div>
                                             <div className="col-span-2">
                                                 <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5"><Mail className="w-3 h-3" /> Email</label>
@@ -174,13 +178,21 @@ export default function StaffDetails() {
                                                 <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5"><CreditCard className="w-3 h-3" /> Passport ID</label>
                                                 <div className="text-sm font-mono text-slate-700">{p.passport_id || '-'}</div>
                                             </div>
+                                            <div>
+                                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5"><CreditCard className="w-3 h-3" /> CN ID</label>
+                                                <div className="text-sm font-mono text-slate-700">{p.cn_id || '-'}</div>
+                                            </div>
+                                            <div>
+                                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5"><CreditCard className="w-3 h-3" /> MO ID</label>
+                                                <div className="text-sm font-mono text-slate-700">{p.mo_id || '-'}</div>
+                                            </div>
                                         </div>
                                     </div>
 
                                     {/* Right Column: Employment Overview */}
                                     <div className="flex flex-col gap-5">
                                         <div>
-                                            <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-4 border-b border-slate-100 pb-2">Employment Overview</h3>
+                                            <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-1 border-b border-slate-100 pb-2">Employment Overview</h3>
                                         </div>
                                         <div className="grid grid-cols-2 gap-x-4 gap-y-5">
                                             <div className="col-span-2">
@@ -194,6 +206,14 @@ export default function StaffDetails() {
                                             <div>
                                                 <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Staff ID</label>
                                                 <div className="text-sm font-mono text-slate-900">{si.id}</div>
+                                            </div>
+                                            <div>
+                                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Person ID</label>
+                                                <div className="text-sm font-mono text-slate-900">{p.id}</div>
+                                            </div>
+                                            <div>
+                                                <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Company ID</label>
+                                                <div className="text-sm font-mono text-slate-900">{staffDetail?.company.id}</div>
                                             </div>
                                             <div>
                                                 <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Cust ID</label>
