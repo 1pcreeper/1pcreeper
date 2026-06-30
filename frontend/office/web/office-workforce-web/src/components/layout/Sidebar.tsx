@@ -70,7 +70,6 @@ export default function Sidebar() {
             {isIndividualNavOpen && (
                 <div className="flex flex-col gap-1 anim-fade-in pl-2">
                     {
-                        companyId &&
                         individualNav.map((item) => (
                             <NavLink
                                 key={item.path}

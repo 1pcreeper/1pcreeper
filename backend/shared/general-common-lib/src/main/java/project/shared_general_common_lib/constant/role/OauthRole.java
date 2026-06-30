@@ -1,5 +1,5 @@
 package project.shared_general_common_lib.constant.role;
 
-public enum SystemRole {
-    SYSTEM_ADMIN
+public enum OauthRole {
+    OAUTH_ADMIN,OAUTH_USER
 }

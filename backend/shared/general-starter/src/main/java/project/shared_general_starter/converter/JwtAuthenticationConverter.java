@@ -40,10 +40,8 @@ public class JwtAuthenticationConverter implements Converter<Jwt, AbstractAuthen
     @Override
     public AbstractAuthenticationToken convert(Jwt source) {
 
-        List<GrantedAuthority> combinedAuthorities = new ArrayList<>();
-        
         jwtAuthRequestBaseHandler.handle(source);
-        combinedAuthorities.addAll(extractAuthorities(source));
+        List<GrantedAuthority> combinedAuthorities = new ArrayList<>(extractAuthorities(source));
 
         String uid = source.getSubject();
         UserDetails userDetails = userDetailsBaseService.loadUserByUsername(uid);

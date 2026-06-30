@@ -80,3 +80,11 @@ export interface PersonDetailResponseDTO {
     detail: PersonDetailDTO;
     staffs: StaffDTO[];
 }
+export interface WorkingPeriodResponseDTO {
+    id: number;
+    orgId: number;
+    name: string;
+    startAt: string;
+    endAt: string;
+    isActive: boolean;
+}
