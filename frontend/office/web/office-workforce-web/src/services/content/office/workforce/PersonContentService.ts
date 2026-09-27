@@ -1,6 +1,6 @@
 import officeAPI from "@/api/office.api";
 import { PageParams, PaginationBaseResponseDTO } from "@/models/dto/base/base.dto";
-import { PersonCreateRequestDTO } from "@/models/dto/office/workforce/request.dto";
+import { PersonCreateRequestDTO, PersonUpdateRequestDTO } from "@/models/dto/office/workforce/request.dto";
 import { PersonDetailResponseDTO, PersonResponseDTO } from "@/models/dto/office/workforce/response.dto";
 
 export default class PersonContentService {
@@ -16,6 +16,15 @@ export default class PersonContentService {
     public async create(requestDTO: PersonCreateRequestDTO): Promise<PersonResponseDTO> {
         return await officeAPI<PersonCreateRequestDTO, PersonResponseDTO>(`/workforce/persons`, "POST", requestDTO);
     }
+
+    public async delete(id: number): Promise<void> {
+        await officeAPI<null, void>(`/workforce/persons/${id}`, "DELETE", null);
+    }
+
+    public async update(id: number, requestDTO: PersonUpdateRequestDTO): Promise<PersonResponseDTO> {
+        return await officeAPI<PersonUpdateRequestDTO, PersonResponseDTO>(`/workforce/persons/${id}`, "PUT", requestDTO);
+    }
+
     public async findById(id: number): Promise<PersonResponseDTO> {
         return await officeAPI<null, PersonResponseDTO>(`/workforce/persons/${id}`, "GET", null);
     }

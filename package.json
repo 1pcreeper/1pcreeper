@@ -1,0 +1,20 @@
+{
+  "name": "1pcreeper",
+  "private": true,
+  "workspaces": [
+    "frontend/office/web/office-workforce-web"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=frontend/office/web/office-workforce-web",
+    "build": "npm run build --workspace=frontend/office/web/office-workforce-web",
+    "start": "node server.js",
+    "lint": "npm run lint --workspace=frontend/office/web/office-workforce-web"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "tsx": "^4.21.0",
+    "vite": "^6.2.3"
+  }
+}

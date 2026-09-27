@@ -10,9 +10,9 @@ import project.office_workforce_service.model.dto.request.OccupationCreateReques
 import project.office_workforce_service.model.dto.request.OccupationUpdateRequestDTO;
 import project.office_workforce_service.model.dto.response.OccupationResponseDTO;
 import project.office_workforce_service.model.entity.Occupation;
-import project.office_workforce_service.model.entity.Organization;
+import project.office_workforce_service.model.entity.Department;
 import project.office_workforce_service.service.manager.OccupationManagerService;
-import project.office_workforce_service.service.manager.OrganizationManagerService;
+import project.office_workforce_service.service.manager.DepartmentManagerService;
 import project.shared_office_starter.mapper.PaginationMapper;
 import project.shared_office_starter.model.dto.base.PaginationBaseResponseDTO;
 
@@ -22,20 +22,20 @@ public class OccupationService {
     @Autowired
     private OccupationManagerService occupationManagerService;
     @Autowired
-    private OrganizationManagerService organizationManagerService;
+    private DepartmentManagerService departmentManagerService;
     @Autowired
     private OccupationMapper occupationMapper;
     @Autowired
     private PaginationMapper paginationMapper;
 
     public PaginationBaseResponseDTO<OccupationResponseDTO> search(
-        @Nullable Long orgId,
+        @Nullable Long departId,
         @Nullable String q,
         @Nullable Boolean isActive,
         Pageable pageable) {
 
         return paginationMapper.toDTO(
-            occupationManagerService.search(orgId, q, isActive, pageable),
+            occupationManagerService.search(departId, q, isActive, pageable),
             occupationMapper::toResponseDTO
         );
     }
@@ -46,7 +46,7 @@ public class OccupationService {
 
     @Transactional
     public OccupationResponseDTO create(OccupationCreateRequestDTO requestDTO) {
-        Organization org = organizationManagerService.getReferenceById(requestDTO.getOrgId());
+        Department org = departmentManagerService.getReferenceById(requestDTO.getDepartId());
         Occupation newOccupation = occupationMapper.toEntity(requestDTO, org);
         return occupationMapper.toResponseDTO(occupationManagerService.save(newOccupation));
     }

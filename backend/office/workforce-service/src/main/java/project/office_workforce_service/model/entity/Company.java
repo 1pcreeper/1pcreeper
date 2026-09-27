@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import project.office_workforce_service.model.entity.base.AbstractAuditableEntity;
 
+import java.util.UUID;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -12,6 +14,9 @@ import project.office_workforce_service.model.entity.base.AbstractAuditableEntit
 @Entity
 @Table(name = "companies")
 public class Company extends AbstractAuditableEntity {
+
+    @Column(name = "uid", unique = true, updatable = false)
+    private UUID uid;
 
     @Column(name = "name_english")
     private String nameEnglish;

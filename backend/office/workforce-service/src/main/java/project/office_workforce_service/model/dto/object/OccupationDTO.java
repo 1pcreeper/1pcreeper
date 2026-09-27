@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class OccupationDTO {
     private Long id;
     private String name;
-    private Long orgId;
+    private Long departId;
     private Boolean isActive;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

@@ -15,6 +15,7 @@ public class StaffDetailDTO {
     private Long id;
     private Long staffId;
     private Integer maxWorkingHrs;
+    private String about;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

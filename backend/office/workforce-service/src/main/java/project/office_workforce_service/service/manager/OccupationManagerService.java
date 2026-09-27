@@ -19,7 +19,7 @@ public class OccupationManagerService extends AbstractBaseService<Occupation, Lo
         this.occupationRepository = occupationRepository;
     }
 
-    public Page<Occupation> search(Long orgId, String q, Boolean isActive, Pageable pageable) {
-        return occupationRepository.search(orgId, q, isActive, pageable);
+    public Page<Occupation> search(Long departId, String q, Boolean isActive, Pageable pageable) {
+        return occupationRepository.search(departId, q, isActive, pageable);
     }
 }

@@ -37,8 +37,7 @@ public class AuthController {
         return "Hello";
     }
     
-
-    @Secured({UserRoles.EXPENDITURE_USER})
+    
     @GetMapping("/verify")
     public ResponseEntity<APIBaseResponseDTO<UserVerifyResponseDTO>> verify(
         @AuthenticationPrincipal User user

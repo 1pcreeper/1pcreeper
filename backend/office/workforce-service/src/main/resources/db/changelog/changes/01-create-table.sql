@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS staff_details CASCADE;
 DROP TABLE IF EXISTS staffs CASCADE;
 DROP TABLE IF EXISTS places CASCADE;
 DROP TABLE IF EXISTS working_periods CASCADE;
-DROP TABLE IF EXISTS organizations CASCADE;
+DROP TABLE IF EXISTS departments CASCADE;
 DROP TABLE IF EXISTS company_details CASCADE;
 DROP TABLE IF EXISTS companies CASCADE;
 DROP TABLE IF EXISTS person_details CASCADE;
@@ -28,7 +28,7 @@ DROP TYPE IF EXISTS work_type;
 DROP TYPE IF EXISTS gender;
 
 CREATE TYPE gender AS ENUM ('MALE', 'FEMALE');
-CREATE TYPE work_type AS ENUM ('FULL_TIME', 'FULL_PART_TIME', 'PART_TIME','CONTRACT','FREELANCE');
+CREATE TYPE work_type AS ENUM ('FULL_TIME', 'FULL_PART_TIME', 'PART_TIME','CONTRACT','FREELANCE','INTERN','TEMPORARY','SPECIAL');
 CREATE TYPE transaction_method AS ENUM ('DEPOSIT','WITHDRAWAL','OVERWRITE','SYSTEM_UPDATE');
 CREATE TYPE schedule_status AS ENUM ('ACTIVE','INACTIVE','DRAFT');
 CREATE TYPE task_status AS ENUM ('PENDING', 'PROCESSING', 'COMPLETED', 'FAILED');
@@ -62,6 +62,7 @@ CREATE TABLE abstract_auditable_entity (
 
 CREATE TABLE persons (
    id SERIAL PRIMARY KEY,
+   uid UUID UNIQUE DEFAULT gen_random_uuid(),
    name_english VARCHAR(255),
    name_chinese VARCHAR(255),
    office_tel VARCHAR(50) NULL CHECK (office_tel ~ '^[+]([0-9]){3}\s([0-9])+$' OR office_tel IS NULL),
@@ -90,6 +91,7 @@ CREATE TABLE persons (
 
 CREATE TABLE companies (
   id SERIAL PRIMARY KEY,
+  uid UUID UNIQUE DEFAULT gen_random_uuid(),
   name_english VARCHAR(255),
   name_chinese VARCHAR(255),
   business_registration_number VARCHAR(50) UNIQUE NULL CHECK (business_registration_number ~ '^[0-9]{8}$' OR business_registration_number IS NULL),
@@ -108,8 +110,9 @@ CREATE TABLE company_details (
   website TEXT
 ) INHERITS (abstract_auditable_entity);
 
-CREATE TABLE organizations (
+CREATE TABLE departments (
   id SERIAL PRIMARY KEY,
+  uid UUID UNIQUE DEFAULT gen_random_uuid(),
   company_id INTEGER NOT NULL REFERENCES companies(id) ON DELETE CASCADE,
   name VARCHAR(255) NOT NULL,
   bio TEXT,
@@ -118,17 +121,18 @@ CREATE TABLE organizations (
 
 CREATE TABLE working_periods (
   id SERIAL PRIMARY KEY,
-  org_id INTEGER NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,
+  depart_id INTEGER NOT NULL REFERENCES departments(id) ON DELETE CASCADE,
   start_at TIME NOT NULL,
   end_at TIME NOT NULL,
   name VARCHAR(255) NOT NULL,
   is_active BOOLEAN DEFAULT TRUE,
-  UNIQUE(org_id,start_at,end_at)
+  UNIQUE(depart_id,start_at,end_at)
 ) INHERITS (abstract_auditable_entity);
 
 CREATE TABLE places (
    id SERIAL PRIMARY KEY,
-   org_id INTEGER NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,
+   uid UUID UNIQUE DEFAULT gen_random_uuid(),
+   depart_id INTEGER NOT NULL REFERENCES departments(id) ON DELETE CASCADE,
    name TEXT NOT NULL,
    address TEXT,
    is_active BOOLEAN DEFAULT TRUE
@@ -136,9 +140,10 @@ CREATE TABLE places (
 
 CREATE TABLE staffs (
    id SERIAL PRIMARY KEY,
+   uid UUID UNIQUE DEFAULT gen_random_uuid(),
    company_id INTEGER NOT NULL REFERENCES companies(id) ON DELETE CASCADE,
    person_id INTEGER NOT NULL REFERENCES persons(id) ON DELETE CASCADE,
-   org_id INTEGER NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,
+   depart_id INTEGER NOT NULL REFERENCES departments(id) ON DELETE CASCADE,
    cust_id TEXT,
    type work_type,
    is_active BOOLEAN DEFAULT TRUE,
@@ -147,14 +152,16 @@ CREATE TABLE staffs (
 
 CREATE TABLE staff_details (
    id SERIAL PRIMARY KEY,
-   staff_id INTEGER NOT NULL REFERENCES staffs(id) ON DELETE CASCADE,
-   max_working_hrs INTEGER NOT NULL CHECK (max_working_hrs > 0)
+   staff_id INTEGER UNIQUE NOT NULL REFERENCES staffs(id) ON DELETE CASCADE,
+   max_working_hrs INTEGER NOT NULL CHECK (max_working_hrs > 0),
+   about TEXT
 ) INHERITS (abstract_auditable_entity);
 
 CREATE TABLE occupations (
     id SERIAL PRIMARY KEY,
+    uid UUID UNIQUE DEFAULT gen_random_uuid(),
     name TEXT NOT NULL,
-    org_id INTEGER NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,
+    depart_id INTEGER NOT NULL REFERENCES departments(id) ON DELETE CASCADE,
     is_active BOOLEAN DEFAULT TRUE
 ) INHERITS (abstract_auditable_entity);
 

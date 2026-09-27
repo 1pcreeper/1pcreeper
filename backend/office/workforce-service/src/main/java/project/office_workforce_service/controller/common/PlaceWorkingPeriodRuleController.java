@@ -11,6 +11,7 @@ import project.office_workforce_service.model.dto.request.PlaceWorkingPeriodRule
 import project.office_workforce_service.model.dto.request.PlaceWorkingPeriodRuleUpdateRequestDTO;
 import project.office_workforce_service.model.dto.response.PlaceWorkingPeriodRuleResponseDTO;
 import project.office_workforce_service.service.common.PlaceWorkingPeriodRuleService;
+import project.shared_office_common_lib.constant.role.Roles;
 import project.shared_office_starter.model.dto.base.APIBaseResponseDTO;
 import project.shared_office_starter.model.dto.base.PaginationBaseResponseDTO;
 
@@ -25,7 +26,7 @@ public class PlaceWorkingPeriodRuleController {
         this.ruleService = ruleService;
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @GetMapping("/search")
     public ResponseEntity<APIBaseResponseDTO<PaginationBaseResponseDTO<PlaceWorkingPeriodRuleResponseDTO>>> search(
         @RequestParam(required = false) Long placeId,
@@ -34,14 +35,14 @@ public class PlaceWorkingPeriodRuleController {
         return ResponseEntity.ok(APIBaseResponseDTO.success(ruleService.search(placeId, workingPeriodId, pageable)));
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @PostMapping
     public ResponseEntity<APIBaseResponseDTO<PlaceWorkingPeriodRuleResponseDTO>> create(
         @Valid @RequestBody PlaceWorkingPeriodRuleCreateRequestDTO request) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(ruleService.create(request)));
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @PutMapping("/{id}")
     public ResponseEntity<APIBaseResponseDTO<PlaceWorkingPeriodRuleResponseDTO>> update(
         @PathVariable Long id, @Valid @RequestBody PlaceWorkingPeriodRuleUpdateRequestDTO request) {

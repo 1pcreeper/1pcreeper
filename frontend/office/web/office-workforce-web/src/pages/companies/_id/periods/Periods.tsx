@@ -1,66 +1,140 @@
 import { EntityPageLayout } from '@/components/layout/EntityPageLayout';
 import { Column, DataTable } from '@/components/ui/DataTable';
 import { DeleteModal } from '@/components/ui/DeleteModal';
+import { DropdownSearch } from '@/components/ui/DropdownSearch';
+import { MessageModal } from '@/components/ui/MessageModal';
 import { Modal } from '@/components/ui/Modal';
+import { PaginationBaseResponseDTO } from '@/models/dto/base/base.dto';
+import { WorkingPeriodCreateRequestDTO } from '@/models/dto/office/workforce/request.dto';
+import { DepartmentResponseDTO, WorkingPeriodResponseDTO } from '@/models/dto/office/workforce/response.dto';
+import DepartmentContentService from '@/services/content/office/workforce/DepartmentContentService';
+import WorkingPeriodContentService from '@/services/content/office/workforce/WorkingPeriodContentService';
+import { useCompanyStore } from '@/store/useCompanyStore';
 import { Clock } from 'lucide-react';
-import React, { useState } from 'react';
-
-type Period = { id: string; name: string; start: string; end: string; duration: string; type: string; status?: string };
-
-const MOCK_DATA: Period[] = [
-    { id: '1', name: 'Morning Shift', start: '08:00', end: '16:00', duration: '8h', type: 'Fixed', status: 'Active' },
-    { id: '2', name: 'Evening Shift', start: '16:00', end: '00:00', duration: '8h', type: 'Fixed', status: 'Active' },
-    { id: '3', name: 'Night Shift', start: '00:00', end: '08:00', duration: '8h', type: 'Fixed', status: 'Active' },
-    { id: '4', name: 'Flexi Day', start: 'Flexible', end: 'Flexible', duration: '8h', type: 'Flexible', status: 'Active' },
-];
+import React, { useEffect, useState } from 'react';
+import { useParams, useSearchParams } from 'react-router-dom';
 
 export default function Periods() {
-    const [data, setData] = useState(MOCK_DATA);
+    const { id: companyIdStr } = useParams();
+    const companyId = Number(companyIdStr);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const pageParam = searchParams.get("page");
+    const qParam = searchParams.get("q");
+    const [search, setSearch] = useState<string>(qParam || "");
+    const [page, setPage] = useState<number>(Number.isNaN(pageParam) ? 0 : Number(pageParam));
+    const [size, setSize] = useState<number>(10);
+    const [totalPages, setTotalPages] = useState<number>(0);
+    const workingPeriodContentService = WorkingPeriodContentService.getInstance();
+    const departmentContentService = DepartmentContentService.getInstance();
+
+    const [data, setData] = useState<WorkingPeriodResponseDTO[]>([]);
+    const { currentSelectedCompany } = useCompanyStore();
+    const [departments, setDepartments] = useState<DepartmentResponseDTO[]>([]);
+    const [selectedDepartId, setSelectedDepartId] = useState<number | null>(null);
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-    const [selectedPeriod, setSelectedPeriod] = useState<Period | null>(null);
+    const [selectedPeriod, setSelectedPeriod] = useState<WorkingPeriodResponseDTO | null>(null);
+    const [modalMessage, setModalMessage] = useState<{ type: 'success' | 'error', text: string, title: string } | null>(null);
 
-    const [formData, setFormData] = useState({ name: '', start: '', end: '', duration: '', type: 'Fixed', status: 'Active' });
+    const showMessage = (type: 'success' | 'error', text: string) => { setModalMessage({ type, text, title: type === 'success' ? 'Success' : 'Error' }); };
 
-    const columns: Column<Period>[] = [
+    const [formData, setFormData] = useState<WorkingPeriodCreateRequestDTO>({ name: '', startAt: '09:00:00', endAt: '17:00:00', departId: 0 });
+
+    const columns: Column<WorkingPeriodResponseDTO>[] = [
+        { header: 'ID', accessorKey: 'id', cell: (row) => <span className="font-bold text-slate-900">{row.id}</span> },
         { header: 'Name', accessorKey: 'name', cell: (row) => <span className="font-bold text-slate-900">{row.name}</span> },
-        { header: 'Type', accessorKey: 'type', cell: (row) => <span className="text-slate-600">{row.type}</span> },
-        { header: 'Start Time', accessorKey: 'start', cell: (row) => <span className="text-slate-500 font-mono">{row.start}</span> },
-        { header: 'End Time', accessorKey: 'end', cell: (row) => <span className="text-slate-500 font-mono">{row.end}</span> },
-        { header: 'Duration', accessorKey: 'duration', cell: (row) => <span className="text-slate-600">{row.duration}</span> },
+        { header: 'Start Time', accessorKey: 'startAt', cell: (row) => <span className="text-slate-500 font-mono">{row.startAt}</span> },
+        { header: 'End Time', accessorKey: 'endAt', cell: (row) => <span className="text-slate-500 font-mono">{row.endAt}</span> },
     ];
 
-    const handleOpenModal = (period?: Period) => {
+    const fetchDepartments = async () => {
+        if (Number.isNaN(companyId)) return;
+        const response = await departmentContentService.findAllS1(companyId, { page: 0, size: 100 });
+        setDepartments(response.content);
+        if (response.content.length > 0 && selectedDepartId === null) {
+            setSelectedDepartId(response.content[0].id);
+        }
+    };
+
+    const fetchPeriods = async () => {
+        if (!selectedDepartId) return;
+        let response: PaginationBaseResponseDTO<WorkingPeriodResponseDTO>;
+        if (!search || search.trim() === "") {
+            response = await workingPeriodContentService.findAllS1(selectedDepartId, { page, size });
+        } else {
+            response = await workingPeriodContentService.searchS1(search, selectedDepartId, { page, size });
+        }
+        setData(response.content);
+        setSize(response.pageSize);
+        setTotalPages(response.totalPages);
+    };
+
+    useEffect(() => {
+        fetchDepartments();
+    }, [companyId]);
+
+    useEffect(() => {
+        if (selectedDepartId) {
+            fetchPeriods();
+        }
+    }, [selectedDepartId, page, search]);
+
+    const handleOpenModal = (period?: WorkingPeriodResponseDTO) => {
         if (period) {
             setSelectedPeriod(period);
-            setFormData({ name: period.name, start: period.start, end: period.end, duration: period.duration, type: period.type, status: period.status || 'Active' });
+            setFormData({ name: period.name, startAt: period.startAt, endAt: period.endAt, departId: period.departId });
         } else {
             setSelectedPeriod(null);
-            setFormData({ name: '', start: '09:00', end: '17:00', duration: '8h', type: 'Fixed', status: 'Active' });
+            setFormData({ name: '', startAt: '09:00:00', endAt: '17:00:00', departId: selectedDepartId || (departments.length > 0 ? departments[0].id : 0) });
         }
         setIsModalOpen(true);
     };
 
-    const handleOpenDelete = (period: Period) => {
-        setSelectedPeriod(period);
-        setIsDeleteModalOpen(true);
-    };
-
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (selectedPeriod) {
-            setData(data.map(d => d.id === selectedPeriod.id ? { ...d, ...formData } : d));
-        } else {
-            setData([...data, { id: Date.now().toString(), ...formData }]);
+        try {
+            if (selectedPeriod) {
+                const response = await workingPeriodContentService.update(selectedPeriod.id, formData);
+                setData([...data.filter(d => d.id !== selectedPeriod.id), response]);
+                showMessage('success', 'Working period updated successfully.');
+            } else {
+                const response = await workingPeriodContentService.create(formData);
+                setData([...data.filter(d => d.id !== response.id), response]);
+                showMessage('success', 'Working period created successfully.');
+            }
+            setIsModalOpen(false);
+            fetchPeriods();
+        } catch (error: any) {
+            console.error("Failed to save working period", error);
+            showMessage('error', error?.message || 'Failed to save working period.');
         }
-        setIsModalOpen(false);
     };
 
-    const handleDelete = () => {
-        if (selectedPeriod) {
-            setData(data.filter(d => d.id !== selectedPeriod.id));
-        }
+    const handleDeletePrompt = async () => {
         setIsDeleteModalOpen(false);
+        const randomNumber = Math.floor(Math.random() * 10000) + 1;
+        const deleteModalInput = window.prompt(`Please enter '${randomNumber}' to delete`);
+        if (randomNumber.toString() === deleteModalInput) {
+            handleDelete();
+        } else {
+            showMessage('error', "Input Incorrect. Deletion cancelled.");
+        }
+    };
+
+    const handleDelete = async () => {
+        try {
+            if (selectedPeriod) {
+                await workingPeriodContentService.delete(selectedPeriod.id);
+                setData(data.filter(d => d.id !== selectedPeriod.id));
+                showMessage('success', 'Working period deleted successfully.');
+            }
+            setIsDeleteModalOpen(false);
+            setIsModalOpen(false);
+        } catch (error: any) {
+            console.error("Failed to delete working period", error);
+            showMessage('error', error?.message || 'Failed to delete working period.');
+        }
     };
 
     return (
@@ -70,17 +144,51 @@ export default function Periods() {
                 description="Define standard shifts, schedules, and flexible working hours."
                 onAdd={() => handleOpenModal()}
                 searchPlaceholder="Search periods..."
+                onSearchBarChange={(e) => {
+                    setSearch(e.target.value);
+                    setSearchParams({ q: e.target.value, page: String(page) });
+                }}
+                searchBarValue={search}
                 icon={<Clock className="w-5 h-5" />}
             >
-                <DataTable
-                    data={data}
-                    columns={columns}
-                    onEdit={handleOpenModal}
-                    onDelete={handleOpenDelete}
-                    emptyMessage="No working periods found."
-                    pageNumber={1}
-                    totalPages={1}
-                />
+                <div className="mb-4 flex items-center gap-4">
+                    <label className="text-xs ms-4 pt-3 font-bold text-slate-500 uppercase tracking-wider">Select Department:</label>
+                    <div className="w-64 mt-3">
+                        <DropdownSearch
+                            value={selectedDepartId}
+                            onChange={(val) => {
+                                setSelectedDepartId(val);
+                                setPage(0);
+                            }}
+                            fetchData={async (search, page) => {
+                                if (!currentSelectedCompany?.id) return { content: [], totalPages: 0 };
+                                const res = await DepartmentContentService.getInstance().searchS1(search, currentSelectedCompany.id, { page, size: 10 });
+                                return {
+                                    content: res.content.map(o => ({ id: o.id, label: o.name })),
+                                    totalPages: res.totalPages
+                                };
+                            }}
+                            placeholder="Select department..."
+                            initialLabel={departments.find(o => o.id === selectedDepartId)?.name || ''}
+                        />
+                    </div>
+                </div>
+
+                {departments.length === 0 ? (
+                    <div className="text-center py-8 text-slate-500 text-sm">
+                        Please create an department first to manage working periods.
+                    </div>
+                ) : (
+                    <DataTable
+                        data={data}
+                        columns={columns}
+                        onEdit={handleOpenModal}
+                        emptyMessage="No working periods found."
+                        pageNumber={page + 1}
+                        totalPages={totalPages}
+                        onPageChange={(p) => setPage(p - 1)}
+                    />
+                )}
             </EntityPageLayout>
 
             <Modal
@@ -89,8 +197,27 @@ export default function Periods() {
                 title={selectedPeriod ? "Edit Working Period" : "Add Working Period"}
                 onSubmit={handleSubmit}
                 submitLabel={selectedPeriod ? "SAVE" : "CREATE"}
+                onDelete={selectedPeriod ? () => setIsDeleteModalOpen(true) : undefined}
             >
                 <div className="space-y-4">
+                    <div>
+                        <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Department</label>
+                        <DropdownSearch
+                            value={formData.departId}
+                            onChange={(val) => setFormData({ ...formData, departId: val })}
+                            disabled={!!selectedPeriod}
+                            fetchData={async (search, page) => {
+                                if (!currentSelectedCompany?.id) return { content: [], totalPages: 0 };
+                                const res = await DepartmentContentService.getInstance().searchS1(search, currentSelectedCompany.id, { page, size: 10 });
+                                return {
+                                    content: res.content.map(o => ({ id: o.id, label: o.name })),
+                                    totalPages: res.totalPages
+                                };
+                            }}
+                            placeholder="Select department..."
+                            initialLabel={departments.find(o => o.id === formData.departId)?.name || ''}
+                        />
+                    </div>
                     <div>
                         <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Name</label>
                         <input required className="w-full bg-slate-50 border border-slate-200 rounded px-2 py-1.5 text-xs" value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} />
@@ -98,29 +225,12 @@ export default function Periods() {
                     <div className="grid grid-cols-2 gap-4">
                         <div>
                             <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Start Time</label>
-                            <input type="time" required className="w-full bg-slate-50 border border-slate-200 rounded px-2 py-1.5 text-xs font-mono" value={formData.start} onChange={e => setFormData({ ...formData, start: e.target.value })} />
+                            <input type="time" step="1" required className="w-full bg-slate-50 border border-slate-200 rounded px-2 py-1.5 text-xs font-mono" value={formData.startAt} onChange={e => setFormData({ ...formData, startAt: e.target.value })} />
                         </div>
                         <div>
                             <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">End Time</label>
-                            <input type="time" required className="w-full bg-slate-50 border border-slate-200 rounded px-2 py-1.5 text-xs font-mono" value={formData.end} onChange={e => setFormData({ ...formData, end: e.target.value })} />
+                            <input type="time" step="1" required className="w-full bg-slate-50 border border-slate-200 rounded px-2 py-1.5 text-xs font-mono" value={formData.endAt} onChange={e => setFormData({ ...formData, endAt: e.target.value })} />
                         </div>
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                        <div>
-                            <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Duration</label>
-                            <input required className="w-full bg-slate-50 border border-slate-200 rounded px-2 py-1.5 text-xs" value={formData.duration} onChange={e => setFormData({ ...formData, duration: e.target.value })} placeholder="e.g. 8h" />
-                        </div>
-                        <div>
-                            <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Type</label>
-                            <select className="w-full bg-slate-50 border border-slate-200 rounded px-2 py-1.5 text-xs" value={formData.type} onChange={e => setFormData({ ...formData, type: e.target.value })}>
-                                <option value="Fixed">Fixed</option>
-                                <option value="Flexible">Flexible</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <input type="checkbox" checked={formData.status === 'Active'} onChange={e => setFormData({ ...formData, status: e.target.checked ? 'Active' : 'Inactive' })} id="period-active" />
-                        <label htmlFor="period-active" className="text-xs text-slate-700">Is Active</label>
                     </div>
                 </div>
             </Modal>
@@ -128,9 +238,17 @@ export default function Periods() {
             <DeleteModal
                 isOpen={isDeleteModalOpen}
                 onClose={() => setIsDeleteModalOpen(false)}
-                onConfirm={handleDelete}
+                onConfirm={handleDeletePrompt}
                 title="Delete Period"
                 message={`Are you sure you want to delete ${selectedPeriod?.name}?`}
+            />
+
+            <MessageModal
+                isOpen={modalMessage !== null}
+                onClose={() => setModalMessage(null)}
+                type={modalMessage?.type || 'error'}
+                title={modalMessage?.title || 'Message'}
+                message={modalMessage?.text || ''}
             />
         </>
     );

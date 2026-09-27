@@ -27,7 +27,7 @@ export default function Login() {
                 {error && <div className="p-3 mb-4 text-sm text-red-700 bg-red-50 rounded-md">{error}</div>}
                 <form onSubmit={handleLogin} className="space-y-4">
                     <div>
-                        <label className="block text-sm font-medium text-slate-700 mb-1">Email</label>
+                        <label className="block text-sm font-medium text-slate-700 mb-1">UserName</label>
                         <input
                             type="text"
                             value={name}

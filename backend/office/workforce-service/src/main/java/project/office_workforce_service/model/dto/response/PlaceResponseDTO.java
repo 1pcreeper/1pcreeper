@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PlaceResponseDTO {
     private Long id;
-    private Long orgId;
-    private String orgName;
+    private Long departId;
+    private String departName;
     private String name;
     private String address;
     private Boolean isActive;

@@ -33,7 +33,7 @@ public class StaffService {
     @Autowired
     private PersonManagerService personManagerService;
     @Autowired
-    private OrganizationManagerService organizationManagerService;
+    private DepartmentManagerService departmentManagerService;
     @Autowired
     private StaffMapper staffMapper;
     @Autowired
@@ -60,24 +60,30 @@ public class StaffService {
     public PaginationBaseResponseDTO<StaffResponseDTO> search(
         @Nullable String q,
         @Nullable Long companyId,
-        @Nullable Long orgId,
+        @Nullable Long departId,
         @Nullable WorkType workType,
         @Nullable Boolean isActive,
         Pageable pageable) {
 
         return paginationMapper.toDTO(
-            staffManagerService.searchStaff(q, companyId, orgId, workType, isActive, pageable),
+            staffManagerService.searchStaff(q, companyId, departId, workType, isActive, pageable),
             staff -> staffMapper.toResponseDTO(staff)
         );
     }
 
     public StaffResponseDTO findById(Long id) {
         Staff staff = staffManagerService.findById(id);
+        if (!staff.getIsActive() || !staff.getPerson().getIsActive()) {
+            throw new ResourceNotFoundException("Staff Already Deleted");
+        }
         return staffMapper.toResponseDTO(staff);
     }
 
     public StaffDetailResponseDTO findByIdInDetail(Long id) {
         Staff staff = staffManagerService.findById(id);
+        if (!staff.getIsActive() || !staff.getPerson().getIsActive()) {
+            throw new ResourceNotFoundException("Staff Already Deleted");
+        }
         StaffDetail staffDetail;
         PersonDetail personDetail;
         List<StaffOccupation> staffOccupations;
@@ -132,12 +138,24 @@ public class StaffService {
     public StaffResponseDTO create(StaffCreateRequestDTO requestDTO) {
         Company company = companyManagerService.getReferenceById(requestDTO.getCompanyId());
         Person person = personManagerService.getReferenceById(requestDTO.getPersonId());
-        Organization org = organizationManagerService.getReferenceById(requestDTO.getOrgId());
-
-        Staff newStaff = staffMapper.toEntity(requestDTO, company, person, org);
+        Department org = departmentManagerService.getReferenceById(requestDTO.getDepartId());
+        Staff existingStaff;
+        try{
+            existingStaff = staffManagerService.findByPersonIdAndCompanyId(requestDTO.getPersonId(), requestDTO.getCompanyId());
+        }catch(ResourceNotFoundException e){
+            existingStaff = staffMapper.toEntity(requestDTO, company, person, org);
+        }
+        Staff newStaff = existingStaff;
+        newStaff.setIsActive(true);
         Staff savedStaff = staffManagerService.save(newStaff);
 
-        StaffDetail detail = staffMapper.toDetailEntity(requestDTO.getDetails(), savedStaff);
+        StaffDetail detail;
+        try{
+            detail = staffDetailManagerService.findByStaffId(savedStaff.getId());
+            detail = staffDetailMapper.updateEntity(requestDTO.getDetails(),detail);
+        } catch (ResourceNotFoundException e) {
+            detail = staffMapper.toDetailEntity(requestDTO.getDetails(), savedStaff);
+        }
         StaffDetail savedDetail = staffDetailManagerService.save(detail);
 
         return staffMapper.toResponseDTO(savedStaff);
@@ -146,10 +164,12 @@ public class StaffService {
     @Transactional
     public StaffResponseDTO update(Long id, StaffUpdateRequestDTO requestDTO) {
         Staff existingStaff = staffManagerService.findById(id);
-
-        Organization newOrg = null;
-        if (requestDTO.getOrgId() != null) {
-            newOrg = organizationManagerService.getReferenceById(requestDTO.getOrgId());
+        if (!existingStaff.getIsActive() || !existingStaff.getPerson().getIsActive()) {
+            throw new ResourceNotFoundException("Staff Already Deleted");
+        }
+        Department newOrg = null;
+        if (requestDTO.getDepartId() != null) {
+            newOrg = departmentManagerService.getReferenceById(requestDTO.getDepartId());
         }
 
         staffMapper.updateEntity(requestDTO, existingStaff, newOrg);
@@ -165,6 +185,9 @@ public class StaffService {
             if (requestDTO.getDetails().getMaxWorkingHrs() != null) {
                 savedDetail.setMaxWorkingHrs(requestDTO.getDetails().getMaxWorkingHrs());
             }
+            if (requestDTO.getAbout() != null) {
+                savedDetail.setAbout(requestDTO.getAbout());
+            }
             savedDetail = staffDetailManagerService.save(savedDetail);
         }
 
@@ -177,8 +200,9 @@ public class StaffService {
             : staffManagerService.findAllByIsActive(true, pageable);
         return paginationMapper.toDTO(staffs, (s) -> staffMapper.toResponseDTO(s));
     }
+
     @Transactional
-    public void delete(Long id){
+    public void delete(Long id) {
         Staff existingStaff = staffManagerService.findById(id);
         existingStaff.setIsActive(false);
         staffManagerService.save(existingStaff);

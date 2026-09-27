@@ -16,8 +16,8 @@ import java.time.LocalTime;
 @AllArgsConstructor
 public class WorkingPeriodCreateRequestDTO {
 
-    @NotNull(message = "Organization ID is required")
-    private Long orgId;
+    @NotNull(message = "Department ID is required")
+    private Long departId;
 
     @NotNull(message = "Start time is required")
     private LocalTime startAt;

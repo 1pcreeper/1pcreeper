@@ -14,7 +14,7 @@ import java.time.LocalTime;
 @AllArgsConstructor
 public class WorkingPeriodResponseDTO {
     private Long id;
-    private Long orgId;
+    private Long departId;
 
     @JsonFormat(pattern = "HH:mm:ss")
     private LocalTime startAt;

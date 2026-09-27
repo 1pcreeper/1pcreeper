@@ -11,8 +11,9 @@ import BasicProtected from './components/protected/BasicProtected';
 import { OfficeAuthContextProvider } from './contexts/OfficeAuthContext';
 import Orchestrator from './Orchestrator';
 import Logout from './pages/auth/Logout';
+import CompanyDetails from './pages/companies/_id/CompanyDetails';
 import Dashboard from './pages/companies/_id/dashboard/Dashboard';
-import Organizations from './pages/companies/_id/organizations/Organizations';
+import Departments from './pages/companies/_id/departments/Departments';
 import Periods from './pages/companies/_id/periods/Periods';
 import Schedules from './pages/companies/_id/schedules/Schedules';
 import PersonDetails from './pages/persons/_id/PersonDetails';
@@ -20,10 +21,13 @@ import Persons from './pages/persons/Persons';
 import StaffDetails from './pages/staffs/_id/StaffDetails';
 import Staffs from './pages/staffs/Staffs';
 
+import ErrorPage from '@/pages/error/Error';
+
 const router = createBrowserRouter([
     {
         path: "/",
         element: <BasicRoute />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: "/",
@@ -63,12 +67,16 @@ const router = createBrowserRouter([
                                         element: <Dashboard />
                                     },
                                     {
+                                        path: "/companies/:id/info",
+                                        element: <CompanyDetails />
+                                    },
+                                    {
                                         path: "/companies/:id/schedules",
                                         element: <Schedules />
                                     },
                                     {
-                                        path: "/companies/:id/organizations",
-                                        element: <Organizations />
+                                        path: "/companies/:id/departments",
+                                        element: <Departments />
                                     },
                                     {
                                         path: "/companies/:id/periods",

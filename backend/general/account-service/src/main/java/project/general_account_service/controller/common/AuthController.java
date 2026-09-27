@@ -1,6 +1,7 @@
 package project.general_account_service.controller.common;
 
 import com.google.firebase.auth.FirebaseAuthException;
+import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authorization.AuthorizationDeniedException;
@@ -33,6 +34,7 @@ public class AuthController {
         this.appUserMapper = appUserMapper;
         this.firebaseAuthService = firebaseAuthService;
     }
+    @PermitAll
     @GetMapping("/hello")
     public String echoHello() {
         return "Hello";

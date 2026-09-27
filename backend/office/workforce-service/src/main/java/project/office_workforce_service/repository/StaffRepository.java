@@ -11,6 +11,7 @@ import project.office_workforce_service.model.entity.enums.WorkType;
 import project.office_workforce_service.repository.base.AbstractBaseRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface StaffRepository extends AbstractBaseRepository<Staff, Long> {
@@ -18,25 +19,25 @@ public interface StaffRepository extends AbstractBaseRepository<Staff, Long> {
     @Query("SELECT s FROM Staff s " +
         "JOIN s.person p " +
         "JOIN s.company c " +
-        "JOIN s.org o " +
+        "JOIN s.department d " +
         "WHERE (:q IS NULL OR " +
         "LOWER(p.nameEnglish) LIKE LOWER(CONCAT('%', :q, '%')) OR " +
         "LOWER(p.nameChinese) LIKE LOWER(CONCAT('%', :q, '%')) OR " +
         "LOWER(s.custId) LIKE LOWER(CONCAT('%', :q, '%'))) " +
         "AND (CAST(:companyId AS long) IS NULL OR c.id = :companyId) " +
-        "AND (CAST(:orgId AS long) IS NULL OR o.id = :orgId) " +
+        "AND (CAST(:departId AS long) IS NULL OR d.id = :departId) " +
         "AND (CAST(:workType AS string) IS NULL OR s.type = :workType) " +
-        "AND (CAST(:isActive AS boolean) IS NULL OR s.isActive = :isActive)")
+        "AND (CAST(:isActive AS boolean) IS NULL OR (s.isActive = :isActive AND s.person.isActive = :isActive))")
     Page<Staff> search(@Param("q") String q,
                             @Param("companyId") Long companyId,
-                            @Param("orgId") Long orgId,
+                            @Param("departId") Long departId,
                             @Param("workType") WorkType workType,
                             @Param("isActive") Boolean isActive,
                             Pageable pageable);
 
-    @Query("SELECT s FROM Staff s WHERE s.isActive = :isActive")
+    @Query("SELECT s FROM Staff s WHERE s.isActive = :isActive AND s.person.isActive = :isActive")
     Page<Staff> findAllByIsActive(@Param("isActive") Boolean isActive, Pageable pageable);
-    @Query("SELECT s FROM Staff s WHERE s.company.id = :companyId AND s.isActive = :isActive")
+    @Query("SELECT s FROM Staff s WHERE s.company.id = :companyId AND s.isActive = :isActive AND s.person.isActive = :isActive")
     Page<Staff> findAllByCompanyIdAndIsActive(
         @Param("companyId") Long companyId,
         @Param("isActive") Boolean isActive, 
@@ -44,4 +45,6 @@ public interface StaffRepository extends AbstractBaseRepository<Staff, Long> {
     );
     @Query("SELECT s FROM Staff s WHERE s.person.id = :personId")
     List<Staff> findByPersonId(@Param("personId")Long personId);
+    @Query("SELECT s FROM Staff s WHERE s.person.id = :personId AND s.company.id = :companyId")
+    Optional<Staff> findByPersonIdAndCompanyId(@Param("personId")Long personId, @Param("companyId") Long companyId);
 }

@@ -1,5 +1,6 @@
 package project.shared_office_starter.converter;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.convert.converter.Converter;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
 
 @Component
 @Cacheable
+@Slf4j
 public class JwtAuthenticationConverter implements Converter<Jwt, AbstractAuthenticationToken> {
     private final UserDetailsBaseService userDetailsBaseService;
     private final JwtAuthRequestBaseHandler jwtAuthRequestBaseHandler;
@@ -40,10 +42,8 @@ public class JwtAuthenticationConverter implements Converter<Jwt, AbstractAuthen
     @Override
     public AbstractAuthenticationToken convert(Jwt source) {
 
-        List<GrantedAuthority> combinedAuthorities = new ArrayList<>();
-        
         jwtAuthRequestBaseHandler.handle(source);
-        combinedAuthorities.addAll(extractAuthorities(source));
+        List<GrantedAuthority> combinedAuthorities = new ArrayList<>(extractAuthorities(source));
 
         String uid = source.getSubject();
         UserDetails userDetails = userDetailsBaseService.loadUserByUsername(uid);

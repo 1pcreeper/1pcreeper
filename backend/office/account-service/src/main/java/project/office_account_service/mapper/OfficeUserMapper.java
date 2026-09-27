@@ -32,7 +32,7 @@ public class OfficeUserMapper {
         }
         return OfficeUserDTO.builder()
             .id(officeUser.getId())
-            .uid(officeUser.getUid())
+            .uid(officeUser.getUid().toString())
             .name(officeUser.getName())
             .displayName(officeUser.getDisplayName())
             .email(officeUser.getEmail())
@@ -56,7 +56,7 @@ public class OfficeUserMapper {
         
         return OfficeUserVerifyResponseDTO.builder()
             .id(officeUser.getId())
-            .uid(officeUser.getUid())
+            .uid(officeUser.getUid().toString())
             .name(officeUser.getName())
             .displayName(officeUser.getDisplayName())
             .email(officeUser.getEmail())
@@ -69,7 +69,7 @@ public class OfficeUserMapper {
     public AuthTokenResponseDTO toAuthTokenResponseDTO(OfficeUser officeUser,String token){
         return AuthTokenResponseDTO.builder()
             .id(officeUser.getId())
-            .uid(officeUser.getUid())
+            .uid(officeUser.getUid().toString())
             .name(officeUser.getName())
             .displayName(officeUser.getDisplayName())
             .email(officeUser.getEmail())

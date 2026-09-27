@@ -8,6 +8,7 @@ import project.office_workforce_service.model.entity.WorkingPeriod;
 import project.office_workforce_service.repository.WorkingPeriodRepository;
 import project.office_workforce_service.service.base.AbstractBaseService;
 import project.shared_office_starter.model.exception.PropertyValidationException;
+import project.shared_office_starter.model.exception.ResourceNotFoundException;
 
 import java.time.LocalTime;
 
@@ -22,8 +23,14 @@ public class WorkingPeriodManagerService extends AbstractBaseService<WorkingPeri
         this.workingPeriodRepository = workingPeriodRepository;
     }
 
-    public Page<WorkingPeriod> search(Long orgId, String q, LocalTime startFrom, LocalTime endTo, Boolean isActive, Pageable pageable) {
-        return workingPeriodRepository.search(orgId, q, startFrom, endTo, isActive, pageable);
+    public Page<WorkingPeriod> search(Long departId, String q, LocalTime startFrom, LocalTime endTo, Boolean isActive, Pageable pageable) {
+        return workingPeriodRepository.search(departId, q, startFrom, endTo, isActive, pageable);
+    }
+    
+    public WorkingPeriod findByRangeAndDepartId(Long departId, LocalTime startAt, LocalTime endAt){
+        return workingPeriodRepository.findByRangeAndDepartId(departId, startAt, endAt).orElseThrow(
+            () -> new ResourceNotFoundException("Period Not Found")
+        );
     }
 
     @Override

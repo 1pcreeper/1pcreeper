@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PlaceCreateRequestDTO {
 
-    @NotNull(message = "Organization ID is required")
-    private Long orgId;
+    @NotNull(message = "Department ID is required")
+    private Long departId;
 
     @NotBlank(message = "Place name cannot be blank")
     private String name;

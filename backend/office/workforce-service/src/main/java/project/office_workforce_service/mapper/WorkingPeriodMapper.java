@@ -4,17 +4,17 @@ import org.springframework.stereotype.Component;
 import project.office_workforce_service.model.dto.request.WorkingPeriodCreateRequestDTO;
 import project.office_workforce_service.model.dto.request.WorkingPeriodUpdateRequestDTO;
 import project.office_workforce_service.model.dto.response.WorkingPeriodResponseDTO;
-import project.office_workforce_service.model.entity.Organization;
+import project.office_workforce_service.model.entity.Department;
 import project.office_workforce_service.model.entity.WorkingPeriod;
 
 @Component
 public class WorkingPeriodMapper {
 
-    public WorkingPeriod toEntity(WorkingPeriodCreateRequestDTO request, Organization org) {
+    public WorkingPeriod toEntity(WorkingPeriodCreateRequestDTO request, Department org) {
         if (request == null) return null;
 
         return WorkingPeriod.builder()
-            .org(org)
+            .department(org)
             .startAt(request.getStartAt())
             .endAt(request.getEndAt())
             .name(request.getName())
@@ -36,7 +36,7 @@ public class WorkingPeriodMapper {
 
         return WorkingPeriodResponseDTO.builder()
             .id(wp.getId())
-            .orgId(wp.getOrg() != null ? wp.getOrg().getId() : null)
+            .departId(wp.getDepartment() != null ? wp.getDepartment().getId() : null)
             .startAt(wp.getStartAt())
             .endAt(wp.getEndAt())
             .name(wp.getName())

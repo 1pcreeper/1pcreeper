@@ -4,17 +4,17 @@ import org.springframework.stereotype.Component;
 import project.office_workforce_service.model.dto.request.OccupationCreateRequestDTO;
 import project.office_workforce_service.model.dto.request.OccupationUpdateRequestDTO;
 import project.office_workforce_service.model.dto.response.OccupationResponseDTO;
+import project.office_workforce_service.model.entity.Department;
 import project.office_workforce_service.model.entity.Occupation;
-import project.office_workforce_service.model.entity.Organization;
 
 @Component
 public class OccupationMapper {
 
-    public Occupation toEntity(OccupationCreateRequestDTO request, Organization org) {
+    public Occupation toEntity(OccupationCreateRequestDTO request, Department org) {
         if (request == null) return null;
 
         return Occupation.builder()
-            .org(org)
+            .department(org)
             .name(request.getName())
             .isActive(true)
             .build();
@@ -32,7 +32,7 @@ public class OccupationMapper {
 
         return OccupationResponseDTO.builder()
             .id(occupation.getId())
-            .orgId(occupation.getOrg() != null ? occupation.getOrg().getId() : null)
+            .departId(occupation.getDepartment() != null ? occupation.getDepartment().getId() : null)
             .name(occupation.getName())
             .isActive(occupation.getIsActive())
             .build();

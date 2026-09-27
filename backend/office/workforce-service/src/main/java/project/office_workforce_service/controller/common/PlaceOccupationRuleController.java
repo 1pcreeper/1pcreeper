@@ -11,6 +11,7 @@ import project.office_workforce_service.model.dto.request.PlaceOccupationRuleCre
 import project.office_workforce_service.model.dto.request.PlaceOccupationRuleUpdateRequestDTO;
 import project.office_workforce_service.model.dto.response.PlaceOccupationRuleResponseDTO;
 import project.office_workforce_service.service.common.PlaceOccupationRuleService;
+import project.shared_office_common_lib.constant.role.Roles;
 import project.shared_office_starter.model.dto.base.APIBaseResponseDTO;
 import project.shared_office_starter.model.dto.base.PaginationBaseResponseDTO;
 
@@ -25,7 +26,7 @@ public class PlaceOccupationRuleController {
         this.ruleService = ruleService;
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @GetMapping("/search")
     public ResponseEntity<APIBaseResponseDTO<PaginationBaseResponseDTO<PlaceOccupationRuleResponseDTO>>> search(
         @RequestParam(required = false) Long placeId,
@@ -34,14 +35,14 @@ public class PlaceOccupationRuleController {
         return ResponseEntity.ok(APIBaseResponseDTO.success(ruleService.search(placeId, occupationId, pageable)));
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @PostMapping
     public ResponseEntity<APIBaseResponseDTO<PlaceOccupationRuleResponseDTO>> create(
         @Valid @RequestBody PlaceOccupationRuleCreateRequestDTO request) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(ruleService.create(request)));
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @PutMapping("/{id}")
     public ResponseEntity<APIBaseResponseDTO<PlaceOccupationRuleResponseDTO>> update(
         @PathVariable Long id, @Valid @RequestBody PlaceOccupationRuleUpdateRequestDTO request) {

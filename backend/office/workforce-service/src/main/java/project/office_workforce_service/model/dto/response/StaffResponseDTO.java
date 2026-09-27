@@ -16,8 +16,8 @@ public class StaffResponseDTO {
     private Long personId;
     private String personNameEnglish;
     private String personNameChinese;
-    private Long orgId;
-    private String orgName;
+    private Long departId;
+    private String departName;
 
     private String custId;
     private WorkType type;

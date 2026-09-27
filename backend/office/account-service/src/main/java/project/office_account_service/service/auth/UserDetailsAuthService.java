@@ -11,6 +11,8 @@ import project.office_account_service.service.manager.OfficeUserManagerService;
 import project.shared_office_starter.model.exception.ResourceNotFoundException;
 import project.shared_office_starter.service.base.UserDetailsBaseService;
 
+import java.util.UUID;
+
 @Service
 public class UserDetailsAuthService implements UserDetailsBaseService {
     private final OfficeUserManagerService officeUserManagerService;
@@ -25,7 +27,7 @@ public class UserDetailsAuthService implements UserDetailsBaseService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         try{
-            return officeUserManagerService.findByUid(username);
+            return officeUserManagerService.findByUid(UUID.fromString(username));
         }catch (ResourceNotFoundException e){
             throw new UsernameNotFoundException("User Not Found");
         }

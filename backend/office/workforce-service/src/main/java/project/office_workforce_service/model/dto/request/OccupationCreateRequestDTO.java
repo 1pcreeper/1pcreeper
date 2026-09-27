@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class OccupationCreateRequestDTO {
 
-    @NotNull(message = "Organization ID is required")
-    private Long orgId;
+    @NotNull(message = "Department ID is required")
+    private Long departId;
 
     @NotBlank(message = "Occupation name cannot be blank")
     private String name;

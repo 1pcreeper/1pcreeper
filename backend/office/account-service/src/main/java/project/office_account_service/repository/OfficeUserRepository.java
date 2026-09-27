@@ -10,11 +10,12 @@ import project.office_account_service.repository.base.AbstractBaseRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public interface OfficeUserRepository extends AbstractBaseRepository<OfficeUser,Long> {
     @Query("SELECT u FROM OfficeUser u WHERE u.uid = :uid")
-    Optional<OfficeUser> findByUid(@Param("uid")String uid);
+    Optional<OfficeUser> findByUid(@Param("uid") UUID uid);
     @Query("SELECT u FROM OfficeUser u WHERE LOWER(u.name) = LOWER(:name)")
     Optional<OfficeUser> findByName(@Param("name")String name);
     @Query("SELECT u FROM OfficeUser u WHERE LOWER(u.email) = LOWER(:email)")

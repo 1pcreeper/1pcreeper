@@ -14,7 +14,7 @@ import java.time.LocalTime;
 @AllArgsConstructor
 public class WorkingPeriodDTO {
     private Long id;
-    private Long orgId;
+    private Long departId;
     private LocalTime startAt;
     private LocalTime endAt;
     private String name;

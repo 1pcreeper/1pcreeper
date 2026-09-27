@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class OccupationResponseDTO {
     private Long id;
     private String name;
-    private Long orgId;
+    private Long departId;
     private Boolean isActive;
 }

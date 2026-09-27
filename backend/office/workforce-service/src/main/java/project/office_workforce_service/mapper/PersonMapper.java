@@ -11,6 +11,13 @@ import project.office_workforce_service.model.entity.PersonDetail;
 @Component
 public class PersonMapper {
 
+    
+    private String emptyToNull(String value) {
+        if (value == null) return null;
+        value = value.trim();
+        return value.isEmpty() ? null : value;
+    }
+
     public Person toEntity(PersonCreateRequestDTO request) {
         if (request == null) {
             return null;
@@ -18,13 +25,13 @@ public class PersonMapper {
         return Person.builder()
             .nameEnglish(request.getNameEnglish())
             .nameChinese(request.getNameChinese())
-            .officeTel(request.getOfficeTel())
-            .mobileTel(request.getMobileTel())
-            .email(request.getEmail())
-            .hkId(request.getHkId())
-            .cnId(request.getCnId())
-            .moId(request.getMoId())
-            .passportId(request.getPassportId())
+            .officeTel(emptyToNull(request.getOfficeTel()))
+            .mobileTel(emptyToNull(request.getMobileTel()))
+            .email(emptyToNull(request.getEmail()))
+            .hkId(emptyToNull(request.getHkId()))
+            .cnId(emptyToNull(request.getCnId()))
+            .moId(emptyToNull(request.getMoId()))
+            .passportId(emptyToNull(request.getPassportId()))
             .isActive(true) // Default to true on creation
             .build();
     }
@@ -34,9 +41,15 @@ public class PersonMapper {
 
         if (request.getNameEnglish() != null) entity.setNameEnglish(request.getNameEnglish());
         if (request.getNameChinese() != null) entity.setNameChinese(request.getNameChinese());
-        if (request.getOfficeTel() != null) entity.setOfficeTel(request.getOfficeTel());
-        if (request.getMobileTel() != null) entity.setMobileTel(request.getMobileTel());
-        if (request.getEmail() != null) entity.setEmail(request.getEmail());
+        if (request.getOfficeTel() != null) entity.setOfficeTel(emptyToNull(request.getOfficeTel()));
+        if (request.getMobileTel() != null) entity.setMobileTel(emptyToNull(request.getMobileTel()));
+        if (request.getEmail() != null) entity.setEmail(emptyToNull(request.getEmail()));
+
+        if (request.getHkId() != null) entity.setHkId(emptyToNull(request.getHkId()));
+        if (request.getCnId() != null) entity.setCnId(emptyToNull(request.getCnId()));
+        if (request.getMoId() != null) entity.setMoId(emptyToNull(request.getMoId()));
+        if (request.getPassportId() != null) entity.setPassportId(emptyToNull(request.getPassportId()));
+
         entity.setIsActive(true);
     }
 

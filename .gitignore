@@ -44,3 +44,4 @@ build/
 /data/prod/**
 /infra/local/**
 /infra/prod/**
+**/node_modules/**

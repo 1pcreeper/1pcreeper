@@ -13,6 +13,7 @@ import project.office_workforce_service.model.dto.request.ScheduleUpdateRequestD
 import project.office_workforce_service.model.dto.response.ScheduleResponseDTO;
 import project.office_workforce_service.model.entity.enums.ScheduleStatus;
 import project.office_workforce_service.service.common.ScheduleService;
+import project.shared_office_common_lib.constant.role.Roles;
 import project.shared_office_starter.model.dto.base.APIBaseResponseDTO;
 import project.shared_office_starter.model.dto.base.PaginationBaseResponseDTO;
 
@@ -29,7 +30,7 @@ public class ScheduleController {
         this.scheduleService = scheduleService;
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @GetMapping("/search")
     public ResponseEntity<APIBaseResponseDTO<PaginationBaseResponseDTO<ScheduleResponseDTO>>> search(
         @RequestParam(required = false) Long placeId,
@@ -41,26 +42,26 @@ public class ScheduleController {
         return ResponseEntity.ok(APIBaseResponseDTO.success(scheduleService.search(placeId, staffId, status, startFrom, endTo, pageable)));
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @GetMapping("/{id}")
     public ResponseEntity<APIBaseResponseDTO<ScheduleResponseDTO>> findById(@PathVariable Long id) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(scheduleService.findById(id)));
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @PostMapping
     public ResponseEntity<APIBaseResponseDTO<ScheduleResponseDTO>> create(@Valid @RequestBody ScheduleCreateRequestDTO request) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(scheduleService.create(request)));
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @PutMapping("/{id}")
     public ResponseEntity<APIBaseResponseDTO<ScheduleResponseDTO>> update(
         @PathVariable Long id, @Valid @RequestBody ScheduleUpdateRequestDTO request) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(scheduleService.update(id, request)));
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @PatchMapping("/{id}/status")
     public ResponseEntity<APIBaseResponseDTO<ScheduleResponseDTO>> updateStatus(
         @PathVariable Long id, @Valid @RequestBody ScheduleStatusUpdateRequestDTO request) {

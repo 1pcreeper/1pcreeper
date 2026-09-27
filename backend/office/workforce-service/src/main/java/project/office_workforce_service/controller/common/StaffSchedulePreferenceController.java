@@ -11,6 +11,7 @@ import project.office_workforce_service.model.dto.request.StaffSchedulePreferenc
 import project.office_workforce_service.model.dto.request.StaffSchedulePreferenceUpdateRequestDTO;
 import project.office_workforce_service.model.dto.response.StaffSchedulePreferenceResponseDTO;
 import project.office_workforce_service.service.common.StaffSchedulePreferenceService;
+import project.shared_office_common_lib.constant.role.Roles;
 import project.shared_office_starter.model.dto.base.APIBaseResponseDTO;
 import project.shared_office_starter.model.dto.base.PaginationBaseResponseDTO;
 
@@ -25,7 +26,7 @@ public class StaffSchedulePreferenceController {
         this.preferenceService = preferenceService;
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @GetMapping("/search")
     public ResponseEntity<APIBaseResponseDTO<PaginationBaseResponseDTO<StaffSchedulePreferenceResponseDTO>>> search(
         @RequestParam(required = false) Long staffId,
@@ -35,20 +36,20 @@ public class StaffSchedulePreferenceController {
         return ResponseEntity.ok(APIBaseResponseDTO.success(preferenceService.search(staffId, placeId, weekDay, pageable)));
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @GetMapping("/{id}")
     public ResponseEntity<APIBaseResponseDTO<StaffSchedulePreferenceResponseDTO>> findById(@PathVariable Long id) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(preferenceService.findById(id)));
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @PostMapping
     public ResponseEntity<APIBaseResponseDTO<StaffSchedulePreferenceResponseDTO>> create(
         @Valid @RequestBody StaffSchedulePreferenceCreateRequestDTO request) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(preferenceService.create(request)));
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @PutMapping("/{id}")
     public ResponseEntity<APIBaseResponseDTO<StaffSchedulePreferenceResponseDTO>> update(
         @PathVariable Long id, @Valid @RequestBody StaffSchedulePreferenceUpdateRequestDTO request) {

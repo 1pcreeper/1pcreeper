@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import project.office_workforce_service.constant.UserRoles;
 import project.office_workforce_service.model.dto.request.StaffCreateRequestDTO;
 import project.office_workforce_service.model.dto.request.StaffUpdateRequestDTO;
-import project.office_workforce_service.model.dto.response.CompanyResponseDTO;
 import project.office_workforce_service.model.dto.response.StaffDetailResponseDTO;
 import project.office_workforce_service.model.dto.response.StaffResponseDTO;
 import project.office_workforce_service.model.entity.enums.WorkType;
 import project.office_workforce_service.service.common.StaffService;
+import project.shared_office_common_lib.constant.role.Roles;
 import project.shared_office_starter.model.dto.base.APIBaseResponseDTO;
 import project.shared_office_starter.model.dto.base.PaginationBaseResponseDTO;
 
@@ -30,38 +30,38 @@ public class StaffController {
         this.staffService = staffService;
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @GetMapping("/search")
     public ResponseEntity<APIBaseResponseDTO<PaginationBaseResponseDTO<StaffResponseDTO>>> search(
         @RequestParam(required = false) String q,
         @RequestParam(required = false) Long companyId,
-        @RequestParam(required = false) Long orgId,
+        @RequestParam(required = false) Long departId,
         @RequestParam(required = false) WorkType workType,
         @RequestParam(required = false,defaultValue = "true") Boolean isActive,
         Pageable pageable) {
-        return ResponseEntity.ok(APIBaseResponseDTO.success(staffService.search(q, companyId, orgId, workType, isActive, pageable)));
+        return ResponseEntity.ok(APIBaseResponseDTO.success(staffService.search(q, companyId, departId, workType, isActive, pageable)));
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @GetMapping("/{id}")
     public ResponseEntity<APIBaseResponseDTO<StaffResponseDTO>> findById(@PathVariable Long id) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(staffService.findById(id)));
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @PostMapping
     public ResponseEntity<APIBaseResponseDTO<StaffResponseDTO>> create(@Valid @RequestBody StaffCreateRequestDTO request) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(staffService.create(request)));
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @PutMapping("/{id}")
     public ResponseEntity<APIBaseResponseDTO<StaffResponseDTO>> update(
         @PathVariable Long id, @Valid @RequestBody StaffUpdateRequestDTO request) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(staffService.update(id, request)));
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @GetMapping()
     public ResponseEntity<APIBaseResponseDTO<PaginationBaseResponseDTO<StaffResponseDTO>>> findAll(
         @PageableDefault Pageable pageable,
@@ -70,12 +70,12 @@ public class StaffController {
         return ResponseEntity.ok(APIBaseResponseDTO.success(staffService.findAll(pageable,companyId)));
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @GetMapping("/details/{id}")
     public ResponseEntity<APIBaseResponseDTO<StaffDetailResponseDTO>> findByIdInDetail(@PathVariable Long id) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(staffService.findByIdInDetail(id)));
     }
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @DeleteMapping("/{id}")
     public ResponseEntity<APIBaseResponseDTO<Void>> delete(@PathVariable("id") Long id) {
         staffService.delete(id);

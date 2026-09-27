@@ -9,6 +9,8 @@ import project.office_workforce_service.model.dto.response.CompanyDetailResponse
 import project.office_workforce_service.model.dto.response.CompanyResponseDTO;
 import project.office_workforce_service.model.entity.Company;
 import project.office_workforce_service.model.entity.CompanyDetail;
+import project.shared_office_starter.util.StringBlankUtil;
+import static project.shared_office_starter.util.StringBlankUtil.getNullIfBlank;
 
 @Component
 public class CompanyMapper {
@@ -19,11 +21,10 @@ public class CompanyMapper {
         return Company.builder()
             .nameEnglish(request.getNameEnglish())
             .nameChinese(request.getNameChinese())
-            .businessRegistrationNumber(request.getBusinessRegistrationNumber())
-            .secretaryLicenseNumber(request.getSecretaryLicenseNumber())
-            .email(request.getEmail())
-            .tel(request.getTel())
-            .isActive(true)
+            .businessRegistrationNumber(getNullIfBlank(request.getBusinessRegistrationNumber()))
+            .secretaryLicenseNumber(getNullIfBlank(request.getSecretaryLicenseNumber()))
+            .email(getNullIfBlank(request.getEmail()))
+            .tel(getNullIfBlank(request.getTel()))
             .build();
     }
 
@@ -44,11 +45,10 @@ public class CompanyMapper {
 
         if (request.getNameEnglish() != null) entity.setNameEnglish(request.getNameEnglish());
         if (request.getNameChinese() != null) entity.setNameChinese(request.getNameChinese());
-        if (request.getBusinessRegistrationNumber() != null) entity.setBusinessRegistrationNumber(request.getBusinessRegistrationNumber());
-        if (request.getSecretaryLicenseNumber() != null) entity.setSecretaryLicenseNumber(request.getSecretaryLicenseNumber());
-        if (request.getEmail() != null) entity.setEmail(request.getEmail());
-        if (request.getTel() != null) entity.setTel(request.getTel());
-        entity.setIsActive(true);
+        if (request.getBusinessRegistrationNumber() != null) entity.setBusinessRegistrationNumber(getNullIfBlank(request.getBusinessRegistrationNumber()));
+        if (request.getSecretaryLicenseNumber()!=null) entity.setSecretaryLicenseNumber(getNullIfBlank(request.getSecretaryLicenseNumber()));
+        if (request.getEmail() != null) entity.setEmail(getNullIfBlank(request.getEmail()));
+        if (request.getTel() != null) entity.setTel(getNullIfBlank(request.getTel()));
     }
 
     public CompanyResponseDTO toResponseDTO(Company company) {

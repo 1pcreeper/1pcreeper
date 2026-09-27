@@ -9,9 +9,9 @@ import project.office_workforce_service.mapper.PlaceMapper;
 import project.office_workforce_service.model.dto.request.PlaceCreateRequestDTO;
 import project.office_workforce_service.model.dto.request.PlaceUpdateRequestDTO;
 import project.office_workforce_service.model.dto.response.PlaceResponseDTO;
-import project.office_workforce_service.model.entity.Organization;
+import project.office_workforce_service.model.entity.Department;
 import project.office_workforce_service.model.entity.Place;
-import project.office_workforce_service.service.manager.OrganizationManagerService;
+import project.office_workforce_service.service.manager.DepartmentManagerService;
 import project.office_workforce_service.service.manager.PlaceManagerService;
 import project.shared_office_starter.mapper.PaginationMapper;
 import project.shared_office_starter.model.dto.base.PaginationBaseResponseDTO;
@@ -22,20 +22,20 @@ public class PlaceService {
     @Autowired
     private PlaceManagerService placeManagerService;
     @Autowired
-    private OrganizationManagerService organizationManagerService;
+    private DepartmentManagerService departmentManagerService;
     @Autowired
     private PlaceMapper placeMapper;
     @Autowired
     private PaginationMapper paginationMapper;
 
     public PaginationBaseResponseDTO<PlaceResponseDTO> search(
-        @Nullable Long orgId,
+        @Nullable Long departId,
         @Nullable String q,
         @Nullable Boolean isActive,
         Pageable pageable) {
 
         return paginationMapper.toDTO(
-            placeManagerService.search(orgId, q, isActive, pageable),
+            placeManagerService.search(departId, q, isActive, pageable),
             placeMapper::toResponseDTO
         );
     }
@@ -46,7 +46,7 @@ public class PlaceService {
 
     @Transactional
     public PlaceResponseDTO create(PlaceCreateRequestDTO requestDTO) {
-        Organization org = organizationManagerService.getReferenceById(requestDTO.getOrgId());
+        Department org = departmentManagerService.getReferenceById(requestDTO.getDepartId());
         Place newPlace = placeMapper.toEntity(requestDTO, org);
         return placeMapper.toResponseDTO(placeManagerService.save(newPlace));
     }

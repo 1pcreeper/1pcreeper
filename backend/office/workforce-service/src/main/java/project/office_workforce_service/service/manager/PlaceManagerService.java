@@ -19,7 +19,7 @@ public class PlaceManagerService extends AbstractBaseService<Place, Long> {
         this.placeRepository = placeRepository;
     }
 
-    public Page<Place> search(Long orgId, String q, Boolean isActive, Pageable pageable) {
-        return placeRepository.search(orgId, q, isActive, pageable);
+    public Page<Place> search(Long departId, String q, Boolean isActive, Pageable pageable) {
+        return placeRepository.search(departId, q, isActive, pageable);
     }
 }

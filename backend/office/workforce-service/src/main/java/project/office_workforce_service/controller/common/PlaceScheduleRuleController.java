@@ -10,6 +10,7 @@ import project.office_workforce_service.model.dto.request.PlaceScheduleRuleCreat
 import project.office_workforce_service.model.dto.request.PlaceScheduleRuleUpdateRequestDTO;
 import project.office_workforce_service.model.dto.response.PlaceScheduleRuleResponseDTO;
 import project.office_workforce_service.service.common.PlaceScheduleRuleService;
+import project.shared_office_common_lib.constant.role.Roles;
 import project.shared_office_starter.model.dto.base.APIBaseResponseDTO;
 
 @RestController
@@ -23,19 +24,19 @@ public class PlaceScheduleRuleController {
         this.ruleService = ruleService;
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @GetMapping("/place/{placeId}")
     public ResponseEntity<APIBaseResponseDTO<PlaceScheduleRuleResponseDTO>> findByPlaceId(@PathVariable Long placeId) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(ruleService.findByPlaceId(placeId)));
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @PostMapping
     public ResponseEntity<APIBaseResponseDTO<PlaceScheduleRuleResponseDTO>> create(@Valid @RequestBody PlaceScheduleRuleCreateRequestDTO request) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(ruleService.create(request)));
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @PutMapping("/{id}")
     public ResponseEntity<APIBaseResponseDTO<PlaceScheduleRuleResponseDTO>> update(
         @PathVariable Long id, @Valid @RequestBody PlaceScheduleRuleUpdateRequestDTO request) {

@@ -62,7 +62,7 @@ public class AccountService {
     public AuthTokenResponseDTO register(AuthRegisterRequestDTO requestDTO) {
         checkExistingOfficeUser(requestDTO.getName(), requestDTO.getPassword());
         OfficeUser newOfficeUser = officeUserMapper.toOfficeUser(requestDTO);
-        newOfficeUser.setUid(UUID.randomUUID().toString());
+        newOfficeUser.setUid(UUID.randomUUID());
         newOfficeUser.setPassword(passwordEncoder.encode(requestDTO.getPassword()));
         newOfficeUser.setRoles(Set.of(OfficeUserRole.OFFICE_USER));
         OfficeUser savedOfficeUser = officeUserManagerService.save(newOfficeUser);
@@ -110,7 +110,7 @@ public class AccountService {
             .issuer("office-account-service")
             .issuedAt(now)
             .expiresAt(now.plusSeconds(3600L))
-            .subject(officeUser.getUid())
+            .subject(officeUser.getUid().toString())
             .claim(JwtClaimKeysConstant.ROLE_KEY,
                 officeUser.getRoles() == null ? new ArrayList<>() : officeUser.getRoles()
             )

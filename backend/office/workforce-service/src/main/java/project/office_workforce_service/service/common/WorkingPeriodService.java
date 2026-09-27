@@ -1,6 +1,7 @@
 package project.office_workforce_service.service.common;
 
 import jakarta.annotation.Nullable;
+import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -9,12 +10,14 @@ import project.office_workforce_service.mapper.WorkingPeriodMapper;
 import project.office_workforce_service.model.dto.request.WorkingPeriodCreateRequestDTO;
 import project.office_workforce_service.model.dto.request.WorkingPeriodUpdateRequestDTO;
 import project.office_workforce_service.model.dto.response.WorkingPeriodResponseDTO;
-import project.office_workforce_service.model.entity.Organization;
+import project.office_workforce_service.model.entity.Department;
 import project.office_workforce_service.model.entity.WorkingPeriod;
-import project.office_workforce_service.service.manager.OrganizationManagerService;
+import project.office_workforce_service.service.manager.DepartmentManagerService;
 import project.office_workforce_service.service.manager.WorkingPeriodManagerService;
 import project.shared_office_starter.mapper.PaginationMapper;
 import project.shared_office_starter.model.dto.base.PaginationBaseResponseDTO;
+import project.shared_office_starter.model.exception.DatabaseUpdateFailureException;
+import project.shared_office_starter.model.exception.ResourceNotFoundException;
 
 import java.time.LocalTime;
 
@@ -24,14 +27,16 @@ public class WorkingPeriodService {
     @Autowired
     private WorkingPeriodManagerService workingPeriodManagerService;
     @Autowired
-    private OrganizationManagerService organizationManagerService;
+    private DepartmentManagerService departmentManagerService;
     @Autowired
     private WorkingPeriodMapper workingPeriodMapper;
     @Autowired
     private PaginationMapper paginationMapper;
+    @Autowired
+    private EntityManager entityManager;
 
     public PaginationBaseResponseDTO<WorkingPeriodResponseDTO> search(
-        @Nullable Long orgId,
+        @Nullable Long departId,
         @Nullable String q,
         @Nullable LocalTime startFrom,
         @Nullable LocalTime endTo,
@@ -39,26 +44,52 @@ public class WorkingPeriodService {
         Pageable pageable) {
 
         return paginationMapper.toDTO(
-            workingPeriodManagerService.search(orgId, q, startFrom, endTo, isActive, pageable),
+            workingPeriodManagerService.search(departId, q, startFrom, endTo, isActive, pageable),
             workingPeriodMapper::toResponseDTO
         );
     }
 
     public WorkingPeriodResponseDTO findById(Long id) {
-        return workingPeriodMapper.toResponseDTO(workingPeriodManagerService.findById(id));
+        WorkingPeriod existingWP = workingPeriodManagerService.findById(id);
+        if (!existingWP.getIsActive()) {
+            throw new ResourceNotFoundException("Period Already Deleted");
+        }
+        return workingPeriodMapper.toResponseDTO(existingWP);
     }
 
     @Transactional
     public WorkingPeriodResponseDTO create(WorkingPeriodCreateRequestDTO requestDTO) {
-        Organization org = organizationManagerService.getReferenceById(requestDTO.getOrgId());
-        WorkingPeriod newWP = workingPeriodMapper.toEntity(requestDTO, org);
-        return workingPeriodMapper.toResponseDTO(workingPeriodManagerService.save(newWP));
+        try {
+            WorkingPeriod existing = workingPeriodManagerService.findByRangeAndDepartId(
+                requestDTO.getDepartId(), requestDTO.getStartAt(), requestDTO.getEndAt()
+            );
+            if (existing.getIsActive()) {
+                throw new DatabaseUpdateFailureException("Period Already Existed");
+            }
+            existing.setIsActive(true);
+            existing.setName(requestDTO.getName());
+            return workingPeriodMapper.toResponseDTO(workingPeriodManagerService.save(existing));
+        } catch (ResourceNotFoundException e) {
+            Department org = departmentManagerService.getReferenceById(requestDTO.getDepartId());
+            WorkingPeriod newWP = workingPeriodMapper.toEntity(requestDTO, org);
+            return workingPeriodMapper.toResponseDTO(workingPeriodManagerService.save(newWP));
+        }
     }
 
     @Transactional
     public WorkingPeriodResponseDTO update(Long id, WorkingPeriodUpdateRequestDTO requestDTO) {
         WorkingPeriod existingWP = workingPeriodManagerService.findById(id);
+        if (!existingWP.getIsActive()) {
+            throw new ResourceNotFoundException("Period Already Deleted");
+        }
         workingPeriodMapper.updateEntity(requestDTO, existingWP);
         return workingPeriodMapper.toResponseDTO(workingPeriodManagerService.save(existingWP));
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        WorkingPeriod existingWP = workingPeriodManagerService.findById(id);
+        existingWP.setIsActive(false);
+        workingPeriodManagerService.save(existingWP);
     }
 }

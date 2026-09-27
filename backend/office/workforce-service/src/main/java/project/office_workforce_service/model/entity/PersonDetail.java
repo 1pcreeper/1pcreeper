@@ -27,6 +27,7 @@ public class PersonDetail extends AbstractAuditableEntity {
     private LocalDate dateOfBirth;
 
     @Enumerated(EnumType.STRING)
+    @org.hibernate.annotations.JdbcTypeCode(org.hibernate.type.SqlTypes.NAMED_ENUM)
     private Gender gender;
 
     private String nationality;

@@ -30,6 +30,7 @@ import project.office_account_service.model.entity.OfficeUser;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public abstract class AbstractAuditableEntity extends AbstractPersistableEntity {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

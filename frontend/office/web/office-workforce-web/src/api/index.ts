@@ -42,6 +42,9 @@ export const apiRequest = async <P, R>(
         const response = await fetch(url, options);
 
         if (response.status === 401) {
+            if (window.location.pathname !== '/auth/login' && window.location.pathname !== '/auth/logout') {
+                window.location.href = '/auth/logout';
+            }
             throw new LoginRequiredError("Authentication token expired");
         }
 

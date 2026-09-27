@@ -12,6 +12,26 @@ import java.time.LocalDateTime;
 
 @Component
 public class PersonDetailMapper {
+    
+    public void updateEntity(project.office_workforce_service.model.dto.request.PersonUpdateRequestDTO request, PersonDetail entity) {
+        if (request == null || entity == null) return;
+        if (request.getBio() != null) entity.setBio(emptyToNull(request.getBio()));
+        if (request.getDateOfBirth() != null) entity.setDateOfBirth(request.getDateOfBirth());
+        if (request.getGender() != null) entity.setGender(request.getGender());
+        if (request.getNationality() != null) entity.setNationality(emptyToNull(request.getNationality()));
+        if (request.getOccupation() != null) entity.setOccupation(emptyToNull(request.getOccupation()));
+        if (request.getAddress() != null) entity.setAddress(emptyToNull(request.getAddress()));
+        if (request.getWechatId() != null) entity.setWechatId(emptyToNull(request.getWechatId()));
+        if (request.getInstagramId() != null) entity.setInstagramId(emptyToNull(request.getInstagramId()));
+        if (request.getWebsite() != null) entity.setWebsite(emptyToNull(request.getWebsite()));
+    }
+
+    private String emptyToNull(String value) {
+        if (value == null) return null;
+        value = value.trim();
+        return value.isEmpty() ? null : value;
+    }
+
     public PersonDetailDTO tpPersonDetailDTO(PersonDetail personDetail) {
         if (personDetail == null) return null;
         return PersonDetailDTO.builder()

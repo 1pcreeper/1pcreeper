@@ -1,13 +1,13 @@
--- Organization Hierarchy
-CREATE INDEX idx_organizations_company_id ON organizations(company_id);
-CREATE INDEX idx_places_org_id ON places(org_id);
-CREATE INDEX idx_working_periods_org_id ON working_periods(org_id);
-CREATE INDEX idx_occupations_org_id ON occupations(org_id);
+-- Department Hierarchy
+CREATE INDEX idx_departments_company_id ON departments(company_id);
+CREATE INDEX idx_places_depart_id ON places(depart_id);
+CREATE INDEX idx_working_periods_depart_id ON working_periods(depart_id);
+CREATE INDEX idx_occupations_depart_id ON occupations(depart_id);
 
 -- Staff Linkages
 CREATE INDEX idx_staffs_company_id ON staffs(company_id);
 CREATE INDEX idx_staffs_person_id ON staffs(person_id);
-CREATE INDEX idx_staffs_org_id ON staffs(org_id);
+CREATE INDEX idx_staffs_depart_id ON staffs(depart_id);
 
 -- Staff Occupations Linkages
 CREATE INDEX idx_staff_occupations_staff_id ON staff_occupations(staff_id);

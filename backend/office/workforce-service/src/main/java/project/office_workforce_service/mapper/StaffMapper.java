@@ -5,27 +5,20 @@ import project.office_workforce_service.model.dto.object.StaffDTO;
 import project.office_workforce_service.model.dto.request.StaffCreateRequestDTO;
 import project.office_workforce_service.model.dto.request.StaffDetailRequestDTO;
 import project.office_workforce_service.model.dto.request.StaffUpdateRequestDTO;
-import project.office_workforce_service.model.dto.response.StaffDetailResponseDTO;
 import project.office_workforce_service.model.dto.response.StaffResponseDTO;
-import project.office_workforce_service.model.entity.Company;
-import project.office_workforce_service.model.entity.Organization;
-import project.office_workforce_service.model.entity.Person;
-import project.office_workforce_service.model.entity.Staff;
-import project.office_workforce_service.model.entity.StaffDetail;
-import project.office_workforce_service.model.entity.enums.WorkType;
-
-import java.time.LocalDateTime;
+import project.office_workforce_service.model.entity.*;
+import project.office_workforce_service.model.entity.Department;
 
 @Component
 public class StaffMapper {
 
-    public Staff toEntity(StaffCreateRequestDTO request, Company company, Person person, Organization org) {
+    public Staff toEntity(StaffCreateRequestDTO request, Company company, Person person, Department org) {
         if (request == null) return null;
 
         return Staff.builder()
             .company(company)
             .person(person)
-            .org(org)
+            .department(org)
             .custId(request.getCustId())
             .type(request.getType())
             .isActive(true)
@@ -41,10 +34,10 @@ public class StaffMapper {
             .build();
     }
 
-    public void updateEntity(StaffUpdateRequestDTO request, Staff entity, Organization newOrg) {
+    public void updateEntity(StaffUpdateRequestDTO request, Staff entity, Department newOrg) {
         if (request == null || entity == null) return;
 
-        if (newOrg != null) entity.setOrg(newOrg);
+        if (newOrg != null) entity.setDepartment(newOrg);
         if (request.getCustId() != null) entity.setCustId(request.getCustId());
         if (request.getType() != null) entity.setType(request.getType());
         entity.setIsActive(true);
@@ -58,8 +51,8 @@ public class StaffMapper {
             .personId(staff.getPerson() != null ? staff.getPerson().getId() : null)
             .personNameEnglish(staff.getPerson() != null ? staff.getPerson().getNameEnglish() : null)
             .personNameChinese(staff.getPerson() != null ? staff.getPerson().getNameChinese() : null)
-            .orgId(staff.getOrg() != null ? staff.getOrg().getId() : null)
-            .orgName(staff.getOrg() != null ? staff.getOrg().getName() : null)
+            .departId(staff.getDepartment() != null ? staff.getDepartment().getId() : null)
+            .departName(staff.getDepartment() != null ? staff.getDepartment().getName() : null)
             .custId(staff.getCustId())
             .type(staff.getType())
             .isActive(staff.getIsActive())
@@ -74,8 +67,8 @@ public class StaffMapper {
             .companyId(staff.getCompany() != null ? staff.getCompany().getId() : null)
             .companyName(getCompanyNameChineseOrEnglish(staff))
             .personId(staff.getPerson() != null ? staff.getPerson().getId() : null)
-            .orgId(staff.getOrg() != null ? staff.getOrg().getId() : null)
-            .orgName(staff.getOrg()!=null ? staff.getOrg().getName():null)
+            .departId(staff.getDepartment() != null ? staff.getDepartment().getId() : null)
+            .departName(staff.getDepartment()!=null ? staff.getDepartment().getName():null)
             .custId(staff.getCustId())
             .type(staff.getType())
             .isActive(staff.getIsActive())

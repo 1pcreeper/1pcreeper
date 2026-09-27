@@ -12,10 +12,10 @@ import project.office_workforce_service.repository.base.AbstractBaseRepository;
 public interface OccupationRepository extends AbstractBaseRepository<Occupation, Long> {
 
     @Query("SELECT o FROM Occupation o WHERE " +
-        "(:orgId IS NULL OR o.org.id = :orgId) AND " +
+        "(:departId IS NULL OR o.department.id = :departId) AND " +
         "(:q IS NULL OR LOWER(o.name) LIKE LOWER(CONCAT('%', :q, '%'))) AND " +
         "(:isActive IS NULL OR o.isActive = :isActive)")
-    Page<Occupation> search(@Param("orgId") Long orgId,
+    Page<Occupation> search(@Param("departId") Long departId,
                             @Param("q") String q,
                             @Param("isActive") Boolean isActive,
                             Pageable pageable);

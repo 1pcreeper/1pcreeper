@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -29,8 +30,8 @@ public class OfficeUser extends AbstractPersistableEntity implements UserDetails
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "uid", nullable = false, unique = true, length = 255)
-    private String uid;
+    @Column(name = "uid", nullable = false, unique = true, updatable = false)
+    private UUID uid;
 
     @Column(name = "name", unique = true, length = 20)
     private String name;

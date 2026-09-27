@@ -9,10 +9,7 @@ import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import project.office_api_gateway.factory.CrossSiteCookieFilterFactory;
-import project.office_api_gateway.properties.OfficeAccountServiceSpecProperties;
-import project.office_api_gateway.properties.OfficeExpenditureServiceSpecProperties;
-import project.office_api_gateway.properties.OfficeWorkforceServiceSpecProperties;
-import project.office_api_gateway.properties.ServletProperties;
+import project.office_api_gateway.properties.*;
 
 @Configuration
 @Slf4j
@@ -20,6 +17,7 @@ public class GatewayConfig {
     private final OfficeAccountServiceSpecProperties officeAccountServiceSpecProperties;
     private final OfficeWorkforceServiceSpecProperties officeWorkforceServiceSpecProperties;
     private final OfficeExpenditureServiceSpecProperties officeExpenditureServiceSpecProperties;
+    private final OfficeTransportServiceSpecProperties officeTransportServiceSpecProperties;
     private final ServletProperties servletProperties;
     private final CrossSiteCookieFilterFactory crossSiteCookieFilterFactory;
 
@@ -28,12 +26,14 @@ public class GatewayConfig {
         OfficeAccountServiceSpecProperties officeAccountServiceSpecProperties,
         OfficeWorkforceServiceSpecProperties officeWorkforceServiceSpecProperties,
         OfficeExpenditureServiceSpecProperties officeExpenditureServiceSpecProperties,
+        OfficeTransportServiceSpecProperties officeTransportServiceSpecProperties,
         ServletProperties servletProperties,
         CrossSiteCookieFilterFactory crossSiteCookieFilterFactory
     ) {
         this.officeAccountServiceSpecProperties = officeAccountServiceSpecProperties;
         this.officeWorkforceServiceSpecProperties = officeWorkforceServiceSpecProperties;
         this.officeExpenditureServiceSpecProperties = officeExpenditureServiceSpecProperties;
+        this.officeTransportServiceSpecProperties = officeTransportServiceSpecProperties;
         this.servletProperties = servletProperties;
         this.crossSiteCookieFilterFactory = crossSiteCookieFilterFactory;
     }
@@ -78,6 +78,17 @@ public class GatewayConfig {
                         DedupeResponseHeaderGatewayFilterFactory.Strategy.RETAIN_FIRST.name()
                     ))
                 .uri("lb://" + officeExpenditureServiceSpecProperties.getHostName() + ":" + officeExpenditureServiceSpecProperties.getHttpPort()))
+            .route("transport", r -> r.path(servletProperties.getContextPath() + "/transport/**")
+                .and()
+                .predicate(exchange -> !exchange.getRequest().getURI().getPath().contains("/internal/"))
+                .filters(f -> f
+                    .filter(logPath())
+                    .rewritePath(servletProperties.getContextPath() + "/transport/(?<segment>.*)", "/${segment}")
+                    .dedupeResponseHeader(
+                        "Access-Control-Allow-Origin Access-Control-Allow-Credentials",
+                        DedupeResponseHeaderGatewayFilterFactory.Strategy.RETAIN_FIRST.name()
+                    ))
+                .uri("lb://" + officeTransportServiceSpecProperties.getHostName() + ":" + officeTransportServiceSpecProperties.getHttpPort()))
             .build();
     }
 

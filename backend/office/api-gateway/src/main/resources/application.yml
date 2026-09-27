@@ -50,6 +50,10 @@ properties:
             hostName: ${OFFICE_EXPENDITURE_SERVICE_SERVER_HOSTNAME}
             httpPort: ${OFFICE_EXPENDITURE_SERVICE_SERVER_PORT}
             grpcPort: ${OFFICE_EXPENDITURE_SERVICE_GRPC_PORT}
+        office-transport-service:
+            hostName: ${OFFICE_TRANSPORT_SERVICE_SERVER_HOSTNAME}
+            httpPort: ${OFFICE_TRANSPORT_SERVICE_SERVER_PORT}
+            grpcPort: ${OFFICE_TRANSPORT_SERVICE_GRPC_PORT}
     jwt:
         issuer-uri: ${OFFICE_OAUTH2_RESOURCE_JWT_ISSUER_LOCATION}
     cors: 

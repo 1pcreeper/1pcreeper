@@ -17,8 +17,8 @@ export interface StaffDTO {
     companyId: number;
     companyName: string;
     personId: number;
-    orgId: number;
-    orgName: string;
+    departId: number;
+    departName: string;
     custId: string;
     type: WorkType;
     isActive: boolean;
@@ -30,6 +30,7 @@ export interface StaffDetailDTO {
     id: number;
     staffId: number;
     maxWorkingHrs: number;
+    about: string;
     createdAt: string;
     updatedAt: string;
 }

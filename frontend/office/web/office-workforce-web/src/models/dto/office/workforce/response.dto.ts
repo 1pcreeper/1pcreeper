@@ -22,14 +22,15 @@ export interface CompanyResponseDTO {
     email: string;
     tel: string;
     isActive: boolean;
+    details?: CompanyDetailResponseDTO;
 }
 export interface StaffResponseDTO {
     id: number;
     personId: number;
     personNameEnglish: string;
     personNameChinese: string;
-    orgId: number;
-    orgName: string;
+    departId: number;
+    departName: string;
     custId: string;
     type: WorkerType;
     isActive: boolean;
@@ -44,7 +45,7 @@ export interface StaffDetailResponseDTO {
     schedulePreferences: StaffSchedulePreferenceDTO[];
 }
 
-export interface OrganizationResponseDTO {
+export interface DepartmentResponseDTO {
     id: number;
     companyId: number;
     name: string;
@@ -54,8 +55,8 @@ export interface OrganizationResponseDTO {
 
 export interface PlaceResponseDTO {
     id: number;
-    orgId: number;
-    orgName: string;
+    departId: number;
+    departName: string;
     name: string;
     address: string;
     isActive: boolean;
@@ -82,7 +83,7 @@ export interface PersonDetailResponseDTO {
 }
 export interface WorkingPeriodResponseDTO {
     id: number;
-    orgId: number;
+    departId: number;
     name: string;
     startAt: string;
     endAt: string;

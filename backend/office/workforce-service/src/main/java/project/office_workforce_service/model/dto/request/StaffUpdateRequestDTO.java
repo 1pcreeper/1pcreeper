@@ -14,12 +14,14 @@ import project.office_workforce_service.model.entity.enums.WorkType;
 @AllArgsConstructor
 public class StaffUpdateRequestDTO {
 
-    private Long orgId; // In case they get transferred to another branch
+    private Long departId; // In case they get transferred to another branch
 
     @Size(max = 255)
     private String custId;
 
     private WorkType type;
+    
+    private String about;
 
     @Valid
     private StaffDetailRequestDTO details;

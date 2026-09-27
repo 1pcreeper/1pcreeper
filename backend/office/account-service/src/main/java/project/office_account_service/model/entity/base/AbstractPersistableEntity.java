@@ -8,6 +8,7 @@ import java.io.Serializable;
 @Getter
 @MappedSuperclass
 public abstract class AbstractPersistableEntity implements Serializable {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

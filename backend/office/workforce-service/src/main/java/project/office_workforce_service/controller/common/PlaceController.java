@@ -11,6 +11,7 @@ import project.office_workforce_service.model.dto.request.PlaceCreateRequestDTO;
 import project.office_workforce_service.model.dto.request.PlaceUpdateRequestDTO;
 import project.office_workforce_service.model.dto.response.PlaceResponseDTO;
 import project.office_workforce_service.service.common.PlaceService;
+import project.shared_office_common_lib.constant.role.Roles;
 import project.shared_office_starter.model.dto.base.APIBaseResponseDTO;
 import project.shared_office_starter.model.dto.base.PaginationBaseResponseDTO;
 
@@ -25,29 +26,29 @@ public class PlaceController {
         this.placeService = placeService;
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @GetMapping("/search")
     public ResponseEntity<APIBaseResponseDTO<PaginationBaseResponseDTO<PlaceResponseDTO>>> search(
-        @RequestParam(required = false) Long orgId,
+        @RequestParam(required = false) Long departId,
         @RequestParam(required = false) String q,
-        @RequestParam(required = false) Boolean isActive,
+        @RequestParam(required = false,defaultValue = "true") Boolean isActive,
         Pageable pageable) {
-        return ResponseEntity.ok(APIBaseResponseDTO.success(placeService.search(orgId, q, isActive, pageable)));
+        return ResponseEntity.ok(APIBaseResponseDTO.success(placeService.search(departId, q, isActive, pageable)));
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @GetMapping("/{id}")
     public ResponseEntity<APIBaseResponseDTO<PlaceResponseDTO>> findById(@PathVariable Long id) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(placeService.findById(id)));
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @PostMapping
     public ResponseEntity<APIBaseResponseDTO<PlaceResponseDTO>> create(@Valid @RequestBody PlaceCreateRequestDTO request) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(placeService.create(request)));
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @PutMapping("/{id}")
     public ResponseEntity<APIBaseResponseDTO<PlaceResponseDTO>> update(
         @PathVariable Long id, @Valid @RequestBody PlaceUpdateRequestDTO request) {

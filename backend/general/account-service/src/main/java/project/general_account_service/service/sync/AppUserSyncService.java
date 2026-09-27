@@ -73,7 +73,7 @@ public class AppUserSyncService {
         newAppUser.setUid(uid);
         newAppUser.setEmail(email);
         newAppUser.setDisplayName(displayName==null ? "User" : displayName.isBlank() ? "User" : displayName);
-        newAppUser.setRoles(Set.of(AppUserRole.APP_USER));
+        newAppUser.setRoles(Set.of(AppUserRole.ACCOUNT_USER));
         return appUserManagerService.save(newAppUser);
     }
 }

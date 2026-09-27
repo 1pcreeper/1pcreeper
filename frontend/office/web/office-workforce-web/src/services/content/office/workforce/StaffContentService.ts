@@ -1,6 +1,6 @@
 import officeAPI from "@/api/office.api";
 import { PageParams, PaginationBaseResponseDTO } from "@/models/dto/base/base.dto";
-import { StaffCreateRequestDTO } from "@/models/dto/office/workforce/request.dto";
+import { StaffCreateRequestDTO, StaffUpdateRequestDTO } from "@/models/dto/office/workforce/request.dto";
 import { StaffDetailResponseDTO, StaffResponseDTO } from "@/models/dto/office/workforce/response.dto";
 
 export default class StaffContentService {
@@ -16,6 +16,15 @@ export default class StaffContentService {
     public async create(requestDTO: StaffCreateRequestDTO): Promise<StaffResponseDTO> {
         return await officeAPI<StaffCreateRequestDTO, StaffResponseDTO>(`/workforce/staffs`, "POST", requestDTO);
     }
+
+    public async update(id: number, requestDTO: StaffUpdateRequestDTO): Promise<StaffResponseDTO> {
+        return await officeAPI<StaffUpdateRequestDTO, StaffResponseDTO>(`/workforce/staffs/${id}`, "PUT", requestDTO);
+    }
+    public async delete(id: number): Promise<void> {
+        return await officeAPI<null, void>(`/workforce/staffs/${id}`, "DELETE", null);
+    }
+
+
     public async findById(id: number): Promise<StaffResponseDTO> {
         return await officeAPI<null, StaffResponseDTO>(`/workforce/staffs/${id}`, "GET", null);
     }

@@ -23,6 +23,7 @@ import project.office_workforce_service.service.manager.PersonManagerService;
 import project.office_workforce_service.service.manager.StaffManagerService;
 import project.shared_office_starter.mapper.PaginationMapper;
 import project.shared_office_starter.model.dto.base.PaginationBaseResponseDTO;
+import project.shared_office_starter.model.exception.ResourceNotFoundException;
 
 import java.util.List;
 
@@ -64,26 +65,52 @@ public class PersonService {
     public PersonResponseDTO findById(Long id) {
         Person person = personManagerService.findById(id);
         PersonDetail detail = personDetailManagerService.findByPersonId(id);
+        if (!person.getIsActive()){
+            throw new ResourceNotFoundException("Person Already Deleted");
+        }
         return personMapper.toResponseDTO(person);
     }
+
 
     @Transactional
     public PersonResponseDTO create(PersonCreateRequestDTO requestDTO) {
         Person newPerson = personMapper.toEntity(requestDTO);
         Person savedPerson = personManagerService.save(newPerson);
-
+        
+        // Create an empty PersonDetail
+        PersonDetail newDetail = new PersonDetail();
+        newDetail.setPerson(savedPerson);
+        personDetailManagerService.save(newDetail);
+        
         return personMapper.toResponseDTO(savedPerson);
     }
+
+
 
     @Transactional
     public PersonResponseDTO update(Long id, PersonUpdateRequestDTO requestDTO) {
         Person existingPerson = personManagerService.findById(id);
-
+        if (!existingPerson.getIsActive()){
+            throw new ResourceNotFoundException("Person Already Deleted");
+        }
         personMapper.updateEntity(requestDTO, existingPerson);
         Person savedPerson = personManagerService.save(existingPerson);
-
+        
+        try {
+            PersonDetail existingDetail = personDetailManagerService.findByPersonId(id);
+            personDetailMapper.updateEntity(requestDTO, existingDetail);
+            personDetailManagerService.save(existingDetail);
+        } catch (Exception e) {
+            // PersonDetail might not exist, create it
+            PersonDetail newDetail = new PersonDetail();
+            newDetail.setPerson(savedPerson);
+            personDetailMapper.updateEntity(requestDTO, newDetail);
+            personDetailManagerService.save(newDetail);
+        }
+        
         return personMapper.toResponseDTO(savedPerson);
     }
+
     public PaginationBaseResponseDTO<PersonResponseDTO> findAll(Pageable pageable){
         return paginationMapper.toDTO(
             personManagerService.findAllByIsActive(true,pageable),
@@ -97,20 +124,31 @@ public class PersonService {
         personManagerService.save(existingPerson);
     }
     
-    public PersonDetailResponseDTO findByIdInDetail(Long id){
-        PersonDetail existingPersonDetail = personDetailManagerService.findByPersonId(id);
-        Person existingPerson = existingPersonDetail.getPerson();
-        List<Staff> staffs = staffManagerService.findByPersonId(id);
 
+    public PersonDetailResponseDTO findByIdInDetail(Long id){
+        Person existingPerson = personManagerService.findById(id);
+        if (!existingPerson.getIsActive()){
+            throw new ResourceNotFoundException("Person Already Deleted");
+        }
+        PersonDetail existingPersonDetail = null;
+        try {
+            existingPersonDetail = personDetailManagerService.findByPersonId(id);
+        } catch (Exception e) {
+            existingPersonDetail = new PersonDetail();
+            existingPersonDetail.setPerson(existingPerson);
+        }
+        
+        List<Staff> staffs = staffManagerService.findByPersonId(id);
         PersonDetailDTO personDetailDTO = personDetailMapper.tpPersonDetailDTO(existingPersonDetail);
         PersonDTO personDTO = personMapper.toPersonDTO(existingPerson);
         List<StaffDTO> staffDTOs = staffs.stream().map(s->staffMapper.toStaffDTO(s))
             .filter(StaffDTO::getIsActive).toList();
-        
+            
         return PersonDetailResponseDTO.builder()
             .person(personDTO)
             .detail(personDetailDTO)
             .staffs(staffDTOs)
             .build();
     }
+
 }

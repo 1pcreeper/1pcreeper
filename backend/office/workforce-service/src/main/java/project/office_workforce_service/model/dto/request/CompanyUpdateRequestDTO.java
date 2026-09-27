@@ -20,19 +20,19 @@ public class CompanyUpdateRequestDTO {
     private String nameChinese;
 
     @Size(max = 50)
-    @Pattern(regexp = "^[0-9]{8}$", message = "Business Registration Number must be exactly 8 digits")
+    @Pattern(regexp = "^$|^[0-9]{8}$", message = "Business Registration Number must be exactly 8 digits")
     private String businessRegistrationNumber;
 
     @Size(max = 20)
-    @Pattern(regexp = "^[0-9]{6}$", message = "Secretary License Number must be exactly 6 digits")
+    @Pattern(regexp = "^$|^[0-9]{6}$", message = "Secretary License Number must be exactly 6 digits")
     private String secretaryLicenseNumber;
 
     @Size(max = 255)
-    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9._%+-]+\\.[a-zA-Z]{2,}$", message = "Invalid email format")
+    @Pattern(regexp = "^$|^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9._%+-]+\\.[a-zA-Z]{2,}$", message = "Invalid email format")
     private String email;
 
     @Size(max = 50)
-    @Pattern(regexp = "^[+]([0-9]){3}\\s([0-9])+$", message = "Invalid telephone format")
+    @Pattern(regexp = "^$|^[+]([0-9]){3}\\s([0-9])+$", message = "Invalid telephone format")
     private String tel;
 
     // Allows updating details in the same payload

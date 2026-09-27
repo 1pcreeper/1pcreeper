@@ -8,6 +8,7 @@ import java.io.Serializable;
 @Getter
 @MappedSuperclass
 public abstract class AbstractPersistableEntity implements Serializable {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,7 +19,7 @@ public abstract class AbstractPersistableEntity implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) {
-            return true;
+            return true;    
         }
         if (o == null || getClass() != o.getClass()) {
             return false;

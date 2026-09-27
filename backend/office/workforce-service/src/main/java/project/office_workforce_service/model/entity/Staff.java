@@ -7,6 +7,8 @@ import org.hibernate.type.SqlTypes;
 import project.office_workforce_service.model.entity.base.AbstractAuditableEntity;
 import project.office_workforce_service.model.entity.enums.WorkType;
 
+import java.util.UUID;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -17,7 +19,10 @@ import project.office_workforce_service.model.entity.enums.WorkType;
     @UniqueConstraint(columnNames = {"company_id", "person_id"})
 })
 public class Staff extends AbstractAuditableEntity {
-
+    
+    @Column(name = "uid", unique = true, updatable = false)
+    private UUID uid;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id", nullable = false)
     private Company company;
@@ -27,8 +32,8 @@ public class Staff extends AbstractAuditableEntity {
     private Person person;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "org_id", nullable = false)
-    private Organization org;
+    @JoinColumn(name = "depart_id", nullable = false)
+    private Department department;
 
     @Column(name = "cust_id", columnDefinition = "TEXT")
     private String custId;

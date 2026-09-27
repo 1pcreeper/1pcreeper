@@ -4,17 +4,17 @@ import org.springframework.stereotype.Component;
 import project.office_workforce_service.model.dto.request.PlaceCreateRequestDTO;
 import project.office_workforce_service.model.dto.request.PlaceUpdateRequestDTO;
 import project.office_workforce_service.model.dto.response.PlaceResponseDTO;
-import project.office_workforce_service.model.entity.Organization;
+import project.office_workforce_service.model.entity.Department;
 import project.office_workforce_service.model.entity.Place;
 
 @Component
 public class PlaceMapper {
 
-    public Place toEntity(PlaceCreateRequestDTO request, Organization org) {
+    public Place toEntity(PlaceCreateRequestDTO request, Department org) {
         if (request == null) return null;
 
         return Place.builder()
-            .org(org)
+            .department(org)
             .name(request.getName())
             .address(request.getAddress())
             .isActive(true)
@@ -34,8 +34,8 @@ public class PlaceMapper {
 
         return PlaceResponseDTO.builder()
             .id(place.getId())
-            .orgId(place.getOrg() != null ? place.getOrg().getId() : null)
-            .orgName(place.getOrg() != null ? place.getOrg().getName() : null)
+            .departId(place.getDepartment() != null ? place.getDepartment().getId() : null)
+            .departName(place.getDepartment() != null ? place.getDepartment().getName() : null)
             .name(place.getName())
             .address(place.getAddress())
             .isActive(place.getIsActive())

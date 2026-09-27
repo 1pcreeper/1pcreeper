@@ -16,11 +16,20 @@ export default class CompanyContentService {
     public async create(requestDTO: CompanyCreateRequestDTO): Promise<CompanyResponseDTO> {
         return await officeAPI<CompanyCreateRequestDTO, CompanyResponseDTO>(`/workforce/companies`, "POST", requestDTO);
     }
+    public async update(id: number, requestDTO: CompanyCreateRequestDTO): Promise<CompanyResponseDTO> {
+        return await officeAPI<CompanyCreateRequestDTO, CompanyResponseDTO>(`/workforce/companies/${id}`, "PUT", requestDTO);
+    }
+    public async delete(id: number): Promise<void> {
+        return await officeAPI<null, void>(`/workforce/companies/${id}`, "DELETE", null);
+    }
     public async findById(id: number): Promise<CompanyResponseDTO> {
         return await officeAPI<null, CompanyResponseDTO>(`/workforce/companies/${id}`, "GET", null);
     }
     public async findAllS1(page: PageParams): Promise<PaginationBaseResponseDTO<CompanyResponseDTO>> {
         return await officeAPI<null, PaginationBaseResponseDTO<CompanyResponseDTO>>(`/workforce/companies?page=${page.page}&size=${page.size}`, "GET", null);
+    }
+    public async searchS1(q: string, page: PageParams): Promise<PaginationBaseResponseDTO<CompanyResponseDTO>> {
+        return await officeAPI<null, PaginationBaseResponseDTO<CompanyResponseDTO>>(`/workforce/companies?q=${encodeURIComponent(q)}&page=${page.page}&size=${page.size}`, "GET", null);
     }
 
     public getDisplayName(company: CompanyResponseDTO): string {

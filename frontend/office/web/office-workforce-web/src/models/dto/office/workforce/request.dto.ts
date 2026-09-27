@@ -22,17 +22,25 @@ export interface StaffDetailRequestDTO {
 export interface StaffCreateRequestDTO {
     companyId: number;
     personId: number;
-    orgId: number;
+    departId: number;
     custId: string;
     type: WorkType
     details: StaffDetailRequestDTO;
 }
-export interface OrganizationCreateRequestDTO {
+export interface StaffUpdateRequestDTO {
+    departId: number;
+    custId: string;
+    type: WorkType;
+    about: string;
+    details: StaffDetailRequestDTO;
+}
+
+export interface DepartmentCreateRequestDTO {
     companyId: number;
     name: string;
     bio: string;
 }
-export interface OrganizationUpdateRequestDTO {
+export interface DepartmentUpdateRequestDTO {
     name: string;
     bio: string;
 }
@@ -53,4 +61,29 @@ export interface PersonUpdateRequestDTO {
     officeTel: string;
     mobileTel: string;
     email: string;
+    hkId?: string;
+    cnId?: string;
+    moId?: string;
+    passportId?: string;
+    bio?: string;
+    dateOfBirth?: string;
+    gender?: string;
+    nationality?: string;
+    occupation?: string;
+    address?: string;
+    wechatId?: string;
+    instagramId?: string;
+    website?: string;
+}
+export interface WorkingPeriodCreateRequestDTO {
+    departId: number;
+    startAt: string;
+    endAt: string;
+    name: string;
+}
+
+export interface WorkingPeriodUpdateRequestDTO {
+    startAt: string;
+    endAt: string;
+    name: string;
 }

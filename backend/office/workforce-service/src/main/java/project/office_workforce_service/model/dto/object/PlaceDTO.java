@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class PlaceDTO {
     private Long id;
-    private Long orgId;
+    private Long departId;
     private String name;
     private String address;
     private Boolean isActive;

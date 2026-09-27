@@ -11,6 +11,7 @@ import project.office_workforce_service.model.entity.enums.WorkType;
 import project.office_workforce_service.repository.StaffRepository;
 import project.office_workforce_service.service.base.AbstractBaseService;
 import project.shared_office_starter.model.exception.PropertyValidationException;
+import project.shared_office_starter.model.exception.ResourceNotFoundException;
 
 import java.util.List;
 
@@ -25,8 +26,8 @@ public class StaffManagerService extends AbstractBaseService<Staff, Long> {
         this.staffRepository = staffRepository;
     }
 
-    public Page<Staff> searchStaff(String q, Long companyId, Long orgId, WorkType workType, Boolean isActive, Pageable pageable) {
-        return staffRepository.search(q, companyId, orgId, workType, isActive, pageable);
+    public Page<Staff> searchStaff(String q, Long companyId, Long departId, WorkType workType, Boolean isActive, Pageable pageable) {
+        return staffRepository.search(q, companyId, departId, workType, isActive, pageable);
     }
 
     @Override
@@ -46,5 +47,11 @@ public class StaffManagerService extends AbstractBaseService<Staff, Long> {
 
     public List<Staff> findByPersonId(Long personId){
         return staffRepository.findByPersonId(personId);
+    }
+    
+    public Staff findByPersonIdAndCompanyId(Long personId, Long companyId){
+        return staffRepository.findByPersonIdAndCompanyId(personId,companyId).orElseThrow(
+            ()->new ResourceNotFoundException("Staff Not Found")
+        );
     }
 }

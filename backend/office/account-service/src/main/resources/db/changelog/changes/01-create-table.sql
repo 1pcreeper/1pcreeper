@@ -12,7 +12,7 @@ CREATE TABLE abstract_persistable_entity (
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
-  uid VARCHAR(255) NOT NULL UNIQUE,
+  uid UUID NOT NULL UNIQUE,
   name VARCHAR(20) UNIQUE CHECK (name <> '' AND name NOT LIKE '% %' AND name ~ '^[a-zA-Z0-9._]+$'),
   email VARCHAR(255) UNIQUE CHECK (email <> '' AND email NOT LIKE '% %' AND email ~ '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9._%+-]+\.[a-zA-Z]{2,}$'),
   display_name VARCHAR(20) NOT NULL,

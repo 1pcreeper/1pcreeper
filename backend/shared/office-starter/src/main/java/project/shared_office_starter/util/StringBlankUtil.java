@@ -12,4 +12,11 @@ public class StringBlankUtil {
         }
         return object.toString();
     }
+    
+    public static String getNullIfBlank(String words){
+        if(words.isBlank()){
+            return null;
+        }
+        return words;
+    }
 }

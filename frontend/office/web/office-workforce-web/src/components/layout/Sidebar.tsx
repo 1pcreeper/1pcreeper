@@ -1,5 +1,5 @@
 import { useCompanyStore } from '@/store/useCompanyStore';
-import { Building, CalendarCheck, ChevronDown, Clock, FolderTree, LayoutDashboard, User, Users } from 'lucide-react';
+import { Building, CalendarCheck, ChevronDown, Clock, Group, LayoutDashboard, User, Users, FolderTree } from 'lucide-react';
 import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { cn } from '../../lib/utils';
@@ -14,8 +14,9 @@ const individualNav = [
 ];
 
 const companyNav = [
-    { icon: Users, label: 'Staff', path: 'staffs' },
-    { icon: Building, label: 'Organizations', path: 'organizations' },
+    { icon: Building, label: 'Company', path: 'info' },
+    { icon: Users, label: 'Staffs', path: 'staffs' },
+    { icon: Group, label: 'Departments', path: 'departments' },
     { icon: Clock, label: 'Periods', path: 'periods' },
 ];
 

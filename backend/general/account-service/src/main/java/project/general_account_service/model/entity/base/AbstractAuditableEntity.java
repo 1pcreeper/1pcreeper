@@ -30,6 +30,7 @@ import project.general_account_service.model.entity.AppUser;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public abstract class AbstractAuditableEntity extends AbstractPersistableEntity {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -21,8 +21,8 @@ public class StaffCreateRequestDTO {
     @NotNull(message = "Person ID is required")
     private Long personId;
 
-    @NotNull(message = "Organization ID is required")
-    private Long orgId;
+    @NotNull(message = "Department ID is required")
+    private Long departId;
 
     @Size(max = 255, message = "Custom ID must not exceed 255 characters")
     private String custId;

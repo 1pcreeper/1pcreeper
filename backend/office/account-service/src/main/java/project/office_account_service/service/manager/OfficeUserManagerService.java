@@ -11,6 +11,7 @@ import project.office_account_service.service.base.AbstractBaseService;
 import project.shared_office_starter.model.exception.ResourceNotFoundException;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class OfficeUserManagerService extends AbstractBaseService<OfficeUser,Long> {
@@ -20,7 +21,7 @@ public class OfficeUserManagerService extends AbstractBaseService<OfficeUser,Lon
         super(officeUserRepository, "OfficeUser");
         this.officeUserRepository = officeUserRepository;
     }
-    public OfficeUser findByUid(String uid){
+    public OfficeUser findByUid(UUID uid){
         return officeUserRepository.findByUid(uid).orElseThrow(
             ()->new ResourceNotFoundException("Uid Not Found")
         );

@@ -19,4 +19,7 @@ public class StaffDetail extends AbstractAuditableEntity {
 
     @Column(name = "max_working_hrs", nullable = false)
     private Integer maxWorkingHrs;
+
+    @Column(name = "about")
+    private String about;
 }

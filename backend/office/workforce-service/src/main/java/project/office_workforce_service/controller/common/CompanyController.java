@@ -12,6 +12,7 @@ import project.office_workforce_service.model.dto.request.CompanyCreateRequestDT
 import project.office_workforce_service.model.dto.request.CompanyUpdateRequestDTO;
 import project.office_workforce_service.model.dto.response.CompanyResponseDTO;
 import project.office_workforce_service.service.common.CompanyService;
+import project.shared_office_common_lib.constant.role.Roles;
 import project.shared_office_starter.model.dto.base.APIBaseResponseDTO;
 import project.shared_office_starter.model.dto.base.PaginationBaseResponseDTO;
 
@@ -26,7 +27,7 @@ public class CompanyController {
         this.companyService = companyService;
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @GetMapping("/search")
     public ResponseEntity<APIBaseResponseDTO<PaginationBaseResponseDTO<CompanyResponseDTO>>> search(
         @RequestParam(required = false) String q,
@@ -35,31 +36,31 @@ public class CompanyController {
         return ResponseEntity.ok(APIBaseResponseDTO.success(companyService.search(q, isActive, pageable)));
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @GetMapping("/{id}")
     public ResponseEntity<APIBaseResponseDTO<CompanyResponseDTO>> findById(@PathVariable Long id) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(companyService.findById(id)));
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @GetMapping
     public ResponseEntity<APIBaseResponseDTO<PaginationBaseResponseDTO<CompanyResponseDTO>>> findAll(@PageableDefault Pageable pageable) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(companyService.findAll(pageable)));
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @PostMapping
     public ResponseEntity<APIBaseResponseDTO<CompanyResponseDTO>> create(@Valid @RequestBody CompanyCreateRequestDTO request) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(companyService.create(request)));
     }
 
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @PutMapping("/{id}")
     public ResponseEntity<APIBaseResponseDTO<CompanyResponseDTO>> update(
         @PathVariable Long id, @Valid @RequestBody CompanyUpdateRequestDTO request) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(companyService.update(id, request)));
     }
-    @Secured({UserRoles.WORKFORCE_ADMIN})
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @DeleteMapping("/{id}")
     public ResponseEntity<APIBaseResponseDTO<Void>> delete(@PathVariable("id") Long id) {
         companyService.delete(id);

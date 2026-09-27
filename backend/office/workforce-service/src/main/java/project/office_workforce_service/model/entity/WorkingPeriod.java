@@ -13,13 +13,13 @@ import java.time.LocalTime;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "working_periods", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"org_id", "start_at", "end_at"})
+    @UniqueConstraint(columnNames = {"depart_id", "start_at", "end_at"})
 })
 public class WorkingPeriod extends AbstractAuditableEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "org_id", nullable = false)
-    private Organization org;
+    @JoinColumn(name = "depart_id", nullable = false)
+    private Department department;
 
     @Column(name = "start_at", nullable = false)
     private LocalTime startAt;

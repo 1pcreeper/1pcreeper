@@ -1,9 +1,12 @@
-export enum WorkType {
+export enum WorkType {//'FULL_TIME', 'FULL_PART_TIME', 'PART_TIME','CONTRACT','FREELANCE','INTERN','TEMPORARY','SPECIAL'
     FULL_TIME = "FULL_TIME",
     FULL_PART_TIME = "FULL_PART_TIME",
     PART_TIME = "PART_TIME",
     CONTRACT = "CONTRACT",
-    FREELANCE = "FREELANCE"
+    FREELANCE = "FREELANCE",
+    INTERN = "INTERN",
+    TEMPORARY = "TEMPORARY",
+    SPECIAL = "SPECIAL"
 }
 export enum Gender {
     MALE = "MALE",

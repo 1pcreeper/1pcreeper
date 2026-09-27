@@ -48,6 +48,7 @@
         <module>office/account-service</module>
         <module>office/workforce-service</module>
         <module>office/expenditure-service</module>
+        <module>office/transport-service</module>
         <module>office/dummy-service</module>
         <module>shared/general-auth-starter</module>
         <module>shared/general-starter</module>
