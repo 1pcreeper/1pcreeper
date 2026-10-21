@@ -4,7 +4,6 @@ import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import java.util.function.Supplier;
 
-
 public abstract class AbstractCacheBaseService<C> {
     private final String cacheKey;
     private final Class<C> cacheClass;
@@ -17,22 +16,34 @@ public abstract class AbstractCacheBaseService<C> {
     }
 
     public C save(Long id, C cacheDTO) {
-        if (cache != null) {
-            cache.put(id, cacheDTO);
+        return save((Object) id, cacheDTO);
+    }
+
+    public C save(Object key, C cacheDTO) {
+        if (cache != null && key != null && cacheDTO != null) {
+            cache.put(key, cacheDTO);
         }
         return cacheDTO;
     }
 
     // Thread-safe self-populating loader pattern
     public C findByIdOrLoad(Long id, Supplier<C> databaseLoader) {
-        if (cache == null) return databaseLoader.get();
+        return findByKeyOrLoad((Object) id, databaseLoader);
+    }
 
-        // Native Spring Cache provider lock (prevents database stampede)
-        return cache.get(id, () -> databaseLoader.get());
+    public C findByKeyOrLoad(Object key, Supplier<C> loader) {
+        if (cache == null || key == null) return loader.get();
+
+        // Native Spring Cache provider lock (prevents database/network stampede)
+        return cache.get(key, () -> loader.get());
     }
 
     public void delete(Long id) {
-        if (cache != null) cache.evict(id);
+        delete((Object) id);
+    }
+
+    public void delete(Object key) {
+        if (cache != null && key != null) cache.evict(key);
     }
 
     public void clear() {

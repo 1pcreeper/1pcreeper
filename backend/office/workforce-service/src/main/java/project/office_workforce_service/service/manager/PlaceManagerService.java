@@ -1,5 +1,6 @@
 package project.office_workforce_service.service.manager;
 
+import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +20,15 @@ public class PlaceManagerService extends AbstractBaseService<Place, Long> {
         this.placeRepository = placeRepository;
     }
 
-    public Page<Place> search(Long departId, String q, Boolean isActive, Pageable pageable) {
-        return placeRepository.search(departId, q, isActive, pageable);
+    public Page<Place> search(Long companyId, Long departId, @Nullable String q, Boolean isActive, Pageable pageable) {
+        return placeRepository.search(companyId, departId, q, isActive, pageable);
+    }
+
+    public boolean existsByDepartmentIdAndNameIgnoreCase(Long departmentId, String name) {
+        return placeRepository.existsByDepartmentIdAndNameIgnoreCase(departmentId, name);
+    }
+
+    public java.util.Optional<Place> findByDepartmentIdAndNameIgnoreCase(Long departmentId, String name) {
+        return placeRepository.findByDepartmentIdAndNameIgnoreCase(departmentId, name);
     }
 }

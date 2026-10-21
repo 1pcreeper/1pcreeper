@@ -18,6 +18,7 @@ import project.office_workforce_service.model.dto.response.PersonResponseDTO;
 import project.office_workforce_service.model.entity.Person;
 import project.office_workforce_service.model.entity.PersonDetail;
 import project.office_workforce_service.model.entity.Staff;
+import project.office_workforce_service.service.checker.PersonCheckerService;
 import project.office_workforce_service.service.manager.PersonDetailManagerService;
 import project.office_workforce_service.service.manager.PersonManagerService;
 import project.office_workforce_service.service.manager.StaffManagerService;
@@ -38,6 +39,9 @@ public class PersonService {
     
     @Autowired
     private StaffManagerService staffManagerService;
+
+    @Autowired
+    private PersonCheckerService personCheckerService;
 
     @Autowired
     private PersonMapper personMapper;
@@ -64,16 +68,13 @@ public class PersonService {
 
     public PersonResponseDTO findById(Long id) {
         Person person = personManagerService.findById(id);
-        PersonDetail detail = personDetailManagerService.findByPersonId(id);
-        if (!person.getIsActive()){
-            throw new ResourceNotFoundException("Person Already Deleted");
-        }
+        personCheckerService.checkPersonIsActive(person);
         return personMapper.toResponseDTO(person);
     }
 
-
     @Transactional
     public PersonResponseDTO create(PersonCreateRequestDTO requestDTO) {
+        personCheckerService.checkCreateRequest(requestDTO);
         Person newPerson = personMapper.toEntity(requestDTO);
         Person savedPerson = personManagerService.save(newPerson);
         
@@ -85,14 +86,11 @@ public class PersonService {
         return personMapper.toResponseDTO(savedPerson);
     }
 
-
-
     @Transactional
     public PersonResponseDTO update(Long id, PersonUpdateRequestDTO requestDTO) {
         Person existingPerson = personManagerService.findById(id);
-        if (!existingPerson.getIsActive()){
-            throw new ResourceNotFoundException("Person Already Deleted");
-        }
+        personCheckerService.checkPersonIsActive(existingPerson);
+        personCheckerService.checkUpdateRequest(id, requestDTO);
         personMapper.updateEntity(requestDTO, existingPerson);
         Person savedPerson = personManagerService.save(existingPerson);
         
@@ -120,6 +118,7 @@ public class PersonService {
     @Transactional
     public void delete(Long id){
         Person existingPerson = personManagerService.findById(id);
+        personCheckerService.checkPersonIsActive(existingPerson);
         existingPerson.setIsActive(false);
         personManagerService.save(existingPerson);
     }
@@ -127,9 +126,7 @@ public class PersonService {
 
     public PersonDetailResponseDTO findByIdInDetail(Long id){
         Person existingPerson = personManagerService.findById(id);
-        if (!existingPerson.getIsActive()){
-            throw new ResourceNotFoundException("Person Already Deleted");
-        }
+        personCheckerService.checkPersonIsActive(existingPerson);
         PersonDetail existingPersonDetail = null;
         try {
             existingPersonDetail = personDetailManagerService.findByPersonId(id);

@@ -13,6 +13,7 @@ import project.office_workforce_service.model.dto.response.CompanyResponseDTO;
 import project.office_workforce_service.model.entity.Company;
 import project.office_workforce_service.model.entity.CompanyDetail;
 import project.office_workforce_service.model.entity.Staff;
+import project.office_workforce_service.service.checker.CompanyCheckerService;
 import project.office_workforce_service.service.manager.CompanyDetailManagerService;
 import project.office_workforce_service.service.manager.CompanyManagerService;
 import project.shared_office_starter.mapper.PaginationMapper;
@@ -26,6 +27,9 @@ public class CompanyService {
 
     @Autowired
     private CompanyDetailManagerService companyDetailManagerService;
+
+    @Autowired
+    private CompanyCheckerService companyCheckerService;
 
     @Autowired
     private CompanyMapper companyMapper;
@@ -46,11 +50,13 @@ public class CompanyService {
 
     public CompanyResponseDTO findById(Long id) {
         Company company = companyManagerService.findById(id);
+        companyCheckerService.checkCompanyIsActive(company);
         return companyMapper.toResponseDTO(company);
     }
 
     @Transactional
     public CompanyResponseDTO create(CompanyCreateRequestDTO requestDTO) {
+        companyCheckerService.checkCreateRequest(requestDTO);
         Company newCompany = companyMapper.toEntity(requestDTO);
         Company savedCompany = companyManagerService.save(newCompany);
 
@@ -66,6 +72,8 @@ public class CompanyService {
     @Transactional
     public CompanyResponseDTO update(Long id, CompanyUpdateRequestDTO requestDTO) {
         Company existingCompany = companyManagerService.findById(id);
+        companyCheckerService.checkCompanyIsActive(existingCompany);
+        companyCheckerService.checkUpdateRequest(id, requestDTO);
         companyMapper.updateEntity(requestDTO, existingCompany);
         Company savedCompany = companyManagerService.save(existingCompany);
 
@@ -95,6 +103,7 @@ public class CompanyService {
     @Transactional
     public void delete(Long id){
         Company existingCompany = companyManagerService.findById(id);
+        companyCheckerService.checkCompanyIsActive(existingCompany);
         existingCompany.setIsActive(false);
         companyManagerService.save(existingCompany);
     }

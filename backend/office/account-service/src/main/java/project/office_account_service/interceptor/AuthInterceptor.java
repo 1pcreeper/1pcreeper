@@ -2,11 +2,16 @@ package project.office_account_service.interceptor;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import project.shared_office_starter.annotation.PermitAllCredentials;
 import project.shared_office_starter.interceptor.AbstractAuthBaseInterceptor;
+
+import java.util.Collection;
+import java.util.List;
 
 @Component
 public class AuthInterceptor extends AbstractAuthBaseInterceptor {
@@ -17,10 +22,8 @@ public class AuthInterceptor extends AbstractAuthBaseInterceptor {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             if (handlerMethod.hasMethodAnnotation(PermitAllCredentials.class)) {
                 SecurityContextHolder.getContext().getAuthentication().setAuthenticated(true);
-                return true;
             }
         }
-        
         return true;
     }
 }

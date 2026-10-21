@@ -9,6 +9,5 @@ public class JwtAuthRequestHandler implements JwtAuthRequestBaseHandler {
     @Override
     public void handle(Jwt jwt) {
         String idToken = jwt.getTokenValue();
-        
     }
 }

@@ -16,7 +16,7 @@ public interface WorkingPeriodRepository extends AbstractBaseRepository<WorkingP
 
     @Query("SELECT wp FROM WorkingPeriod wp WHERE " +
         "(:departId IS NULL OR wp.department.id = :departId) AND " +
-        "(:q IS NULL OR LOWER(wp.name) LIKE LOWER(CONCAT('%', CAST(:q AS text), '%'))) AND " +
+        "(:q IS NULL OR LOWER(wp.name) LIKE LOWER(CONCAT('%', CAST(:q AS String), '%'))) AND " +
         "(CAST(:startFrom as time) IS NULL OR wp.startAt >= :startFrom) AND " +
         "(CAST(:endTo as time) IS NULL OR wp.endAt <= :endTo) AND " +
         "(CAST(:isActive AS boolean) IS NULL OR wp.isActive = :isActive)")

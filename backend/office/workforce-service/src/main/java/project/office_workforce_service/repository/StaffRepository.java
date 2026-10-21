@@ -47,4 +47,14 @@ public interface StaffRepository extends AbstractBaseRepository<Staff, Long> {
     List<Staff> findByPersonId(@Param("personId")Long personId);
     @Query("SELECT s FROM Staff s WHERE s.person.id = :personId AND s.company.id = :companyId")
     Optional<Staff> findByPersonIdAndCompanyId(@Param("personId")Long personId, @Param("companyId") Long companyId);
+
+    boolean existsByPersonIdAndCompanyId(Long personId, Long companyId);
+    boolean existsByCompanyIdAndCustIdIgnoreCase(Long companyId, String custId);
+    Optional<Staff> findByCompanyIdAndCustIdIgnoreCase(Long companyId, String custId);
+
+    @Query("SELECT s FROM Staff s JOIN StaffOccupation so ON so.staff = s " +
+        "WHERE s.department.id = :departId AND so.occupation.id = :occupationId " +
+        "AND s.isActive = true AND s.person.isActive = true")
+    List<Staff> findActiveByDepartmentIdAndOccupationId(@Param("departId") Long departId,
+                                                        @Param("occupationId") Long occupationId);
 }

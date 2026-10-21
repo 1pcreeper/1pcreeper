@@ -14,6 +14,9 @@ public class StringBlankUtil {
     }
     
     public static String getNullIfBlank(String words){
+        if(words==null){
+            return null;
+        }
         if(words.isBlank()){
             return null;
         }

@@ -11,7 +11,7 @@ import project.office_workforce_service.model.entity.base.AbstractAuditableEntit
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "place_occupation_rules", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"place_id", "occupation_id"})
+    @UniqueConstraint(columnNames = {"place_id", "week_day", "occupation_id"})
 })
 public class PlaceOccupationRule extends AbstractAuditableEntity {
 
@@ -19,10 +19,10 @@ public class PlaceOccupationRule extends AbstractAuditableEntity {
     @JoinColumn(name = "place_id", nullable = false)
     private Place place;
 
+    @Column(name = "week_day", nullable = false)
+    private Integer weekDay;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "occupation_id", nullable = false)
     private Occupation occupation;
-
-    @Column(name = "person_count", nullable = false)
-    private Integer personCount;
 }

@@ -16,7 +16,7 @@ public interface StaffOccupationRepository extends AbstractBaseRepository<StaffO
     @Query("SELECT so FROM StaffOccupation so WHERE " +
         "(:staffId IS NULL OR so.staff.id = :staffId) AND " +
         "(:occupationId IS NULL OR so.occupation.id = :occupationId) AND " +
-        "(:q IS NULL OR LOWER(so.remark) LIKE LOWER(CONCAT('%', :q, '%')))")
+        "(:q IS NULL OR LOWER(so.remark) LIKE LOWER(CONCAT('%', CAST(:q AS String), '%')))")
     Page<StaffOccupation> search(@Param("staffId") Long staffId,
                                  @Param("occupationId") Long occupationId,
                                  @Param("q") String q,
@@ -24,4 +24,7 @@ public interface StaffOccupationRepository extends AbstractBaseRepository<StaffO
 
     @Query("SELECT so FROM StaffOccupation so WHERE so.staff.id = :staffId")
     List<StaffOccupation> findByStaffId(@Param("staffId") Long staffId);
+
+    boolean existsByStaffIdAndOccupationId(Long staffId, Long occupationId);
+    java.util.Optional<StaffOccupation> findByStaffIdAndOccupationId(Long staffId, Long occupationId);
 }

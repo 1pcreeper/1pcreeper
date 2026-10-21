@@ -36,6 +36,7 @@ export interface StaffDetailDTO {
 }
 export interface PersonDTO {
     id: number;
+    uid?: string;
     nameEnglish: string;
     nameChinese: string;
     officeTel: string;
@@ -83,7 +84,7 @@ export interface StaffSchedulePreferenceDTO {
     placeAddress: string;
     weekDay: number;
     workingPeriodId: number;
-    workingPeriodName: number;
+    workingPeriodName?: string;
     priorityIndex: number;
     createdAt: string;
     updatedAt: string;

@@ -67,4 +67,11 @@ public class ScheduleController {
         @PathVariable Long id, @Valid @RequestBody ScheduleStatusUpdateRequestDTO request) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(scheduleService.updateStatus(id, request)));
     }
+
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
+    @DeleteMapping("/{id}")
+    public ResponseEntity<APIBaseResponseDTO<Void>> delete(@PathVariable Long id) {
+        scheduleService.delete(id);
+        return ResponseEntity.ok(APIBaseResponseDTO.success(null));
+    }
 }

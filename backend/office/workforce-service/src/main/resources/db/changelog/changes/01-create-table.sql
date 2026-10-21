@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS schedules CASCADE;
 DROP TABLE IF EXISTS staff_schedule_preferences CASCADE;
 DROP TABLE IF EXISTS place_occupation_rules CASCADE;
 DROP TABLE IF EXISTS place_working_period_rules CASCADE;
+DROP TABLE IF EXISTS place_schedule_rule_work_types CASCADE;
 DROP TABLE IF EXISTS place_schedule_rules CASCADE;
 DROP TABLE IF EXISTS staff_occupations CASCADE;
 DROP TABLE IF EXISTS occupations CASCADE;
@@ -12,6 +13,8 @@ DROP TABLE IF EXISTS staffs CASCADE;
 DROP TABLE IF EXISTS places CASCADE;
 DROP TABLE IF EXISTS working_periods CASCADE;
 DROP TABLE IF EXISTS departments CASCADE;
+DROP TABLE IF EXISTS organization_details CASCADE;
+DROP TABLE IF EXISTS organizations CASCADE;
 DROP TABLE IF EXISTS company_details CASCADE;
 DROP TABLE IF EXISTS companies CASCADE;
 DROP TABLE IF EXISTS person_details CASCADE;
@@ -110,6 +113,27 @@ CREATE TABLE company_details (
   website TEXT
 ) INHERITS (abstract_auditable_entity);
 
+CREATE TABLE organizations (
+    id SERIAL PRIMARY KEY,
+    uid UUID UNIQUE DEFAULT gen_random_uuid(),
+    name_english VARCHAR(255),
+    name_chinese VARCHAR(255),
+    business_registration_number VARCHAR(50) UNIQUE NULL CHECK (business_registration_number ~ '^[0-9]{8}$' OR business_registration_number IS NULL),
+    secretary_license_number VARCHAR(20) UNIQUE NULL CHECK (secretary_license_number ~ '^[0-9]{6}$' OR secretary_license_number IS NULL),
+    email VARCHAR(255) NULL CHECK (email <> '' AND email NOT LIKE '% %' AND email ~ '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9._%+-]+\.[a-zA-Z]{2,}$'),
+    tel VARCHAR(50) NULL CHECK (tel ~ '^[+]([0-9]){3}\s([0-9])+$' OR tel IS NULL),
+    is_active BOOLEAN DEFAULT TRUE
+) INHERITS (abstract_auditable_entity);
+
+CREATE TABLE organization_details (
+  id SERIAL PRIMARY KEY,
+  org_id INTEGER UNIQUE NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,
+  bio TEXT,
+  address TEXT,
+  industry TEXT,
+  website TEXT
+) INHERITS (abstract_auditable_entity);
+
 CREATE TABLE departments (
   id SERIAL PRIMARY KEY,
   uid UUID UNIQUE DEFAULT gen_random_uuid(),
@@ -175,25 +199,31 @@ CREATE TABLE staff_occupations (
 
 CREATE TABLE place_schedule_rules (
    id SERIAL PRIMARY KEY,
-   place_id INTEGER UNIQUE NOT NULL REFERENCES places(id) ON DELETE CASCADE,
-   person_count INTEGER NOT NULL CHECK (person_count > 0),
-   work_type_priorities work_type[]
+   place_id INTEGER UNIQUE NOT NULL REFERENCES places(id) ON DELETE CASCADE
 ) INHERITS (abstract_auditable_entity);
 
-CREATE TABLE place_working_period_rules (
-   id SERIAL PRIMARY KEY,
-   place_id INTEGER NOT NULL REFERENCES places(id) ON DELETE CASCADE,
-   working_period_id INTEGER NOT NULL REFERENCES working_periods(id) ON DELETE CASCADE,
-   person_count INTEGER NOT NULL,
-   UNIQUE(place_id,working_period_id)
-) INHERITS (abstract_auditable_entity);
+CREATE TABLE place_schedule_rule_work_types (
+    rule_id INTEGER NOT NULL REFERENCES place_schedule_rules(id) ON DELETE CASCADE,
+    work_type work_type NOT NULL,
+    priority_index INTEGER NOT NULL,
+    UNIQUE(rule_id, work_type),
+    UNIQUE(rule_id, priority_index)
+);
 
 CREATE TABLE place_occupation_rules (
    id SERIAL PRIMARY KEY,
    place_id INTEGER NOT NULL REFERENCES places(id) ON DELETE CASCADE,
+   week_day INTEGER NOT NULL CHECK ( week_day >= 1 AND week_day <= 7),
    occupation_id INTEGER NOT NULL REFERENCES occupations(id) ON DELETE CASCADE,
+   UNIQUE(place_id,week_day,occupation_id)
+) INHERITS (abstract_auditable_entity);
+
+CREATE TABLE place_working_period_rules (
+   id SERIAL PRIMARY KEY,
+   occupation_rule_id INTEGER NOT NULL REFERENCES place_occupation_rules(id) ON DELETE CASCADE,
+   working_period_id INTEGER NOT NULL REFERENCES working_periods(id) ON DELETE CASCADE,
    person_count INTEGER NOT NULL,
-   UNIQUE(place_id,occupation_id)
+   UNIQUE(occupation_rule_id,working_period_id)
 ) INHERITS (abstract_auditable_entity);
 
 CREATE TABLE staff_schedule_preferences (
@@ -213,6 +243,8 @@ CREATE TABLE schedules(
    place_id INTEGER NOT NULL REFERENCES places(id) ON DELETE CASCADE,
    staff_id INTEGER NOT NULL REFERENCES staffs(id) ON DELETE CASCADE,
    status schedule_status NOT NULL,
+   working_period_id INTEGER NOT NULL REFERENCES working_periods(id) ON DELETE CASCADE,
+   occupation_id INTEGER REFERENCES occupations(id) ON DELETE CASCADE,
    remark TEXT
 ) INHERITS (abstract_auditable_entity);
 
@@ -220,6 +252,9 @@ CREATE TABLE schedule_generation_tasks (
     id SERIAL PRIMARY KEY,
     status task_status NOT NULL,
     requested_by INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    place_id INTEGER REFERENCES places(id),
+    target_year INTEGER,
+    target_month INTEGER,
     started_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     completed_at TIMESTAMP NULL,
     error_message TEXT NULL

@@ -26,4 +26,14 @@ public interface StaffSchedulePreferenceRepository extends AbstractBaseRepositor
 
     @Query("SELECT ssp FROM StaffSchedulePreference ssp WHERE ssp.staff.id = :staffId")
     List<StaffSchedulePreference> findByStaffId(@Param("staffId") Long staffId);
+
+    @Query("SELECT ssp FROM StaffSchedulePreference ssp WHERE ssp.staff.id IN :staffIds " +
+        "AND ssp.place.id = :placeId AND ssp.weekDay = :weekDay")
+    List<StaffSchedulePreference> findByStaffIdInAndPlaceIdAndWeekDay(@Param("staffIds") List<Long> staffIds,
+                                                                      @Param("placeId") Long placeId,
+                                                                      @Param("weekDay") Integer weekDay);
+
+    boolean existsByStaffIdAndPlaceIdAndWeekDay(Long staffId, Long placeId, Integer weekDay);
+
+    boolean existsByStaffIdAndPlaceIdAndWeekDayAndWorkingPeriodId(Long staffId, Long placeId, Integer weekDay, Long workingPeriodId);
 }

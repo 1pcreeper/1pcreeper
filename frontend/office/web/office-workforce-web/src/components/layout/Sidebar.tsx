@@ -1,5 +1,5 @@
 import { useCompanyStore } from '@/store/useCompanyStore';
-import { Building, CalendarCheck, ChevronDown, Clock, Group, LayoutDashboard, User, Users, FolderTree } from 'lucide-react';
+import { Briefcase, Building, Building2, CalendarCheck, ChevronDown, Clock, FolderTree, Group, LayoutDashboard, MapPin, User, Users } from 'lucide-react';
 import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { cn } from '../../lib/utils';
@@ -11,13 +11,16 @@ const mainNav = [
 
 const individualNav = [
     { icon: User, label: 'Person', path: 'persons' },
+    { icon: Building2, label: 'Organizations', path: 'organizations' },
 ];
 
 const companyNav = [
     { icon: Building, label: 'Company', path: 'info' },
     { icon: Users, label: 'Staffs', path: 'staffs' },
     { icon: Group, label: 'Departments', path: 'departments' },
+    { icon: Briefcase, label: 'Occupations', path: 'occupations' },
     { icon: Clock, label: 'Periods', path: 'periods' },
+    { icon: MapPin, label: 'Places', path: 'places' },
 ];
 
 export default function Sidebar() {

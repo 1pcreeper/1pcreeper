@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-@Cacheable
 public class JwtAuthenticationConverter implements Converter<Jwt, AbstractAuthenticationToken> {
     private final UserDetailsBaseService userDetailsBaseService;
     private final JwtAuthRequestBaseHandler jwtAuthRequestBaseHandler;

@@ -8,8 +8,13 @@ import { StaffUpdateRequestDTO } from '@/models/dto/office/workforce/request.dto
 import { StaffDetailResponseDTO } from '@/models/dto/office/workforce/response.dto';
 import CompanyContentService from '@/services/content/office/workforce/CompanyContentService';
 import DepartmentContentService from '@/services/content/office/workforce/DepartmentContentService';
+import OccupationContentService from '@/services/content/office/workforce/OccupationContentService';
 import PersonContentService from '@/services/content/office/workforce/PersonContentService';
+import PlaceContentService from '@/services/content/office/workforce/PlaceContentService';
 import StaffContentService from '@/services/content/office/workforce/StaffContentService';
+import StaffOccupationContentService from '@/services/content/office/workforce/StaffOccupationContentService';
+import StaffSchedulePreferenceContentService from '@/services/content/office/workforce/StaffSchedulePreferenceContentService';
+import WorkingPeriodContentService from '@/services/content/office/workforce/WorkingPeriodContentService';
 import { useCompanyStore } from '@/store/useCompanyStore';
 import { ArrowLeft, Briefcase, Building, Calendar, Clock, CreditCard, Edit2, FileText, Mail, MapPin, Phone, Plus, Search, Trash2, User } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
@@ -100,9 +105,19 @@ export default function StaffDetails() {
     };
 
     const [isPreferenceModalOpen, setIsPreferenceModalOpen] = useState(false);
+    const [prefFormData, setPrefFormData] = useState({
+        placeId: null as number | null,
+        placeLabel: '',
+        weekDay: 1,
+        workingPeriodId: null as number | null,
+        workingPeriodLabel: '',
+        priorityIndex: 1
+    });
 
-    // Form state for adding schedule preference
-    const [prefFormData, setPrefFormData] = useState({ placeId: '1', placeName: 'Main Headquarters', weekDay: 1, workingPeriodName: 'Day Shift', priorityIndex: 1 });
+    const [isOccupationModalOpen, setIsOccupationModalOpen] = useState(false);
+    const [selectedOccupationId, setSelectedOccupationId] = useState<number | null>(null);
+    const [selectedOccupationLabel, setSelectedOccupationLabel] = useState('');
+    const [occupationRemark, setOccupationRemark] = useState('');
 
     // Mock data representing full payload
     const staffDetailDisplay = {
@@ -152,13 +167,106 @@ export default function StaffDetails() {
     const sd = staffDetailDisplay.staff.details;
     const o = staffDetailDisplay.staff.details.occupations;
 
-    const handleAddPreference = (e: React.FormEvent) => {
-        e.preventDefault();
-        //TO BE IMPLEMENTED
-        setIsPreferenceModalOpen(false);
+    const handleOpenAssignOccupationModal = () => {
+        setSelectedOccupationId(null);
+        setSelectedOccupationLabel('');
+        setOccupationRemark('');
+        setIsOccupationModalOpen(true);
     };
 
-    const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const handleAssignOccupation = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!selectedOccupationId) {
+            showMessage('error', 'Please select an occupation.');
+            return;
+        }
+        try {
+            await StaffOccupationContentService.getInstance().create({
+                staffId: Number(id),
+                occupationId: selectedOccupationId,
+                remark: occupationRemark.trim() || undefined
+            });
+            setIsOccupationModalOpen(false);
+            showMessage('success', 'Occupation assigned successfully.');
+            fetchStaff();
+        } catch (error: any) {
+            console.error(error);
+            showMessage('error', error?.message || 'Failed to assign occupation.');
+        }
+    };
+
+    const handleDeleteOccupation = async (staffOccupationId: number) => {
+        if (!window.confirm('Are you sure you want to remove this occupation assignment?')) return;
+        try {
+            await StaffOccupationContentService.getInstance().delete(staffOccupationId);
+            showMessage('success', 'Occupation removed successfully.');
+            fetchStaff();
+        } catch (error: any) {
+            console.error(error);
+            showMessage('error', error?.message || 'Failed to remove occupation.');
+        }
+    };
+
+    const handleOpenAddPreferenceModal = () => {
+        setPrefFormData({
+            placeId: null,
+            placeLabel: '',
+            weekDay: 1,
+            workingPeriodId: null,
+            workingPeriodLabel: '',
+            priorityIndex: 1
+        });
+        setIsPreferenceModalOpen(true);
+    };
+
+    const handleAddPreference = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!prefFormData.placeId) {
+            showMessage('error', 'Please select a place.');
+            return;
+        }
+        if (!prefFormData.workingPeriodId) {
+            showMessage('error', 'Please select a working period.');
+            return;
+        }
+        try {
+            await StaffSchedulePreferenceContentService.getInstance().create({
+                staffId: Number(id),
+                placeId: prefFormData.placeId,
+                weekDay: prefFormData.weekDay,
+                workingPeriodId: prefFormData.workingPeriodId,
+                priorityIndex: Number(prefFormData.priorityIndex) || 0
+            });
+            setIsPreferenceModalOpen(false);
+            showMessage('success', 'Schedule preference added successfully.');
+            fetchStaff();
+        } catch (error: any) {
+            console.error(error);
+            showMessage('error', error?.message || 'Failed to add schedule preference.');
+        }
+    };
+
+    const handleDeletePreference = async (prefId: number) => {
+        if (!window.confirm('Are you sure you want to remove this schedule preference?')) return;
+        try {
+            await StaffSchedulePreferenceContentService.getInstance().delete(prefId);
+            showMessage('success', 'Schedule preference removed successfully.');
+            fetchStaff();
+        } catch (error: any) {
+            console.error(error);
+            showMessage('error', error?.message || 'Failed to remove schedule preference.');
+        }
+    };
+
+    const dayNames: Record<number, string> = {
+        1: 'Monday',
+        2: 'Tuesday',
+        3: 'Wednesday',
+        4: 'Thursday',
+        5: 'Friday',
+        6: 'Saturday',
+        7: 'Sunday'
+    };
 
     const fetchStaff = async () => {
         if (!id || Number.isNaN(id)) {
@@ -172,10 +280,6 @@ export default function StaffDetails() {
             console.error("Failed to fetch staff details:", error);
             navigate(`/companies/${currentSelectedCompany?.id}/staffs`);
         }
-    }
-
-    const handleOpenAssignOccupationModal = () => {
-        // TO BE IMPLEMENTED
     };
 
     useEffect(() => {
@@ -265,6 +369,15 @@ export default function StaffDetails() {
                                                         <h4 className="text-sm font-bold text-slate-900">{occ.occupationName}</h4>
                                                         <h5 className="text-[10px] font-bold text-slate-500 uppercase tracking-wider"> Since {formatPostgresDate(occ.createdAt)}</h5>
                                                     </div>
+                                                    {isWorkforceAdmin && (
+                                                        <button
+                                                            onClick={() => handleDeleteOccupation(occ.id)}
+                                                            className="text-slate-400 hover:text-red-600 p-1 rounded hover:bg-red-50 transition-colors opacity-0 group-hover:opacity-100"
+                                                            title="Remove Occupation"
+                                                        >
+                                                            <Trash2 className="w-3.5 h-3.5" />
+                                                        </button>
+                                                    )}
                                                 </div>
                                             ))}
                                         </div>
@@ -524,7 +637,7 @@ export default function StaffDetails() {
                                             <p className="text-xs text-slate-500">Manage preferred working locations and periods for scheduling.</p>
                                         </div>
                                         <button
-                                            onClick={() => setIsPreferenceModalOpen(true)}
+                                            onClick={handleOpenAddPreferenceModal}
                                             className="bg-indigo-600 text-white px-3 py-1.5 rounded text-[10px] font-bold flex items-center gap-1.5 hover:bg-indigo-700 transition"
                                         >
                                             <Plus className="w-3.5 h-3.5" />
@@ -543,8 +656,19 @@ export default function StaffDetails() {
                                                             <div className="text-sm font-bold text-slate-900">{pref.placeName}</div>
                                                             <div className="text-[10px] text-slate-500 font-mono">ID: {pref.placeId}</div>
                                                         </div>
-                                                        <div className="bg-slate-100 text-slate-600 px-2 py-1 rounded text-[10px] font-bold border border-slate-200">
-                                                            Priority: {pref.priorityIndex}
+                                                        <div className="flex items-center gap-2">
+                                                            <div className="bg-slate-100 text-slate-600 px-2 py-1 rounded text-[10px] font-bold border border-slate-200">
+                                                                Priority: {pref.priorityIndex}
+                                                            </div>
+                                                            {isWorkforceAdmin && (
+                                                                <button
+                                                                    onClick={() => handleDeletePreference(pref.id)}
+                                                                    className="text-slate-400 hover:text-red-600 p-1 rounded hover:bg-red-50 transition-colors opacity-0 group-hover:opacity-100"
+                                                                    title="Remove Preference"
+                                                                >
+                                                                    <Trash2 className="w-3.5 h-3.5" />
+                                                                </button>
+                                                            )}
                                                         </div>
                                                     </div>
 
@@ -604,18 +728,25 @@ export default function StaffDetails() {
                 <div className="space-y-4">
                     <div>
                         <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Place</label>
-                        <select
-                            className="w-full bg-slate-50 border border-slate-200 rounded px-2 py-1.5 text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                        <DropdownSearch
                             value={prefFormData.placeId}
-                            onChange={(e) => {
-                                const name = e.target.options[e.target.selectedIndex].text;
-                                setPrefFormData({ ...prefFormData, placeId: e.target.value, placeName: name });
+                            onChange={(val, opt) => setPrefFormData(p => ({ ...p, placeId: val, placeLabel: opt?.label || '' }))}
+                            fetchData={async (search, page) => {
+                                const res = await PlaceContentService.getInstance().search(
+                                    undefined,
+                                    search,
+                                    true,
+                                    { page, size: 10 },
+                                    staffDetail?.company?.id || staffDetail?.staff?.companyId
+                                );
+                                return {
+                                    content: res.content.map(p => ({ id: p.id, label: `${p.name} (${p.address || 'No address'})` })),
+                                    totalPages: res.totalPages
+                                };
                             }}
-                        >
-                            <option value="1">Main Headquarters</option>
-                            <option value="2">Downtown Branch</option>
-                            <option value="3">Westside Warehouse</option>
-                        </select>
+                            placeholder="Search place..."
+                            initialLabel={prefFormData.placeLabel}
+                        />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                         <div>
@@ -631,7 +762,7 @@ export default function StaffDetails() {
                                 <option value={4}>Thursday</option>
                                 <option value={5}>Friday</option>
                                 <option value={6}>Saturday</option>
-                                <option value={0}>Sunday</option>
+                                <option value={7}>Sunday</option>
                             </select>
                         </div>
                         <div>
@@ -640,21 +771,74 @@ export default function StaffDetails() {
                                 type="number" min="0" required
                                 className="w-full bg-slate-50 border border-slate-200 rounded px-2 py-1.5 text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500"
                                 value={prefFormData.priorityIndex}
-                                onChange={(e) => setPrefFormData({ ...prefFormData, priorityIndex: parseInt(e.target.value) })}
+                                onChange={(e) => setPrefFormData({ ...prefFormData, priorityIndex: parseInt(e.target.value) || 0 })}
                             />
                         </div>
                     </div>
                     <div>
                         <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Working Period</label>
-                        <select
+                        <DropdownSearch
+                            value={prefFormData.workingPeriodId}
+                            onChange={(val, opt) => setPrefFormData(p => ({ ...p, workingPeriodId: val, workingPeriodLabel: opt?.label || '' }))}
+                            fetchData={async (search, page) => {
+                                const res = await WorkingPeriodContentService.getInstance().search(
+                                    staffDetail?.staff?.departId,
+                                    search,
+                                    { page, size: 10 }
+                                );
+                                return {
+                                    content: res.content.map(wp => ({ id: wp.id, label: `${wp.name} (${wp.startAt} - ${wp.endAt})` })),
+                                    totalPages: res.totalPages
+                                };
+                            }}
+                            placeholder="Search working period..."
+                            initialLabel={prefFormData.workingPeriodLabel}
+                        />
+                    </div>
+                </div>
+            </Modal>
+
+            <Modal
+                isOpen={isOccupationModalOpen}
+                onClose={() => setIsOccupationModalOpen(false)}
+                title="Assign Occupation to Staff"
+                onSubmit={handleAssignOccupation}
+                submitLabel="ASSIGN OCCUPATION"
+            >
+                <div className="space-y-4">
+                    <div>
+                        <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Occupation</label>
+                        <DropdownSearch
+                            value={selectedOccupationId}
+                            onChange={(val, opt) => {
+                                setSelectedOccupationId(val);
+                                setSelectedOccupationLabel(opt?.label || '');
+                            }}
+                            fetchData={async (search, page) => {
+                                const res = await OccupationContentService.getInstance().search(
+                                    staffDetail?.staff?.departId,
+                                    search,
+                                    true,
+                                    { page, size: 10 }
+                                );
+                                return {
+                                    content: res.content.map(occ => ({ id: occ.id, label: occ.name })),
+                                    totalPages: res.totalPages
+                                };
+                            }}
+                            placeholder="Search occupation..."
+                            initialLabel={selectedOccupationLabel}
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-[10px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Remark (Optional)</label>
+                        <input
+                            type="text"
                             className="w-full bg-slate-50 border border-slate-200 rounded px-2 py-1.5 text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                            value={prefFormData.workingPeriodName}
-                            onChange={(e) => setPrefFormData({ ...prefFormData, workingPeriodName: e.target.value })}
-                        >
-                            <option value="Day Shift">Day Shift</option>
-                            <option value="Night Shift">Night Shift</option>
-                            <option value="Flexi Day">Flexi Day</option>
-                        </select>
+                            placeholder="e.g. Primary assignment, Lead, etc."
+                            value={occupationRemark}
+                            onChange={(e) => setOccupationRemark(e.target.value)}
+                        />
                     </div>
                 </div>
             </Modal>

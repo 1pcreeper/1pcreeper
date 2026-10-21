@@ -5,8 +5,13 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.hibernate.id.enhanced.CustomOptimizerDescriptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -34,9 +39,14 @@ import org.springframework.security.oauth2.server.authorization.settings.Authori
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.server.csrf.CsrfToken;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.OncePerRequestFilter;
+import project.office_account_service.filter.CsrfCookieFilter;
 import project.office_account_service.properties.JwtSecretProperties;
 import project.shared_office_common_lib.properties.JwtProperties;
 import project.shared_office_starter.converter.JwtAuthenticationConverter;
@@ -46,6 +56,7 @@ import project.shared_office_starter.handler.SpaCsrfTokenRequestHandler;
 import project.shared_office_starter.resolver.AuthBearerTokenResolver;
 import project.shared_office_starter.service.base.UserDetailsBaseService;
 
+import java.io.IOException;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.interfaces.RSAPrivateKey;
@@ -61,7 +72,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Configuration
-@EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
+@EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true,prePostEnabled = true)
 @EnableWebSecurity
 public class OauthSecurityConfig {
     private final UserDetailsBaseService userDetailsBaseService;
@@ -71,6 +82,7 @@ public class OauthSecurityConfig {
     private final AuthBearerTokenResolver authBearerTokenResolver;
     private final JwtSecretProperties jwtSecretProperties;
     private final JwtProperties jwtProperties;
+    private final CsrfCookieFilter csrfCookieFilter;
 
     @Autowired
     public OauthSecurityConfig(
@@ -80,7 +92,8 @@ public class OauthSecurityConfig {
         JwtAuthenticationConverter jwtAuthenticationConverter,
         AuthBearerTokenResolver authBearerTokenResolver,
         JwtSecretProperties jwtSecretProperties,
-        JwtProperties jwtProperties
+        JwtProperties jwtProperties,
+        CsrfCookieFilter csrfCookieFilter
     ) {
         this.userDetailsBaseService = userDetailsBaseService;
         this.spaCsrfTokenRequestHandler = spaCsrfTokenRequestHandler;
@@ -89,6 +102,7 @@ public class OauthSecurityConfig {
         this.authBearerTokenResolver = authBearerTokenResolver;
         this.jwtSecretProperties = jwtSecretProperties;
         this.jwtProperties = jwtProperties;
+        this.csrfCookieFilter = csrfCookieFilter;
     }
 
 
@@ -109,6 +123,7 @@ public class OauthSecurityConfig {
                     cors.configurationSource(corsConfigurationSource())
             )
             .csrf(csrfCustomize())
+            .addFilterAfter(csrfCookieFilter, BasicAuthenticationFilter.class)
             .authorizeHttpRequests((authorize) ->
                 authorize
                     .requestMatchers("/public/**").permitAll()
@@ -135,7 +150,7 @@ public class OauthSecurityConfig {
     @Order(2)
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrfCustomize())
+            .csrf(csrf->csrf.disable())
             .cors(
                 cors ->
                     cors.configurationSource(corsConfigurationSource())
@@ -231,12 +246,10 @@ public class OauthSecurityConfig {
         configuration.setAllowedHeaders(List.of("*")); // Allow all headers
         configuration.setAllowCredentials(true); // Allow cookies or Authorization headers
 
-        return new CorsConfigurationSource() {
-            @Override
-            public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
-                return configuration;
-            }
-        };
+        UrlBasedCorsConfigurationSource source =
+            new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
 
@@ -244,7 +257,7 @@ public class OauthSecurityConfig {
         return csrf ->
             csrf
                 .ignoringRequestMatchers(
-                    "/auth/**" , "/internal/**"
+                    "/internal/**"
                 )
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .csrfTokenRequestHandler(spaCsrfTokenRequestHandler);

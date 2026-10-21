@@ -9,10 +9,11 @@ import project.office_workforce_service.mapper.PlaceRuleMapper;
 import project.office_workforce_service.model.dto.request.PlaceWorkingPeriodRuleCreateRequestDTO;
 import project.office_workforce_service.model.dto.request.PlaceWorkingPeriodRuleUpdateRequestDTO;
 import project.office_workforce_service.model.dto.response.PlaceWorkingPeriodRuleResponseDTO;
-import project.office_workforce_service.model.entity.Place;
+import project.office_workforce_service.model.entity.PlaceOccupationRule;
 import project.office_workforce_service.model.entity.PlaceWorkingPeriodRule;
 import project.office_workforce_service.model.entity.WorkingPeriod;
-import project.office_workforce_service.service.manager.PlaceManagerService;
+import project.office_workforce_service.service.checker.PlaceWorkingPeriodRuleCheckerService;
+import project.office_workforce_service.service.manager.PlaceOccupationRuleManagerService;
 import project.office_workforce_service.service.manager.PlaceWorkingPeriodRuleManagerService;
 import project.office_workforce_service.service.manager.WorkingPeriodManagerService;
 import project.shared_office_starter.mapper.PaginationMapper;
@@ -24,38 +25,47 @@ public class PlaceWorkingPeriodRuleService {
     @Autowired
     private PlaceWorkingPeriodRuleManagerService ruleManager;
     @Autowired
-    private PlaceManagerService placeManager;
+    private PlaceOccupationRuleManagerService occupationRuleManager;
     @Autowired
     private WorkingPeriodManagerService wpManager;
+    @Autowired
+    private PlaceWorkingPeriodRuleCheckerService checkerService;
     @Autowired
     private PlaceRuleMapper mapper;
     @Autowired
     private PaginationMapper paginationMapper;
 
     public PaginationBaseResponseDTO<PlaceWorkingPeriodRuleResponseDTO> search(
-        @Nullable Long placeId,
+        @Nullable Long occupationRuleId,
         @Nullable Long workingPeriodId,
         Pageable pageable) {
 
         return paginationMapper.toDTO(
-            ruleManager.search(placeId, workingPeriodId, pageable),
+            ruleManager.search(occupationRuleId, workingPeriodId, pageable),
             mapper::toWorkingPeriodRuleResponseDTO
         );
     }
 
     @Transactional
     public PlaceWorkingPeriodRuleResponseDTO create(PlaceWorkingPeriodRuleCreateRequestDTO requestDTO) {
-        Place place = placeManager.getReferenceById(requestDTO.getPlaceId());
+        checkerService.checkCreateRequest(requestDTO);
+        PlaceOccupationRule occupationRule = occupationRuleManager.getReferenceById(requestDTO.getOccupationRuleId());
         WorkingPeriod wp = wpManager.getReferenceById(requestDTO.getWorkingPeriodId());
 
-        PlaceWorkingPeriodRule entity = mapper.toWorkingPeriodRuleEntity(requestDTO, place, wp);
+        PlaceWorkingPeriodRule entity = mapper.toWorkingPeriodRuleEntity(requestDTO, occupationRule, wp);
         return mapper.toWorkingPeriodRuleResponseDTO(ruleManager.save(entity));
     }
 
     @Transactional
     public PlaceWorkingPeriodRuleResponseDTO update(Long id, PlaceWorkingPeriodRuleUpdateRequestDTO requestDTO) {
+        checkerService.checkUpdateRequest(requestDTO);
         PlaceWorkingPeriodRule existing = ruleManager.findById(id);
         mapper.updateWorkingPeriodRuleEntity(requestDTO, existing);
         return mapper.toWorkingPeriodRuleResponseDTO(ruleManager.save(existing));
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        ruleManager.deleteById(id);
     }
 }

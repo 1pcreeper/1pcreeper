@@ -8,13 +8,24 @@ import org.springframework.stereotype.Repository;
 import project.office_workforce_service.model.entity.PlaceOccupationRule;
 import project.office_workforce_service.repository.base.AbstractBaseRepository;
 
+import java.util.List;
+import java.util.Optional;
+
 @Repository
 public interface PlaceOccupationRuleRepository extends AbstractBaseRepository<PlaceOccupationRule, Long> {
 
     @Query("SELECT po FROM PlaceOccupationRule po WHERE " +
         "(:placeId IS NULL OR po.place.id = :placeId) AND " +
+        "(:weekDay IS NULL OR po.weekDay = :weekDay) AND " +
         "(:occupationId IS NULL OR po.occupation.id = :occupationId)")
     Page<PlaceOccupationRule> search(@Param("placeId") Long placeId,
-                                        @Param("occupationId") Long occupationId,
-                                        Pageable pageable);
+                                     @Param("weekDay") Integer weekDay,
+                                     @Param("occupationId") Long occupationId,
+                                     Pageable pageable);
+
+    List<PlaceOccupationRule> findByPlaceIdAndWeekDay(Long placeId, Integer weekDay);
+
+    boolean existsByPlaceIdAndWeekDayAndOccupationId(Long placeId, Integer weekDay, Long occupationId);
+
+    Optional<PlaceOccupationRule> findByPlaceIdAndWeekDayAndOccupationId(Long placeId, Integer weekDay, Long occupationId);
 }

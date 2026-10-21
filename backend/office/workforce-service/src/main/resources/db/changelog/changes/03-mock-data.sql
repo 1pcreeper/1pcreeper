@@ -37,11 +37,11 @@ VALUES
 (3, 1, 'CCTV Monitor', TRUE, 0, CURRENT_TIMESTAMP, 0);
 
 -- 7. Create Persons (The actual humans)
-INSERT INTO persons (id, name_english, name_chinese, mobile_tel, email, hk_id, is_active, created_by, created_at, version)
+INSERT INTO persons (id, uid, name_english, name_chinese, mobile_tel, email, hk_id, is_active, created_by, created_at, version)
 VALUES 
-(1, 'John Doe', '陳大文', '+852 91234561', 'john.doe@email.com', 'A123456(1)', TRUE, 0, CURRENT_TIMESTAMP, 0),
-(2, 'Jane Smith', '李小玲', '+852 91234562', 'jane.s@email.com', 'B234567(2)', TRUE, 0, CURRENT_TIMESTAMP, 0),
-(3, 'Bob Lee', '李博', '+852 91234563', 'bob.lee@email.com', 'C345678(3)', TRUE, 0, CURRENT_TIMESTAMP, 0);
+(1, 'a0000000-0000-0000-0000-000000000001', 'John Doe', '陳大文', '+852 91234561', 'john.doe@email.com', 'A123456(1)', TRUE, 0, CURRENT_TIMESTAMP, 0),
+(2, 'a0000000-0000-0000-0000-000000000002', 'Jane Smith', '李小玲', '+852 91234562', 'jane.s@email.com', 'B234567(2)', TRUE, 0, CURRENT_TIMESTAMP, 0),
+(3, 'a0000000-0000-0000-0000-000000000003', 'Bob Lee', '李博', '+852 91234563', 'bob.lee@email.com', 'C345678(3)', TRUE, 0, CURRENT_TIMESTAMP, 0);
 
 INSERT INTO person_details (id, person_id, gender, nationality, created_by, created_at, version)
 VALUES 
@@ -70,17 +70,26 @@ VALUES
 (3, 3, 3, 'Eagle eyes', 0, CURRENT_TIMESTAMP, 0);             -- Bob is CCTV Monitor
 
 -- 10. Configure Place Rules (Central Bank Plaza Requirements)
--- Overall: Needs 5 people max per day, prefers Full Time then Part Time
-INSERT INTO place_schedule_rules (id, place_id, person_count, work_type_priorities, created_by, created_at, version)
-VALUES (1, 1, 5, '{FULL_TIME, PART_TIME}'::work_type[], 0, CURRENT_TIMESTAMP, 0);
+-- Overall: prefers Full Time, then Part Time, then Contract staff
+INSERT INTO place_schedule_rules (id, place_id, created_by, created_at, version)
+VALUES (1, 1, 0, CURRENT_TIMESTAMP, 0);
 
--- Period Rule: The Day Shift at the Bank requires 3 people
-INSERT INTO place_working_period_rules (id, place_id, working_period_id, person_count, created_by, created_at, version)
-VALUES (1, 1, 1, 3, 0, CURRENT_TIMESTAMP, 0);
+INSERT INTO place_schedule_rule_work_types (rule_id, work_type, priority_index)
+VALUES (1, 'FULL_TIME', 0), (1, 'PART_TIME', 1), (1, 'CONTRACT', 2);
 
--- Occupation Rule: The Bank requires exactly 1 Senior Officer
-INSERT INTO place_occupation_rules (id, place_id, occupation_id, person_count, created_by, created_at, version)
-VALUES (1, 1, 1, 1, 0, CURRENT_TIMESTAMP, 0);
+-- Occupation Rules: The Bank needs a Senior Officer on Mon & Tue, and a Patrol Guard on Mon
+INSERT INTO place_occupation_rules (id, place_id, week_day, occupation_id, created_by, created_at, version)
+VALUES
+(1, 1, 1, 1, 0, CURRENT_TIMESTAMP, 0),
+(2, 1, 2, 1, 0, CURRENT_TIMESTAMP, 0),
+(3, 1, 1, 2, 0, CURRENT_TIMESTAMP, 0);
+
+-- Period Rules: Day Shift staffing required per occupation rule
+INSERT INTO place_working_period_rules (id, occupation_rule_id, working_period_id, person_count, created_by, created_at, version)
+VALUES
+(1, 1, 1, 1, 0, CURRENT_TIMESTAMP, 0),
+(2, 2, 1, 1, 0, CURRENT_TIMESTAMP, 0),
+(3, 3, 1, 1, 0, CURRENT_TIMESTAMP, 0);
 
 -- 11. Staff Preferences
 -- John prefers the Day Shift at Central Bank on Mondays (week_day = 1)
@@ -88,10 +97,21 @@ INSERT INTO staff_schedule_preferences (id, staff_id, place_id, week_day, workin
 VALUES (1, 1, 1, 1, 1, 100, 0, CURRENT_TIMESTAMP, 0);
 
 -- 12. Generate a DRAFT Schedule based on preferences and rules
-INSERT INTO schedules (id, start_at, end_at, place_id, staff_id, status, remark, created_by, created_at, version)
+INSERT INTO schedules (id, start_at, end_at, place_id, staff_id, status, working_period_id, occupation_id, remark, created_by, created_at, version)
 VALUES 
-(1, CURRENT_DATE + INTERVAL '1 day 08:00:00', CURRENT_DATE + INTERVAL '1 day 16:00:00', 1, 1, 'DRAFT', 'System matched preference for John (Day Shift)', 0, CURRENT_TIMESTAMP, 0),
-(2, CURRENT_DATE + INTERVAL '1 day 08:00:00', CURRENT_DATE + INTERVAL '1 day 16:00:00', 1, 2, 'DRAFT', 'System assigned Jane to fulfill 3-person requirement', 0, CURRENT_TIMESTAMP, 0);
+(1, CURRENT_DATE + INTERVAL '1 day 08:00:00', CURRENT_DATE + INTERVAL '1 day 16:00:00', 1, 1, 'DRAFT', 1, 1, 'System matched preference for John (Day Shift)', 0, CURRENT_TIMESTAMP, 0),
+(2, CURRENT_DATE + INTERVAL '1 day 08:00:00', CURRENT_DATE + INTERVAL '1 day 16:00:00', 1, 2, 'DRAFT', 1, 2, 'System assigned Jane to fulfill patrol requirement', 0, CURRENT_TIMESTAMP, 0);
+
+-- 13. Create Organizations (Incorporated legal contacts / corporate entities)
+INSERT INTO organizations (id, uid, name_english, name_chinese, business_registration_number, secretary_license_number, email, tel, is_active, created_by, created_at, version)
+VALUES
+(1, 'b0000000-0000-0000-0000-000000000001', 'Apex Corporate Services Limited', '頂峰企業服務有限公司', '87654321', '654321', 'contact@apexcorp.hk', '+852 28881234', TRUE, 0, CURRENT_TIMESTAMP, 0),
+(2, 'b0000000-0000-0000-0000-000000000002', 'Global Logistics & Guarding Alliance', '環球物流安保聯盟', '98765432', '123456', 'info@globalalliance.org', '+852 29995678', TRUE, 0, CURRENT_TIMESTAMP, 0);
+
+INSERT INTO organization_details (id, org_id, bio, address, industry, created_by, created_at, version)
+VALUES
+(1, 1, 'Corporate secretarial and compliance services across APAC.', '20/F, Prosperity Tower, Central, HK', 'Corporate Services', 0, CURRENT_TIMESTAMP, 0),
+(2, 2, 'Logistics support and guarding alliance for industrial sites.', '8 Harbour Industrial Road, Kwun Tong, HK', 'Logistics & Security', 0, CURRENT_TIMESTAMP, 0);
 
 -- Note: Adjust sequences so Postgres doesn't get confused by the hardcoded IDs when saving new records later!
 -- SELECT setval('users_id_seq', (SELECT MAX(id) FROM users));
@@ -101,5 +121,15 @@ SELECT setval('places_id_seq', (SELECT MAX(id) FROM places));
 SELECT setval('working_periods_id_seq', (SELECT MAX(id) FROM working_periods));
 SELECT setval('occupations_id_seq', (SELECT MAX(id) FROM occupations));
 SELECT setval('persons_id_seq', (SELECT MAX(id) FROM persons));
+SELECT setval('organizations_id_seq', (SELECT MAX(id) FROM organizations));
 SELECT setval('staffs_id_seq', (SELECT MAX(id) FROM staffs));
 SELECT setval('schedules_id_seq', (SELECT MAX(id) FROM schedules));
+SELECT setval('company_details_id_seq', (SELECT MAX(id) FROM company_details));
+SELECT setval('organization_details_id_seq', (SELECT MAX(id) FROM organization_details));
+SELECT setval('person_details_id_seq', (SELECT MAX(id) FROM person_details));
+SELECT setval('staff_details_id_seq', (SELECT MAX(id) FROM staff_details));
+SELECT setval('staff_occupations_id_seq', (SELECT MAX(id) FROM staff_occupations));
+SELECT setval('place_schedule_rules_id_seq', (SELECT MAX(id) FROM place_schedule_rules));
+SELECT setval('place_working_period_rules_id_seq', (SELECT MAX(id) FROM place_working_period_rules));
+SELECT setval('place_occupation_rules_id_seq', (SELECT MAX(id) FROM place_occupation_rules));
+SELECT setval('staff_schedule_preferences_id_seq', (SELECT MAX(id) FROM staff_schedule_preferences));

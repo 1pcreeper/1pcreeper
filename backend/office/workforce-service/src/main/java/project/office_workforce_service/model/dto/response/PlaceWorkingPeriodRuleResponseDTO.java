@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PlaceWorkingPeriodRuleResponseDTO {
     private Long id;
-    private Long placeId;
+    private Long occupationRuleId;
     private Long workingPeriodId;
     private String workingPeriodName; // Added for frontend ease
     private Integer personCount;

@@ -14,7 +14,6 @@ public class PlaceRuleMapper {
 
         return PlaceScheduleRule.builder()
             .place(place)
-            .personCount(request.getPersonCount())
             .workTypePriorities(request.getWorkTypePriorities())
             .build();
     }
@@ -22,7 +21,6 @@ public class PlaceRuleMapper {
     public void updateScheduleRuleEntity(PlaceScheduleRuleUpdateRequestDTO request, PlaceScheduleRule entity) {
         if (request == null || entity == null) return;
 
-        if (request.getPersonCount() != null) entity.setPersonCount(request.getPersonCount());
         if (request.getWorkTypePriorities() != null) entity.setWorkTypePriorities(request.getWorkTypePriorities());
     }
 
@@ -32,17 +30,16 @@ public class PlaceRuleMapper {
         return PlaceScheduleRuleResponseDTO.builder()
             .id(entity.getId())
             .placeId(entity.getPlace() != null ? entity.getPlace().getId() : null)
-            .personCount(entity.getPersonCount())
             .workTypePriorities(entity.getWorkTypePriorities())
             .build();
     }
 
     // --- Place Working Period Rule ---
-    public PlaceWorkingPeriodRule toWorkingPeriodRuleEntity(PlaceWorkingPeriodRuleCreateRequestDTO request, Place place, WorkingPeriod wp) {
+    public PlaceWorkingPeriodRule toWorkingPeriodRuleEntity(PlaceWorkingPeriodRuleCreateRequestDTO request, PlaceOccupationRule occupationRule, WorkingPeriod wp) {
         if (request == null) return null;
 
         return PlaceWorkingPeriodRule.builder()
-            .place(place)
+            .occupationRule(occupationRule)
             .workingPeriod(wp)
             .personCount(request.getPersonCount())
             .build();
@@ -59,7 +56,7 @@ public class PlaceRuleMapper {
 
         return PlaceWorkingPeriodRuleResponseDTO.builder()
             .id(entity.getId())
-            .placeId(entity.getPlace() != null ? entity.getPlace().getId() : null)
+            .occupationRuleId(entity.getOccupationRule() != null ? entity.getOccupationRule().getId() : null)
             .workingPeriodId(entity.getWorkingPeriod() != null ? entity.getWorkingPeriod().getId() : null)
             .workingPeriodName(entity.getWorkingPeriod() != null ? entity.getWorkingPeriod().getName() : null)
             .personCount(entity.getPersonCount())
@@ -72,15 +69,15 @@ public class PlaceRuleMapper {
 
         return PlaceOccupationRule.builder()
             .place(place)
+            .weekDay(request.getWeekDay())
             .occupation(occupation)
-            .personCount(request.getPersonCount())
             .build();
     }
 
     public void updateOccupationRuleEntity(PlaceOccupationRuleUpdateRequestDTO request, PlaceOccupationRule entity) {
         if (request == null || entity == null) return;
 
-        if (request.getPersonCount() != null) entity.setPersonCount(request.getPersonCount());
+        if (request.getWeekDay() != null) entity.setWeekDay(request.getWeekDay());
     }
 
     public PlaceOccupationRuleResponseDTO toOccupationRuleResponseDTO(PlaceOccupationRule entity) {
@@ -89,9 +86,9 @@ public class PlaceRuleMapper {
         return PlaceOccupationRuleResponseDTO.builder()
             .id(entity.getId())
             .placeId(entity.getPlace() != null ? entity.getPlace().getId() : null)
+            .weekDay(entity.getWeekDay())
             .occupationId(entity.getOccupation() != null ? entity.getOccupation().getId() : null)
             .occupationName(entity.getOccupation() != null ? entity.getOccupation().getName() : null)
-            .personCount(entity.getPersonCount())
             .build();
     }
 }

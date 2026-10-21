@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class PersonResponseDTO {
     private Long id;
+    private java.util.UUID uid;
     private String nameEnglish;
     private String nameChinese;
     private String officeTel;

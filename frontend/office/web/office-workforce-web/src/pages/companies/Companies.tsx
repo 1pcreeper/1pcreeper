@@ -39,7 +39,7 @@ export default function Companies() {
     const pageSize = 10;
 
     const handleSelectCompany = (id: number) => {
-        navigate(`/companies/${id}/dashboard`);
+        navigate(`/companies/${id}/info`);
     };
 
     const validateField = (field: string, value: string): string => {

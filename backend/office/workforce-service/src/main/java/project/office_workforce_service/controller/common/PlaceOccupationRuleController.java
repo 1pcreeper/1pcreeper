@@ -30,9 +30,10 @@ public class PlaceOccupationRuleController {
     @GetMapping("/search")
     public ResponseEntity<APIBaseResponseDTO<PaginationBaseResponseDTO<PlaceOccupationRuleResponseDTO>>> search(
         @RequestParam(required = false) Long placeId,
+        @RequestParam(required = false) Integer weekDay,
         @RequestParam(required = false) Long occupationId,
         Pageable pageable) {
-        return ResponseEntity.ok(APIBaseResponseDTO.success(ruleService.search(placeId, occupationId, pageable)));
+        return ResponseEntity.ok(APIBaseResponseDTO.success(ruleService.search(placeId, weekDay, occupationId, pageable)));
     }
 
     @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
@@ -47,5 +48,12 @@ public class PlaceOccupationRuleController {
     public ResponseEntity<APIBaseResponseDTO<PlaceOccupationRuleResponseDTO>> update(
         @PathVariable Long id, @Valid @RequestBody PlaceOccupationRuleUpdateRequestDTO request) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(ruleService.update(id, request)));
+    }
+
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
+    @DeleteMapping("/{id}")
+    public ResponseEntity<APIBaseResponseDTO<Void>> delete(@PathVariable Long id) {
+        ruleService.delete(id);
+        return ResponseEntity.ok(APIBaseResponseDTO.success(null));
     }
 }

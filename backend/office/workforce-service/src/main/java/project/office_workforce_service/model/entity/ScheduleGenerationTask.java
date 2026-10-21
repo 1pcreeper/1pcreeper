@@ -27,6 +27,16 @@ public class ScheduleGenerationTask extends AbstractAuditableEntity {
     @JoinColumn(name = "requested_by", nullable = false)
     private User requestedBy;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "place_id")
+    private Place place;
+
+    @Column(name = "target_year")
+    private Integer targetYear;
+
+    @Column(name = "target_month")
+    private Integer targetMonth;
+
     @Column(name = "started_at")
     private LocalDateTime startedAt;
 

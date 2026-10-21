@@ -32,7 +32,6 @@ import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
 
-
 @RestController
 @RequestMapping(path = "/auth")
 public class AuthController {

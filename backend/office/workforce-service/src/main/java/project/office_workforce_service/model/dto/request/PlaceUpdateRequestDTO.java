@@ -13,4 +13,5 @@ public class PlaceUpdateRequestDTO {
     private String name;
     private String address;
     private Boolean isActive;
+    private Long departId;
 }

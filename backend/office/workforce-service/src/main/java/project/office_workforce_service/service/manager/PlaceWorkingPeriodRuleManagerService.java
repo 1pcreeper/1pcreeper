@@ -9,6 +9,8 @@ import project.office_workforce_service.repository.PlaceWorkingPeriodRuleReposit
 import project.office_workforce_service.service.base.AbstractBaseService;
 import project.shared_office_starter.model.exception.PropertyValidationException;
 
+import java.util.List;
+
 @Service
 public class PlaceWorkingPeriodRuleManagerService extends AbstractBaseService<PlaceWorkingPeriodRule, Long> {
 
@@ -20,8 +22,8 @@ public class PlaceWorkingPeriodRuleManagerService extends AbstractBaseService<Pl
         this.ruleRepository = ruleRepository;
     }
 
-    public Page<PlaceWorkingPeriodRule> search(Long placeId, Long workingPeriodId, Pageable pageable) {
-        return ruleRepository.search(placeId, workingPeriodId, pageable);
+    public Page<PlaceWorkingPeriodRule> search(Long occupationRuleId, Long workingPeriodId, Pageable pageable) {
+        return ruleRepository.search(occupationRuleId, workingPeriodId, pageable);
     }
 
     @Override
@@ -30,5 +32,13 @@ public class PlaceWorkingPeriodRuleManagerService extends AbstractBaseService<Pl
             throw new PropertyValidationException("Person count must be zero or greater.");
         }
         return super.save(entity);
+    }
+
+    public List<PlaceWorkingPeriodRule> findByOccupationRuleId(Long occupationRuleId) {
+        return ruleRepository.findByOccupationRuleId(occupationRuleId);
+    }
+
+    public boolean existsByOccupationRuleIdAndWorkingPeriodId(Long occupationRuleId, Long workingPeriodId) {
+        return ruleRepository.existsByOccupationRuleIdAndWorkingPeriodId(occupationRuleId, workingPeriodId);
     }
 }

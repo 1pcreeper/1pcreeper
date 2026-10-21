@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package office_transport;
+option java_multiple_files = true;
+option java_package = "project.shared_office_starter.grpc";
+option java_outer_classname = "OfficeTransportServiceProto";
+
+service OfficeTransportRPCService {
+  rpc getVehicleByUid (OfficeVehicleRequest) returns (OfficeVehicleResponse);
+  rpc verifyVehicleActive (OfficeVehicleRequest) returns (OfficeVehicleActiveResponse);
+}
+
+message OfficeVehicleRequest {
+  string uid = 1;
+}
+
+message OfficeVehicleResponse {
+  string uid = 1;
+  string licensePlate = 2;
+  string make = 3;
+  string model = 4;
+  string personUid = 5;
+  string vrdExpiryDate = 6;
+  bool isActive = 7;
+}
+
+message OfficeVehicleActiveResponse {
+  string uid = 1;
+  bool isActive = 2;
+}

@@ -12,3 +12,9 @@ export enum Gender {
     MALE = "MALE",
     FEMALE = "FEMALE"
 }
+
+export enum ScheduleStatus {
+    ACTIVE = "ACTIVE",
+    INACTIVE = "INACTIVE",
+    DRAFT = "DRAFT"
+}

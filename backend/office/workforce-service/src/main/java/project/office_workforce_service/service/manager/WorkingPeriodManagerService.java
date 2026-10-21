@@ -35,9 +35,13 @@ public class WorkingPeriodManagerService extends AbstractBaseService<WorkingPeri
 
     @Override
     public WorkingPeriod save(WorkingPeriod entity) {
-        if (entity.getStartAt() != null && entity.getEndAt() != null && entity.getStartAt().isAfter(entity.getEndAt())) {
-            throw new PropertyValidationException("Working period start time cannot be after end time.");
+        if (entity.getStartAt() != null && entity.getEndAt() != null && entity.getStartAt().equals(entity.getEndAt())) {
+            throw new PropertyValidationException("Working period start time and end time must be different.");
         }
         return super.save(entity);
+    }
+
+    public boolean existsByRangeAndDepartId(Long departId, LocalTime startAt, LocalTime endAt) {
+        return workingPeriodRepository.findByRangeAndDepartId(departId, startAt, endAt).isPresent();
     }
 }

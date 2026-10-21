@@ -11,6 +11,7 @@ import project.office_workforce_service.model.dto.request.PlaceUpdateRequestDTO;
 import project.office_workforce_service.model.dto.response.PlaceResponseDTO;
 import project.office_workforce_service.model.entity.Department;
 import project.office_workforce_service.model.entity.Place;
+import project.office_workforce_service.service.checker.PlaceCheckerService;
 import project.office_workforce_service.service.manager.DepartmentManagerService;
 import project.office_workforce_service.service.manager.PlaceManagerService;
 import project.shared_office_starter.mapper.PaginationMapper;
@@ -24,28 +25,34 @@ public class PlaceService {
     @Autowired
     private DepartmentManagerService departmentManagerService;
     @Autowired
+    private PlaceCheckerService placeCheckerService;
+    @Autowired
     private PlaceMapper placeMapper;
     @Autowired
     private PaginationMapper paginationMapper;
 
     public PaginationBaseResponseDTO<PlaceResponseDTO> search(
+        @Nullable Long companyId,
         @Nullable Long departId,
         @Nullable String q,
         @Nullable Boolean isActive,
         Pageable pageable) {
 
         return paginationMapper.toDTO(
-            placeManagerService.search(departId, q, isActive, pageable),
+            placeManagerService.search(companyId, departId, q, isActive, pageable),
             placeMapper::toResponseDTO
         );
     }
 
     public PlaceResponseDTO findById(Long id) {
-        return placeMapper.toResponseDTO(placeManagerService.findById(id));
+        Place place = placeManagerService.findById(id);
+        placeCheckerService.checkPlaceIsActive(place);
+        return placeMapper.toResponseDTO(place);
     }
 
     @Transactional
     public PlaceResponseDTO create(PlaceCreateRequestDTO requestDTO) {
+        placeCheckerService.checkCreateRequest(requestDTO);
         Department org = departmentManagerService.getReferenceById(requestDTO.getDepartId());
         Place newPlace = placeMapper.toEntity(requestDTO, org);
         return placeMapper.toResponseDTO(placeManagerService.save(newPlace));
@@ -54,7 +61,17 @@ public class PlaceService {
     @Transactional
     public PlaceResponseDTO update(Long id, PlaceUpdateRequestDTO requestDTO) {
         Place existingPlace = placeManagerService.findById(id);
+        placeCheckerService.checkPlaceIsActive(existingPlace);
+        placeCheckerService.checkUpdateRequest(id, requestDTO, existingPlace);
         placeMapper.updateEntity(requestDTO, existingPlace);
         return placeMapper.toResponseDTO(placeManagerService.save(existingPlace));
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        Place existingPlace = placeManagerService.findById(id);
+        placeCheckerService.checkPlaceIsActive(existingPlace);
+        existingPlace.setIsActive(false);
+        placeManagerService.save(existingPlace);
     }
 }

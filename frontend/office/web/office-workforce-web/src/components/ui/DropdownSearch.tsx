@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Search, ChevronDown, Loader2 } from 'lucide-react';
-
+import { ChevronDown, ChevronLeft, ChevronRight, Loader2, Search } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 
 interface Option {
     id: number;
@@ -9,7 +8,7 @@ interface Option {
 
 interface DropdownSearchProps {
     value: number | null;
-    onChange: (value: number) => void;
+    onChange: (value: number, option?: Option) => void;
     fetchData: (search: string, page: number) => Promise<{ content: Option[], totalPages: number }>;
     placeholder?: string;
     disabled?: boolean;
@@ -24,11 +23,14 @@ export function DropdownSearch({ value, onChange, fetchData, placeholder = "Sear
     const [totalPages, setTotalPages] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
     const [selectedLabel, setSelectedLabel] = useState(initialLabel);
-    
+
+    useEffect(() => {
+        setSelectedLabel(initialLabel);
+    }, [initialLabel, value]);
+
     const dropdownRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
 
-    // Simple useClickAway equivalent if the hook is missing (we will create it or use inline logic)
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -39,12 +41,12 @@ export function DropdownSearch({ value, onChange, fetchData, placeholder = "Sear
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
-    const loadOptions = async (searchValue: string, pageNum: number, append: boolean = false) => {
+    const loadOptions = async (searchValue: string, pageNum: number) => {
         setIsLoading(true);
         try {
             const data = await fetchData(searchValue, pageNum);
-            setOptions(prev => append ? [...prev, ...data.content] : data.content);
-            setTotalPages(data.totalPages);
+            setOptions(data.content);
+            setTotalPages(data.totalPages || 0);
             setPage(pageNum);
         } catch (error) {
             console.error("Failed to load options", error);
@@ -72,17 +74,10 @@ export function DropdownSearch({ value, onChange, fetchData, placeholder = "Sear
     }, [search]);
 
     const handleSelect = (opt: Option) => {
-        onChange(opt.id);
+        onChange(opt.id, opt);
         setSelectedLabel(opt.label);
         setIsOpen(false);
         setSearch("");
-    };
-
-    const handleScroll = (e: React.UIEvent<HTMLUListElement>) => {
-        const bottom = e.currentTarget.scrollHeight - e.currentTarget.scrollTop <= e.currentTarget.clientHeight + 10;
-        if (bottom && !isLoading && page + 1 < totalPages) {
-            loadOptions(search, page + 1, true);
-        }
     };
 
     return (
@@ -100,7 +95,7 @@ export function DropdownSearch({ value, onChange, fetchData, placeholder = "Sear
             </button>
 
             {isOpen && (
-                <div className="absolute z-50 w-full mt-1 bg-white border border-slate-200 rounded-md shadow-lg">
+                <div className="absolute z-50 w-full mt-1 bg-white border border-slate-200 rounded-md shadow-lg overflow-hidden">
                     <div className="p-2 border-b border-slate-100 sticky top-0 bg-white rounded-t-md z-10 flex items-center gap-2">
                         <Search className="w-4 h-4 text-slate-400 shrink-0" />
                         <input
@@ -112,10 +107,9 @@ export function DropdownSearch({ value, onChange, fetchData, placeholder = "Sear
                             onChange={(e) => setSearch(e.target.value)}
                         />
                     </div>
-                    
-                    <ul 
+
+                    <ul
                         className="max-h-48 overflow-y-auto py-1"
-                        onScroll={handleScroll}
                     >
                         {options.length === 0 && !isLoading && (
                             <li className="px-3 py-2 text-xs text-slate-500 text-center">No results found</li>
@@ -135,6 +129,38 @@ export function DropdownSearch({ value, onChange, fetchData, placeholder = "Sear
                             </li>
                         )}
                     </ul>
+
+                    {totalPages > 1 && (
+                        <div className="p-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 bg-slate-50/90">
+                            <button
+                                type="button"
+                                disabled={page === 0 || isLoading}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    if (page > 0) loadOptions(search, page - 1);
+                                }}
+                                className="flex items-center gap-1 px-2 py-1 border border-slate-200 rounded bg-white hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-[11px]"
+                            >
+                                <ChevronLeft className="w-3 h-3" />
+                                Prev
+                            </button>
+                            <span className="text-[11px] font-medium text-slate-600">
+                                Page {page + 1} of {totalPages}
+                            </span>
+                            <button
+                                type="button"
+                                disabled={page + 1 >= totalPages || isLoading}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    if (page + 1 < totalPages) loadOptions(search, page + 1);
+                                }}
+                                className="flex items-center gap-1 px-2 py-1 border border-slate-200 rounded bg-white hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-[11px]"
+                            >
+                                Next
+                                <ChevronRight className="w-3 h-3" />
+                            </button>
+                        </div>
+                    )}
                 </div>
             )}
         </div>

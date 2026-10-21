@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class PlaceWorkingPeriodRuleDTO {
     private Long id;
-    private Long placeId;
+    private Long occupationRuleId;
     private Long workingPeriodId;
     private Integer personCount;
     private LocalDateTime createdAt;

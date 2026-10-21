@@ -13,10 +13,13 @@ public interface OccupationRepository extends AbstractBaseRepository<Occupation,
 
     @Query("SELECT o FROM Occupation o WHERE " +
         "(:departId IS NULL OR o.department.id = :departId) AND " +
-        "(:q IS NULL OR LOWER(o.name) LIKE LOWER(CONCAT('%', :q, '%'))) AND " +
+        "(:q IS NULL OR LOWER(o.name) LIKE LOWER(CONCAT('%', CAST(:q AS String), '%'))) AND " +
         "(:isActive IS NULL OR o.isActive = :isActive)")
     Page<Occupation> search(@Param("departId") Long departId,
                             @Param("q") String q,
                             @Param("isActive") Boolean isActive,
                             Pageable pageable);
+
+    boolean existsByDepartmentIdAndNameIgnoreCase(Long departmentId, String name);
+    java.util.Optional<Occupation> findByDepartmentIdAndNameIgnoreCase(Long departmentId, String name);
 }

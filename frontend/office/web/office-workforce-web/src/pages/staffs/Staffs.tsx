@@ -43,7 +43,7 @@ export default function Staffs() {
     const showMessage = (type: 'success' | 'error', text: string) => { setModalMessage({ type, text, title: type === 'success' ? 'Success' : 'Error' }); };
 
     const columns: Column<StaffResponseDTO>[] = [
-        { header: 'Staff ID', accessorKey: 'id', cell: (row) => <span className="text-slate-900 font-bold ">{row.id}</span> },
+        { header: 'ID', accessorKey: 'id', cell: (row) => <span className="text-slate-900 font-bold ">{row.id}</span> },
         { header: 'Name', accessorKey: 'personNameEnglish', cell: (row) => <span className="font-bold text-slate-900">{staffContentService.getDisplayName(row)}</span> },
         { header: 'Department', accessorKey: 'departName', cell: (row) => <span className="text-slate-600">{row.departName}</span> },
         { header: 'Person ID', accessorKey: 'personId', cell: (row) => <span className="text-slate-500">{row.personId}</span> }

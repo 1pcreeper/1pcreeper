@@ -13,10 +13,15 @@ import project.office_workforce_service.model.dto.response.ScheduleResponseDTO;
 import project.office_workforce_service.model.entity.Place;
 import project.office_workforce_service.model.entity.Schedule;
 import project.office_workforce_service.model.entity.Staff;
+import project.office_workforce_service.model.entity.WorkingPeriod;
+import project.office_workforce_service.model.entity.Occupation;
 import project.office_workforce_service.model.entity.enums.ScheduleStatus;
+import project.office_workforce_service.service.checker.ScheduleCheckerService;
+import project.office_workforce_service.service.manager.OccupationManagerService;
 import project.office_workforce_service.service.manager.PlaceManagerService;
 import project.office_workforce_service.service.manager.ScheduleManagerService;
 import project.office_workforce_service.service.manager.StaffManagerService;
+import project.office_workforce_service.service.manager.WorkingPeriodManagerService;
 import project.shared_office_starter.mapper.PaginationMapper;
 import project.shared_office_starter.model.dto.base.PaginationBaseResponseDTO;
 
@@ -31,6 +36,12 @@ public class ScheduleService {
     private PlaceManagerService placeManagerService;
     @Autowired
     private StaffManagerService staffManagerService;
+    @Autowired
+    private WorkingPeriodManagerService workingPeriodManagerService;
+    @Autowired
+    private OccupationManagerService occupationManagerService;
+    @Autowired
+    private ScheduleCheckerService scheduleCheckerService;
     @Autowired
     private ScheduleMapper mapper;
     @Autowired
@@ -56,15 +67,23 @@ public class ScheduleService {
 
     @Transactional
     public ScheduleResponseDTO create(ScheduleCreateRequestDTO requestDTO) {
+        scheduleCheckerService.checkCreateRequest(requestDTO);
         Place place = placeManagerService.getReferenceById(requestDTO.getPlaceId());
         Staff staff = staffManagerService.getReferenceById(requestDTO.getStaffId());
+        WorkingPeriod workingPeriod = workingPeriodManagerService.getReferenceById(requestDTO.getWorkingPeriodId());
 
-        Schedule entity = mapper.toEntity(requestDTO, place, staff);
+        Occupation occupation = null;
+        if (requestDTO.getOccupationId() != null) {
+            occupation = occupationManagerService.getReferenceById(requestDTO.getOccupationId());
+        }
+
+        Schedule entity = mapper.toEntity(requestDTO, place, staff, workingPeriod, occupation);
         return mapper.toResponseDTO(scheduleManagerService.save(entity));
     }
 
     @Transactional
     public ScheduleResponseDTO update(Long id, ScheduleUpdateRequestDTO requestDTO) {
+        scheduleCheckerService.checkUpdateRequest(requestDTO);
         Schedule existing = scheduleManagerService.findById(id);
 
         Place newPlace = null;
@@ -77,7 +96,23 @@ public class ScheduleService {
             newStaff = staffManagerService.getReferenceById(requestDTO.getStaffId());
         }
 
-        mapper.updateEntity(requestDTO, existing, newPlace, newStaff);
+        WorkingPeriod newWorkingPeriod = null;
+        if (requestDTO.getWorkingPeriodId() != null) {
+            newWorkingPeriod = workingPeriodManagerService.getReferenceById(requestDTO.getWorkingPeriodId());
+        }
+
+        Occupation newOccupation = null;
+        if (requestDTO.getOccupationId() != null) {
+            newOccupation = occupationManagerService.getReferenceById(requestDTO.getOccupationId());
+        }
+
+        Long effectiveStaffId = requestDTO.getStaffId() != null ? requestDTO.getStaffId() : existing.getStaff().getId();
+        Long effectivePlaceId = requestDTO.getPlaceId() != null ? requestDTO.getPlaceId() : existing.getPlace().getId();
+        LocalDateTime effectiveStartAt = requestDTO.getStartAt() != null ? requestDTO.getStartAt() : existing.getStartAt();
+        LocalDateTime effectiveEndAt = requestDTO.getEndAt() != null ? requestDTO.getEndAt() : existing.getEndAt();
+        scheduleCheckerService.checkNoConflict(effectiveStaffId, effectivePlaceId, effectiveStartAt, effectiveEndAt, id);
+
+        mapper.updateEntity(requestDTO, existing, newPlace, newStaff, newWorkingPeriod, newOccupation);
         return mapper.toResponseDTO(scheduleManagerService.save(existing));
     }
 
@@ -86,5 +121,10 @@ public class ScheduleService {
         Schedule existing = scheduleManagerService.findById(id);
         existing.setStatus(requestDTO.getStatus());
         return mapper.toResponseDTO(scheduleManagerService.save(existing));
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        scheduleManagerService.deleteById(id);
     }
 }

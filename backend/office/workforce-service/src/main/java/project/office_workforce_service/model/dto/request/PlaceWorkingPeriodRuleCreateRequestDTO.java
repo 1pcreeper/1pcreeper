@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PlaceWorkingPeriodRuleCreateRequestDTO {
 
-    @NotNull(message = "Place ID is required")
-    private Long placeId;
+    @NotNull(message = "Occupation rule ID is required")
+    private Long occupationRuleId;
 
     @NotNull(message = "Working Period ID is required")
     private Long workingPeriodId;

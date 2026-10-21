@@ -4,7 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="Change" />
+    <list default="true" id="0afa3aac-8082-436c-a4a6-f200c00f42fb" name="Changes" comment="Change">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/mapper/OrganizationMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/mapper/OrganizationMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/mapper/ScheduleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/mapper/ScheduleMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/OrganizationCreateRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/request/OrganizationCreateRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/ScheduleResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/model/dto/response/ScheduleResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/common/OrganizationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/common/OrganizationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/WorkingPeriodManagerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/java/project/office_workforce_service/service/manager/WorkingPeriodManagerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/resources/db/changelog/changes/01-create-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/resources/db/changelog/changes/01-create-table.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/office/workforce-service/src/main/resources/db/changelog/changes/03-mock-data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/office/workforce-service/src/main/resources/db/changelog/changes/03-mock-data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/util/StringBlankUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/util/StringBlankUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/content/office/DATABASE.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/content/office/DATABASE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/content/office/ERD_DIAGRAMS.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/content/office/ERD_DIAGRAMS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/components/layout/Sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/components/layout/Sidebar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/models/dto/office/workforce/request.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/models/dto/office/workforce/request.dto.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/models/dto/office/workforce/response.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/models/dto/office/workforce/response.dto.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/pages/companies/_id/places/Places.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/pages/companies/_id/places/Places.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/pages/companies/_id/schedules/Schedules.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/pages/companies/_id/schedules/Schedules.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/pages/organizations/_id/OrganizationDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/office/web/office-workforce-web/src/pages/organizations/_id/OrganizationDetails.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -78,10 +98,13 @@
     "Maven.general-service-registry [clean].executor": "Run",
     "Maven.general-service-registry [install].executor": "Run",
     "Maven.office-transport-service [install].executor": "Run",
+    "Maven.office-workforce-service [install].executor": "Run",
     "Maven.project [clean,-X].executor": "Run",
     "Maven.project [clean].executor": "Run",
+    "Maven.project [compile].executor": "Run",
     "Maven.project [install].executor": "Run",
     "Maven.project [mvn,clean,install,-DskipTests].executor": "Run",
+    "Maven.project [org.apache.maven.plugins:maven-clean-plugin:3.4.1:clean].executor": "Run",
     "Maven.project [site].executor": "Run",
     "Maven.project [validate].executor": "Run",
     "Maven.shared-general-auth-starter [clean].executor": "Run",
@@ -103,11 +126,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\1pcreeper\projects\001 Project\codes\v001\code\backend\office\api-gateway\src\main\resources" />
       <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\general\dummy-service\src\main\resources\db\changelog\changes" />
       <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\office\account-service\src\main\resources\db\changelog\changes" />
       <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\office\workforce-service\src\main\resources\db\changelog\changes" />
       <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\office\account-service\src\main\java\project\office_account_service" />
-      <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\shared\general-starter\src\main\java\project\shared_general_starter\model" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\1pcreeper\projects\001 Project\codes\v001\1pcreeper-project\backend\office\api-gateway\src\main\resources" />
@@ -130,7 +153,7 @@
       <command value="mvn mvn clean install -DskipTests" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.GeneralAccountServiceApplication">
+  <component name="RunManager" selected="Application.OfficeWorkforceServiceApplication">
     <list>
       <item itemvalue="Application.GeneralServiceRegistryApplication " />
       <item itemvalue="Application.GeneralConfigMappingApplication" />
@@ -156,14 +179,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1769726695816</updated>
-    </task>
-    <task id="LOCAL-00006" summary="changed Dependency">
-      <option name="closed" value="true" />
-      <created>1778210768283</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1778210768283</updated>
     </task>
     <task id="LOCAL-00007" summary="changed Dependency">
       <option name="closed" value="true" />
@@ -549,7 +564,15 @@
       <option name="project" value="LOCAL" />
       <updated>1788785879664</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="Change">
+      <option name="closed" value="true" />
+      <created>1791072861255</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1791072861255</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -574,6 +597,11 @@
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/middleware/general/polyroom-ai-worker/src/__main__.py</url>
           <option name="timeStamp" value="98" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/backend/shared/office-starter/src/main/java/project/shared_office_starter/advice/GlobalExceptionAdvice.java</url>
+          <line>35</line>
+          <option name="timeStamp" value="105" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

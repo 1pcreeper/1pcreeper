@@ -29,4 +29,12 @@ public class StaffOccupationManagerService extends AbstractBaseService<StaffOccu
     public List<StaffOccupation> findByStaffId(Long staffId){
         return  staffOccupationRepository.findByStaffId(staffId);   
     }
+
+    public boolean existsByStaffIdAndOccupationId(Long staffId, Long occupationId) {
+        return staffOccupationRepository.existsByStaffIdAndOccupationId(staffId, occupationId);
+    }
+
+    public java.util.Optional<StaffOccupation> findByStaffIdAndOccupationId(Long staffId, Long occupationId) {
+        return staffOccupationRepository.findByStaffIdAndOccupationId(staffId, occupationId);
+    }
 }

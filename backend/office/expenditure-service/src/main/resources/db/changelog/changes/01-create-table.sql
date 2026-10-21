@@ -43,6 +43,7 @@ CREATE TABLE abstract_auditable_entity (
 
 CREATE TABLE outcome_categories (
 	id SERIAL PRIMARY KEY,
+	uid UUID UNIQUE DEFAULT gen_random_uuid(),
 	name TEXT NOT NULL,
 	is_active BOOLEAN DEFAULT TRUE,
 	company_id INTEGER NOT NULL   -- referenced to office_workforce_db companies(id)
@@ -50,6 +51,7 @@ CREATE TABLE outcome_categories (
 
 CREATE TABLE outcome_subcategories (
 	id SERIAL PRIMARY KEY,
+	uid UUID UNIQUE DEFAULT gen_random_uuid(),
 	name TEXT NOT NULL,
 	category_id INTEGER NOT NULL REFERENCES outcome_categories(id) ON DELETE CASCADE,
 	is_active BOOLEAN DEFAULT TRUE,
@@ -58,6 +60,7 @@ CREATE TABLE outcome_subcategories (
 
 CREATE TABLE outcomes (
 	id SERIAL PRIMARY KEY,
+	uid UUID UNIQUE DEFAULT gen_random_uuid(),
 	name TEXT NOT NULL,
 	subcategory_id INTEGER NOT NULL REFERENCES outcome_subcategories(id) ON DELETE CASCADE,
 	default_price NUMERIC(12, 4) NOT NULL,
@@ -67,6 +70,7 @@ CREATE TABLE outcomes (
 
 CREATE TABLE staff_salaries (
 	id SERIAL PRIMARY KEY,
+	uid UUID UNIQUE DEFAULT gen_random_uuid(),
 	staff_id INTEGER NOT NULL,  -- referenced to office_workforce_db staffs(id)
 	amount NUMERIC(12, 4) NOT NULL,
 	approved_at TIMESTAMP NOT NULL,
@@ -76,6 +80,7 @@ CREATE TABLE staff_salaries (
 
 CREATE TABLE outcome_expenses (
 	id SERIAL PRIMARY KEY,
+	uid UUID UNIQUE DEFAULT gen_random_uuid(),
 	name TEXT NOT NULL,
 	outcome_id INTEGER REFERENCES outcomes(id) ON DELETE CASCADE,
 	cost NUMERIC(12, 4) NOT NULL,
@@ -89,6 +94,7 @@ CREATE TABLE outcome_expenses (
 
 CREATE TABLE staff_salary_expenses (
 	id SERIAL PRIMARY KEY,
+	uid UUID UNIQUE DEFAULT gen_random_uuid(),
 	name TEXT NOT NULL,
 	staff_salary_id INTEGER NOT NULL REFERENCES staff_salaries(id) ON DELETE CASCADE,
 	cost NUMERIC(12, 4) NOT NULL,

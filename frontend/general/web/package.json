@@ -1,0 +1,28 @@
+{
+    "name": "mesh-shop-frontends",
+    "private": true,
+    "type": "module",
+    "workspaces": [
+        "mesh-shop-shared",
+        "user-mesh-shop-web",
+        "admin-mesh-shop-web"
+    ],
+    "scripts": {
+        "dev:user": "npm run dev -w user-mesh-shop-web",
+        "dev:admin": "npm run dev -w admin-mesh-shop-web",
+        "build": "npm run build --workspaces --if-present",
+        "build:demo": "npm run build:demo --workspaces --if-present",
+        "typecheck": "npm run typecheck --workspaces --if-present",
+        "test": "vitest run",
+        "format": "prettier --write \"**/*.{ts,tsx,css,json}\" --ignore-path .gitignore"
+    },
+    "devDependencies": {
+        "vitest": "^3.2.4",
+        "@types/node": "^22.15.0",
+        "vite": "^6.4.3",
+        "prettier": "^3.6.2"
+    },
+    "overrides": {
+        "vite": "^6.4.3"
+    }
+}

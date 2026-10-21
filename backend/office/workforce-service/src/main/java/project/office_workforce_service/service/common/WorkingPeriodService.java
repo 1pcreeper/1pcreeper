@@ -12,6 +12,7 @@ import project.office_workforce_service.model.dto.request.WorkingPeriodUpdateReq
 import project.office_workforce_service.model.dto.response.WorkingPeriodResponseDTO;
 import project.office_workforce_service.model.entity.Department;
 import project.office_workforce_service.model.entity.WorkingPeriod;
+import project.office_workforce_service.service.checker.WorkingPeriodCheckerService;
 import project.office_workforce_service.service.manager.DepartmentManagerService;
 import project.office_workforce_service.service.manager.WorkingPeriodManagerService;
 import project.shared_office_starter.mapper.PaginationMapper;
@@ -28,6 +29,8 @@ public class WorkingPeriodService {
     private WorkingPeriodManagerService workingPeriodManagerService;
     @Autowired
     private DepartmentManagerService departmentManagerService;
+    @Autowired
+    private WorkingPeriodCheckerService workingPeriodCheckerService;
     @Autowired
     private WorkingPeriodMapper workingPeriodMapper;
     @Autowired
@@ -51,37 +54,23 @@ public class WorkingPeriodService {
 
     public WorkingPeriodResponseDTO findById(Long id) {
         WorkingPeriod existingWP = workingPeriodManagerService.findById(id);
-        if (!existingWP.getIsActive()) {
-            throw new ResourceNotFoundException("Period Already Deleted");
-        }
+        workingPeriodCheckerService.checkWorkingPeriodIsActive(existingWP);
         return workingPeriodMapper.toResponseDTO(existingWP);
     }
 
     @Transactional
     public WorkingPeriodResponseDTO create(WorkingPeriodCreateRequestDTO requestDTO) {
-        try {
-            WorkingPeriod existing = workingPeriodManagerService.findByRangeAndDepartId(
-                requestDTO.getDepartId(), requestDTO.getStartAt(), requestDTO.getEndAt()
-            );
-            if (existing.getIsActive()) {
-                throw new DatabaseUpdateFailureException("Period Already Existed");
-            }
-            existing.setIsActive(true);
-            existing.setName(requestDTO.getName());
-            return workingPeriodMapper.toResponseDTO(workingPeriodManagerService.save(existing));
-        } catch (ResourceNotFoundException e) {
-            Department org = departmentManagerService.getReferenceById(requestDTO.getDepartId());
-            WorkingPeriod newWP = workingPeriodMapper.toEntity(requestDTO, org);
-            return workingPeriodMapper.toResponseDTO(workingPeriodManagerService.save(newWP));
-        }
+        workingPeriodCheckerService.checkCreateRequest(requestDTO);
+        Department org = departmentManagerService.getReferenceById(requestDTO.getDepartId());
+        WorkingPeriod newWP = workingPeriodMapper.toEntity(requestDTO, org);
+        return workingPeriodMapper.toResponseDTO(workingPeriodManagerService.save(newWP));
     }
 
     @Transactional
     public WorkingPeriodResponseDTO update(Long id, WorkingPeriodUpdateRequestDTO requestDTO) {
         WorkingPeriod existingWP = workingPeriodManagerService.findById(id);
-        if (!existingWP.getIsActive()) {
-            throw new ResourceNotFoundException("Period Already Deleted");
-        }
+        workingPeriodCheckerService.checkWorkingPeriodIsActive(existingWP);
+        workingPeriodCheckerService.checkUpdateRequest(id, requestDTO, existingWP);
         workingPeriodMapper.updateEntity(requestDTO, existingWP);
         return workingPeriodMapper.toResponseDTO(workingPeriodManagerService.save(existingWP));
     }
@@ -89,6 +78,7 @@ public class WorkingPeriodService {
     @Transactional
     public void delete(Long id) {
         WorkingPeriod existingWP = workingPeriodManagerService.findById(id);
+        workingPeriodCheckerService.checkWorkingPeriodIsActive(existingWP);
         existingWP.setIsActive(false);
         workingPeriodManagerService.save(existingWP);
     }

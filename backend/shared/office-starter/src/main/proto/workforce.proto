@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package office_workforce;
+option java_multiple_files = true;
+option java_package = "project.shared_office_starter.grpc";
+option java_outer_classname = "OfficeWorkforceServiceProto";
+
+service OfficeWorkforceRPCService {
+  rpc getPersonByUid (OfficePersonRequest) returns (OfficePersonResponse);
+  rpc verifyPersonActive (OfficePersonRequest) returns (OfficePersonActiveResponse);
+  rpc searchPersons (OfficePersonSearchRequest) returns (OfficePersonListResponse);
+}
+
+message OfficePersonRequest {
+  string uid = 1;
+}
+
+message OfficePersonSearchRequest {
+  string query = 1;
+  int32 limit = 2;
+}
+
+message OfficePersonListResponse {
+  repeated OfficePersonResponse persons = 1;
+}
+
+message OfficePersonResponse {
+  string uid = 1;
+  string nameEnglish = 2;
+  string nameChinese = 3;
+  string mobileTel = 4;
+  string officeTel = 5;
+  string email = 6;
+  string hkId = 7;
+  bool isActive = 8;
+}
+
+message OfficePersonActiveResponse {
+  string uid = 1;
+  bool isActive = 2;
+}
+

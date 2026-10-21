@@ -18,6 +18,8 @@ public class ScheduleUpdateRequestDTO {
     private LocalDateTime endAt;
     private Long placeId;
     private Long staffId;
+    private Long workingPeriodId;
+    private Long occupationId;
     private ScheduleStatus status;
     private String remark;
 }

@@ -15,6 +15,5 @@ import java.util.List;
 public class PlaceScheduleRuleResponseDTO {
     private Long id;
     private Long placeId;
-    private Integer personCount;
     private List<WorkType> workTypePriorities;
 }

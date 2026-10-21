@@ -1,0 +1,7 @@
+node_modules/
+**/dist/
+.mesh-shop-runtime/
+playwright-report/
+test-results/
+.env.local
+.env.production.local

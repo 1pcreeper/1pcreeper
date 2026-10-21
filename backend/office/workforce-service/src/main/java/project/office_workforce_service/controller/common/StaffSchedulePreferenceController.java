@@ -55,4 +55,11 @@ public class StaffSchedulePreferenceController {
         @PathVariable Long id, @Valid @RequestBody StaffSchedulePreferenceUpdateRequestDTO request) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(preferenceService.update(id, request)));
     }
+
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
+    @DeleteMapping("/{id}")
+    public ResponseEntity<APIBaseResponseDTO<Void>> delete(@PathVariable Long id) {
+        preferenceService.delete(id);
+        return ResponseEntity.ok(APIBaseResponseDTO.success(null));
+    }
 }

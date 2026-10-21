@@ -54,4 +54,20 @@ public class StaffManagerService extends AbstractBaseService<Staff, Long> {
             ()->new ResourceNotFoundException("Staff Not Found")
         );
     }
+
+    public boolean existsByPersonIdAndCompanyId(Long personId, Long companyId) {
+        return staffRepository.existsByPersonIdAndCompanyId(personId, companyId);
+    }
+
+    public boolean existsByCompanyIdAndCustIdIgnoreCase(Long companyId, String custId) {
+        return staffRepository.existsByCompanyIdAndCustIdIgnoreCase(companyId, custId);
+    }
+
+    public java.util.Optional<Staff> findByCompanyIdAndCustIdIgnoreCase(Long companyId, String custId) {
+        return staffRepository.findByCompanyIdAndCustIdIgnoreCase(companyId, custId);
+    }
+
+    public List<Staff> findActiveByDepartmentIdAndOccupationId(Long departId, Long occupationId) {
+        return staffRepository.findActiveByDepartmentIdAndOccupationId(departId, occupationId);
+    }
 }

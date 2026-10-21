@@ -11,6 +11,7 @@ import project.office_workforce_service.model.dto.request.OccupationUpdateReques
 import project.office_workforce_service.model.dto.response.OccupationResponseDTO;
 import project.office_workforce_service.model.entity.Occupation;
 import project.office_workforce_service.model.entity.Department;
+import project.office_workforce_service.service.checker.OccupationCheckerService;
 import project.office_workforce_service.service.manager.OccupationManagerService;
 import project.office_workforce_service.service.manager.DepartmentManagerService;
 import project.shared_office_starter.mapper.PaginationMapper;
@@ -23,6 +24,8 @@ public class OccupationService {
     private OccupationManagerService occupationManagerService;
     @Autowired
     private DepartmentManagerService departmentManagerService;
+    @Autowired
+    private OccupationCheckerService occupationCheckerService;
     @Autowired
     private OccupationMapper occupationMapper;
     @Autowired
@@ -41,11 +44,14 @@ public class OccupationService {
     }
 
     public OccupationResponseDTO findById(Long id) {
-        return occupationMapper.toResponseDTO(occupationManagerService.findById(id));
+        Occupation existing = occupationManagerService.findById(id);
+        occupationCheckerService.checkOccupationIsActive(existing);
+        return occupationMapper.toResponseDTO(existing);
     }
 
     @Transactional
     public OccupationResponseDTO create(OccupationCreateRequestDTO requestDTO) {
+        occupationCheckerService.checkCreateRequest(requestDTO);
         Department org = departmentManagerService.getReferenceById(requestDTO.getDepartId());
         Occupation newOccupation = occupationMapper.toEntity(requestDTO, org);
         return occupationMapper.toResponseDTO(occupationManagerService.save(newOccupation));
@@ -54,6 +60,8 @@ public class OccupationService {
     @Transactional
     public OccupationResponseDTO update(Long id, OccupationUpdateRequestDTO requestDTO) {
         Occupation existingOccupation = occupationManagerService.findById(id);
+        occupationCheckerService.checkOccupationIsActive(existingOccupation);
+        occupationCheckerService.checkUpdateRequest(id, requestDTO, existingOccupation);
         occupationMapper.updateEntity(requestDTO, existingOccupation);
         return occupationMapper.toResponseDTO(occupationManagerService.save(existingOccupation));
     }

@@ -11,13 +11,13 @@ import project.office_workforce_service.model.entity.base.AbstractAuditableEntit
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "place_working_period_rules", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"place_id", "working_period_id"})
+    @UniqueConstraint(columnNames = {"occupation_rule_id", "working_period_id"})
 })
 public class PlaceWorkingPeriodRule extends AbstractAuditableEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "place_id", nullable = false)
-    private Place place;
+    @JoinColumn(name = "occupation_rule_id", nullable = false)
+    private PlaceOccupationRule occupationRule;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "working_period_id", nullable = false)

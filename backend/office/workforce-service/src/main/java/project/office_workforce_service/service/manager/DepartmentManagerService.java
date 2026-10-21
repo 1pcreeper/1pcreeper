@@ -30,4 +30,12 @@ public class DepartmentManagerService extends AbstractBaseService<Department, Lo
     public Page<Department> findAllByCompanyIdAndIsActive(Long companyId, Boolean isActive, Pageable pageable){
         return  departmentRepository.findAllByCompanyIdAndIsActive(companyId,isActive,pageable);
     }
+
+    public boolean existsByCompanyIdAndNameIgnoreCase(Long companyId, String name) {
+        return departmentRepository.existsByCompanyIdAndNameIgnoreCase(companyId, name);
+    }
+
+    public java.util.Optional<Department> findByCompanyIdAndNameIgnoreCase(Long companyId, String name) {
+        return departmentRepository.findByCompanyIdAndNameIgnoreCase(companyId, name);
+    }
 }

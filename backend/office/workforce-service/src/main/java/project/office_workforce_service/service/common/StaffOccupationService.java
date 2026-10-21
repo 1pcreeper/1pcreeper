@@ -12,6 +12,7 @@ import project.office_workforce_service.model.dto.response.StaffOccupationRespon
 import project.office_workforce_service.model.entity.Occupation;
 import project.office_workforce_service.model.entity.Staff;
 import project.office_workforce_service.model.entity.StaffOccupation;
+import project.office_workforce_service.service.checker.StaffOccupationCheckerService;
 import project.office_workforce_service.service.manager.OccupationManagerService;
 import project.office_workforce_service.service.manager.StaffManagerService;
 import project.office_workforce_service.service.manager.StaffOccupationManagerService;
@@ -27,6 +28,8 @@ public class StaffOccupationService {
     private StaffManagerService staffManagerService;
     @Autowired
     private OccupationManagerService occupationManagerService;
+    @Autowired
+    private StaffOccupationCheckerService staffOccupationCheckerService;
     @Autowired
     private StaffOccupationMapper mapper;
     @Autowired
@@ -50,6 +53,7 @@ public class StaffOccupationService {
 
     @Transactional
     public StaffOccupationResponseDTO create(StaffOccupationCreateRequestDTO requestDTO) {
+        staffOccupationCheckerService.checkCreateRequest(requestDTO);
         Staff staff = staffManagerService.getReferenceById(requestDTO.getStaffId());
         Occupation occupation = occupationManagerService.getReferenceById(requestDTO.getOccupationId());
 
@@ -60,6 +64,7 @@ public class StaffOccupationService {
     @Transactional
     public StaffOccupationResponseDTO update(Long id, StaffOccupationUpdateRequestDTO requestDTO) {
         StaffOccupation existing = staffOccupationManagerService.findById(id);
+        staffOccupationCheckerService.checkUpdateRequest(id, existing.getStaff().getId(), requestDTO);
 
         Occupation newOccupation = null;
         if (requestDTO.getOccupationId() != null) {
@@ -68,5 +73,10 @@ public class StaffOccupationService {
 
         mapper.updateEntity(requestDTO, existing, newOccupation);
         return mapper.toResponseDTO(staffOccupationManagerService.save(existing));
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        staffOccupationManagerService.deleteById(id);
     }
 }

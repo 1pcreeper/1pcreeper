@@ -26,4 +26,16 @@ public class CompanyManagerService extends AbstractBaseService<Company, Long> {
     public Page<Company> findAllByIsActive(Boolean isActive, Pageable pageable){
         return companyRepository.findAllByIsActive(isActive,pageable);
     }
+
+    public boolean existsByNameEnglishIgnoreCase(String nameEnglish) {
+        return companyRepository.existsByNameEnglishIgnoreCase(nameEnglish);
+    }
+
+    public boolean existsByBusinessRegistrationNumber(String brn) {
+        return companyRepository.existsByBusinessRegistrationNumber(brn);
+    }
+
+    public java.util.Optional<Company> findByBusinessRegistrationNumber(String brn) {
+        return companyRepository.findByBusinessRegistrationNumber(brn);
+    }
 }

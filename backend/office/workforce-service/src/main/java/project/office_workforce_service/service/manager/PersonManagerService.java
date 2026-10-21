@@ -22,6 +22,11 @@ public class PersonManagerService extends AbstractBaseService<Person, Long> {
         this.personRepository = personRepository;
     }
 
+    public Person findByUid(java.util.UUID uid) {
+        return personRepository.findByUid(uid)
+            .orElseThrow(() -> new project.shared_office_starter.model.exception.ResourceNotFoundException("Person not found by UID: " + uid));
+    }
+
     public Page<Person> search(String q, Boolean isActive, Pageable pageable) {
         return personRepository.search(q, isActive, pageable);
     }
@@ -37,5 +42,20 @@ public class PersonManagerService extends AbstractBaseService<Person, Long> {
     public Page<Person> findAllByIsActive(Boolean isActive, Pageable pageable){
         return personRepository.findAllByIsActive(isActive,pageable);
     }
-    
+
+    public boolean existsByHkId(String hkId) {
+        return personRepository.existsByHkId(hkId);
+    }
+
+    public boolean existsByEmail(String email) {
+        return personRepository.existsByEmail(email);
+    }
+
+    public java.util.Optional<Person> findByHkId(String hkId) {
+        return personRepository.findByHkId(hkId);
+    }
+
+    public java.util.Optional<Person> findByEmail(String email) {
+        return personRepository.findByEmail(email);
+    }
 }

@@ -11,6 +11,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import project.shared_office_common_lib.constant.ServiceRegistryIDNames;
 import project.shared_office_starter.grpc.OfficeAccountRPCServiceGrpc;
+import project.shared_office_starter.grpc.OfficeExpenditureRPCServiceGrpc;
+import project.shared_office_starter.grpc.OfficeTransportRPCServiceGrpc;
+import project.shared_office_starter.grpc.OfficeWorkforceRPCServiceGrpc;
 
 import java.time.Duration;
 import java.util.List;
@@ -18,11 +21,29 @@ import java.util.Map;
 
 @Configuration
 public class GrpcStubConfig {
+
     @Autowired
     private EurekaClient eurekaClient;
-    @Value("${grpc.client.office-account-service.port}")
+
+    // Account Service Port
+    @Value("${grpc.client.office-account-service.port:9095}")
     private int officeAccountServicePort;
 
+    // Workforce Service Port
+    @Value("${grpc.client.office-workforce-service.port:9096}")
+    private int officeWorkforceServicePort;
+
+    // Transport Service Port
+    @Value("${grpc.client.office-transport-service.port:9098}")
+    private int officeTransportServicePort;
+
+    // Expenditure Service Port
+    @Value("${grpc.client.office-expenditure-service.port:9097}")
+    private int officeExpenditureServicePort;
+
+    // =========================================================================
+    // Account Service Channel & Stubs
+    // =========================================================================
     @Bean
     public ManagedChannel officeAccountServiceManagedChannel() {
         String officeAccountServiceAddress;
@@ -41,47 +62,105 @@ public class GrpcStubConfig {
             .build();
     }
 
-    //injection
+    @Bean
+    public OfficeAccountRPCServiceGrpc.OfficeAccountRPCServiceBlockingStub officeAccountRPCServiceBlockingStub() {
+        return OfficeAccountRPCServiceGrpc.newBlockingStub(officeAccountServiceManagedChannel());
+    }
 
     @Bean
     public OfficeAccountRPCServiceGrpc.OfficeAccountRPCServiceBlockingStub generalAccountRPCServiceBlockingStub() {
-        return OfficeAccountRPCServiceGrpc.newBlockingStub(officeAccountServiceManagedChannel());
+        return officeAccountRPCServiceBlockingStub();
     }
-//
-//    @Bean
-//    public RoleRPCServiceGrpc.RoleRPCServiceBlockingStub roleRPCServiceBlockingStub() {
-//        return RoleRPCServiceGrpc.newBlockingStub(userAccountServiceManagedChannel());
-//    }
-//
-//    @Bean
-//    public BusinessRPCServiceGrpc.BusinessRPCServiceBlockingStub businessRPCServiceBlockingStub() {
-//        return BusinessRPCServiceGrpc.newBlockingStub(userAccountServiceManagedChannel());
-//    }
-//
-//    @Bean
-//    public AccountVerifyManagerRPCServiceGrpc.AccountVerifyManagerRPCServiceBlockingStub accountVerifyManagerRPCServiceBlockingStub() {
-//        return AccountVerifyManagerRPCServiceGrpc.newBlockingStub(userAccountServiceManagedChannel());
-//    }
-//    
-//    @Bean
-//    public BusinessContactRPCServiceGrpc.BusinessContactRPCServiceBlockingStub businessContactRPCServiceBlockingStub() {
-//        return BusinessContactRPCServiceGrpc.newBlockingStub(userAccountServiceManagedChannel());
-//    }
-//    
-//    @Bean
-//    public UserContactRPCServiceGrpc.UserContactRPCServiceBlockingStub userContactRPCServiceBlockingStub() {
-//        return UserContactRPCServiceGrpc.newBlockingStub(userAccountServiceManagedChannel());
-//    }
 
+    // =========================================================================
+    // Workforce Service Channel & Stubs
+    // =========================================================================
+    @Bean
+    public ManagedChannel officeWorkforceServiceManagedChannel() {
+        String officeWorkforceServiceAddress;
+        try {
+            InstanceInfo instanceInfo = eurekaClient.getNextServerFromEureka(
+                ServiceRegistryIDNames.OFFICE_WORKFORCE_SERVICE, false
+            );
+            officeWorkforceServiceAddress = instanceInfo.getIPAddr();
+        } catch (Exception e) {
+            officeWorkforceServiceAddress = ServiceRegistryIDNames.OFFICE_WORKFORCE_SERVICE;
+        }
+        return ManagedChannelBuilder.forAddress(officeWorkforceServiceAddress, officeWorkforceServicePort)
+            .usePlaintext()
+            .enableRetry()
+            .defaultServiceConfig(buildServiceConfig())
+            .build();
+    }
 
+    @Bean
+    public OfficeWorkforceRPCServiceGrpc.OfficeWorkforceRPCServiceBlockingStub officeWorkforceRPCServiceBlockingStub() {
+        return OfficeWorkforceRPCServiceGrpc.newBlockingStub(officeWorkforceServiceManagedChannel());
+    }
+
+    // =========================================================================
+    // Transport Service Channel & Stubs
+    // =========================================================================
+    @Bean
+    public ManagedChannel officeTransportServiceManagedChannel() {
+        String officeTransportServiceAddress;
+        try {
+            InstanceInfo instanceInfo = eurekaClient.getNextServerFromEureka(
+                ServiceRegistryIDNames.OFFICE_TRANSPORT_SERVICE, false
+            );
+            officeTransportServiceAddress = instanceInfo.getIPAddr();
+        } catch (Exception e) {
+            officeTransportServiceAddress = ServiceRegistryIDNames.OFFICE_TRANSPORT_SERVICE;
+        }
+        return ManagedChannelBuilder.forAddress(officeTransportServiceAddress, officeTransportServicePort)
+            .usePlaintext()
+            .enableRetry()
+            .defaultServiceConfig(buildServiceConfig())
+            .build();
+    }
+
+    @Bean
+    public OfficeTransportRPCServiceGrpc.OfficeTransportRPCServiceBlockingStub officeTransportRPCServiceBlockingStub() {
+        return OfficeTransportRPCServiceGrpc.newBlockingStub(officeTransportServiceManagedChannel());
+    }
+
+    // =========================================================================
+    // Expenditure Service Channel & Stubs
+    // =========================================================================
+    @Bean
+    public ManagedChannel officeExpenditureServiceManagedChannel() {
+        String officeExpenditureServiceAddress;
+        try {
+            InstanceInfo instanceInfo = eurekaClient.getNextServerFromEureka(
+                ServiceRegistryIDNames.OFFICE_EXPENDITURE_SERVICE, false
+            );
+            officeExpenditureServiceAddress = instanceInfo.getIPAddr();
+        } catch (Exception e) {
+            officeExpenditureServiceAddress = ServiceRegistryIDNames.OFFICE_EXPENDITURE_SERVICE;
+        }
+        return ManagedChannelBuilder.forAddress(officeExpenditureServiceAddress, officeExpenditureServicePort)
+            .usePlaintext()
+            .enableRetry()
+            .defaultServiceConfig(buildServiceConfig())
+            .build();
+    }
+
+    @Bean
+    public OfficeExpenditureRPCServiceGrpc.OfficeExpenditureRPCServiceBlockingStub officeExpenditureRPCServiceBlockingStub() {
+        return OfficeExpenditureRPCServiceGrpc.newBlockingStub(officeExpenditureServiceManagedChannel());
+    }
+
+    // =========================================================================
+    // Resilient Retry & Load Balancing Policy
+    // =========================================================================
     private Map<String, Object> buildServiceConfig() {
-
         return Map.of(
             "loadBalancingConfig",
             List.of(
                 Map.of("weighted_round_robin", Map.of()),
                 Map.of("round_robin", Map.of()),
-                Map.of("pick_first", Map.of("shuffleAddressList", true))),
+                Map.of("pick_first", Map.of("shuffleAddressList", true))
+            ),
             "methodConfig",
             List.of(
                 Map.of(
@@ -90,10 +169,14 @@ public class GrpcStubConfig {
                     "retryPolicy",
                     Map.of(
                         "maxAttempts", (double) 5,
-                        "initialBackoff", durationToServiceConfigString(Duration.ofSeconds(2)),
+                        "initialBackoff", durationToServiceConfigString(Duration.ofMillis(500)),
                         "backoffMultiplier", "2.0",
                         "maxBackoff", durationToServiceConfigString(Duration.ofSeconds(2)),
-                        "retryableStatusCodes", List.of("UNAVAILABLE")))));
+                        "retryableStatusCodes", List.of("UNAVAILABLE")
+                    )
+                )
+            )
+        );
     }
 
     @NotNull

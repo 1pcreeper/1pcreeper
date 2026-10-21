@@ -27,6 +27,11 @@ public class ScheduleCreateRequestDTO {
     @NotNull(message = "Staff ID is required")
     private Long staffId;
 
+    @NotNull(message = "Working period is required.")
+    private Long workingPeriodId;
+
+    private Long occupationId;
+
     @NotNull(message = "Status is required")
     private ScheduleStatus status;
 

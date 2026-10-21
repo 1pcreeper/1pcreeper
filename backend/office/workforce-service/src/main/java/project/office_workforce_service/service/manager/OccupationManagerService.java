@@ -22,4 +22,12 @@ public class OccupationManagerService extends AbstractBaseService<Occupation, Lo
     public Page<Occupation> search(Long departId, String q, Boolean isActive, Pageable pageable) {
         return occupationRepository.search(departId, q, isActive, pageable);
     }
+
+    public boolean existsByDepartmentIdAndNameIgnoreCase(Long departmentId, String name) {
+        return occupationRepository.existsByDepartmentIdAndNameIgnoreCase(departmentId, name);
+    }
+
+    public java.util.Optional<Occupation> findByDepartmentIdAndNameIgnoreCase(Long departmentId, String name) {
+        return occupationRepository.findByDepartmentIdAndNameIgnoreCase(departmentId, name);
+    }
 }

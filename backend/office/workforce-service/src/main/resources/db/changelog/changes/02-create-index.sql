@@ -18,10 +18,12 @@ CREATE INDEX idx_schedules_place_id ON schedules(place_id);
 CREATE INDEX idx_schedules_staff_id ON schedules(staff_id);
 
 -- Rule Linkages
-CREATE INDEX idx_place_wp_rules_place_id ON place_working_period_rules(place_id);
+CREATE INDEX idx_place_wp_rules_occ_rule_id ON place_working_period_rules(occupation_rule_id);
 CREATE INDEX idx_place_wp_rules_wp_id ON place_working_period_rules(working_period_id);
 CREATE INDEX idx_place_occ_rules_place_id ON place_occupation_rules(place_id);
 CREATE INDEX idx_place_occ_rules_occ_id ON place_occupation_rules(occupation_id);
+CREATE INDEX idx_place_occ_rules_week_day ON place_occupation_rules(week_day);
+CREATE INDEX idx_place_schedule_rule_work_types_rule_id ON place_schedule_rule_work_types(rule_id);
 
 -- Schedule queries (Combining time range and status)
 CREATE INDEX idx_schedules_time_range ON schedules(start_at, end_at);
@@ -44,6 +46,13 @@ CREATE INDEX idx_companies_name_zh_trgm ON companies USING gin (lower(name_chine
 
 -- Place Searches
 CREATE INDEX idx_places_name_trgm ON places USING gin (lower(name) gin_trgm_ops);
+
+-- Organization Searches
+CREATE INDEX idx_organizations_name_en_trgm ON organizations USING gin (lower(name_english) gin_trgm_ops);
+CREATE INDEX idx_organizations_name_zh_trgm ON organizations USING gin (lower(name_chinese) gin_trgm_ops);
+CREATE INDEX idx_organizations_email_trgm ON organizations USING gin (lower(email) gin_trgm_ops);
+CREATE INDEX idx_organizations_brn ON organizations (business_registration_number);
+CREATE INDEX idx_organizations_sln ON organizations (secretary_license_number);
 
 -- Task Index
 CREATE UNIQUE INDEX idx_single_processing_task 

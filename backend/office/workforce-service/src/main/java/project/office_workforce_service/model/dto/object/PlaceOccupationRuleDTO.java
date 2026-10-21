@@ -14,8 +14,8 @@ import java.time.LocalDateTime;
 public class PlaceOccupationRuleDTO {
     private Long id;
     private Long placeId;
+    private Integer weekDay;
     private Long occupationId;
-    private Integer personCount;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

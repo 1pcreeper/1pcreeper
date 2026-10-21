@@ -12,6 +12,7 @@ import project.office_workforce_service.model.dto.response.PlaceOccupationRuleRe
 import project.office_workforce_service.model.entity.Occupation;
 import project.office_workforce_service.model.entity.Place;
 import project.office_workforce_service.model.entity.PlaceOccupationRule;
+import project.office_workforce_service.service.checker.PlaceOccupationRuleCheckerService;
 import project.office_workforce_service.service.manager.OccupationManagerService;
 import project.office_workforce_service.service.manager.PlaceManagerService;
 import project.office_workforce_service.service.manager.PlaceOccupationRuleManagerService;
@@ -28,23 +29,27 @@ public class PlaceOccupationRuleService {
     @Autowired
     private OccupationManagerService occupationManager;
     @Autowired
+    private PlaceOccupationRuleCheckerService checkerService;
+    @Autowired
     private PlaceRuleMapper mapper;
     @Autowired
     private PaginationMapper paginationMapper;
 
     public PaginationBaseResponseDTO<PlaceOccupationRuleResponseDTO> search(
         @Nullable Long placeId,
+        @Nullable Integer weekDay,
         @Nullable Long occupationId,
         Pageable pageable) {
 
         return paginationMapper.toDTO(
-            ruleManager.search(placeId, occupationId, pageable),
+            ruleManager.search(placeId, weekDay, occupationId, pageable),
             mapper::toOccupationRuleResponseDTO
         );
     }
 
     @Transactional
     public PlaceOccupationRuleResponseDTO create(PlaceOccupationRuleCreateRequestDTO requestDTO) {
+        checkerService.checkCreateRequest(requestDTO);
         Place place = placeManager.getReferenceById(requestDTO.getPlaceId());
         Occupation occ = occupationManager.getReferenceById(requestDTO.getOccupationId());
 
@@ -55,7 +60,13 @@ public class PlaceOccupationRuleService {
     @Transactional
     public PlaceOccupationRuleResponseDTO update(Long id, PlaceOccupationRuleUpdateRequestDTO requestDTO) {
         PlaceOccupationRule existing = ruleManager.findById(id);
+        checkerService.checkUpdateRequest(requestDTO, existing);
         mapper.updateOccupationRuleEntity(requestDTO, existing);
         return mapper.toOccupationRuleResponseDTO(ruleManager.save(existing));
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        ruleManager.deleteById(id);
     }
 }

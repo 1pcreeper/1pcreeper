@@ -20,6 +20,10 @@ import PersonDetails from './pages/persons/_id/PersonDetails';
 import Persons from './pages/persons/Persons';
 import StaffDetails from './pages/staffs/_id/StaffDetails';
 import Staffs from './pages/staffs/Staffs';
+import Places from './pages/companies/_id/places/Places';
+import Occupations from './pages/companies/_id/occupations/Occupations';
+import Organizations from './pages/organizations/Organizations';
+import OrganizationDetails from './pages/organizations/_id/OrganizationDetails';
 
 import ErrorPage from '@/pages/error/Error';
 
@@ -83,6 +87,14 @@ const router = createBrowserRouter([
                                         element: <Periods />
                                     },
                                     {
+                                        path: "/companies/:id/places",
+                                        element: <Places />
+                                    },
+                                    {
+                                        path: "/companies/:id/occupations",
+                                        element: <Occupations />
+                                    },
+                                    {
                                         path: "/companies/:id/staffs",
                                         element: <Staffs />
                                     },
@@ -93,6 +105,14 @@ const router = createBrowserRouter([
                                     {
                                         path: "/persons/:id",
                                         element: <PersonDetails />
+                                    },
+                                    {
+                                        path: "/organizations",
+                                        element: <Organizations />
+                                    },
+                                    {
+                                        path: "/organizations/:id",
+                                        element: <OrganizationDetails />
                                     },
                                     {
                                         path: "/staffs/:id",

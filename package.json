@@ -5,7 +5,7 @@
     "frontend/office/web/office-workforce-web"
   ],
   "scripts": {
-    "dev": "npm run dev --workspace=frontend/office/web/office-workforce-web",
+    "dev": "node run-dev.cjs",
     "build": "npm run build --workspace=frontend/office/web/office-workforce-web",
     "start": "node server.js",
     "lint": "npm run lint --workspace=frontend/office/web/office-workforce-web"

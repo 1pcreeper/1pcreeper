@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-@Cacheable
 @Slf4j
 public class JwtAuthenticationConverter implements Converter<Jwt, AbstractAuthenticationToken> {
     private final UserDetailsBaseService userDetailsBaseService;
@@ -44,7 +43,7 @@ public class JwtAuthenticationConverter implements Converter<Jwt, AbstractAuthen
 
         jwtAuthRequestBaseHandler.handle(source);
         List<GrantedAuthority> combinedAuthorities = new ArrayList<>(extractAuthorities(source));
-
+        
         String uid = source.getSubject();
         UserDetails userDetails = userDetailsBaseService.loadUserByUsername(uid);
 

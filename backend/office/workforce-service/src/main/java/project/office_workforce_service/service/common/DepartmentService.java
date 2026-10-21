@@ -12,6 +12,7 @@ import project.office_workforce_service.model.dto.request.DepartmentUpdateReques
 import project.office_workforce_service.model.dto.response.DepartmentResponseDTO;
 import project.office_workforce_service.model.entity.Company;
 import project.office_workforce_service.model.entity.Department;
+import project.office_workforce_service.service.checker.DepartmentCheckerService;
 import project.office_workforce_service.service.manager.CompanyManagerService;
 import project.office_workforce_service.service.manager.DepartmentManagerService;
 import project.shared_office_starter.mapper.PaginationMapper;
@@ -26,6 +27,9 @@ public class DepartmentService {
 
     @Autowired
     private CompanyManagerService companyManagerService;
+
+    @Autowired
+    private DepartmentCheckerService departmentCheckerService;
 
     @Autowired
     private DepartmentMapper departmentMapper;
@@ -47,14 +51,13 @@ public class DepartmentService {
 
     public DepartmentResponseDTO findById(Long id) {
         Department existingOrg = departmentManagerService.findById(id);
-        if (!existingOrg.getIsActive()){
-            throw new ResourceNotFoundException("Department Already Deleted");
-        }
+        departmentCheckerService.checkDepartmentIsActive(existingOrg);
         return departmentMapper.toResponseDTO(existingOrg);
     }
 
     @Transactional
     public DepartmentResponseDTO create(DepartmentCreateRequestDTO requestDTO) {
+        departmentCheckerService.checkCreateRequest(requestDTO);
         Company company = companyManagerService.getReferenceById(requestDTO.getCompanyId());
 
         Department newOrg = departmentMapper.toEntity(requestDTO, company);
@@ -64,9 +67,8 @@ public class DepartmentService {
     @Transactional
     public DepartmentResponseDTO update(Long id, DepartmentUpdateRequestDTO requestDTO) {
         Department existingOrg = departmentManagerService.findById(id);
-        if (!existingOrg.getIsActive()){
-            throw new ResourceNotFoundException("Department Already Deleted");
-        }
+        departmentCheckerService.checkDepartmentIsActive(existingOrg);
+        departmentCheckerService.checkUpdateRequest(id, requestDTO, existingOrg);
         departmentMapper.updateEntity(requestDTO, existingOrg);
 
         return departmentMapper.toResponseDTO(departmentManagerService.save(existingOrg));
@@ -86,6 +88,7 @@ public class DepartmentService {
     @Transactional
     public void delete(Long id){
         Department existingOrg = departmentManagerService.findById(id);
+        departmentCheckerService.checkDepartmentIsActive(existingOrg);
         existingOrg.setIsActive(false);
         departmentManagerService.save(existingOrg);
     }

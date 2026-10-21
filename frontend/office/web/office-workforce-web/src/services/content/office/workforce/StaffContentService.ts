@@ -4,14 +4,14 @@ import { StaffCreateRequestDTO, StaffUpdateRequestDTO } from "@/models/dto/offic
 import { StaffDetailResponseDTO, StaffResponseDTO } from "@/models/dto/office/workforce/response.dto";
 
 export default class StaffContentService {
-    private static readonly INSTANCE: StaffContentService;
+    private static INSTANCE: StaffContentService;
     private constructor() {
     }
     public static getInstance(): StaffContentService {
-        if (StaffContentService.INSTANCE) {
-            return StaffContentService.INSTANCE;
+        if (!StaffContentService.INSTANCE) {
+            StaffContentService.INSTANCE = new StaffContentService();
         }
-        return new StaffContentService();
+        return StaffContentService.INSTANCE;
     }
     public async create(requestDTO: StaffCreateRequestDTO): Promise<StaffResponseDTO> {
         return await officeAPI<StaffCreateRequestDTO, StaffResponseDTO>(`/workforce/staffs`, "POST", requestDTO);

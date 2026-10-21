@@ -60,6 +60,7 @@ public class PersonMapper {
 
         return PersonResponseDTO.builder()
             .id(person.getId())
+            .uid(person.getUid())
             .nameEnglish(person.getNameEnglish())
             .nameChinese(person.getNameChinese())
             .officeTel(person.getOfficeTel())
@@ -82,6 +83,7 @@ public class PersonMapper {
 
         return PersonDTO.builder()
             .id(person.getId())
+            .uid(person.getUid())
             .nameEnglish(person.getNameEnglish())
             .nameChinese(person.getNameChinese())
             .officeTel(person.getOfficeTel())

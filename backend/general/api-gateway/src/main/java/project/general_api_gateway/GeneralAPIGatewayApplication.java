@@ -19,9 +19,7 @@ import org.springframework.context.annotation.FilterType;
     },
     // 關鍵：排除掉所有 Servlet 版的 Security 配置類別
     excludeFilters = @ComponentScan.Filter(
-        type = FilterType.ASSIGNABLE_TYPE,
-        classes = {
-        }
+        type = FilterType.ASSIGNABLE_TYPE
     )
 )
 public class GeneralAPIGatewayApplication {

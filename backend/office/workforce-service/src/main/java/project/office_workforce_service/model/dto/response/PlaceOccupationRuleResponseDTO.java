@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class PlaceOccupationRuleResponseDTO {
     private Long id;
     private Long placeId;
+    private Integer weekDay;
     private Long occupationId;
     private String occupationName; // Added for frontend ease
-    private Integer personCount;
 }

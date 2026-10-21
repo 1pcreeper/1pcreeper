@@ -13,6 +13,7 @@ import project.office_workforce_service.model.entity.Place;
 import project.office_workforce_service.model.entity.Staff;
 import project.office_workforce_service.model.entity.StaffSchedulePreference;
 import project.office_workforce_service.model.entity.WorkingPeriod;
+import project.office_workforce_service.service.checker.StaffSchedulePreferenceCheckerService;
 import project.office_workforce_service.service.manager.PlaceManagerService;
 import project.office_workforce_service.service.manager.StaffManagerService;
 import project.office_workforce_service.service.manager.StaffSchedulePreferenceManagerService;
@@ -31,6 +32,8 @@ public class StaffSchedulePreferenceService {
     private PlaceManagerService placeManagerService;
     @Autowired
     private WorkingPeriodManagerService workingPeriodManagerService;
+    @Autowired
+    private StaffSchedulePreferenceCheckerService checkerService;
     @Autowired
     private StaffSchedulePreferenceMapper mapper;
     @Autowired
@@ -54,6 +57,7 @@ public class StaffSchedulePreferenceService {
 
     @Transactional
     public StaffSchedulePreferenceResponseDTO create(StaffSchedulePreferenceCreateRequestDTO requestDTO) {
+        checkerService.checkCreateRequest(requestDTO);
         Staff staff = staffManagerService.getReferenceById(requestDTO.getStaffId());
         Place place = placeManagerService.getReferenceById(requestDTO.getPlaceId());
         WorkingPeriod wp = workingPeriodManagerService.getReferenceById(requestDTO.getWorkingPeriodId());
@@ -64,6 +68,7 @@ public class StaffSchedulePreferenceService {
 
     @Transactional
     public StaffSchedulePreferenceResponseDTO update(Long id, StaffSchedulePreferenceUpdateRequestDTO requestDTO) {
+        checkerService.checkUpdateRequest(requestDTO);
         StaffSchedulePreference existing = preferenceManagerService.findById(id);
 
         Place newPlace = null;
@@ -78,5 +83,10 @@ public class StaffSchedulePreferenceService {
 
         mapper.updateEntity(requestDTO, existing, newPlace, newWp);
         return mapper.toResponseDTO(preferenceManagerService.save(existing));
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        preferenceManagerService.deleteById(id);
     }
 }

@@ -33,4 +33,18 @@ public class StaffSchedulePreferenceManagerService extends AbstractBaseService<S
     public List<StaffSchedulePreference> findByStaffId(Long staffId){
         return preferenceRepository.findByStaffId(staffId);
     }
+
+    public List<StaffSchedulePreference> findByStaffIdInAndPlaceIdAndWeekDay(List<Long> staffIds, Long placeId, Integer weekDay) {
+        return preferenceRepository.findByStaffIdInAndPlaceIdAndWeekDay(staffIds, placeId, weekDay);
+    }
+
+    public boolean existsByStaffIdAndPlaceIdAndWeekDay(Long staffId, Long placeId, Integer weekDay) {
+        return preferenceRepository.existsByStaffIdAndPlaceIdAndWeekDay(staffId, placeId, weekDay);
+    }
+
+    public boolean existsByStaffIdAndPlaceIdAndWeekDayAndWorkingPeriodId(
+        Long staffId, Long placeId, Integer weekDay, Long workingPeriodId) {
+        return preferenceRepository.existsByStaffIdAndPlaceIdAndWeekDayAndWorkingPeriodId(
+            staffId, placeId, weekDay, workingPeriodId);
+    }
 }

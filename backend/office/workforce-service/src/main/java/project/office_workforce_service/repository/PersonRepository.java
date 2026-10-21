@@ -24,6 +24,14 @@ public interface PersonRepository extends AbstractBaseRepository<Person, Long> {
                         @Param("isActive") Boolean isActive,
                         Pageable pageable);
 
+    @Query("SELECT p FROM Person p WHERE p.uid = :uid")
+    java.util.Optional<Person> findByUid(@Param("uid") java.util.UUID uid);
+
     @Query("SELECT p FROM Person p WHERE p.isActive = :isActive")
     Page<Person> findAllByIsActive(@Param("isActive") Boolean isActive, Pageable pageable);
+
+    boolean existsByHkId(String hkId);
+    java.util.Optional<Person> findByHkId(String hkId);
+    boolean existsByEmail(String email);
+    java.util.Optional<Person> findByEmail(String email);
 }

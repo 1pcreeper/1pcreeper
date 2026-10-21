@@ -14,6 +14,7 @@ import project.office_workforce_service.model.dto.response.StaffDetailResponseDT
 import project.office_workforce_service.model.dto.response.StaffResponseDTO;
 import project.office_workforce_service.model.entity.*;
 import project.office_workforce_service.model.entity.enums.WorkType;
+import project.office_workforce_service.service.checker.StaffCheckerService;
 import project.office_workforce_service.service.manager.*;
 import project.shared_office_starter.mapper.PaginationMapper;
 import project.shared_office_starter.model.dto.base.PaginationBaseResponseDTO;
@@ -56,6 +57,8 @@ public class StaffService {
     private StaffOccupationMapper staffOccupationMapper;
     @Autowired
     private StaffSchedulePreferenceMapper staffSchedulePreferenceMapper;
+    @Autowired
+    private StaffCheckerService staffCheckerService;
 
     public PaginationBaseResponseDTO<StaffResponseDTO> search(
         @Nullable String q,
@@ -73,17 +76,13 @@ public class StaffService {
 
     public StaffResponseDTO findById(Long id) {
         Staff staff = staffManagerService.findById(id);
-        if (!staff.getIsActive() || !staff.getPerson().getIsActive()) {
-            throw new ResourceNotFoundException("Staff Already Deleted");
-        }
+        staffCheckerService.checkStaffIsActive(staff);
         return staffMapper.toResponseDTO(staff);
     }
 
     public StaffDetailResponseDTO findByIdInDetail(Long id) {
         Staff staff = staffManagerService.findById(id);
-        if (!staff.getIsActive() || !staff.getPerson().getIsActive()) {
-            throw new ResourceNotFoundException("Staff Already Deleted");
-        }
+        staffCheckerService.checkStaffIsActive(staff);
         StaffDetail staffDetail;
         PersonDetail personDetail;
         List<StaffOccupation> staffOccupations;
@@ -136,6 +135,7 @@ public class StaffService {
 
     @Transactional
     public StaffResponseDTO create(StaffCreateRequestDTO requestDTO) {
+        staffCheckerService.checkCreateRequest(requestDTO);
         Company company = companyManagerService.getReferenceById(requestDTO.getCompanyId());
         Person person = personManagerService.getReferenceById(requestDTO.getPersonId());
         Department org = departmentManagerService.getReferenceById(requestDTO.getDepartId());
@@ -164,9 +164,8 @@ public class StaffService {
     @Transactional
     public StaffResponseDTO update(Long id, StaffUpdateRequestDTO requestDTO) {
         Staff existingStaff = staffManagerService.findById(id);
-        if (!existingStaff.getIsActive() || !existingStaff.getPerson().getIsActive()) {
-            throw new ResourceNotFoundException("Staff Already Deleted");
-        }
+        staffCheckerService.checkStaffIsActive(existingStaff);
+        staffCheckerService.checkUpdateRequest(id, requestDTO, existingStaff);
         Department newOrg = null;
         if (requestDTO.getDepartId() != null) {
             newOrg = departmentManagerService.getReferenceById(requestDTO.getDepartId());
@@ -204,6 +203,7 @@ public class StaffService {
     @Transactional
     public void delete(Long id) {
         Staff existingStaff = staffManagerService.findById(id);
+        staffCheckerService.checkStaffIsActive(existingStaff);
         existingStaff.setIsActive(false);
         staffManagerService.save(existingStaff);
     }

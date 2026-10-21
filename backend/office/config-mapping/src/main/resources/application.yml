@@ -11,6 +11,8 @@ spring:
       active: native
   cloud:
       config:
+          discovery:
+              enabled: true
           server:
               native:
                   search-locations: file:/${OFFICE_CONFIG_MAPPING_CONFIG_FILE}

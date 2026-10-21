@@ -16,7 +16,6 @@ import java.util.List;
 public class PlaceScheduleRuleDTO {
     private Long id;
     private Long placeId;
-    private Integer personCount;
     private List<WorkType> workTypePriorities;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

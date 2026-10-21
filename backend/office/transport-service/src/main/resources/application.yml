@@ -44,3 +44,7 @@ grpc:
 jwt:
     secret: ${OFFICE_TRANSPORT_SERVICE_JWT_SECRET}
     expiration.millis: ${OFFICE_TRANSPORT_SERVICE_JWT_EXPIRATION_MILLIS}
+storage:
+    local:
+        root-path: ${OFFICE_TRANSPORT_SERVICE_STORAGE_ROOT_PATH:/data/local/office/transport-service}
+

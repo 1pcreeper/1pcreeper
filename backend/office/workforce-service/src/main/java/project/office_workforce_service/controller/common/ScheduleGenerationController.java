@@ -7,6 +7,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import project.office_workforce_service.constant.UserRoles;
+import project.office_workforce_service.model.dto.request.ScheduleGenerationTriggerRequestDTO;
 import project.office_workforce_service.model.dto.response.ScheduleGenerationStatusResponseDTO;
 import project.office_workforce_service.model.dto.response.ScheduleGenerationTaskResponseDTO;
 import project.office_workforce_service.model.entity.User;
@@ -28,9 +29,10 @@ public class ScheduleGenerationController {
     @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @PostMapping("/trigger")
     public ResponseEntity<APIBaseResponseDTO<ScheduleGenerationTaskResponseDTO>> triggerGeneration(
-        @AuthenticationPrincipal User user
+        @AuthenticationPrincipal User user,
+        @Valid @RequestBody ScheduleGenerationTriggerRequestDTO request
     ) {
-        ScheduleGenerationTaskResponseDTO response = scheduleGenerationService.triggerGeneration(user);
+        ScheduleGenerationTaskResponseDTO response = scheduleGenerationService.triggerGeneration(user, request);
         return ResponseEntity.accepted().body(APIBaseResponseDTO.success(response));
     }
 

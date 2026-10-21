@@ -31,7 +31,7 @@ export function MessageModal({ isOpen, onClose, title, message, type }: MessageM
           </button>
         </div>
         
-        <div className="p-5 text-sm text-slate-700">
+        <div className="p-5 text-sm text-slate-700 whitespace-pre-line text-left">
           {message}
         </div>
         <div className="px-5 py-3 bg-slate-50 border-t border-slate-200 flex justify-end">

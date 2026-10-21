@@ -30,4 +30,7 @@ public interface DepartmentRepository extends AbstractBaseRepository<Department,
         @Param("isActive") Boolean isActive,
         Pageable pageable
     );
+
+    boolean existsByCompanyIdAndNameIgnoreCase(Long companyId, String name);
+    java.util.Optional<Department> findByCompanyIdAndNameIgnoreCase(Long companyId, String name);
 }

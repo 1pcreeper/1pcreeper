@@ -85,6 +85,10 @@ public abstract class AbstractBaseService<T, ID> {
         repository.deleteAll(entities);
     }
 
+    public boolean existsById(ID id) {
+        return repository.existsById(id);
+    }
+
     public long count() {
         return repository.count();
     }

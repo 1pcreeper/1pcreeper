@@ -1,0 +1,39 @@
+{
+    "name": "@mesh-shop/shared",
+    "private": true,
+    "version": "0.1.0",
+    "type": "module",
+    "exports": {
+        ".": "./src/index.ts",
+        "./styles.css": "./src/styles.css"
+    },
+    "dependencies": {
+        "@react-three/drei": "^10.0.0",
+        "@react-three/fiber": "^9.1.0",
+        "@stomp/stompjs": "^7.3.0",
+        "axios": "^1.8.4",
+        "firebase": "^11.6.0",
+        "lucide-react": "^0.468.0",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0",
+        "react-router-dom": "^7.5.0",
+        "sockjs-client": "^1.6.1",
+        "three": "^0.175.0"
+    },
+    "devDependencies": {
+        "@tailwindcss/vite": "^4.1.0",
+        "@types/react": "^19.0.0",
+        "@types/react-dom": "^19.0.0",
+        "@types/sockjs-client": "^1.5.4",
+        "@types/three": "^0.175.0",
+        "@vitejs/plugin-react": "^4.4.0",
+        "fake-indexeddb": "^6.2.5",
+        "tailwindcss": "^4.1.0",
+        "typescript": "^5.8.3",
+        "vite": "^6.3.0",
+        "vite-plugin-pwa": "^1.0.0"
+    },
+    "scripts": {
+        "typecheck": "tsc -p tsconfig.json"
+    }
+}

@@ -54,4 +54,11 @@ public class StaffOccupationController {
         @PathVariable Long id, @Valid @RequestBody StaffOccupationUpdateRequestDTO request) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(staffOccupationService.update(id, request)));
     }
+
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
+    @DeleteMapping("/{id}")
+    public ResponseEntity<APIBaseResponseDTO<Void>> delete(@PathVariable Long id) {
+        staffOccupationService.delete(id);
+        return ResponseEntity.ok(APIBaseResponseDTO.success(null));
+    }
 }

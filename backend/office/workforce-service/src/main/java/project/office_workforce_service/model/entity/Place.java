@@ -14,7 +14,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "places")
 public class Place extends AbstractAuditableEntity {
-    
+
     @Column(name = "uid", unique = true, updatable = false)
     private UUID uid;
 
@@ -22,10 +22,10 @@ public class Place extends AbstractAuditableEntity {
     @JoinColumn(name = "depart_id", nullable = false)
     private Department department;
 
-    @Column(columnDefinition = "TEXT", nullable = false)
+    @Column(nullable = false, name = "name")
     private String name;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "address")
     private String address;
 
     @Builder.Default

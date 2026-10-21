@@ -1,5 +1,6 @@
 package project.office_workforce_service.controller.common;
 
+import jakarta.annotation.Nullable;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +17,7 @@ import project.shared_office_starter.model.dto.base.APIBaseResponseDTO;
 import project.shared_office_starter.model.dto.base.PaginationBaseResponseDTO;
 
 @RestController
-@RequestMapping("/places")
+@RequestMapping({"/places", "/workforce/places"})
 public class PlaceController {
 
     private final PlaceService placeService;
@@ -29,11 +30,12 @@ public class PlaceController {
     @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
     @GetMapping("/search")
     public ResponseEntity<APIBaseResponseDTO<PaginationBaseResponseDTO<PlaceResponseDTO>>> search(
+        @RequestParam(required = false) Long companyId,
         @RequestParam(required = false) Long departId,
-        @RequestParam(required = false) String q,
-        @RequestParam(required = false,defaultValue = "true") Boolean isActive,
+        @RequestParam(required = false) @Nullable String q,
+        @RequestParam(required = false, defaultValue = "true") Boolean isActive,
         Pageable pageable) {
-        return ResponseEntity.ok(APIBaseResponseDTO.success(placeService.search(departId, q, isActive, pageable)));
+        return ResponseEntity.ok(APIBaseResponseDTO.success(placeService.search(companyId, departId, q, isActive, pageable)));
     }
 
     @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
@@ -53,5 +55,12 @@ public class PlaceController {
     public ResponseEntity<APIBaseResponseDTO<PlaceResponseDTO>> update(
         @PathVariable Long id, @Valid @RequestBody PlaceUpdateRequestDTO request) {
         return ResponseEntity.ok(APIBaseResponseDTO.success(placeService.update(id, request)));
+    }
+
+    @Secured({UserRoles.WORKFORCE_ADMIN, Roles.OFFICE_ADMIN})
+    @DeleteMapping("/{id}")
+    public ResponseEntity<APIBaseResponseDTO<Void>> delete(@PathVariable Long id) {
+        placeService.delete(id);
+        return ResponseEntity.ok(APIBaseResponseDTO.success(null));
     }
 }

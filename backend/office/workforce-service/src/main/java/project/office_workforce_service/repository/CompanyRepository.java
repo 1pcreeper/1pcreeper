@@ -23,4 +23,8 @@ public interface CompanyRepository extends AbstractBaseRepository<Company, Long>
                          Pageable pageable);
     @Query("SELECT c FROM Company c WHERE c.isActive = :isActive")
     Page<Company> findAllByIsActive(@Param("isActive") Boolean isActive, Pageable pageable);
+
+    boolean existsByBusinessRegistrationNumber(String businessRegistrationNumber);
+    java.util.Optional<Company> findByBusinessRegistrationNumber(String businessRegistrationNumber);
+    boolean existsByNameEnglishIgnoreCase(String nameEnglish);
 }

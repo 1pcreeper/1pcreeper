@@ -18,8 +18,14 @@ public class ScheduleGenerationTaskResponseDTO {
     private Long id;
 
     private TaskStatus status;
-    
+
     private String requestedByUid;
+
+    private Long placeId;
+    private String placeName; // Frontend convenience
+
+    private Integer targetYear;
+    private Integer targetMonth;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime startedAt;

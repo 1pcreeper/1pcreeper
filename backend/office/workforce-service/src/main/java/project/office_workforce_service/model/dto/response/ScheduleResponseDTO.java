@@ -22,7 +22,14 @@ public class ScheduleResponseDTO {
 
     private Long staffId;
     private String staffNameEnglish; // Frontend convenience
+    private String staffNameChinese; // Frontend convenience
     private String staffCustId; // Helpful for guard rosters
+
+    private Long workingPeriodId;
+    private String workingPeriodName; // Frontend convenience
+
+    private Long occupationId;
+    private String occupationName; // Frontend convenience
 
     private ScheduleStatus status;
     private String remark;

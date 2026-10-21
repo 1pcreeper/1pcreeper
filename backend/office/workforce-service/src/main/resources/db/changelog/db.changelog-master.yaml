@@ -5,3 +5,7 @@ databaseChangeLog:
         file: db/changelog/changes/02-create-index.sql
   - include:
         file: db/changelog/changes/03-mock-data.sql
+  - include:
+        file: db/changelog/changes/05-add-schedule-working-period.sql
+  - include:
+        file: db/changelog/changes/06-restructure-schedule-rules.sql
